@@ -1,5 +1,4 @@
 - @page_title = 'Capella juris - zbor Pravnog fakulteta u Zagrebu'
-- @image_src = 'images/capella_juris.jpg'
 
 %section.intro
 
@@ -10,7 +9,7 @@
 
     #main
 
-      %img.intext{:src => 'images/capella_juris.jpg', :alt => 'capella juris', :width => '269', :height => '180'}
+      %img.intext{:src => '/images/capella_juris.jpg', :alt => 'capella juris', :width => '269', :height => '180'}
 
       %p Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. <strong>Ive Josipovića</strong>, sadašnjeg predsjednika RH i prof. <strong>Wolfganga Ruscha</strong>, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro <a href='o_nama.html#jurica'>Jurica Petar Petrač</a>. Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17'>Ćirilometodska 4</a>.  Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…
 
@@ -39,13 +38,13 @@
         %header
           %h1 Makedonsko devojče
 
-        %audio{:src => 'audio/makedonsko_devojce.mp3', :controls => true}
+        %audio{:src => '/audio/makedonsko_devojce.mp3', :controls => true}
 
         %object{:width => @object_width, :height => @audio_height}
-          %param{:name => 'flashvars', :value => 'audioUrl=audio/makedonsko_devojce.mp3'}
+          %param{:name => 'flashvars', :value => 'audioUrl=/audio/makedonsko_devojce.mp3'}
           %param{:name => 'src', :value => 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
           %param{:name => 'quality', :value => 'best'}
-          %embed{:type => 'application/x-shockwave-flash', :flashvars => 'audioUrl=audio/makedonsko_devojce.mp3', :src => 'http://www.google.com/reader/ui/3523697345-audio-player.swf', :width => @object_width, :height => @audio_height, :quality => 'best'}
+          %embed{:type => 'application/x-shockwave-flash', :flashvars => 'audioUrl=/audio/makedonsko_devojce.mp3', :src => 'http://www.google.com/reader/ui/3523697345-audio-player.swf', :width => @object_width, :height => @audio_height, :quality => 'best'}
 
         :javascript
           if (Modernizr.audio && Modernizr.audio.ogg && !Modernizr.audio.mp3) {
@@ -57,31 +56,27 @@
 
   %h1 Vijesti
 
-  - posts.each do |post|
-    - unless session[:flag] == post[:id].to_s
-      %article
-        %header.x
-          %hgroup
-            %h1= post[:title]
-            %h2= post[:subtitle]
-          %time{:datetime => "#{post[:date]}", :pubdate => true}= post[:date].to_date.to_s(:cro)
-        - post[:text].split("\n").each do |paragraph|
-          %p= paragraph
-        %a{href: "edit/#{post[:id]}"}
+  - Post.all.each do |post|
+    %article
+      %header.x
+        %hgroup
+          %h1= post.title
+          %h2= post.subtitle
+        %time{:datetime => "#{post.created_at}", :pubdate => true}= post.created_at.to_s(:cro) #to_date sam izbacio
+      - post.body.split("\n").each do |paragraph|
+        %p= paragraph
+      - unless post.id == @post_id
+        %a{href: "/edit/#{post.id}"}
           %input{type: 'submit', value: 'Izmjeni'}
-    - else
-      %form{action: '/update_post', method: 'post'}
-        %article
-          %header.x
-            %hgroup
-              %input{type: 'text', name: 'title', value: "#{post[:title]}"}
-              %br
-              %input{type: 'text', name: 'subtitle', value: "#{post[:subtitle]}"}
-          %textarea{type: 'text', name: 'text', rows: 15, cols: 100}= post[:text]
-          %br
-          %input{type: 'submit', value: 'Spremi promjene'}
-          %a{href: '/cancel'}
-            %input{type: 'submit', value: 'Odustani'}
+        %a{href: "/index/#{post.id}"}
+          %input{type: 'submit', value: 'Izbrisi'}
+      - else
+        %span{style: 'color: red'} Jeste li sigurni da želite izbrisati post?
+        %a{href: '/index'}
+          %input{type: 'submit', value: 'Ne, ipak sam se malo stiltao'}
+        %form{action: "/#{post.id}", method: 'post'}
+          %input{type: 'hidden', name: '_method', value: 'delete'}
+          %input{type: 'submit', value: 'Hell yeah da želim!'}
 
   %p.arrow
     <a href='arhiva.html'>Arhiva vijesti</a> ▶
