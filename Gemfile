@@ -1,6 +1,7 @@
 source :rubygems
 
 gem "sinatra"
+gem "sinatra-activerecord"
 
 group :development do
   gem "shotgun"
@@ -10,4 +11,5 @@ end
 gem "haml"
 gem "sass"
 gem "compass"
-gem "mysql2"
+gem "activerecord"
+gem "sqlite3"
