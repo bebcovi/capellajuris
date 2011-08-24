@@ -8,7 +8,7 @@
     %meta{:name => 'author', :content => 'Matija Marohnić &lt;matija.marohnic@gmail.com&gt;'}
     %link{:rel => 'shortcut icon', :href => 'images/favicon.ico'}
     -# %link{:rel => 'alternate', :type => 'application/atom+xml', :title => 'Vijesti', :href => 'feed/feed.xml'}
-    %link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/style.css'}
+    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/css/style.css'}
     %script{:type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js'}
     %script{:type => 'text/javascript', :src => 'js/modernizr-1.6.min.js'}
     %script{:type => 'text/javascript', :src => 'js/init.js'}
@@ -24,13 +24,13 @@
         #logophoto.x
 
           %a#logo{:href => 'index.html'}
-            %img{:src => 'images/logo.png', :alt => 'logo', :width => '225', :height => '111'}
+            %img{:src => '/images/logo.png', :alt => 'logo', :width => '225', :height => '111'}
 
-          %img#photo{:src => 'images/header.jpg', :alt => 'header photo', :width => '602', :height => '181'}
+          %img#photo{:src => '/images/header.jpg', :alt => 'header photo', :width => '602', :height => '181'}
 
         %nav
           %ol.x
-            - session[:pages].each do |page|
+            - Pages.each do |page|
               %li
                 %a{href: "/#{page[:normal]}", :class => current?(page) && 'current'}
                   = page[:croatian]
