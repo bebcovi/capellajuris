@@ -56,27 +56,23 @@
 
   %h1 Vijesti
 
-  - Post.all.each do |post|
+  - Post.each do |post|
     %article
       %header.x
         %hgroup
           %h1= post.title
           %h2= post.subtitle
-        %time{:datetime => "#{post.created_at}", :pubdate => true}= post.created_at.to_s(:cro) #to_date sam izbacio
+        %time{datetime: "#{post.created_at}", pubdate: true}= post.created_at.to_s(:cro)
       - post.body.split("\n").each do |paragraph|
         %p= paragraph
-      - unless post.id == @post_id
-        %a{href: "/edit/#{post.id}"}
-          %input{type: 'submit', value: 'Izmjeni'}
-        %a{href: "/index/#{post.id}"}
-          %input{type: 'submit', value: 'Izbrisi'}
-      - else
-        %span{style: 'color: red'} Jeste li sigurni da želite izbrisati post?
-        %a{href: '/index'}
-          %input{type: 'submit', value: 'Ne, ipak sam se malo stiltao'}
-        %form{action: "/#{post.id}", method: 'post'}
-          %input{type: 'hidden', name: '_method', value: 'delete'}
-          %input{type: 'submit', value: 'Hell yeah da želim!'}
+      %a{href: "/post/#{post.id}"}
+        %button{type: 'submit'} Izmjeni
+      %form{action: "/delete/#{post.id}", method: 'post', style: 'display: inline'}
+        %input{type: 'hidden', name: '_method', value: 'delete'}
+        %button{type: 'submit'} Izbriši
+
+  %a{href: '/post/new'}
+    %button{type: 'submit'} Dodaj
 
   %p.arrow
     <a href='arhiva.html'>Arhiva vijesti</a> ▶
