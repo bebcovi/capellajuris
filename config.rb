@@ -20,7 +20,7 @@ end
 DB = Sequel.connect 'sqlite://development.db'
 
 # Sinatra
-enable :sessions
+# enable :sessions
 enable :run
 
 # Models
