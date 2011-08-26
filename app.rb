@@ -4,6 +4,8 @@ require_relative 'config'
 
 require_relative 'extras/cro_dates'
 
+enable:run
+
 Pages = [
   {normal: 'index', croatian: 'Početna'},
   {normal: 'o_nama', croatian: 'O Nama'},
