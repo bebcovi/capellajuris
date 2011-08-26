@@ -1,0 +1,12 @@
+- @page_title = 'Prijava'
+
+%form{action: '/login', method: 'post'}
+  %p
+    %label{for: 'username'} Korisničko ime:
+    %input#username{type: 'text', name: 'username', maxlength: '30', value: "#{@username}"}
+  %p
+    %label{for: 'password'} Lozinka:
+    %input#password{type: 'password', name: 'password', maxlength: '30'}
+  %p
+    %input{type: 'submit', value: 'Prijava'}
+%p= @message
