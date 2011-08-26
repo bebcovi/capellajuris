@@ -21,6 +21,7 @@ DB = Sequel.connect 'sqlite://development.db'
 
 # Sinatra
 enable :sessions
+enable :run
 
 # Models
-require_relative 'models/post.rb'
+require_relative 'models/post'
