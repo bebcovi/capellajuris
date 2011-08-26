@@ -17,11 +17,12 @@ configure do
 end
 
 # Sequel
-DB = Sequel.connect 'sqlite://development.db'
+DB = Sequel.sqlite 'development.db'
+Sequel::Model.plugin(:schema)
 
 # Sinatra
-enable :sessions
 enable :run
+enable :sessions
 
-# Models
-require_relative 'models/post'
+# Database Models
+Dir['models/*.rb'].each { |model| require_relative model}
