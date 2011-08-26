@@ -1,5 +1,13 @@
 - @page_title = 'Capella juris - zbor Pravnog fakulteta u Zagrebu'
 
+#login
+  - unless logged_in?
+    %a{:href => '/login'} Administrator
+  - else
+    %form{action: '/logout', method: 'post'}
+      %input{type: 'submit', value: 'Odjava'}
+    %a{:href => '/user'} Promijeni 
+
 %section.intro
 
   %header
@@ -65,13 +73,14 @@
         %time{datetime: "#{post.created_at}", pubdate: true}= post.created_at.to_s(:cro)
       - post.body.split("\n").each do |paragraph|
         %p= paragraph
-      %a{href: "/post/#{post.id}"}
-        %button{type: 'submit'} Izmjeni
-      %form{action: "/delete/#{post.id}", method: 'post', style: 'display: inline'}
-        %input{type: 'hidden', name: '_method', value: 'delete'}
-        %button{type: 'submit'} Izbriši
-
-  %a{href: '/post/new'}
-    %button{type: 'submit'} Dodaj
+      - if logged_in?
+        %form{action: "/post/#{post.id}", method: 'get', style: 'display: inline'}
+          %input{type: 'submit', value: 'Izmjeni'}
+        %form{action: "/delete/#{post.id}", method: 'post', style: 'display: inline'}
+          %input{type: 'hidden', name: '_method', value: 'delete'}
+          %input{type: 'submit', value: 'Izbriši'}
+  - if logged_in?
+    %a{href: '/post/new'}
+      %button{type: 'submit'} Dodaj
 
   %p.arrow <a href='arhiva.html'>Arhiva vijesti</a> ▶

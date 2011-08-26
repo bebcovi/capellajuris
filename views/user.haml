@@ -1,0 +1,19 @@
+- @page_title = 'Admininstator'
+
+- if logged_in?
+  %form{action: '/user', method: 'post'}
+    %input{type: 'hidden', name: '_method', value: 'put'}
+    %p
+      %label{for: 'username'} Staro korisničko ime:
+      %input#username{type: 'text', name: 'username', maxlength: '30', value: "#{@username}"}
+      %label{for: 'username'} Novo korisničko ime:
+      %input#username{type: 'text', name: 'new_username', maxlength: '30'}
+    %p
+      %label{for: 'password'} Stara lozinka:
+      %input#password{type: 'password', name: 'password', maxlength: '30'}
+      %label{for: 'password'} Nova lozinka:
+      %input#password{type: 'password', name: 'new_password', maxlength: '30'}
+    %p
+      %input{type: 'submit', name: 'action', value: 'Promijeni'}
+      %input{type: 'submit', name: 'action', value: 'Odustani'}
+  %p= @messsage
