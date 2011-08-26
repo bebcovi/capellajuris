@@ -2,16 +2,15 @@
 
 %section.news
 
-  %form{action: "/edit/", method: 'post'}
+  %form{action: "/edit/#{@post.id}", method: 'post'}
     %input{type: 'hidden', name: '_method', value: 'put'}
-    %input{type: 'hidden', name: 'id', value: "#{@post.id}"}
     %article
       %header.x
         %hgroup
           %input{type: 'text', name: 'title', value: "#{@post.title}"}
           %br
           %input{type: 'text', name: 'subtitle', value: "#{@post.subtitle}"}
-      %textarea{type: 'text', name: 'body', rows: 15, cols: 100}= @post.body
+      %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @post.body
       %input{type: 'submit', value: 'Spremi'}
       %a{href: '/index'}
         %input{type: 'submit', value: 'Odustani'}
