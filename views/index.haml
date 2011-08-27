@@ -2,11 +2,11 @@
 
 #login
   - unless logged_in?
-    %a{:href => '/login'} Administrator
+    %a{href: '/login'} Administrator
   - else
     %form{action: '/logout', method: 'post'}
       %input{type: 'submit', value: 'Odjava'}
-    %a{:href => '/user'} Promijeni korisničko ime/lozinku
+    %a{href: '/user'} Izmjeni korisničko ime/lozinku
 
 %section.intro
 
@@ -22,7 +22,7 @@
       %p Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. <strong>Ive Josipovića</strong>, sadašnjeg predsjednika RH i prof. <strong>Wolfganga Ruscha</strong>, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro <a href='o_nama.html#jurica'>Jurica Petar Petrač</a>. Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17'>Ćirilometodska 4</a>.  Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…
 
       %p.arrow
-        <a href='o_nama.html'>Opširnije</a> ▶
+        %a{href: '/o_nama'} Opširnije ▶
 
     %aside
 
@@ -76,11 +76,13 @@
       - if logged_in?
         %form{action: "/post/#{post.id}", method: 'get', style: 'display: inline'}
           %input{type: 'submit', value: 'Izmjeni'}
-        %form{action: "/delete/#{post.id}", method: 'post', style: 'display: inline'}
+        %form{action: "/delete", method: 'post', style: 'display: inline'}
           %input{type: 'hidden', name: '_method', value: 'delete'}
+          %input{type: 'hidden', name: 'id', value: "#{post.id}"}
           %input{type: 'submit', value: 'Izbriši'}
   - if logged_in?
     %a{href: '/post/new'}
       %button{type: 'submit'} Dodaj
 
-  %p.arrow <a href='arhiva.html'>Arhiva vijesti</a> ▶
+  %p.arrow
+    %a{href: '/arhiva'} Arhiva vijesti ▶
