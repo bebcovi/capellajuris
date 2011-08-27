@@ -13,28 +13,19 @@ Pages = [
 
 helpers do
   def current?(page)
-    if page[:normal] == 'index' and request.path_info == '/'
-      true
-    else
-      ('/' + page[:normal]) == request.path_info
-    end
+    ('/' + page[:normal] == request.path_info) or (page[:normal] == 'index' and request.path_info == '/')
   end
 
-  def auth
-    auth_result = Hash.new
-    auth_result[:suceeded] = User[:username => params[:username], :password => params[:password]]
-    unless auth_result[:suceeded]
-      if User[:username => params[:username]]
-        auth_result[:message] = 'Kriva lozinka.'
-      else
-        auth_result[:message] = 'Krivo korisničko ime.'
-      end
-    end
-    return auth_result
+  def auth?
+    User[:username => params[:username], :password => params[:password]]
   end
 
-  def login(log = true)
-    session[:logged] = log
+  def login
+    session[:logged] = true
+  end
+
+  def logout
+    session[:logged] = false
   end
 
   def logged_in?
@@ -51,18 +42,17 @@ get '/:page' do
 end
 
 post '/login' do
-  if auth[:suceeded]
+  if auth?
     login
     redirect :index
   else
-    @message = auth[:message]
-    @username = params[:username] if @message == 'Kriva lozinka.'
+    @message = 'Krivo korisničko ime ili lozinka.'
     haml :login
   end
 end
 
 post '/logout' do
-  login(false)
+  logout
   redirect :index
 end
 
@@ -70,12 +60,11 @@ put '/user' do
   if params[:action] == 'Odustani'
     redirect :index
   else
-    if auth[:suceeded]
-      auth[:suceeded].update(:username => params[:new_username], :password => params[:new_password])
+    if auth?
+      User.first.update(:username => params[:new_username], :password => params[:new_password])
       redirect :index
     else
-      @message = auth[:message]
-      @username = params[:username] if @message == 'Kriva lozinka.'
+      @message = 'Krivo korisničko ime ili lozinka.'
       haml :user
     end
   end
@@ -95,22 +84,21 @@ get '/post/:id' do
   end
 end
 
-put '/edit/:id' do
-  if logged_in?
+put '/edit' do
+  if params[:action] == 'Odustani'
+    redirect :index
+  else
     post = Post[params[:id]] || Post.new
-    post.title, post.subtitle = params[:title], params[:subtitle]
-    post.body = params[:body]
+    post.title, post.subtitle, post.body = params[:title], params[:subtitle], params[:body]
     post.created_at = Date.today unless post.id
     post.save
     redirect :index
   end
 end
 
-delete '/delete/:id' do
-  if logged_in?
-    Post[params[:id]].delete
-    redirect :index
-  end
+delete '/delete' do
+  Post[params[:id]].delete
+  redirect :index
 end
 
 get '/css/style.css' do
