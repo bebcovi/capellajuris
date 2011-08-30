@@ -2,7 +2,9 @@ require 'haml'
 require 'sass'
 require 'compass'
 require 'sequel'
-require 'sqlite3'
+
+require_relative 'helpers'
+require_relative 'extras/cro_dates'
 
 # Haml & Sass/Compass
 configure do
