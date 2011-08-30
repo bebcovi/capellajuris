@@ -2,36 +2,12 @@
 require 'sinatra'
 require_relative 'config'
 
-require_relative 'extras/cro_dates'
-
 Pages = [
   {normal: 'index', croatian: 'Početna'},
   {normal: 'o_nama', croatian: 'O Nama'},
   {normal: 'slike', croatian: 'Slike'},
   {normal: 'video', croatian: 'Video'}
 ]
-
-helpers do
-  def current?(page)
-    ('/' + page[:normal] == request.path_info) or (page[:normal] == 'index' and request.path_info == '/')
-  end
-
-  def auth?
-    User[:username => params[:username], :password => params[:password]]
-  end
-
-  def login
-    session[:logged] = true
-  end
-
-  def logout
-    session[:logged] = false
-  end
-
-  def logged_in?
-    session[:logged]
-  end
-end
 
 get '/' do
   haml :index
@@ -56,17 +32,19 @@ post '/logout' do
   redirect :index
 end
 
-put '/user' do
+before '/user' do
   if params[:action] == 'Odustani'
     redirect :index
+  end
+end
+
+put '/user' do
+  if auth?
+    User.first.update(:username => params[:new_username], :password => params[:new_password])
+    redirect :index
   else
-    if auth?
-      User.first.update(:username => params[:new_username], :password => params[:new_password])
-      redirect :index
-    else
-      @message = 'Krivo korisničko ime ili lozinka.'
-      haml :user
-    end
+    @message = 'Krivo korisničko ime ili lozinka.'
+    haml :user
   end
 end
 
@@ -84,19 +62,21 @@ get '/post/:id' do
   end
 end
 
-put '/edit' do
+before '/edit/:id' do
   if params[:action] == 'Odustani'
-    redirect :index
-  else
-    post = Post[params[:id]] || Post.new
-    post.title, post.subtitle, post.body = params[:title], params[:subtitle], params[:body]
-    post.created_at = Date.today unless post.id
-    post.save
     redirect :index
   end
 end
 
-delete '/delete' do
+put '/edit/:id' do
+  post = Post[params[:id]] || Post.new
+  post.title, post.subtitle, post.body = params[:title], params[:subtitle], params[:body]
+  post.created_at = Date.today unless post.id
+  post.save
+  redirect :index
+end
+
+delete '/delete/:id' do
   Post[params[:id]].delete
   redirect :index
 end
