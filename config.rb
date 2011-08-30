@@ -23,7 +23,6 @@ DB = Sequel.sqlite 'development.db'
 Sequel::Model.plugin(:schema)
 
 # Sinatra
-enable :run
 enable :sessions
 
 # Database Models
