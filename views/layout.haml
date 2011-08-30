@@ -1,19 +1,19 @@
 !!! 5
-%html{:lang => 'hr'}
+%html{lang: 'hr'}
 
   %head
     %title= @page_title
-    %meta{:charset => 'utf-8'}
-    %meta{:name => 'description', :content => 'Službene stranice Capelle juris.'}
-    %meta{:name => 'author', :content => 'Matija Marohnić &lt;matija.marohnic@gmail.com&gt;'}
-    %link{:rel => 'shortcut icon', :href => 'images/favicon.ico'}
+    %meta{charset: 'utf-8'}
+    %meta{name: 'description', content: 'Službene stranice Capelle juris.'}
+    %meta{name: 'author', content: 'Matija Marohnić &lt;matija.marohnic@gmail.com&gt;'}
+    %link{rel: 'shortcut icon', href: 'images/favicon.ico'}
     -# %link{:rel => 'alternate', :type => 'application/atom+xml', :title => 'Vijesti', :href => 'feed/feed.xml'}
-    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/css/style.css'}
-    %script{:type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js'}
-    %script{:type => 'text/javascript', :src => 'js/modernizr-1.6.min.js'}
-    %script{:type => 'text/javascript', :src => 'js/init.js'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/style.css'}
+    %script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js'}
+    %script{type: 'text/javascript', src: 'js/modernizr-1.6.min.js'}
+    %script{type: 'text/javascript', src: 'js/init.js'}
     /[if lt IE 9]
-      %script{:type => 'text/javascript', :src => 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
+      %script{type: 'text/javascript', src: 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
 
   %body
 
@@ -23,10 +23,10 @@
 
         #logophoto.x
 
-          %a#logo{:href => 'index.html'}
-            %img{:src => '/images/logo.png', :alt => 'logo', :width => '225', :height => '111'}
+          %a#logo{href: 'index.html'}
+            %img{src: '/images/logo.png', alt: 'logo', width: '225', height: '111'}
 
-          %img#photo{:src => '/images/header.jpg', :alt => 'header photo', :width => '602', :height => '181'}
+          %img#photo{src: '/images/header.jpg', alt: 'header photo', width: '602', height: '181'}
 
         %nav
           %ol.x
@@ -46,10 +46,10 @@
           %p
             %span.label Kontakt
             %span.value
-              %a{:href => 'mailto:capellajuris@gmail.com'} capellajuris@gmail.com
+              %a{href: 'mailto:capellajuris@gmail.com'} capellajuris@gmail.com
 
         %article#facebook.x
 
           %p Pratite nas na Facebooku za novosti, najave nastupa i slike
 
-          %a{:href => 'http://www.facebook.com/group.php?gid=15322005634', :target => '_blank'}
+          %a{href: 'http://www.facebook.com/group.php?gid=15322005634', target: '_blank'}

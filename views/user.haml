@@ -1,8 +1,7 @@
 - @page_title = 'Admininstator'
 
 - if logged_in?
-  %form{action: '/user', method: 'post'}
-    %input{type: 'hidden', name: '_method', value: 'put'}
+  - form_tag(action: '/user', method: 'put')
     %p
       %label{for: 'username'} Staro korisničko ime:
       %input#username{type: 'text', name: 'username', maxlength: '30'}

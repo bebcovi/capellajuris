@@ -2,22 +2,19 @@
 
 #login
   - unless logged_in?
-    %a{href: '/login'} Administrator
+    - form_tag(action: '/login', method: 'get') do
+      %input{type: 'submit', value: 'Administrator'}
   - else
-    %form{action: '/logout', method: 'post'}
+    - form_tag(action: '/logout', method: 'post') do
       %input{type: 'submit', value: 'Odjava'}
     %a{href: '/user'} Izmjeni korisničko ime/lozinku
 
 %section.intro
-
   %header
     %h1 Capella juris
-
   .x
-
     #main
-
-      %img.intext{:src => '/images/capella_juris.jpg', :alt => 'capella juris', :width => '269', :height => '180'}
+      %img.intext{src: '/images/capella_juris.jpg', alt: 'capella juris', width: '269', height: '180'}
 
       %p Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. <strong>Ive Josipovića</strong>, sadašnjeg predsjednika RH i prof. <strong>Wolfganga Ruscha</strong>, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro <a href='o_nama.html#jurica'>Jurica Petar Petrač</a>. Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17'>Ćirilometodska 4</a>.  Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…
 
@@ -36,23 +33,23 @@
           %h1 Makedonska humoreska
 
         %object{:width => @object_width, :height => @video_height}
-          %param{:name => 'movie', :value => 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US'}
-          %param{:name => 'allowFullScreen', :value => 'true'}
-          %param{:name => 'allowscriptaccess', :value => 'always'}
-          %embed{:src => 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', :type => 'application/x-shockwave-flash', :allowscriptaccess => 'always', :width => @object_width, :height => @video_height}
+          %param{name: 'movie', value: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US'}
+          %param{name: 'allowFullScreen', value: 'true'}
+          %param{name: 'allowscriptaccess', value: 'always'}
+          %embed{src: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', type: 'application/x-shockwave-flash', allowscriptaccess: 'always', :width => @object_width, :height => @video_height}
 
       %article.audio
 
         %header
           %h1 Makedonsko devojče
 
-        %audio{:src => '/audio/makedonsko_devojce.mp3', :controls => true}
+        %audio{src: '/audio/makedonsko_devojce.mp3', :controls => true}
 
         %object{:width => @object_width, :height => @audio_height}
-          %param{:name => 'flashvars', :value => 'audioUrl=/audio/makedonsko_devojce.mp3'}
-          %param{:name => 'src', :value => 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
-          %param{:name => 'quality', :value => 'best'}
-          %embed{:type => 'application/x-shockwave-flash', :flashvars => 'audioUrl=/audio/makedonsko_devojce.mp3', :src => 'http://www.google.com/reader/ui/3523697345-audio-player.swf', :width => @object_width, :height => @audio_height, :quality => 'best'}
+          %param{name: 'flashvars', value: 'audioUrl=/audio/makedonsko_devojce.mp3'}
+          %param{name: 'src', value: 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
+          %param{name: 'quality', value: 'best'}
+          %embed{type: 'application/x-shockwave-flash', flashvars: 'audioUrl=/audio/makedonsko_devojce.mp3', src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf', :width => @object_width, :height => @audio_height, quality: 'best'}
 
         :javascript
           if (Modernizr.audio && Modernizr.audio.ogg && !Modernizr.audio.mp3) {
@@ -70,19 +67,19 @@
         %hgroup
           %h1= post.title
           %h2= post.subtitle
-        %time{datetime: "#{post.created_at}", pubdate: true}= post.created_at.to_s(:cro)
+        %time{datetime: "#{post.created_at}", :pubdate => true}= post.created_at.to_s(:cro)
       - post.body.split("\n").each do |paragraph|
         %p= paragraph
+
       - if logged_in?
-        %form{action: "/post/#{post.id}", method: 'get', style: 'display: inline'}
+        - form_tag(action: "/post/#{post.id}", method: 'get', style: 'display: inline') do
           %input{type: 'submit', value: 'Izmjeni'}
-        %form{action: "/delete", method: 'post', style: 'display: inline'}
-          %input{type: 'hidden', name: '_method', value: 'delete'}
-          %input{type: 'hidden', name: 'id', value: "#{post.id}"}
+        - form_tag(action: "/delete/#{post.id}", method: 'delete', style: 'display: inline') do
           %input{type: 'submit', value: 'Izbriši'}
+
   - if logged_in?
-    %a{href: '/post/new'}
-      %button{type: 'submit'} Dodaj
+    - form_tag(action: '/post/new', method: 'get') do
+      %input{type: 'submit', value: 'Dodaj'}
 
   %p.arrow
     %a{href: '/arhiva'} Arhiva vijesti ▶

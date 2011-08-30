@@ -1,6 +1,6 @@
 - @page_title = 'Prijava'
 
-%form{action: '/login', method: 'post'}
+- form_tag(action: '/login', method: 'post') do
   %p
     %label{for: 'username'} Korisničko ime:
     %input#username{type: 'text', name: 'username', maxlength: '30'}
