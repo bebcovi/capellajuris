@@ -24,6 +24,10 @@ Sequel::Model.plugin(:schema)
 
 # Sinatra
 enable :sessions
+configure(:development) do |c|
+  require "sinatra/reloader"
+  c.also_reload "*.rb"
+end
 
 # Database Models
 Dir['models/*.rb'].each { |model| require_relative model}
