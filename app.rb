@@ -2,8 +2,6 @@
 require 'sinatra'
 require_relative 'config'
 
-set :app_file, __FILE__
-
 Pages = [
   {normal: 'index', croatian: 'Početna'},
   {normal: 'o_nama', croatian: 'O Nama'},
