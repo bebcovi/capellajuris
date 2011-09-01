@@ -15,4 +15,4 @@
     %p
       %input{type: 'submit', name: 'action', value: 'Promijeni'}
       %input{type: 'submit', name: 'action', value: 'Odustani'}
-  %p= @messsage
+  - haml_tag :p, session[:error] if session[:error]
