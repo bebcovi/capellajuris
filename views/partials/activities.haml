@@ -1,9 +1,12 @@
 %article{id: string_to_id(@title)}
+
   %header
     %h1= @title
-  %ol.activities{start: '2006'}
+
+  .inner
+
     - Activity.each do |activity|
-      %li
-        %ol
-          - activity.things.split("\n").each do |list_element|
-            %li= list_element
+      %article
+        %header
+          %h1= activity.year
+        = BlueCloth.new(activity.things).to_html
