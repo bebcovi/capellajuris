@@ -1,0 +1,2 @@
+- add article IDs (using function which converts title to ID)
+- validations (i.e. titles can't be empty)
