@@ -48,6 +48,9 @@ body
   #login, #logout
     +trailer
 
+  p#login, #logout
+    height: rhythm()
+
   #login table
     height: rhythm(6)
     width: 300px
@@ -117,17 +120,18 @@ body
           time
             float: right
 
-      form input
-        background-color: transparent
-        border: 0
-        margin-right: rhythm(0.5)
-        @extend a
-
       #edit, #delete
         display: inline
 
       #add
         +trailer
+
+    #intro, .news, .archive
+      form input
+        background-color: transparent
+        border: 0
+        margin-right: rhythm(0.5)
+        @extend a
 
     .members
       +trailer
