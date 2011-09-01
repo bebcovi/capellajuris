@@ -1,38 +1,42 @@
-$header: Georgia, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', Times, serif
-$body: Verdana, 'Helvetica Neue', Helvetica, Geneva, sans-serif
+$serif: Georgia, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', Times, serif
+$sans-serif: Verdana, 'Helvetica Neue', Helvetica, Geneva, sans-serif
 
 body
-  font-family: $body
+  font-family: $sans-serif
 
 #{headings()}
-  font:
-    family: $header
-    weight: normal
+  font-family: $serif
 
 #wrapper
-
-  p
-    +trailer
 
   a
     +hover-link
 
+  form
+    input:hover
+      &[type='submit'], &[type='button']
+        cursor: pointer
+
   nav ol li a
-    font: 1.25em $header
+    font: 1.25em $serif
     text-transform: uppercase
     &:hover
       text-decoration: none
 
-  #login
+  p#login
+    text-align: right
+
+  form#logout
     text-align: right
 
   #main
 
-    section
+    p
+      +trailer
 
-      h1
-        font-size: 3em
-        +trailer(2)
+    section h1
+      font-size: 3em
+      +trailer(2)
 
     article
 
@@ -47,8 +51,6 @@ body
       aside article h1
         +trailer
         font-size: 1.5em
-        &:after
-          content: ':'
 
     .news, .archive
 
@@ -57,38 +59,44 @@ body
         header
 
           h1
-            margin: 10px 0
-            font-size: 24px
-            text-transform: uppercase
+            +trailer
+            font-size: 1.75em
 
           h2
-            font-size: 18px
+            display: none
 
           time
-            font-size: small
+            font-size: 0.8
 
     .members .first
       font-weight: bold
 
-    .activities
-      padding-left: 40px
+    #aktivnosti
+
+      .inner
+        width: 750px
+        padding-left: rhythm(1)
+
+      article
+        +trailer
+
+        header h1
+          +trailer
+          font-size: 1.5em
+
+        ol
+          padding-left: rhythm(2)
+          list-style-type: disc
+
+          li
+            +trailer
+            padding-left: rhythm(0.5)
 
       .award
         text-transform: uppercase
         font:
           size: 10px
           weight: bold
-
-      li
-        margin: 20px 0
-        list-style-type: decimal
-
-        ol
-          padding-left: 25px
-
-          li
-            margin: 8px 0
-            list-style-type: disc
 
     .videos article
       text-align: center
@@ -104,7 +112,7 @@ body
       text-align: center
 
   footer
-    font-family: $header
+    font-family: $serif
 
     p
       margin: 0
@@ -120,6 +128,3 @@ body
 
     #facebook
       font-size: 16px
-
-      p:after
-        content: ':'

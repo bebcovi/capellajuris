@@ -1,12 +1,22 @@
 - @page_title = 'Prijava'
 
-- form_tag(action: '/login', method: 'post') do
-  %p
-    %label{for: 'username'} Korisničko ime:
-    %input#username{type: 'text', name: 'username', maxlength: '30'}
-  %p
-    %label{for: 'password'} Lozinka:
-    %input#password{type: 'password', name: 'password', maxlength: '30'}
-  %p
-    %input{type: 'submit', value: 'Prijava'}
+- form_tag(action: '/login', method: 'post', id: 'login') do
+  %table
+
+    %tr.username
+      %td
+        %label{for: 'username'} Korisničko ime
+      %td
+        %input#username{type: 'text', name: 'username', maxlength: 30, autofocus: true}
+
+    %tr.password
+      %td
+        %label{for: 'password'} Lozinka
+      %td
+        %input#password{type: 'password', name: 'password', maxlength: 30}
+
+    %tr.submit
+      %td{colspan: 2}
+        %input{type: 'submit', value: 'Prijava'}
+
 - haml_tag :p, session[:error] if session[:error]

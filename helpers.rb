@@ -64,18 +64,17 @@ module Haml
   module Helpers
     def form_tag(attr, &block)
       if attr[:method] == 'get' or attr[:method] == 'post'
-        haml_tag(:form, {action: "#{attr[:action]}",
-                         method: "#{attr[:method]}",
-                         style: "#{attr[:style]}"}) do
-          yield
-        end
+        haml_tag(:form,     { action: attr[:action],
+                              method: attr[:method],
+                              id: attr[:id]}) { yield }
       else
-        haml_tag(:form, {action: "#{attr[:action]}",
-                         method: 'post',
-                         style: "#{attr[:style]}"}) do
-          haml_tag(:input, {type: 'hidden',
-                            name: '_method',
-                            value: "#{attr[:method]}"}) do
+        haml_tag(:form,     { action: attr[:action],
+                              method: 'post',
+                              id: attr[:id]}) do
+
+          haml_tag(:input,  { type: 'hidden',
+                              name: '_method',
+                              value: attr[:method]}) do
             yield
           end
         end
