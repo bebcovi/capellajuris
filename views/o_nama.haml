@@ -2,14 +2,31 @@
 
 %section.about
 
+  :ruby
+    Order.order(:order).each do |article|
+      haml_tag :article do
+        haml_tag :header do
+          haml_tag :h1, "#{article.title}"
+        end
+        if article.title == 'Članovi zbora' or article.title == 'Aktivnosti'
+          if article.title == 'Članovi zbora'
+            generate_members
+          else
+            generate_activities
+          end
+        else
+          generate_other_content
+        end
+      end
+    end
   %article.povijestzbora
-    
+
     %header
       %h1 Povijest zbora
     
     %p Capella juris je zbor Pravnog fakulteta Sveučilišta u Zagrebu, osnovan u svibnju 2006. na inicijativu prof. <strong>Josipovića</strong> i prof. <strong>Wolfganga Ruscha</strong>, koji je zbor vodio prve dvije godine. Repertoar zbora je raznolik te se sastoji od renesansnih madrigala do suvremene glazbe, od hrvatske i europske narodne glazbe do jazza.
     
-    %img.intext{src: 'images/povijest_zbora.jpg', alt: 'zbor', alt: 'capella juris', width: '250', height: '168'}
+    %img.intext{src: 'images/povijest_zbora.jpg', alt: 'zbor', width: '250', height: '168'}
     
     %p Zbor se sastoji od 58 studentica, studenata i prijatelja Pravnog fakulteta Sveučilišta u Zagrebu te nastupa na promocijama diplomanata, ali i svim važnijim manifestacijama vezanim uz fakultet. Tako je, između ostalog, nastupao u Hrvatskom narodnom kazalištu prilikom obilježavanja 230 godina Pravnog fakulteta u Zagrebu, prilikom posjeta povjerenika Europske Unije za proširenje, gospodina Olia Rehna, te za Zakladu Zlatko Crnić u Hrvatskoj odvjetničkoj komori.
       
@@ -24,7 +41,7 @@
     %header
       %h1 Biografija dirigenta
     
-    %img.intext{src: 'images/biografija_dirigenta.jpg', alt: 'dirigent jurica petar petrač', alt: 'jurica petar petrač', width: '137', height: '87'}
+    %img.intext{src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: '137', height: '87'}
     
     %p Jurica Petar Petrač, prof. (Zagreb, 1985.) se nakon završene opće gimnazije <a href='http://www.gimnazija-osma-tbrezovackog-zg.skole.hr/'>Tituš Brezovački</a> i srednje glazbene škole <a href='http://www.glazbena-bberse-zg.skole.hr/index.shtml'>Blagoje Bersa</a> upisuje na studij glazbene teorije Muzičke akademije Sveučilišta u Zagrebu, diplomiravši u veljači 2009. godine. Istovremeno upisuje i studij Povijesti umjetnosti te Etnologije i kulturne antropologije na Filozofskom fakultetu u Zagrebu. Sa 17 godina osniva i Mješoviti pjevački zbor &#8220;Capella miércoles&#8221;, koji djeluje u crkvi sv. Kvirina na Pantovčaku. Od 2008. godine, nakon prvobitnog pjevačkog sudjelovanja, postaje glazbeni voditelj zbora &#8220;Capella juris&#8221;, a od 2011. glazbeni voditelj oratorijskog zbora crkve sv. Marka u Zagrebu, &#8220;Cantores Sancti Marci&#8221;.
     
@@ -32,17 +49,13 @@
     
     %header
       %h1 Članovi zbora
-      
-    :ruby
-      @members = {'male' => [], 'female' => []}
-      
+
     %ul.members
       %li.first Soprani
       %li	Alisa Besek
       %li	Ana Miletić
       %li	Ana Vlašić
       %li Ana Zavada
-      -# %li	Ana Zorić Dodig
       %li	Anja Juršetić
       %li	Barbara Bogojević
       %li	Daria Dubajić
@@ -52,7 +65,6 @@
       %li	Katarina Sabljić
       %li	Klara Marinčević
       %li	Kristina Gotvald
-      -# %li	Laura Horvat
       %li	Lidija Živković
       %li	Marija Ercegovac
       %li	Marija Vučurević
@@ -63,13 +75,12 @@
       %li Vesna Juretić
       %li Vinka Lozica
       %li.last Zrinka Marija Krnjak
-      
+
     %ul.members
       %li.first Alti
       %li Ana Lukac
       %li Ana Mažuranić
       %li Ana Zidar
-      -# %li Antonija Sviben
       %li Barbara Pavlek
       %li Daria Kolezarić
       %li Darja Petro
@@ -78,13 +89,11 @@
       %li Iva Bojanovsky
       %li Jelena Pepelnik
       %li Lucija Petrač
-      -# %li Martina Rep
       %li Mirjana Martinković 
       %li Mirna Radosavljević
       %li Nikol Namjesnik
       %li Nikolina Zlopaša
       %li Rafaela Tripalo
-      -# %li Sandra Rudelić
       %li Valentina Samardžija
       %li.last Vida Brezak
       
@@ -93,7 +102,6 @@
       %li Bartul Marušić
       %li Davor Krnjak
       %li Davor Kutnjak
-      -# %li Josip Pavlović
       %li Matija Marohnić
       %li Tomislav Krnjak
       %li.last Vedran Klisarić
