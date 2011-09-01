@@ -2,10 +2,6 @@
 require 'sinatra'
 require_relative 'config'
 
-get '/create' do
-  redirect :index
-end
-
 get '/' do
   haml :index
 end
@@ -14,28 +10,16 @@ get '/:page' do
   haml params[:page].to_sym
 end
 
-
-before '/login' do
-  authenticate!
-end
-
 post '/login' do
+  authenticate!
   log_in!
-end
-
-after '/login' do
   redirect :index
 end
 
-
 post '/logout' do
   log_out!
-end
-
-after '/logout' do
   redirect back
 end
-
 
 before '/user' do
   redirect :index if params[:action] == 'Odustani'
@@ -53,21 +37,24 @@ end
 
 get '/post/new' do
   if logged_in?
-    session[:post] = Post.new
+    session[:post] = Post.new unless session[:post]
     haml :post
   end
 end
 
 get '/post/:id' do
   if logged_in?
-    session[:post] = Post[params[:id]]
+    session[:post] = Post[params[:id]] unless session[:post]
     haml :post
   end
 end
 
 
 before '/edit_post/:id' do
-  redirect :index if params[:action] == 'Odustani'
+  if params[:action] == 'Odustani'
+    session[:error] = session[:post] = nil
+    redirect :index
+  end
   validate_post!
 end
 
@@ -77,9 +64,6 @@ post '/edit_post/:id' do
   else
     Post.create(:title => params[:title], :subtitle => params[:subtitle], :body => params[:body], :created_at => Date.today)
   end
-end
-
-after '/edit_post/:id' do
   session[:error] = session[:post] = nil
   redirect :index
 end
@@ -96,21 +80,24 @@ end
 
 get '/content/new' do
   if logged_in?
-    session[:content] = Content.new
+    session[:content] = Content.new unless session[:content]
     haml :content
   end
 end
 
 get '/content/:id' do
   if logged_in?
-    session[:content] = Content[params[:id]]
+    session[:content] = Content[params[:id]] unless session[:content]
     haml :content
   end
 end
 
 
 before '/edit_content/:id' do
-  redirect :index if params[:action] == 'Odustani'
+  if params[:action] == 'Odustani'
+    session[:error] = session[:content] = nil
+    redirect :index
+  end
   validate_content!
 end
 
@@ -120,9 +107,6 @@ post '/edit_content/:id' do
   else
     Content.create(:title => params[:title], :body => params[:body])
   end
-end
-
-after '/edit_content/:id' do
   session[:error] = session[:content] = nil
   redirect :index if params[:id] == '1'
   redirect :o_nama
