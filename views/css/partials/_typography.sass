@@ -1,0 +1,125 @@
+$header: Georgia, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', Times, serif
+$body: Verdana, 'Helvetica Neue', Helvetica, Geneva, sans-serif
+
+body
+  font-family: $body
+
+#{headings()}
+  font:
+    family: $header
+    weight: normal
+
+#wrapper
+
+  p
+    +trailer
+
+  a
+    +hover-link
+
+  nav ol li a
+    font: 1.25em $header
+    text-transform: uppercase
+    &:hover
+      text-decoration: none
+
+  #login
+    text-align: right
+
+  #main
+
+    section
+
+      h1
+        font-size: 3em
+        +trailer(2)
+
+    article
+
+      em
+        font-weight: bold
+
+    #intro
+
+      .main p:last-child
+        +trailer(0)
+
+      aside article h1
+        +trailer
+        font-size: 1.5em
+        &:after
+          content: ':'
+
+    .news, .archive
+
+      article
+
+        header
+
+          h1
+            margin: 10px 0
+            font-size: 24px
+            text-transform: uppercase
+
+          h2
+            font-size: 18px
+
+          time
+            font-size: small
+
+    .members .first
+      font-weight: bold
+
+    .activities
+      padding-left: 40px
+
+      .award
+        text-transform: uppercase
+        font:
+          size: 10px
+          weight: bold
+
+      li
+        margin: 20px 0
+        list-style-type: decimal
+
+        ol
+          padding-left: 25px
+
+          li
+            margin: 8px 0
+            list-style-type: disc
+
+    .videos article
+      text-align: center
+
+      h1
+        +trailer
+        font-size: 2em
+
+    .arrow:hover
+      text-decoration: none
+
+    .top
+      text-align: center
+
+  footer
+    font-family: $header
+
+    p
+      margin: 0
+
+    #contact
+      font-size: 18px
+      line-height: 40px
+
+      .label
+        font-weight: bold
+        &:after
+          content: ':'
+
+    #facebook
+      font-size: 16px
+
+      p:after
+        content: ':'

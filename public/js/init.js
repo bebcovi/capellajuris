@@ -1,7 +1,12 @@
 $(function() {
-  
-  $('ul.members li.first').append(': ');
-  $('ul.members li').not('.first').not('.last').append(', ');
-  $('ul.members li.last').append('.');
-  
-});
+
+  if (!Modernizr.audio.mp3) {
+    $('audio').css('display', 'none')
+    $('.flash').css('display', 'inline')
+  }
+
+  $('.members .first').append(': ')
+  $('.members li').not('.first').not('.last').append(', ')
+  $('.members .last').append('.')
+
+})

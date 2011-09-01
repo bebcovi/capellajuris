@@ -1,0 +1,44 @@
+$text: lighten(black, 30%)
+$link: #c70000
+
+body
+  color: $text
+
+#wrapper
+
+  a
+    color: $link
+
+  nav
+    background-color: darken(white, 3%)
+    border-color: darken(white, 20%)
+
+    ol li a
+      +link-colors(lighten($text, 20%), $link)
+      &.current
+        color: $link
+
+  #main
+
+    img
+      border-color: $text
+
+    #intro
+      background-color: darken(white, 2%)
+      border-color: darken(white, 10%)
+
+    .news, .archive
+
+      article header time
+        color: lighten($text, 30%)
+
+  footer
+    background-color: darken(white, 3%)
+    border-color: darken(white, 20%)
+
+    #facebook a
+      background: #c6c6c6 url('/images/fb_32.gif') no-repeat 0 0
+      border-color: lighten(black, 40%)
+      &:hover
+        background-position: -33px 0
+        border-color: #344466

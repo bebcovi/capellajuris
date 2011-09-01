@@ -1,0 +1,140 @@
++establish-baseline
+
+.audio .flash, .no-audio audio
+  display: none
+
+#wrapper
+  $wrapper-width: 960px
+
+  +padding-leader
+  width: $wrapper-width
+  margin: 0 auto
+
+  img
+    display: block
+
+  header
+
+    .inner
+      +clearfix
+      padding: 0 rhythm(2)
+
+      #logo
+        +leader(2)
+        float: left
+
+      #photo
+        float: right
+
+  nav
+    +clearfix
+    +trailer
+    +rhythm-borders
+
+    ol
+      +clearfix
+
+      li
+        float: left
+        margin: 0 rhythm(0.5)
+
+        a
+          display: block
+          padding: 0 rhythm(0.5)
+
+  #login
+    +trailer
+
+  #main
+
+    img
+      border: 1px solid
+      float: left
+      margin-right: rhythm()
+
+    section
+      +trailer(2)
+
+    article
+      +trailer(3)
+
+    .about, .photos, .videos
+      +leader(3)
+
+    #intro
+      $intro-padding: 1.5
+      $aside-width: 300px
+
+      +rhythm-borders(1px, $intro-padding)
+
+      .inner
+        +clearfix
+
+      .main
+        +trailer(0)
+        float: left
+        width: $wrapper-width - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
+
+
+      aside
+        float: right
+        width: $aside-width
+
+        article
+          +trailer
+          &:last-child
+            margin: 0
+
+    .news, .archive
+
+      article
+
+        header
+          +clearfix
+
+          hgroup
+            float: left
+
+          time
+            +padding-trailer
+            float: right
+
+    .members
+      +trailer
+
+      li
+        display: inline
+
+    .photos img
+      +trailer(2)
+      float: none
+      margin-left: auto
+      margin-right: auto
+
+    .videos article
+      +trailer(2)
+
+  footer
+    +clearfix
+    +trailer
+    +rhythm-borders
+
+    #contact
+      float: left
+
+    #facebook
+      +clearfix
+      float: right
+      width: 250px
+
+      p
+        float: left
+        width: 200px
+
+      a
+        display: block
+        float: right
+        width: 32px
+        height: 32px
+        border-width: 1px
+        border-style: solid
