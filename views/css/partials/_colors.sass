@@ -18,6 +18,12 @@ body
       &.current
         color: $link
 
+  form#login table
+    .username, .password
+      input
+        border-color: darken(white, 40%)
+        color: darken(white, 50%)
+
   #main
 
     img
@@ -29,8 +35,11 @@ body
 
     .news, .archive
 
-      article header time
-        color: lighten($text, 30%)
+      article
+        border-color: darken(white, 15%)
+
+        header time
+          color: lighten($text, 30%)
 
   footer
     background-color: darken(white, 3%)
