@@ -81,6 +81,6 @@ delete '/delete/:id' do
   redirect :index
 end
 
-get '/css/style.css' do
-  sass :'css/style'
+get '/css/screen.css' do
+  sass :'css/screen'
 end
