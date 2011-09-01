@@ -9,4 +9,4 @@
     %input#password{type: 'password', name: 'password', maxlength: '30'}
   %p
     %input{type: 'submit', value: 'Prijava'}
-%p= @message
+- haml_tag :p, session[:error] if session[:error]
