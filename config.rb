@@ -11,6 +11,7 @@ configure do
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir = 'views/css'
+    config.images_dir = 'public/images'
     config.line_comments = false
   end
 
