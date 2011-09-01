@@ -7,6 +7,6 @@
 
 #janko-m
 
-- add article IDs (using function which converts title to ID)
-- validations (i.e. titles can't be empty)
-- generate members with Ruby
+- ~~add article IDs (using function which converts title to ID)~~ &#x2713
+- ~~validations (i.e. titles can't be empty)~~ &#x2713
+- ~~generate members with Ruby~~ &#x2713
