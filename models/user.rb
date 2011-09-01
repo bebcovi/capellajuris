@@ -1,11 +1,7 @@
 class User < Sequel::Model
-  set_schema do
+  create_table do
     primary_key :id
-    string :username
-    string :password
-  end
-
-  unless table_exists?
-    create_table
-  end
+    column :username, 'varchar(50)'
+    string :password, 'varchar(50)'
+  end unless table_exists?
 end

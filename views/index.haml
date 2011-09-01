@@ -59,25 +59,7 @@
   %header
     %h1 Vijesti
 
-  - Post.each do |post|
-    %article
-      %header
-        %hgroup
-          %h1= post.title
-          %h2= post.subtitle
-        %time{datetime: "#{post.created_at}", pubdate: true}= post.created_at.to_s(:cro)
-      - post.body.split("\n").each do |paragraph|
-        %p= paragraph
-
-      - if logged_in?
-        - form_tag(action: "/post/#{post.id}", method: 'get', style: 'display: inline') do
-          %input{type: 'submit', value: 'Izmjeni'}
-        - form_tag(action: "/delete/#{post.id}", method: 'delete', style: 'display: inline') do
-          %input{type: 'submit', value: 'Izbriši'}
-
-  - if logged_in?
-    - form_tag(action: '/post/new', method: 'get') do
-      %input{type: 'submit', value: 'Dodaj'}
+  - generate_posts
 
   %p.arrow
     %a{href: '/arhiva'} Arhiva vijesti

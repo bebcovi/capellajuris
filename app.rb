@@ -2,13 +2,6 @@
 require 'sinatra'
 require_relative 'config'
 
-Pages = [
-  {normal: 'index', croatian: 'Početna'},
-  {normal: 'o_nama', croatian: 'O Nama'},
-  {normal: 'slike', croatian: 'Slike'},
-  {normal: 'video', croatian: 'Video'}
-]
-
 get '/' do
   haml :index
 end

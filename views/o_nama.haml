@@ -3,6 +3,24 @@
 
 %section.about
 
+  :ruby
+    Order.order(:order).each do |article|
+      haml_tag :article do
+        haml_tag :header do
+          haml_tag :h1, "#{article.title}"
+        end
+        if article.title == 'Članovi zbora' or article.title == 'Aktivnosti'
+          if article.title == 'Članovi zbora'
+            generate_members
+          else
+            generate_activities
+          end
+        else
+          generate_other_content
+        end
+      end
+    end
+
   %article#povijestzbora
 
     %header
@@ -28,6 +46,8 @@
       %h1 Biografija dirigenta
 
     %img{src: 'images/biografija_dirigenta.jpg', alt: 'dirigent jurica petar petrač', alt: 'jurica petar petrač', width: '137', height: '87'}
+
+    :markdown
 
       Jurica Petar Petrač, prof. (Zagreb, 1985.) se nakon završene opće gimnazije [Tituš Brezovački](http://www.gimnazija-osma-tbrezovackog-zg.skole.hr/) i srednje glazbene škole [Blagoje Bersa](http://www.glazbena-bberse-zg.skole.hr/index.shtml) upisuje na studij glazbene teorije Muzičke akademije Sveučilišta u Zagrebu, diplomiravši u veljači 2009. godine. Istovremeno upisuje i studij Povijesti umjetnosti te Etnologije i kulturne antropologije na Filozofskom fakultetu u Zagrebu. Sa 17 godina osniva i Mješoviti pjevački zbor "Capella miércoles", koji djeluje u crkvi sv. Kvirina na Pantovčaku. Od 2008. godine, nakon prvobitnog pjevačkog sudjelovanja, postaje glazbeni voditelj zbora "Capella juris", a od 2011. glazbeni voditelj oratorijskog zbora crkve sv. Marka u Zagrebu, "Cantores Sancti Marci".
 
@@ -75,7 +95,6 @@
       %li Iva Bojanovsky
       %li Jelena Pepelnik
       %li Lucija Petrač
-      %li Mirjana Martinković
       %li Mirna Radosavljević
       %li Nikol Namjesnik
       %li Nikolina Zlopaša
