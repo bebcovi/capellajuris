@@ -11,15 +11,18 @@ helpers do
     ('/' + page[:normal] == request.path_info) or (page[:normal] == 'index' and request.path_info == '/')
   end
 
-  def auth?
-    User[:username => params[:username], :password => params[:password]]
+  def authenticate!
+    if not User[:username => params[:username], :password => params[:password]]
+      session[:error] = 'Krivo korisničko ime ili lozinka.'
+      redirect back
+    end
   end
 
-  def login
+  def log_in!
     session[:logged] = true
   end
 
-  def logout
+  def log_out!
     session[:logged] = false
   end
 
@@ -34,6 +37,26 @@ helpers do
     when 'T'; 'Tenori'
     when 'B'; 'Basi'
     end
+  end
+
+  def string_to_id(string)
+    string.downcase.delete(' ').gsub(/[ČĆčć]/, 'c').gsub(/[Šš]/, 's').gsub(/[Đđ]/, 'd').gsub(/[Žž]/, 'z')
+  end
+
+  def validate_post!
+    session[:error] = "Naslov ne smije ostati prazan. " if params[:title] == ""
+    session[:error] += "Tijelo ne smije ostati prazno." if params[:body] == ""
+    params[:id] = nil if params[:id] == 'new'
+    session[:post] = Post.new(:id => params[:id], :title => params[:title], :body => params[:body])
+    redirect back if session[:error]
+  end
+
+  def validate_content!
+    session[:error] = "Naslov ne smije ostati prazan. " if params[:title] == ""
+    session[:error] += "Tijelo ne smije ostati prazno." if params[:body] == ""
+    params[:id] = nil if params[:id] == 'new'
+    session[:content] = Content.new(:id => params[:id], :title => params[:title], :body => params[:body])
+    redirect back if session[:error]
   end
 end
 
@@ -59,73 +82,9 @@ module Haml
       end
     end
 
-    def generate_posts
-      Post.each do |post|
-        haml_tag :article do
-          haml_tag :header, {:class => 'x'} do
-            haml_tag :hgroup do
-              haml_tag :h1, post.title
-              haml_tag :h2, post.subtitle
-            end
-            haml_tag :time, {datetime: post.created_at, :pubdate => true}, post.created_at.to_s(:cro)
-          end
-          post.body.split("\n").each do |paragraph|
-            haml_tag :p, paragraph
-          end
-
-          if logged_in?
-            form_tag(action: "/post/#{post.id}", method: 'get', style: 'display: inline') do
-              haml_tag :input, {type: 'submit', value: 'Izmjeni'}
-            end
-            form_tag(action: "/delete/#{post.id}", method: 'delete', style: 'display: inline') do
-              haml_tag :input, {type: 'submit', value: 'Izbriši'}
-            end
-          end
-        end
-      end
-
-      if logged_in?
-        form_tag(action: '/post/new', method: 'get') do
-          haml_tag :input, {type: 'submit', value: 'Dodaj'}
-        end
-      end
-    end
-
-    def generate_members
-      ['S','A','T','B'].each do |voice|
-        haml_tag(:ul, {:class => 'members'}) do
-          haml_tag(:li, {:class => 'first'}, voice_to_cro("#{voice}"))
-          last = Member.filter(:voice => voice).count
-          Member.filter(:voice => voice).order(:last_name).each_with_index do |member, index|
-            haml_tag(:li, {:class => (index == last) && 'last'}, "#{member.first_name} #{member.last_name}")
-          end
-        end
-      end
-    end
-
-    def generate_activities
-      haml_tag :ol, {:class => 'activities', start: '2006'} do
-        Article.each do |things|
-          haml_tag :li do
-            haml_tag :ol do
-              things.split("\n").each do |list_element|
-                haml_tag :li, list_element
-              end
-            end
-          end
-        end
-      end
-    end
-
-    def generate_other_content
-      case article.title
-      when 'Povijest zbora'
-        haml_tag :img, {:class => 'intext', src: 'images/povijest_zbora.jpg', alt: 'zbor', width: '250', height: '168'}
-      when 'Biografija dirigenta'
-        haml_tag :img, {:class => 'intext', src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: '137', height: '168'}
-      end
-      article.body.split("\n").each do |paragraph|
-        haml_tag :p, paragraph
+    def button(attr)
+      form_tag(action: attr[:action], method: (attr[:method] || 'get'), style: 'display: inline') do
+        haml_tag :input, {type: submit, value: attr[:value]}
       end
     end
   end
