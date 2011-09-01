@@ -45,9 +45,14 @@
   #login, #logout
     +trailer
 
-  form#login
+  form#login table
     height: rhythm(6)
     width: 300px
+
+    .username, .password
+      input
+        border: 1px solid
+        padding: rhythm(0.25)
 
   #main
 
@@ -106,6 +111,12 @@
 
           time
             float: right
+
+      #edit, #delete
+        display: inline
+
+      #add
+        +trailer
 
     .members
       +trailer
