@@ -1,0 +1,11 @@
+%article{id: string_to_id(@title)}
+  %header
+    %h1= @title
+  :ruby
+    case @title
+    when 'Povijest zbora'
+      haml_tag :img, {:class => 'intext', src: 'images/povijest_zbora.jpg', alt: 'zbor', width: '250', height: '168'}
+    when 'Biografija dirigenta'
+      haml_tag :img, {:class => 'intext', src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: '137', height: '87'}
+    end
+  = BlueCloth.new(Content.filter(:title => @title).first.body).to_html

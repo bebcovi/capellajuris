@@ -28,10 +28,9 @@
 
         %nav
           %ol
-            - Pages.each do |page|
+            - ['index','o_nama','slike','video'].each do |page|
               %li
-                %a{href: "/#{page[:normal]}", class: current?(page) && 'current'}
-                  = page[:croatian]
+                %a{href: "/#{page}", class: current?(page) && 'current'}= page_on_croatian(page)
 
       #main
         = yield

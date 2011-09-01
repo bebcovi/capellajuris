@@ -11,68 +11,116 @@ get '/:page' do
 end
 
 post '/login' do
-  if auth?
-    login
-    redirect :index
-  else
-    @message = 'Krivo korisničko ime ili lozinka.'
-    haml :login
-  end
-end
-
-post '/logout' do
-  logout
+  authenticate!
+  log_in!
   redirect :index
 end
 
+post '/logout' do
+  log_out!
+  redirect back
+end
+
 before '/user' do
-  if params[:action] == 'Odustani'
-    redirect :index
-  end
+  redirect :index if params[:action] == 'Odustani'
+  authenticate!
 end
 
 put '/user' do
-  if auth?
-    User.first.update(:username => params[:new_username], :password => params[:new_password])
-    redirect :index
-  else
-    @message = 'Krivo korisničko ime ili lozinka.'
-    haml :user
-  end
+  User.first.update(:username => params[:new_username], :password => params[:new_password])
 end
+
+after '/user' do
+  redirect :index
+end
+
 
 get '/post/new' do
   if logged_in?
-    @post = Post.new
+    session[:post] = Post.new unless session[:post]
     haml :post
   end
 end
 
 get '/post/:id' do
   if logged_in?
-    @post = Post[params[:id]]
+    session[:post] = Post[params[:id]] unless session[:post]
     haml :post
   end
 end
 
-before '/edit/:id' do
+
+before '/edit_post/:id' do
   if params[:action] == 'Odustani'
+    session[:error] = session[:post] = nil
     redirect :index
+  end
+  validate_post!
+end
+
+post '/edit_post/:id' do
+  unless params[:id] == 'new'
+    Post[params[:id]].update(:title => params[:title], :subtitle => params[:subtitle], :body => params[:body])
+  else
+    Post.create(:title => params[:title], :subtitle => params[:subtitle], :body => params[:body], :created_at => Date.today)
+  end
+  session[:error] = session[:post] = nil
+  redirect :index
+end
+
+
+delete '/delete_post/:id' do
+  Post[params[:id]].delete
+end
+
+after '/delete_post/:id' do
+  redirect :index
+end
+
+
+get '/content/new' do
+  if logged_in?
+    session[:content] = Content.new unless session[:content]
+    haml :content
   end
 end
 
-put '/edit/:id' do
-  post = Post[params[:id]] || Post.new
-  post.title, post.subtitle, post.body = params[:title], params[:subtitle], params[:body]
-  post.created_at = Date.today unless post.id
-  post.save
-  redirect :index
+get '/content/:id' do
+  if logged_in?
+    session[:content] = Content[params[:id]] unless session[:content]
+    haml :content
+  end
 end
 
-delete '/delete/:id' do
-  Post[params[:id]].delete
-  redirect :index
+
+before '/edit_content/:id' do
+  if params[:action] == 'Odustani'
+    session[:error] = session[:content] = nil
+    redirect :index
+  end
+  validate_content!
 end
+
+post '/edit_content/:id' do
+  unless params[:id] == 'new'
+    Content[params[:id]].update(:title => params[:title], :body => params[:body])
+  else
+    Content.create(:title => params[:title], :body => params[:body])
+  end
+  session[:error] = session[:content] = nil
+  redirect :index if params[:id] == '1'
+  redirect :o_nama
+end
+
+
+delete '/delete_content/:id' do
+  Content[params[:id]].delete
+end
+
+after '/delete_content/:id' do
+  redirect :o_nama
+end
+
 
 get '/css/screen.css' do
   sass :'css/screen'

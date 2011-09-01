@@ -2,6 +2,7 @@ require 'haml'
 require 'sass'
 require 'compass'
 require 'sequel'
+require 'bluecloth'
 
 require_relative 'helpers'
 require_relative 'extras/cro_dates'
@@ -25,10 +26,6 @@ Sequel::Model.plugin(:schema)
 
 # Sinatra
 enable :sessions
-configure(:development) do |c|
-  require "sinatra/reloader"
-  c.also_reload "*.rb"
-end
 
 # Database Models
 Dir['models/*.rb'].each { |model| require_relative model}
