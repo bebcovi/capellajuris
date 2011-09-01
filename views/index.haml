@@ -3,10 +3,9 @@
 
 - unless logged_in?
   %p#login
-    %a{href: '/login'} Prijavi se
+    %a{href: '/login'} Prijava
 - else
-  - form_tag(action: '/logout', method: 'post', id: 'logout') do
-    %input{type: 'submit', value: 'Odjava'}
+  - button(action: '/logout', method: 'post', value: 'Odjava', id: 'logout')
 
 %section#intro
 
