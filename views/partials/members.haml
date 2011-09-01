@@ -1,0 +1,9 @@
+%article{id: string_to_id(@title)}
+  %header
+    %h1= @title
+  - ['S','A','T','B'].each do |voice|
+    %ul.members
+      %li.first= voice_to_cro(voice)
+      - last = Member.filter(:voice => voice).count - 1
+      - Member.filter(:voice => voice).order(:last_name).each_with_index do |member, index|
+        %li{:class => (index == last) && 'last'}= "#{member.first_name} #{member.last_name}"

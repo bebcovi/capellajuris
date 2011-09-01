@@ -1,0 +1,16 @@
+- Post.each do |post|
+  %article
+    %header
+      %hgroup
+        %h1= post.title
+      %time{datetime: post.created_at, :pubdate => true}= post.created_at.to_s(:cro)
+    - post.body.split("\n").each do |paragraph|
+      %p= paragraph
+
+    :ruby
+      if logged_in?
+        button(action: "/post/#{post.id}", value: 'Izmjeni')
+        button(action: "/delete_post/#{post.id}", method: 'delete', value: 'Izbriši')
+      end
+
+- button(action: "/post/new", value: 'Dodaj') if logged_in?

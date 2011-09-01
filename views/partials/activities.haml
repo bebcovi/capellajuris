@@ -1,0 +1,9 @@
+%article{id: string_to_id(@title)}
+  %header
+    %h1= @title
+  %ol.activities{start: '2006'}
+    - Activity.each do |activity|
+      %li
+        %ol
+          - activity.things.split("\n").each do |list_element|
+            %li= list_element
