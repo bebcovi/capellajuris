@@ -11,5 +11,6 @@ $(function() {
 
   $('#intro aside article h1').append(':')
   $('form#login label').append(':')
+  $('#facebook p').append(':')
 
 })
