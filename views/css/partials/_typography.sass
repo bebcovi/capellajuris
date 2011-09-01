@@ -18,10 +18,13 @@ body
         cursor: pointer
 
   nav ol li a
-    font: 1.25em $serif
+    font-family: serif
     text-transform: uppercase
     &:hover
       text-decoration: none
+
+  p#login, form#logout
+    height: rhythm()
 
   p#login
     text-align: right
@@ -40,7 +43,7 @@ body
 
     article
 
-      em
+      em, strong
         font-weight: bold
 
     #intro
@@ -98,6 +101,9 @@ body
           size: 10px
           weight: bold
 
+    .photos ul
+      text-align: center
+
     .videos article
       text-align: center
 
@@ -118,8 +124,8 @@ body
       margin: 0
 
     #contact
-      font-size: 18px
-      line-height: 40px
+      +leader(0.5)
+      font-size: 1.25em
 
       .label
         font-weight: bold
