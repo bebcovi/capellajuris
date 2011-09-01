@@ -10,4 +10,4 @@
         %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= session[:post].body
         %input{type: 'submit', name: 'action', value: 'Spremi'}
         %input{type: 'submit', name: 'action', value: 'Odustani'}
-    - haml_tag :p, session[:error] if session[:error]
+    - haml_tag(:p, session[:error]) if session[:error]
