@@ -1,73 +1,71 @@
-- @page_title = 'Capella juris - zbor Pravnog fakulteta u Zagrebu'
+- @page_title = 'Zbor Pravnog fakulteta u Zagrebu'
 
 #login
   - unless logged_in?
-    - form_tag(action: '/login', method: 'get') do
-      %input{type: 'submit', value: 'Administrator'}
+    %a{href: '/login'} Prijavi se
   - else
     - form_tag(action: '/logout', method: 'post') do
       %input{type: 'submit', value: 'Odjava'}
     %a{href: '/user'} Izmjeni korisničko ime/lozinku
 
-%section.intro
+%section#intro
+
   %header
     %h1 Capella juris
-  .x
-    #main
-      %img.intext{src: '/images/capella_juris.jpg', alt: 'capella juris', width: '269', height: '180'}
 
-      %p Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. <strong>Ive Josipovića</strong>, sadašnjeg predsjednika RH i prof. <strong>Wolfganga Ruscha</strong>, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro <a href='o_nama.html#jurica'>Jurica Petar Petrač</a>. Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17'>Ćirilometodska 4</a>.  Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…
+  .inner
 
-      %p.arrow
-        %a{href: '/o_nama'} Opširnije ▶
+    %article.main
+      %img{src: '/images/capella_juris.jpg', alt: 'capella juris', width: '269', height: '180'}
+      :markdown
+        Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. *Ive Josipovića*, sadašnjeg predsjednika RH i prof. *Wolfganga Ruscha*, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro [Jurica Petar Petrač](/o_nama#biografijadirigenta). Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, [Ćirilometodska 4](http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17).  Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga...
+      %p
+        %a{href: '/o_nama'} Opširnije
+        %a.arrow{href: '/o_nama'} ▶
 
     %aside
 
-      - @object_width = '300'
-      - @video_height = '180'
-      - @audio_height = '27'
+      :ruby
+        @object_width = '300'
+        @video_height = '180'
+        @audio_height = '27'
 
-      %article.video
+      %article
 
         %header
           %h1 Makedonska humoreska
 
-        %object{:width => @object_width, :height => @video_height}
+        %object{width: @object_width, height: @video_height}
           %param{name: 'movie', value: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US'}
           %param{name: 'allowFullScreen', value: 'true'}
           %param{name: 'allowscriptaccess', value: 'always'}
-          %embed{src: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', type: 'application/x-shockwave-flash', allowscriptaccess: 'always', :width => @object_width, :height => @video_height}
+          %embed{src: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', type: 'application/x-shockwave-flash', allowscriptaccess: 'always', width: @object_width, height: @video_height}
 
-      %article.audio
+      %article
 
         %header
           %h1 Makedonsko devojče
 
-        %audio{src: '/audio/makedonsko_devojce.mp3', :controls => true}
+        %audio{src: '/audio/makedonsko_devojce.mp3', controls: true}
 
-        %object{:width => @object_width, :height => @audio_height}
+        %object.flash{width: @object_width, height: @audio_height}
           %param{name: 'flashvars', value: 'audioUrl=/audio/makedonsko_devojce.mp3'}
           %param{name: 'src', value: 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
           %param{name: 'quality', value: 'best'}
-          %embed{type: 'application/x-shockwave-flash', flashvars: 'audioUrl=/audio/makedonsko_devojce.mp3', src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf', :width => @object_width, :height => @audio_height, quality: 'best'}
-
-        :javascript
-          if (Modernizr.audio && Modernizr.audio.ogg && !Modernizr.audio.mp3) {
-            document.getElementsByTagName('audio')[0].style.display = 'none';
-            document.getElementsByTagName('object')[1].style.display = 'inline';
-          }
+          %embed{type: 'application/x-shockwave-flash', flashvars: 'audioUrl=/audio/makedonsko_devojce.mp3', src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf', width: @object_width, height: @audio_height, quality: 'best'}
 
 %section.news
 
-  %h1 Vijesti
+  %header
+    %h1 Vijesti
 
   - Post.each do |post|
     %article
-      %header.x
+      %header
         %hgroup
           %h1= post.title
           %h2= post.subtitle
-        %time{datetime: "#{post.created_at}", :pubdate => true}= post.created_at.to_s(:cro)
+        %time{datetime: "#{post.created_at}", pubdate: true}= post.created_at.to_s(:cro)
       - post.body.split("\n").each do |paragraph|
         %p= paragraph
 
@@ -82,4 +80,5 @@
       %input{type: 'submit', value: 'Dodaj'}
 
   %p.arrow
-    %a{href: '/arhiva'} Arhiva vijesti ▶
+    %a{href: '/arhiva'} Arhiva vijesti
+    %a.arrow{href: '/arhiva'} ▶
