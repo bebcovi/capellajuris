@@ -55,13 +55,13 @@ get '/post/:id' do
   end
 end
 
-before '/edit/:id' do
+before '/edit_post/:id' do
   if params[:action] == 'Odustani'
     redirect :index
   end
 end
 
-put '/edit/:id' do
+put '/edit_post/:id' do
   post = Post[params[:id]] || Post.new
   post.title, post.subtitle, post.body = params[:title], params[:subtitle], params[:body]
   post.created_at = Date.today unless post.id
@@ -69,7 +69,7 @@ put '/edit/:id' do
   redirect :index
 end
 
-delete '/delete/:id' do
+delete '/delete_post/:id' do
   Post[params[:id]].delete
   redirect :index
 end
