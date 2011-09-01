@@ -2,6 +2,7 @@ require 'haml'
 require 'sass'
 require 'compass'
 require 'sequel'
+require 'bluecloth'
 
 require_relative 'helpers'
 require_relative 'extras/cro_dates'
