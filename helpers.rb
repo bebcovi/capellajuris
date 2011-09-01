@@ -41,18 +41,17 @@ module Haml
   module Helpers
     def form_tag(attr, &block)
       if attr[:method] == 'get' or attr[:method] == 'post'
-        haml_tag(:form, {action: "#{attr[:action]}",
-                         method: "#{attr[:method]}",
-                         style: "#{attr[:style]}"}) do
-          yield
-        end
+        haml_tag(:form,     { action: attr[:action],
+                              method: attr[:method],
+                              id: attr[:id]}) { yield }
       else
-        haml_tag(:form, {action: "#{attr[:action]}",
-                         method: 'post',
-                         style: "#{attr[:style]}"}) do
-          haml_tag(:input, {type: 'hidden',
-                            name: '_method',
-                            value: "#{attr[:method]}"}) do
+        haml_tag(:form,     { action: attr[:action],
+                              method: 'post',
+                              id: attr[:id]}) do
+
+          haml_tag(:input,  { type: 'hidden',
+                              name: '_method',
+                              value: attr[:method]}) do
             yield
           end
         end
@@ -62,7 +61,7 @@ module Haml
     def generate_posts
       Post.each do |post|
         haml_tag :article do
-          haml_tag :header, {:class => 'x'} do
+          haml_tag :header do
             haml_tag :hgroup do
               haml_tag :h1, post.title
               haml_tag :h2, post.subtitle
@@ -74,10 +73,10 @@ module Haml
           end
 
           if logged_in?
-            form_tag(action: "/post/#{post.id}", method: 'get', style: 'display: inline') do
+            form_tag(action: "/post/#{post.id}", method: 'get', id: 'edit') do
               haml_tag :input, {type: 'submit', value: 'Izmjeni'}
             end
-            form_tag(action: "/delete/#{post.id}", method: 'delete', style: 'display: inline') do
+            form_tag(action: "/delete/#{post.id}", method: 'delete', id: 'delete') do
               haml_tag :input, {type: 'submit', value: 'Izbriši'}
             end
           end
@@ -85,7 +84,7 @@ module Haml
       end
 
       if logged_in?
-        form_tag(action: '/post/new', method: 'get') do
+        form_tag(action: '/post/new', method: 'get', id: 'add') do
           haml_tag :input, {type: 'submit', value: 'Dodaj'}
         end
       end
