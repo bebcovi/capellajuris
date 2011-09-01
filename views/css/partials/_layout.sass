@@ -42,7 +42,7 @@
           display: block
           padding: 0 rhythm(0.5)
 
-  #login
+  #login, #logout
     +trailer
 
   #main
@@ -88,6 +88,11 @@
     .news, .archive
 
       article
+        +trailer(1.5)
+        +trailing-border(1px, 0.5, $base-font-size, dotted)
+        &:last-of-type
+          +trailing-border(0, 0)
+          +trailer(2.5)
 
         header
           +clearfix
@@ -96,7 +101,6 @@
             float: left
 
           time
-            +padding-trailer
             float: right
 
     .members
@@ -136,5 +140,4 @@
         float: right
         width: 32px
         height: 32px
-        border-width: 1px
-        border-style: solid
+        border: 1px solid
