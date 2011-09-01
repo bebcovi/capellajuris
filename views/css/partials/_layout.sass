@@ -1,5 +1,8 @@
 +establish-baseline
 
+body
+  // +baseline-grid-background($base-line-height, darken(white, 30%))
+
 .audio .flash, .no-audio audio
   display: none
 
@@ -84,6 +87,8 @@
         float: left
         width: $wrapper-width - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
 
+        img
+          +leader(0.5)
 
       aside
         float: right
@@ -92,7 +97,7 @@
         article
           +trailer
           &:last-child
-            margin: 0
+            +trailer(0)
 
     .news, .archive
 
@@ -101,7 +106,7 @@
         +trailing-border(1px, 0.5, $base-font-size, dotted)
         &:last-of-type
           +trailing-border(0, 0)
-          +trailer(2.5)
+          +trailer(2.0)
 
         header
           +clearfix
@@ -111,6 +116,12 @@
 
           time
             float: right
+
+      form input
+        background-color: transparent
+        border: 0
+        margin-right: rhythm(0.5)
+        @extend a
 
       #edit, #delete
         display: inline
@@ -124,11 +135,19 @@
       li
         display: inline
 
-    .photos img
-      +trailer(2)
-      float: none
-      margin-left: auto
-      margin-right: auto
+    .photos
+
+      ul li
+        +trailer(2)
+
+        @for $i from 1 through 19
+          &:nth-child(#{$i})
+            height: floor(image-height("galerija/#{$i}.jpg")/18) * 18
+
+      img
+        float: none
+        display: inline
+        max-height: 100%
 
     .videos article
       +trailer(2)
@@ -144,11 +163,11 @@
     #facebook
       +clearfix
       float: right
-      width: 250px
+      width: 260px
 
       p
         float: left
-        width: 200px
+        width: 210px
 
       a
         display: block
