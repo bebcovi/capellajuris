@@ -10,3 +10,5 @@
 - ~~add article IDs (using function which converts title to ID)~~ &#x2713;
 - ~~validations (i.e. titles can't be empty)~~ &#x2713;
 - ~~generate members with Ruby~~ &#x2713;
+- make cms for members and activities
+- make cms for photos and videos
