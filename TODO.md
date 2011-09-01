@@ -1,9 +1,7 @@
 #silvenon
 
 - look up the guests of Ceremony of Carols
-- use Markdown wherever possible
-- generate members with Ruby
-- create a centered menu extension
+- ~~use Markdown wherever possible~~ &#x2713;
 - update YouTube embedding on index
 - resize photos to fit the vertical rhythm
 
@@ -11,3 +9,4 @@
 
 - add article IDs (using function which converts title to ID)
 - validations (i.e. titles can't be empty)
+- generate members with Ruby
