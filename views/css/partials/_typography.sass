@@ -71,25 +71,32 @@ body
     .members .first
       font-weight: bold
 
-    .activities
-      padding-left: 40px
+    #aktivnosti
+
+      .inner
+        width: 750px
+        padding-left: rhythm(1)
+
+      article
+        +trailer
+
+        header h1
+          +trailer
+          font-size: 1.5em
+
+        ol
+          padding-left: rhythm(2)
+          list-style-type: disc
+
+          li
+            +trailer
+            padding-left: rhythm(0.5)
 
       .award
         text-transform: uppercase
         font:
           size: 10px
           weight: bold
-
-      li
-        margin: 20px 0
-        list-style-type: decimal
-
-        ol
-          padding-left: 25px
-
-          li
-            margin: 8px 0
-            list-style-type: disc
 
     .videos article
       text-align: center
