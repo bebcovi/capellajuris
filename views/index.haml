@@ -1,12 +1,11 @@
 - @page_title = 'Zbor Pravnog fakulteta u Zagrebu'
 
-#login
-  - unless logged_in?
+- unless logged_in?
+  %p#login
     %a{href: '/login'} Prijavi se
-  - else
-    - form_tag(action: '/logout', method: 'post') do
-      %input{type: 'submit', value: 'Odjava'}
-    %a{href: '/user'} Izmjeni korisničko ime/lozinku
+- else
+  - form_tag(action: '/logout', method: 'post', id: 'logout') do
+    %input{type: 'submit', value: 'Odjava'}
 
 %section#intro
 
