@@ -13,4 +13,5 @@
         button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
       end
 
-- haml_tag(:a, {href: '/post/new'}, "Dodaj") if logged_in?
+- if logged_in?
+  %a{href: '/post/new'} Dodaj
