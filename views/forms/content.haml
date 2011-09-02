@@ -1,13 +1,13 @@
-- @page_title = 'Content'
+- @page_title = 'Izmjena sadržaja stranice'
 
-- if logged_in?
-  - action = @content.id ? "/content/#{@content.id}" : '/content/new'
-  - method = @content.id ? 'put' : 'post'
-  - form_tag(action: action, method: method) do
-    %input{type: 'text', name: 'title', value: @content.title}
-    %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @content.body
-    %input{type: 'submit', name: 'action', value: 'Spremi'}
-    %input{type: 'submit', name: 'action', value: 'Odustani'}
-  - button(action: "/content/#{@content.id}", method: 'delete', value: 'Izbriši') unless @content.id == 1
-  - if @error
-    %p= @error
+- action = @content.id ? "/content/#{@content.id}" : '/content/new'
+- method = @content.id ? 'put' : 'post'
+- form_tag(action: action, method: method) do
+  %input{type: 'text', name: 'title', value: @content.title}
+  %textarea{type: 'text', name: 'body', rows: 15, cols: 100}= @content.body
+  %input{type: 'submit', name: 'action', value: 'Spremi'}
+  %input{type: 'submit', name: 'action', value: 'Odustani'}
+- unless @content.id == 1 or @content.id == nil
+  - button(action: "/content/#{@content.id}", method: 'delete', value: 'Izbriši')
+- if @error
+  %p= @error
