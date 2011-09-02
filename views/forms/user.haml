@@ -1,19 +1,19 @@
-- @page_title = 'Admininstator'
+- @page_title = 'Izmjena korisničkog imena/lozinke'
 
-- if logged_in?
-  - form_tag(action: '/user', method: 'put') do
-    %p
-      %label{for: 'username'} Staro korisničko ime:
-      %input#username{type: 'text', name: 'username', maxlength: '30'}
-      %label{for: 'username'} Novo korisničko ime:
-      %input#username{type: 'text', name: 'new_username', maxlength: '30'}
-    %p
-      %label{for: 'password'} Stara lozinka:
-      %input#password{type: 'password', name: 'password', maxlength: '30'}
-      %label{for: 'password'} Nova lozinka:
-      %input#password{type: 'password', name: 'new_password', maxlength: '30'}
-    %p
-      %input{type: 'submit', name: 'action', value: 'Promijeni'}
-      %input{type: 'submit', name: 'action', value: 'Odustani'}
+- form_tag(action: '/user', method: 'put') do
+  %p
+    %label{for: 'username'} Staro korisničko ime:
+    %input#username{type: 'text', name: 'username', maxlength: '30'}
+    %label{for: 'username'} Novo korisničko ime:
+    %input#username{type: 'text', name: 'new_username', maxlength: '30'}
+  %p
+    %label{for: 'password'} Stara lozinka:
+    %input#password{type: 'password', name: 'password', maxlength: '30'}
+    %label{for: 'password'} Nova lozinka:
+    %input#password{type: 'password', name: 'new_password', maxlength: '30'}
+  %p
+    %input{type: 'submit', name: 'action', value: 'Promijeni'}
+    %input{type: 'submit', name: 'action', value: 'Odustani'}
 
-  - haml_tag :p, @error if @error
+- if @error
+  %p= @error
