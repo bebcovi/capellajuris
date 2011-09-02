@@ -1,16 +1,15 @@
-- @page_title = "Post"
+- @page_title = "Izmjena vijesti"
 
-- if logged_in?
-  %section.news
-    - action = @post.id ? "/post/#{@post.id}" : '/post/new'
-    - method = @post.id ? 'put' : 'post'
-    - form_tag(action: action, method: method) do
-      %article
-        %header.x
-          %hgroup
-            %input{type: 'text', name: 'title', value: @post.title}
-        %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @post.body
-        %input{type: 'submit', name: 'action', value: 'Spremi'}
-        %input{type: 'submit', name: 'action', value: 'Odustani'}
-    - if @error
-      %p= @error
+%section.news
+  - action = @post.id ? "/post/#{@post.id}" : '/post/new'
+  - method = @post.id ? 'put' : 'post'
+  - form_tag(action: action, method: method) do
+    %article
+      %header.x
+        %hgroup
+          %input{type: 'text', name: 'title', value: @post.title}
+      %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @post.body
+      %input{type: 'submit', name: 'action', value: 'Spremi'}
+      %input{type: 'submit', name: 'action', value: 'Odustani'}
+  - if @error
+    %p= @error
