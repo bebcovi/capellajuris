@@ -13,26 +13,29 @@ helpers do
     ('/' + page == request.path_info) or (page == 'index' and request.path_info == '/')
   end
 
+  def form?(page)
+    Dir['views/forms/*'].include? "views/forms/#{page}.haml"
+  end
+
   def authenticate!(&block)
     if not User[:username => params[:username], :password => params[:password]]
       @error = 'Krivo korisničko ime ili lozinka.'
-      haml request.path_info.to_sym
+      haml "forms#{request.path_info}".to_sym
     else
       yield
     end
   end
 
   def log_in!
-    session[:logged] = true
-    session[:error] = nil
+    session[:logged_in] = true
   end
 
   def log_out!
-    session[:logged] = false
+    session[:logged_in] = false
   end
 
   def logged_in?
-    session[:logged]
+    session[:logged_in]
   end
 
   def voice_to_cro(voice)
@@ -49,15 +52,16 @@ helpers do
   end
 
   def validate!(&block)
-    if params[:title].empty? or params[:body].empty?
-      redirect :/ if params[:title].empty? and params[:body].empty?
-      @error = "Rubrika za naslov ili tijelo je ostala prazna."
+    if params[:title].empty? and params[:body].empty?
+      request.path_info.include?('post') ? redirect(:/) : redirect(:o_nama)
+    elsif params[:title].empty? or params[:body].empty?
+      @error = "Naslov ili sadržaj je ostao prazan."
       if request.path_info.include? 'post'
         @post = Post.new(:title => params[:title], :body => params[:body])
-        haml :post
+        haml :'forms/post'
       else
         @content = Content.new(:title => params[:title], :body => params[:body])
-        haml :content
+        haml :'forms/content'
       end
     else
       yield
@@ -69,25 +73,22 @@ module Haml
   module Helpers
     def form_tag(attr, &block)
       if attr[:method] == 'get' or attr[:method] == 'post'
-        haml_tag(:form,     { action: attr[:action],
-                              method: attr[:method],
-                              id: attr[:id]}) { yield }
+        haml_tag(:form, {action: attr[:action],
+                         method: attr[:method],
+                         id: attr[:id]}) { yield }
       else
-        haml_tag(:form,     { action: attr[:action],
-                              method: 'post',
-                              id: attr[:id]}) do
-
-          haml_tag(:input,  { type: 'hidden',
-                              name: '_method',
-                              value: attr[:method]}) do
-            yield
-          end
+        haml_tag(:form, {action: attr[:action],
+                         method: 'post',
+                         id: attr[:id]}) do
+          haml_tag(:input, {type: 'hidden',
+                            name: '_method',
+                            value: attr[:method]}) { yield }
         end
       end
     end
 
     def button(attr)
-      form_tag(action: attr[:action], method: attr[:method], style: 'display: inline', id: attr[:id]) do
+      form_tag(action: attr[:action], method: attr[:method], :class => 'button', id: attr[:id]) do
         haml_tag :input, {type: 'submit', value: attr[:value]}
       end
     end
