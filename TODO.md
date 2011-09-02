@@ -16,4 +16,4 @@
 - make cms for photos and videos
 - fix duration of login cookie
 - implement images through Flickr
-- Help Matija fix CSS
+- help silvenon fix CSS
