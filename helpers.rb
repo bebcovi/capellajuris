@@ -13,10 +13,12 @@ helpers do
     ('/' + page == request.path_info) or (page == 'index' and request.path_info == '/')
   end
 
-  def authenticate!
+  def authenticate!(&block)
     if not User[:username => params[:username], :password => params[:password]]
-      session[:error] = 'Krivo korisničko ime ili lozinka.'
-      redirect back
+      @error = 'Krivo korisničko ime ili lozinka.'
+      haml request.path_info.to_sym
+    else
+      yield
     end
   end
 
@@ -46,24 +48,20 @@ helpers do
     string.downcase.delete(' ').gsub(/[ČĆčć]/, 'c').gsub(/[Šš]/, 's').gsub(/[Đđ]/, 'd').gsub(/[Žž]/, 'z')
   end
 
-  def validate_post!
+  def validate!(&block)
     if params[:title].empty? or params[:body].empty?
-      redirect :index if params[:title].empty? and params[:body].empty?
-      session[:error] = "Rubrika za naslov ili tijelo je ostala prazna."
+      redirect :/ if params[:title].empty? and params[:body].empty?
+      @error = "Rubrika za naslov ili tijelo je ostala prazna."
+      if request.path_info.include? 'post'
+        @post = Post.new(:title => params[:title], :body => params[:body])
+        haml :post
+      else
+        @content = Content.new(:title => params[:title], :body => params[:body])
+        haml :content
+      end
+    else
+      yield
     end
-    session[:post] = Post[params[:id]] || Post.new
-    session[:post].title, session[:post].body = params[:title], params[:body]
-    redirect back if session[:error]
-  end
-
-  def validate_content!
-    if params[:title].empty? or params[:body].empty?
-      redirect :index if params[:title].empty? and params[:body].empty?
-      session[:error] = "Rubrika za naslov ili tijelo je ostala prazna."
-    end
-    session[:content] = Content[params[:id]] || Content.new
-    session[:content].title, session[:content].body = params[:title], params[:body]
-    redirect back if session[:error]
   end
 end
 
@@ -89,9 +87,13 @@ module Haml
     end
 
     def button(attr)
-      form_tag(action: attr[:action], method: (attr[:method] || 'get'), style: 'display: inline', id: attr[:id]) do
+      form_tag(action: attr[:action], method: attr[:method], style: 'display: inline', id: attr[:id]) do
         haml_tag :input, {type: 'submit', value: attr[:value]}
       end
+    end
+
+    def render_markdown(text)
+      BlueCloth.new(text).to_html
     end
   end
 end
