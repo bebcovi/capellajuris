@@ -4,9 +4,9 @@
   :ruby
     case @title
     when 'Povijest zbora'
-      haml_tag :img, {:class => 'intext', src: 'images/povijest_zbora.jpg', alt: 'zbor', width: '250', height: '168'}
+      haml_tag :img, {src: 'images/povijest_zbora.jpg', alt: 'zbor', width: '240', height: '162'}
     when 'Biografija dirigenta'
-      haml_tag :img, {:class => 'intext', src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: '137', height: '87'}
+      haml_tag :img, {src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: 158, height: 108}
     end
   = render_markdown Content[:title => @title].body
-  %a{href: "/content/#{Content[:title => @title].id}"} Izmjeni
+  %a.edit{href: "/content/#{Content[:title => @title].id}"} Izmjeni
