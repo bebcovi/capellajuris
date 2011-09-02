@@ -12,4 +12,5 @@
         %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @post.body
         %input{type: 'submit', name: 'action', value: 'Spremi'}
         %input{type: 'submit', name: 'action', value: 'Odustani'}
-  - haml_tag(:p, @error) if @error
+    - if @error
+      %p= @error

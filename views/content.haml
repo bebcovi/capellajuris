@@ -9,4 +9,5 @@
     %input{type: 'submit', name: 'action', value: 'Izmjeni'}
     %input{type: 'submit', name: 'action', value: 'Odustani'}
   - button(action: "/content/#{@content.id}", method: 'delete', value: 'Izbriši') unless @content.id == 1
-  - haml_tag(:p, @error) if @error
+  - if @error
+    %p= @error
