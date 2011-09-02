@@ -20,12 +20,13 @@ body
 
   form
     input
-      &[type='text'], &[type='password']
-        &:focus
-          +box-shadow(darken(white, 15%) 0 0 10px)
+      &[type='button'], &[type='submit']
+        background-color: transparent
       &[type='text'], &[type='password']
         border-color: lighten(black, 50%)
         color: lighten(black, 20%)
+        &:focus
+          +box-shadow(darken(white, 15%) 0 0 10px)
 
   #add
     background-color: darken(white, 5%)
