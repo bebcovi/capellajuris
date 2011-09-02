@@ -19,4 +19,5 @@
       %td{colspan: 2}
         %input{type: 'submit', value: 'Prijava'}
 
-- haml_tag :p, @error if @error
+- if @error
+  %p= @error
