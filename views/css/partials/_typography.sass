@@ -12,26 +12,35 @@ body
   a
     +hover-link
 
-  form
-    input:hover
-      &[type='submit'], &[type='button']
-        cursor: pointer
-
   nav ol li a
-    font-family: serif
+    font-family: $serif
     text-transform: uppercase
     &:hover
       text-decoration: none
 
-  #login, #logout
+  form
+    input, textarea
+      font: $base-font-size $sans-serif
+
+  #log
     text-align: right
 
-    table
-      text-align: left
+  input[type='submit'], input[type='button'], .edit
+    font-weight: bold
+    color: darken(white, 25%)
+    &:hover
+      cursor: pointer
+      color: darken(white, 40%)
+      text-decoration: none
+
+  #add
+    text-align: center
+    &:hover
+      text-decoration: none
 
   #main
 
-    p
+    p, .spacer
       +trailer
 
     section h1
@@ -87,16 +96,10 @@ body
         ol
           padding-left: rhythm(2)
           list-style-type: disc
+          list-style-position: outside
 
           li
             +trailer
-            padding-left: rhythm(0.5)
-
-      .award
-        text-transform: uppercase
-        font:
-          size: 10px
-          weight: bold
 
     .photos ul
       text-align: center
