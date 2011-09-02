@@ -75,14 +75,16 @@ module Haml
       if attr[:method] == 'get' or attr[:method] == 'post'
         haml_tag(:form, {action: attr[:action],
                          method: attr[:method],
-                         id: attr[:id]}) { yield }
+                         id: attr[:id],
+                         :class => attr[:class]}) { yield if block_given? }
       else
         haml_tag(:form, {action: attr[:action],
                          method: 'post',
-                         id: attr[:id]}) do
+                         id: attr[:id],
+                         :class => attr[:class]}) do
           haml_tag(:input, {type: 'hidden',
                             name: '_method',
-                            value: attr[:method]}) { yield }
+                            value: attr[:method]}) { yield if block_given? }
         end
       end
     end

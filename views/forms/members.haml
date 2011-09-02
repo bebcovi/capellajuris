@@ -1,0 +1,23 @@
+- @page_title = 'Izmjena članova zbora'
+
+- session[:members_to_create] = [] if session[:members_to_create] == nil
+- session[:members_to_delete] = [] if session[:members_to_delete] == nil
+
+- ['S','A','T','B'].each do |voice|
+  %ul.members
+    %li.first= voice_to_cro(voice)
+    - last = Member.filter(:voice => voice).count - 1
+    - Member.filter(:voice => voice).order(:last_name).each_with_index do |member, index|
+      - unless session[:members_to_delete].include? member.id
+        %li{:class => (index == last) && 'last'}
+          = "#{member.first_name} #{member.last_name}"
+          - button(action: "/member/#{member.id}", method: 'put', value: 'x')
+  - form_tag(action: '/member/new', method: 'put') do
+    %input{type: 'text', name: 'first_name'}
+    %input{type: 'text', name: 'last_name'}
+    %input{type: 'hidden', name: 'voice', value: voice}
+    %input{type: 'submit', value: 'Dodaj'}
+
+- form_tag(action: '/members', method: 'put') do
+  %input{type: 'submit', name: 'action', value: 'Spremi promjene'}
+  %input{type: 'submit', name: 'action', value: 'Odustani'}

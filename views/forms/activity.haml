@@ -1,0 +1,9 @@
+- @post_title = 'Izmjeni aktivnosti'
+
+- action = @activity.id ? "/activity/#{@activity.id}" : '/activity/new'
+- method = @activity.id ? 'put' : 'post'
+- form_tag(action: action, method: method) do
+  %input{type: 'text', name: 'year', value: @activity.year}
+  %textarea{type: 'text', name: 'things', rows: 15, cols: 100}= @activity.things
+  %input{type: 'submit', name: 'action', value: 'Spremi promjene'}
+  %input{type: 'submit', name: 'action', value: 'Odustani'}
