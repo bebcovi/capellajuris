@@ -14,3 +14,6 @@
 - ~~generate members with Ruby~~ &#x2713;
 - make cms for members and activities
 - make cms for photos and videos
+- fix duration of login cookie
+- implement images through Flickr
+- Help Matija fix CSS
