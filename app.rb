@@ -8,7 +8,7 @@ end
 
 get '/logout' do
   log_out!
-  redirect back
+  redirect :/
 end
 
 get '/:page' do
@@ -17,7 +17,7 @@ get '/:page' do
 end
 
 get '/:form' do
-  haml "forms/#{params[:form]}".to_sym
+  haml "forms/#{params[:form]}".to_sym unless not logged_in? and params[:form] != 'login'
 end
 
 post '/login' do
@@ -84,7 +84,7 @@ post '/content/new' do
   redirect :o_nama if params[:action] == 'Odustani'
   validate! do
     Content.create(:title => params[:title], :body => params[:body])
-    redirect :o_nama
+    redirect ("/o_nama##{string_to_id Content[:body => params[:body]].title}".to_sym)
   end
 end
 
@@ -98,11 +98,11 @@ end
 
 put '/content/:id' do
   if params[:action] == 'Odustani'
-    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
+    params[:id] == '1' ? redirect(:/) : redirect("/o_nama##{string_to_id Content[params[:id]].title}".to_sym)
   end
   validate! do
     Content[params[:id]].update(:title => params[:title], :body => params[:body])
-    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
+    params[:id] == '1' ? redirect(:/) : redirect("/o_nama##{string_to_id Content[params[:id]].title}".to_sym)
   end
 end
 
@@ -112,28 +112,54 @@ delete '/content/:id' do
 end
 
 
-post '/member/new' do
+put '/member/new' do
   session[:members_to_create] << Member.create(:first_name => params[:first_name],
                                                :last_name => params[:last_name],
                                                :voice => params[:voice]).values[:id]
   redirect :members
 end
 
-post '/member/:id' do
+put '/member/:id' do
   session[:members_to_delete] << params[:id].to_i
   redirect :members
 end
 
-post '/members' do
+put '/members' do
   if params[:action] == 'Odustani'
     Member.filter(:id => session[:members_to_create]).delete
-    session[:members_to_create] = session[:members_to_delete] = nil
-    redirect :o_nama
   else
     Member.filter(:id => session[:members_to_delete]).delete
-    session[:members_to_create] = session[:members_to_delete] = nil
-    redirect :o_nama
   end
+  session[:members_to_create] = session[:members_to_delete] = nil
+  redirect :'o_nama#clanovizbora'
+end
+
+
+get '/activity/new' do
+  if logged_in?
+    @activity = Activity.new
+    @activity.year = Activity.order(:year).last.year + 1
+    haml :'forms/activity'
+  end
+end
+
+post '/activity/new' do
+  Activity.create(:year => params[:year], :thing => params[:things]) if params[:action] != 'Odustani'
+  redirect :'o_nama#aktivnosti'
+end
+
+
+get '/activity/:id' do
+  if logged_in?
+    @activity = Activity[params[:id]]
+    haml :'forms/activity'
+  end
+end
+
+put '/activity/:id' do
+  Activity[params[:id]].update(:year => params[:year],
+                               :things => params[:things]) if params[:action] != 'Odustani'
+  redirect :'o_nama#aktivnosti'
 end
 
 
