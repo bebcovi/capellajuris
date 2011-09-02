@@ -128,10 +128,14 @@ body
 
     #intro, .news, .archive
       form input
-        background-color: transparent
-        border: 0
-        margin-right: rhythm(0.5)
-        @extend a
+        &[type='submit'], [type='button']
+          background-color: transparent
+          border: 0
+          margin-right: rhythm(0.5)
+          @extend a
+
+    .button
+      display: inline
 
     .members
       +trailer
