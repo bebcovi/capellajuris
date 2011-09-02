@@ -7,3 +7,4 @@
       - last = Member.filter(:voice => voice).count - 1
       - Member.filter(:voice => voice).order(:last_name).each_with_index do |member, index|
         %li{:class => (index == last) && 'last'}= "#{member.first_name} #{member.last_name}"
+  %a{href: '/members'} Izmjeni
