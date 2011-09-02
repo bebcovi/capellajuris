@@ -6,6 +6,7 @@ gem 'sass'
 gem 'compass'
 gem 'sequel'
 gem 'bluecloth'
+gem 'sqlite3'
 
 group :development do
   gem 'thin'
