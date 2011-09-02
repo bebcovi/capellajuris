@@ -76,7 +76,7 @@ module Haml
         haml_tag(:form, {action: attr[:action],
                          method: attr[:method],
                          id: attr[:id],
-                         :class => attr[:class]}) { yield }
+                         :class => attr[:class]}) { yield if block_given? }
       else
         haml_tag(:form, {action: attr[:action],
                          method: 'post',
@@ -84,7 +84,7 @@ module Haml
                          :class => attr[:class]}) do
           haml_tag(:input, {type: 'hidden',
                             name: '_method',
-                            value: attr[:method]}) { yield }
+                            value: attr[:method]}) { yield if block_given? }
         end
       end
     end
