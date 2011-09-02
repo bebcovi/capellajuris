@@ -2,12 +2,14 @@
 
 - if logged_in?
   %section.news
-    - form_tag(action: "/edit_post/#{session[:post].id || 'new'}", method: 'post') do
+    - action = @post.id ? "/post/#{@post.id}" : '/post/new'
+    - method = @post.id ? 'put' : 'post'
+    - form_tag(action: action, method: method) do
       %article
         %header.x
           %hgroup
-            %input{type: 'text', name: 'title', value: session[:post].title}
-        %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= session[:post].body
+            %input{type: 'text', name: 'title', value: @post.title}
+        %textarea{type: 'text', name: 'body', rows: 15, cols: 100, style: 'display: block'}= @post.body
         %input{type: 'submit', name: 'action', value: 'Spremi'}
         %input{type: 'submit', name: 'action', value: 'Odustani'}
-    - haml_tag(:p, session[:error]) if session[:error]
+  - haml_tag(:p, @error) if @error

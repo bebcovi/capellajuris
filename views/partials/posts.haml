@@ -9,8 +9,8 @@
 
     :ruby
       if logged_in?
-        button(action: "/post/#{post.id}", value: 'Izmjeni', id: 'edit')
-        button(action: "/delete_post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
+        haml_tag :a, {href: "/post/#{post.id}"}, "Izmjeni"
+        button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
       end
 
-- button(action: "/post/new", value: 'Dodaj', id: 'add') if logged_in?
+- haml_tag(:a, {href: '/post/new'}, "Dodaj") if logged_in?

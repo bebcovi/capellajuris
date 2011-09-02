@@ -1,7 +1,7 @@
 - @page_title = 'Admininstator'
 
 - if logged_in?
-  - form_tag(action: '/user', method: 'put')
+  - form_tag(action: '/user', method: 'put') do
     %p
       %label{for: 'username'} Staro korisničko ime:
       %input#username{type: 'text', name: 'username', maxlength: '30'}
@@ -15,4 +15,5 @@
     %p
       %input{type: 'submit', name: 'action', value: 'Promijeni'}
       %input{type: 'submit', name: 'action', value: 'Odustani'}
-  - haml_tag :p, session[:error] if session[:error]
+
+  - haml_tag :p, @error if @error

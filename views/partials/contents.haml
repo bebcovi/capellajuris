@@ -8,4 +8,5 @@
     when 'Biografija dirigenta'
       haml_tag :img, {:class => 'intext', src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: '137', height: '87'}
     end
-  = BlueCloth.new(Content.filter(:title => @title).first.body).to_html
+  = render_markdown Content[:title => @title].body
+  %a{href: "/content/#{Content[:title => @title].id}"} Izmjeni

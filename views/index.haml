@@ -3,9 +3,10 @@
 
 - unless logged_in?
   %p#login
-    %a{href: '/login'} Prijava
+    %a{href: '/login'} Prijava administratora
 - else
-  - button(action: '/logout', method: 'post', value: 'Odjava', id: 'logout')
+  %a{href: '/logout'} Odjava
+  %a{href: '/user'} Promjena korisničkog imena ili passworda
 
 %section#intro
 
@@ -16,12 +17,12 @@
 
     %article.main
       %img{src: '/images/capella_juris.jpg', alt: 'capella juris', width: '269', height: '180'}
-        = BlueCloth.new(Content.first.body).to_html
+        = render_markdown Content.first.body
       %p
         %a{href: '/o_nama'} Opširnije
         %a.arrow{href: '/o_nama'} ▶
 
-      - button(action: '/content/1', value: 'Izmjeni') if logged_in?
+      - haml_tag(:a, {href: '/content/1'},'Izmjeni') if logged_in?
 
     %aside
 
