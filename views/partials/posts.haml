@@ -7,11 +7,9 @@
     - post.body.split("\n").each do |paragraph|
       %p= paragraph
 
-    :ruby
-      if logged_in?
-        haml_tag :a, {href: "/post/#{post.id}"}, "Izmjeni"
-        button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
-      end
+    - if logged_in?
+      %a{:href => "/post/#{post.id}"} Izmjeni
+      - button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
 
 - if logged_in?
   %a{href: '/post/new'} Dodaj
