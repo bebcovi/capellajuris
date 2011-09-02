@@ -6,7 +6,6 @@
     %a{href: '/login'} Prijava administratora
 - else
   %a{href: '/logout'} Odjava
-  %a{href: '/user'} Promjena korisničkog imena ili passworda
 
 %section#intro
 
@@ -22,7 +21,8 @@
         %a{href: '/o_nama'} Opširnije
         %a.arrow{href: '/o_nama'} ▶
 
-      - haml_tag(:a, {href: '/content/1'},'Izmjeni') if logged_in?
+      - if logged_in?
+        %a{href: '/content/1'} Izmjeni
 
     %aside
 
