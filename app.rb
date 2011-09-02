@@ -11,113 +11,106 @@ get '/:page' do
 end
 
 post '/login' do
-  authenticate!
-  log_in!
-  redirect :index
+  authenticate! do
+    log_in!
+    redirect :/
+  end
 end
 
-post '/logout' do
+get '/logout' do
   log_out!
   redirect back
 end
 
-before '/user' do
-  redirect :index if params[:action] == 'Odustani'
-  authenticate!
-end
-
 put '/user' do
-  User.first.update(:username => params[:new_username], :password => params[:new_password])
-end
-
-after '/user' do
-  redirect :index
+  redirect :index if params[:action] == 'Odustani'
+  authenticate! do
+    User.first.update(:username => params[:new_username], :password => params[:new_password])
+    redirect :/
+  end
 end
 
 
 get '/post/new' do
   if logged_in?
-    session[:post] = Post.new unless session[:post]
+    @post = Post.new
     haml :post
   end
 end
+
+post '/post/new' do
+  redirect :index if params[:action] == 'Odustani'
+  validate! do
+    Post.create(:title => params[:title], :body => params[:body], :created_at => Date.today)
+    redirect :/
+  end
+end
+
 
 get '/post/:id' do
   if logged_in?
-    session[:post] = Post[params[:id]] unless session[:post]
+    @post = Post[params[:id]]
     haml :post
   end
 end
 
-
-before '/edit_post/:id' do
-  if params[:action] == 'Odustani'
-    session[:error] = session[:post] = nil
-    redirect :index
+put '/post/:id' do
+  redirect :index if params[:action] == 'Odustani'
+  validate! do
+    Post[params[:id]].update(:title => params[:title], :body => params[:body])
+    redirect :/
   end
-  validate_post!
 end
 
-post '/edit_post/:id' do
-  unless params[:id] == 'new'
-    Post[params[:id]].update(:title => params[:title], :subtitle => params[:subtitle], :body => params[:body])
-  else
-    Post.create(:title => params[:title], :subtitle => params[:subtitle], :body => params[:body], :created_at => Date.today)
-  end
-  session[:error] = session[:post] = nil
-  redirect :index
-end
-
-
-delete '/delete_post/:id' do
+delete '/post/:id' do
   Post[params[:id]].delete
-end
-
-after '/delete_post/:id' do
-  redirect :index
+  redirect :/
 end
 
 
 get '/content/new' do
   if logged_in?
-    session[:content] = Content.new unless session[:content]
+    @content = Content.new
     haml :content
   end
 end
+
+post '/content/new' do
+  redirect :o_nama if params[:action] == 'Odustani'
+  validate! do
+    Content.create(:title => params[:title], :body => params[:body])
+    redirect :o_nama
+  end
+end
+
 
 get '/content/:id' do
   if logged_in?
-    session[:content] = Content[params[:id]] unless session[:content]
+    @content = Content[params[:id]]
     haml :content
   end
 end
 
-
-before '/edit_content/:id' do
+put '/content/:id' do
   if params[:action] == 'Odustani'
-    session[:error] = session[:content] = nil
-    redirect :index
+    if params[:id] == '1'
+      redirect :/
+    else
+      redirect :o_nama
+    end
   end
-  validate_content!
-end
-
-post '/edit_content/:id' do
-  unless params[:id] == 'new'
+  validate! do
     Content[params[:id]].update(:title => params[:title], :body => params[:body])
-  else
-    Content.create(:title => params[:title], :body => params[:body])
+    if params[:id] == '1'
+      redirect :/
+    else
+      redirect :o_nama
+    end
   end
-  session[:error] = session[:content] = nil
-  redirect :index if params[:id] == '1'
-  redirect :o_nama
 end
 
-
-delete '/delete_content/:id' do
-  Content[params[:id]].delete
-end
-
-after '/delete_content/:id' do
+delete '/content/:id' do
+  Content[params[:id]].delete unless params[:id] == '1'
   redirect :o_nama
 end
 
