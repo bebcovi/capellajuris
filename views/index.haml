@@ -1,11 +1,10 @@
 -# encoding:utf-8
 - @page_title = 'Zbor Pravnog fakulteta u Zagrebu'
 
-- unless logged_in?
-  %p#login
+%p#log
+  - unless logged_in?
     %a{href: '/login'} Prijava administratora
-- else
-  %p#logout
+  - else
     %a{href: '/logout'} Odjava
 
 %section#intro
@@ -23,7 +22,8 @@
         %a.arrow{href: '/o_nama'} ▶
 
       - if logged_in?
-        %a{href: '/content/1'} Izmjeni
+        %p
+          %a.edit{href: '/content/1'} Izmjeni
 
     %aside
 
