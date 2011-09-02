@@ -6,6 +6,11 @@ get '/' do
   haml :index
 end
 
+get '/logout' do
+  log_out!
+  redirect back
+end
+
 get '/:page' do
   pass if form?(params[:page])
   haml params[:page].to_sym
@@ -20,11 +25,6 @@ post '/login' do
     log_in!
     redirect :/
   end
-end
-
-get '/logout' do
-  log_out!
-  redirect back
 end
 
 put '/user' do
@@ -109,6 +109,31 @@ end
 delete '/content/:id' do
   Content[params[:id]].delete unless params[:id] == '1'
   redirect :o_nama
+end
+
+
+post '/member/new' do
+  session[:members_to_create] << Member.create(:first_name => params[:first_name],
+                                               :last_name => params[:last_name],
+                                               :voice => params[:voice]).values[:id]
+  redirect :members
+end
+
+post '/member/:id' do
+  session[:members_to_delete] << params[:id].to_i
+  redirect :members
+end
+
+post '/members' do
+  if params[:action] == 'Odustani'
+    Member.filter(:id => session[:members_to_create]).delete
+    session[:members_to_create] = session[:members_to_delete] = nil
+    redirect :o_nama
+  else
+    Member.filter(:id => session[:members_to_delete]).delete
+    session[:members_to_create] = session[:members_to_delete] = nil
+    redirect :o_nama
+  end
 end
 
 
