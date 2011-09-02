@@ -7,7 +7,12 @@ get '/' do
 end
 
 get '/:page' do
+  pass if form?(params[:page])
   haml params[:page].to_sym
+end
+
+get '/:form' do
+  haml "forms/#{params[:form]}".to_sym
 end
 
 post '/login' do
@@ -23,7 +28,7 @@ get '/logout' do
 end
 
 put '/user' do
-  redirect :index if params[:action] == 'Odustani'
+  redirect :/ if params[:action] == 'Odustani'
   authenticate! do
     User.first.update(:username => params[:new_username], :password => params[:new_password])
     redirect :/
@@ -34,12 +39,12 @@ end
 get '/post/new' do
   if logged_in?
     @post = Post.new
-    haml :post
+    haml :'forms/post'
   end
 end
 
 post '/post/new' do
-  redirect :index if params[:action] == 'Odustani'
+  redirect :/ if params[:action] == 'Odustani'
   validate! do
     Post.create(:title => params[:title], :body => params[:body], :created_at => Date.today)
     redirect :/
@@ -50,12 +55,12 @@ end
 get '/post/:id' do
   if logged_in?
     @post = Post[params[:id]]
-    haml :post
+    haml :'forms/post'
   end
 end
 
 put '/post/:id' do
-  redirect :index if params[:action] == 'Odustani'
+  redirect :/ if params[:action] == 'Odustani'
   validate! do
     Post[params[:id]].update(:title => params[:title], :body => params[:body])
     redirect :/
@@ -71,7 +76,7 @@ end
 get '/content/new' do
   if logged_in?
     @content = Content.new
-    haml :content
+    haml :'forms/content'
   end
 end
 
@@ -87,25 +92,17 @@ end
 get '/content/:id' do
   if logged_in?
     @content = Content[params[:id]]
-    haml :content
+    haml :'forms/content'
   end
 end
 
 put '/content/:id' do
   if params[:action] == 'Odustani'
-    if params[:id] == '1'
-      redirect :/
-    else
-      redirect :o_nama
-    end
+    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
   end
   validate! do
     Content[params[:id]].update(:title => params[:title], :body => params[:body])
-    if params[:id] == '1'
-      redirect :/
-    else
-      redirect :o_nama
-    end
+    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
   end
 end
 
