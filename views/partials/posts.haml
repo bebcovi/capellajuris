@@ -8,8 +8,9 @@
       %p= paragraph
 
     - if logged_in?
-      %a{:href => "/post/#{post.id}"} Izmjeni
-      - button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
+      %div.spacer
+        %a.edit{:href => "/post/#{post.id}"} Izmjeni
+        - button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši', id: 'delete')
 
 - if logged_in?
   %a{href: '/post/new'} Dodaj
