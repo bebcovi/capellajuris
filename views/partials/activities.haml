@@ -5,8 +5,12 @@
 
   .inner
 
-    - Activity.each do |activity|
+    %a{href: '/activity/new'} Dodaj
+
+    - Activity.order(:year.desc).each do |activity|
       %article
         %header
           %h1= activity.year
         = BlueCloth.new(activity.things).to_html
+        %a{href: "/activity/#{activity.id}", class: 'edit'} Izmjeni
+
