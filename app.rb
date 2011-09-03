@@ -84,6 +84,7 @@ post '/content/new' do
   redirect :o_nama if params[:action] == 'Odustani'
   validate! do
     Content.create(:title => params[:title], :body => params[:body])
+    Order.insert(:title => params[:title], :order => Order.max(:order) + 1)
     redirect ("/o_nama##{string_to_id Content[:body => params[:body]].title}".to_sym)
   end
 end
@@ -107,7 +108,10 @@ put '/content/:id' do
 end
 
 delete '/content/:id' do
-  Content[params[:id]].delete unless params[:id] == '1'
+  unless params[:id] == '1'
+    Order[:title => Content[params[:id]].title].delete
+    Content[params[:id]].delete
+  end
   redirect :o_nama
 end
 

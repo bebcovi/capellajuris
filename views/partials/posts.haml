@@ -2,7 +2,7 @@
   %p
     %a#add{href: '/post/new'} Dodaj +
 
-- Post.each do |post|
+- Post.order(:created_at.desc).each do |post|
   %article
     %header
       %hgroup
@@ -15,6 +15,3 @@
       %div.spacer
         %a.edit{:href => "/post/#{post.id}"} Izmjeni
         - button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši')
-
-- if logged_in?
-  %a{href: '/post/new'} Dodaj

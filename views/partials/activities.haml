@@ -5,7 +5,8 @@
 
   .inner
 
-    %a{href: '/activity/new'} Dodaj
+    %p
+      %a#add{href: '/activity/new'} Dodaj +
 
     - Activity.order(:year.desc).each do |activity|
       %article
