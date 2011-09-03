@@ -8,5 +8,6 @@
     when 'Biografija dirigenta'
       haml_tag :img, {src: 'images/biografija_dirigenta.jpg', alt: 'jurica petar petrač', width: 158, height: 108}
     end
-  = render_markdown Content[:title => @title].body
-  %a.edit{href: "/content/#{Content[:title => @title].id}"} Izmjeni
+  - if Content[:title => @title]
+    = render_markdown Content[:title => @title].body
+    %a.edit{href: "/content/#{Content[:title => @title].id}"} Izmjeni

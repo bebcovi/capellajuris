@@ -3,7 +3,7 @@
 - form_tag(action: '/user', method: 'put') do
   %p
     %label{for: 'username'} Staro korisničko ime:
-    %input#username{type: 'text', name: 'username', maxlength: '30'}
+    %input#username{type: 'text', name: 'username', maxlength: '30', autofocus: true}
     %label{for: 'username'} Novo korisničko ime:
     %input#username{type: 'text', name: 'new_username', maxlength: '30'}
   %p

@@ -17,4 +17,5 @@
 - make cms for photos and videos
 - fix duration of login cookie
 - implement images through Flickr
-- help silvenon fix CSS
+- ~~help silvenon fix CSS~~ &#x2713;
+- implement archive

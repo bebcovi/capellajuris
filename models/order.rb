@@ -1,6 +1,7 @@
 class Order < Sequel::Model
   create_table do
-    column :title, 'varchar(255)', :primary_key => true
-    column :order, 'smallint'
+    primary_key :id
+    column :title, 'varchar(255)'
+    column :order, 'smallint', :unique => true
   end unless table_exists?
 end

@@ -5,8 +5,9 @@
 
 %section.post
   - form_tag(action: action, method: method) do
-    %input{type: 'text', name: 'title', value: @content.title}
-    %textarea{type: 'text', name: 'body', rows: 15, cols: 100}= @content.body
+    %input{type: 'text', name: 'title', value: @content.title, autofocus: @content.title == nil}
+    %textarea{type: 'text', name: 'body', rows: 15, cols: 100, autofocus: @content.title != nil}
+      = @content.body
     %input{type: 'submit', name: 'action', value: 'Spremi'}
     %input{type: 'submit', name: 'action', value: 'Odustani'}
   - unless @content.id == 1 or @content.id == nil
