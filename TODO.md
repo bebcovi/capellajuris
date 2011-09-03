@@ -6,6 +6,7 @@
 - ~~resize photos to fit the vertical rhythm~~ &#x2713; **compass
   freakin rules**
 - use compass spriting in #facebook
+- elongate photos in about by one line
 
 #janko-m
 

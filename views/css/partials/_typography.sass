@@ -40,7 +40,7 @@ body
 
   #main
 
-    p, .spacer
+    p
       +trailer
 
     section h1
@@ -65,17 +65,12 @@ body
 
       article
 
-        header
+        h1
+          +trailer
+          font-size: 1.75em
 
-          h1
-            +trailer
-            font-size: 1.75em
-
-          h2
-            display: none
-
-          time
-            font-size: 0.8
+        time
+          font-size: 0.8
 
     .members .first
       font-weight: bold
@@ -89,7 +84,7 @@ body
       article
         +trailer
 
-        header h1
+        h1
           +trailer
           font-size: 1.5em
 

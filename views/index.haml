@@ -7,10 +7,9 @@
   - else
     %a{href: '/logout'} Odjava
 
-%section#intro
+#intro
 
-  %header
-    %h1= Content.first.title
+  %h1= Content.first.title
 
   .inner
 
@@ -32,10 +31,9 @@
         @video_height = 176
         @audio_height = 27
 
-      %article
+      %section
 
-        %header
-          %h1 Makedonska humoreska
+        %h2 Makedonska humoreska
 
         %object{width: @object_width, height: @video_height}
           %param{name: 'movie', value: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US'}
@@ -43,10 +41,9 @@
           %param{name: 'allowscriptaccess', value: 'always'}
           %embed{src: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', type: 'application/x-shockwave-flash', allowscriptaccess: 'always', width: @object_width, height: @video_height}
 
-      %article
+      %section
 
-        %header
-          %h1 Makedonsko devojče
+        %h2 Makedonsko devojče
 
         %audio{src: '/audio/makedonsko_devojce.mp3', controls: true}
 
@@ -56,10 +53,9 @@
           %param{name: 'quality', value: 'best'}
           %embed{type: 'application/x-shockwave-flash', flashvars: 'audioUrl=/audio/makedonsko_devojce.mp3', src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf', width: @object_width, height: @audio_height, quality: 'best'}
 
-%section.news
+%section#news
 
-  %header
-    %h1 Vijesti
+  %h1 Vijesti
 
   = haml :'partials/posts'
 

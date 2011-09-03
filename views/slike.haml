@@ -1,12 +1,10 @@
 - @page_title = 'Slike'
 
-%section.photos
+%ul
+  - for i in (1..19) do
+    %li
+      %img{src: "/images/galerija/#{i}.jpg"}
 
-  %ul
-    - for i in (1..19) do
-      %li
-        %img{src: "/images/galerija/#{i}.jpg"}
-
-  %p.arrow.top
-    %a{href: '#'} Povratak na vrh
-    %a.arrow{href: '#'} ▲
+%p.arrow.top
+  %a{href: '#'} Povratak na vrh
+  %a.arrow{href: '#'} ▲
