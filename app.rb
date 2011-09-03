@@ -99,9 +99,10 @@ end
 
 put '/content/:id' do
   if params[:action] == 'Odustani'
-    params[:id] == '1' ? redirect(:/) : redirect("/o_nama##{string_to_id Content[params[:id]].title}".to_sym)
+    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
   end
   validate! do
+    Order[:title => Content[params[:id]].title].update(:title => params[:title])
     Content[params[:id]].update(:title => params[:title], :body => params[:body])
     params[:id] == '1' ? redirect(:/) : redirect("/o_nama##{string_to_id Content[params[:id]].title}".to_sym)
   end

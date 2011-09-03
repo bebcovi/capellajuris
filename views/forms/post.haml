@@ -4,8 +4,8 @@
   - action = @post.id ? "/post/#{@post.id}" : '/post/new'
   - method = @post.id ? 'put' : 'post'
   - form_tag(action: action, method: method, id: 'post') do
-    %input{type: 'text', name: 'title', value: @post.title}
-    %textarea{type: 'text', name: 'body', rows: 15, cols: 100, autofocus: true}
+    %input{type: 'text', name: 'title', value: @post.title, autofocus: @post.title == nil}
+    %textarea{type: 'text', name: 'body', rows: 15, cols: 100, autofocus: @post.title != nil}
       = @post.body
     %input{type: 'submit', name: 'action', value: 'Spremi'}
     %input{type: 'submit', name: 'action', value: 'Odustani'}
