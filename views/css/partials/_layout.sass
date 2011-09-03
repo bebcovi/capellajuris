@@ -16,8 +16,6 @@ body
   img
     display: block
 
-  // heading
-
   header .inner
     +clearfix
     padding: 0 rhythm(2)
@@ -45,13 +43,9 @@ body
           display: block
           padding: 0 rhythm(0.5)
 
-  // forms
-
   form
 
     input
-      &[type='button'], &[type='submit']
-        border: 0
       &[type='text'], &[type='password']
         +rhythm-borders(1px, 0.5)
 
@@ -62,11 +56,19 @@ body
 
   #login table
     height: rhythm(6)
-    width: 300px
+    width: 320px
 
   #post
     input[type='text'], textarea
       +trailer(0.5)
+
+  .controls
+    +trailer
+    height: rhythm()
+
+    input
+      &[type='button'], &[type='submit']
+        border: 0
 
   .button
     display: inline
@@ -79,15 +81,18 @@ body
   #main
 
     section
-      +trailer(2)
+      +trailer
 
     article
-      +trailer(3)
+      +trailer
+
+      time + *
+        clear: both
 
     .about, .photos, .videos
       +leader(3)
 
-    .post
+    .post, .login
       +trailer
 
     #intro
@@ -125,22 +130,17 @@ body
           +trailing-border(0, 0)
           +trailer(2.0)
 
-        header
-          +clearfix
+        h1
+          float: left
 
-          hgroup
-            float: left
-
-          time
-            float: right
+        time
+          float: right
 
     .members
       +trailer
 
       li
         display: inline
-
-    // photos & videos
 
     img
       border: 1px solid
@@ -163,8 +163,6 @@ body
 
     .videos article
       +trailer(2)
-
-  // footer
 
   footer
     +clearfix

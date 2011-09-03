@@ -1,17 +1,13 @@
-- if logged_in?
-  %p
-    %a#add{href: '/post/new'} Dodaj +
+%a#add{href: '/post/new'} Dodaj +
 
 - Post.order(:created_at.desc).each do |post|
   %article
-    %header
-      %hgroup
-        %h1= post.title
-      %time{datetime: post.created_at, :pubdate => true}= post.created_at.to_s(:cro)
+    %h1= post.title
+    %time{datetime: post.created_at, pubdate: true}
+      = post.created_at.to_s(:cro)
     - post.body.split("\n").each do |paragraph|
       %p= paragraph
-
     - if logged_in?
-      %div.spacer
+      .controls
         %a.edit{:href => "/post/#{post.id}"} Izmjeni
         - button(action: "/post/#{post.id}", method: 'delete', value: 'Izbriši')
