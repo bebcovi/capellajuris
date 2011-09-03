@@ -2,7 +2,7 @@
 helpers do
   def page_on_croatian(page)
     case page
-    when 'index'; 'Početna'
+    when ''; 'Početna'
     when 'o_nama'; 'O Nama'
     when 'slike'; 'Slike'
     when 'video'; 'Video'
@@ -10,7 +10,7 @@ helpers do
   end
 
   def current?(page)
-    ('/' + page == request.path_info) or (page == 'index' and request.path_info == '/')
+    '/' + page == request.path_info
   end
 
   def form?(page)

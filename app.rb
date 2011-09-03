@@ -2,6 +2,22 @@
 require 'sinatra'
 require_relative 'config'
 
+get '/create' do
+  Content.exclude(:id => 1).each do |content|
+    Bla.insert(:title => content.title,
+               :body => content.body,
+               :order => Order[:title => content.title].order,
+               :last_modified => Date.today,
+               :created_at => Date.today)
+  end
+  Post.each do |post|
+    Bla.insert(:title => post.title,
+               :body => post.body,
+               :last_modified => post.created_at,
+               :created_at => post.created_at)
+  end
+end
+
 get '/' do
   haml :index
 end

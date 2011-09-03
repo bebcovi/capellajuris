@@ -1,7 +1,9 @@
 class Activity < Sequel::Model
-  create_table do
+  set_schema do
     primary_key :id
-    column :things, 'text'
     column :year, 'smallint'
-  end unless table_exists?
+    column :things, 'text'
+  end
+
+  create_table unless table_exists?
 end

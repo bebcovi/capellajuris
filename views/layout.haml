@@ -28,7 +28,7 @@
 
         %nav
           %ol
-            - ['index','o_nama','slike','video'].each do |page|
+            - ['','o_nama','slike','video'].each do |page|
               %li
                 %a{href: "/#{page}", class: current?(page) && 'current'}= page_on_croatian(page)
 
