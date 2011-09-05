@@ -3,7 +3,7 @@
 body
   // +baseline-grid-background($base-line-height, darken(white, 30%))
 
-.audio .flash, .no-audio audio
+.audio #audio object, .no-audio audio
   display: none
 
 #wrapper
@@ -43,6 +43,9 @@ body
           display: block
           padding: 0 rhythm(0.5)
 
+  .spacer
+    +trailer(3)
+
   form
 
     input
@@ -73,27 +76,25 @@ body
   .button
     display: inline
 
-  #add
+  .add
+    +trailer
+    $dir: left
     display: block
-    width: 75px
+    float: $dir
     +rhythm-borders(1px, 0.5)
+    & + *
+      clear: $dir
+
+  .add, .controls
 
   #main
-
-    section
-      +trailer
+    +padding-trailer
 
     article
       +trailer
 
       time + *
         clear: both
-
-    .about, .photos, .videos
-      +leader(3)
-
-    .post, .login
-      +trailer
 
     #intro
       $intro-padding: 1.5
@@ -116,25 +117,23 @@ body
         float: right
         width: $aside-width
 
-        article
+        section
           +trailer
           &:last-child
             +trailer(0)
 
-    .news, .archive
+    #news article
+      +trailer(1.5)
+      +trailing-border(1px, 0.5, $base-font-size, dotted)
+      &:last-of-type
+        +trailing-border(0, 0)
+        +trailer(2.0)
 
-      article
-        +trailer(1.5)
-        +trailing-border(1px, 0.5, $base-font-size, dotted)
-        &:last-of-type
-          +trailing-border(0, 0)
-          +trailer(2.0)
+      h1
+        float: left
 
-        h1
-          float: left
-
-        time
-          float: right
+      time
+        float: right
 
     .members
       +trailer
@@ -143,25 +142,25 @@ body
         display: inline
 
     img
-      border: 1px solid
+      outline: 1px solid
       float: left
       margin-right: rhythm()
 
-    .photos
+    #photos
 
-      ul li
+      li
         +trailer(2)
 
-        @for $i from 1 through 19
-          &:nth-child(#{$i})
-            height: floor(image-height("galerija/#{$i}.jpg")/18) * 18
+        // @for $i from 1 through 19
+        //   &:nth-child(#{$i})
+        //     height: floor(image-height("galerija/#{$i}.jpg")/18) * 18
 
       img
         float: none
         display: inline
         max-height: 100%
 
-    .videos article
+    #videos li
       +trailer(2)
 
   footer
