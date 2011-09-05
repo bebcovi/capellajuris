@@ -13,7 +13,7 @@ body
     background-color: darken(white, 3%)
     border-color: darken(white, 20%)
 
-    ol li a
+    a
       +link-colors(lighten($text, 20%), $link)
       &.current
         color: $link
@@ -28,7 +28,7 @@ body
         &:focus
           +box-shadow(darken(white, 15%) 0 0 10px)
 
-  #add
+  .add
     background-color: darken(white, 5%)
     border-color: darken(white, 25%)
     color: lighten(black, 40%)
@@ -40,19 +40,17 @@ body
   #main
 
     img
-      border-color: $text
+      outline-color: $text
 
     #intro
       background-color: darken(white, 2%)
       border-color: darken(white, 10%)
 
-    .news, .archive
+    #news article
+      border-color: darken(white, 15%)
 
-      article
-        border-color: darken(white, 15%)
-
-        time
-          color: lighten($text, 30%)
+      time
+        color: lighten($text, 30%)
 
   footer
     background-color: darken(white, 3%)
