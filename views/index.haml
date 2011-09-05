@@ -21,7 +21,7 @@
         %a.arrow{href: '/o_nama'} ▶
 
       - if logged_in?
-        %p
+        .controls
           %a.edit{href: '/content/1'} Izmjeni
 
     %aside
@@ -31,7 +31,7 @@
         @video_height = 176
         @audio_height = 27
 
-      %section
+      %section#video
 
         %h2 Makedonska humoreska
 
@@ -41,7 +41,7 @@
           %param{name: 'allowscriptaccess', value: 'always'}
           %embed{src: 'http://www.youtube.com/v/FAi48kKVTS4?fs=1&amp;hl=en_US', type: 'application/x-shockwave-flash', allowscriptaccess: 'always', width: @object_width, height: @video_height}
 
-      %section
+      %section#audio
 
         %h2 Makedonsko devojče
 
@@ -59,6 +59,6 @@
 
   = haml :'partials/posts'
 
-  %p.arrow
+  %p
     %a{href: '/arhiva'} Arhiva vijesti
     %a.arrow{href: '/arhiva'} ▶
