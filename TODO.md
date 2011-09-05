@@ -1,12 +1,14 @@
 #silvenon
 
-- look up the guests of Ceremony of Carols
+- ~~look up the guests of Ceremony of Carols~~ **unrelated to
+  actual development**
 - ~~use Markdown wherever possible~~ &#x2713;
-- update YouTube embedding on index
-- ~~resize photos to fit the vertical rhythm~~ &#x2713; **compass
-  freakin rules**
+- make YouTube embedding clearer
 - use compass spriting in #facebook
-- elongate photos in about by one line
+- elongate photos in "about" by one line
+- ~~remove all unnecessary block elements and fix CSS~~ &#x2713;
+- try to bold stuff in quotes without breaking smart quotes
+- make CSS3 selector fallbacks
 
 #janko-m
 
@@ -16,6 +18,6 @@
 - make cms for members and activities
 - make cms for photos and videos
 - fix duration of login cookie
-- implement images through Flickr
+- implement images through Flickr and resize them to fit the rhythm
 - ~~help silvenon fix CSS~~ &#x2713;
 - implement archive
