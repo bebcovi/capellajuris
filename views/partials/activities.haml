@@ -1,17 +1,13 @@
 %article{id: string_to_id(@title)}
 
-  %header
-    %h1= @title
+  %h1= @title
 
   .inner
 
-    %p
-      %a#add{href: '/activity/new'} Dodaj +
+    %a.add{href: '/activity/new'} Dodaj +
 
     - Activity.order(:year.desc).each do |activity|
-      %article
-        %header
-          %h1= activity.year
+      %section
+        %h1= activity.year
         = BlueCloth.new(activity.things).to_html
-        %a{href: "/activity/#{activity.id}", class: 'edit'} Izmjeni
-
+        %a.edit{href: "/activity/#{activity.id}"} Izmjeni
