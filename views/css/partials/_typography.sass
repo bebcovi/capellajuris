@@ -21,19 +21,21 @@ body
   form
     input, textarea
       font: $base-font-size $sans-serif
+      line-height: $base-line-height
 
   #log
     text-align: right
 
-  input[type='submit'], input[type='button'], .edit
-    font-weight: bold
-    color: darken(white, 25%)
-    &:hover
-      cursor: pointer
-      color: darken(white, 40%)
-      text-decoration: none
+  .controls
+    input[type='submit'], .edit
+      font-weight: bold
+      color: darken(white, 25%)
+      &:hover
+        cursor: pointer
+        color: darken(white, 40%)
+        text-decoration: none
 
-  #add
+  .add
     text-align: center
     &:hover
       text-decoration: none
@@ -43,7 +45,7 @@ body
     p
       +trailer
 
-    section h1
+    h1
       font-size: 3em
       +trailer(2)
 
@@ -53,35 +55,34 @@ body
         font-weight: bold
 
     #intro
+      +trailer(2)
 
       .main p:last-child
         +trailer(0)
 
-      aside article h1
+      aside section h2
         +trailer
         font-size: 1.5em
 
-    .news, .archive
-
-      article
-
-        h1
-          +trailer
-          font-size: 1.75em
-
-        time
-          font-size: 0.8
-
     .members .first
       font-weight: bold
+
+    #news article
+
+      h1
+        +trailer
+        font-size: 1.75em
+
+      time
+        font-size: 0.8
 
     #aktivnosti
 
       .inner
         width: 750px
-        padding-left: rhythm(1)
+        padding-left: rhythm()
 
-      article
+      section
         +trailer
 
         h1
@@ -90,16 +91,15 @@ body
 
         ol
           padding-left: rhythm(2)
-          list-style-type: disc
-          list-style-position: outside
+          list-style: disc outside
 
           li
             +trailer
 
-    .photos ul
+    #photos
       text-align: center
 
-    .videos article
+    #videos
       text-align: center
 
       h1
@@ -109,14 +109,11 @@ body
     .arrow:hover
       text-decoration: none
 
-    .top
+    #top
       text-align: center
 
   footer
     font-family: $serif
-
-    p
-      margin: 0
 
     #contact
       +leader(0.5)
@@ -124,8 +121,6 @@ body
 
       .label
         font-weight: bold
-        &:after
-          content: ':'
 
     #facebook
-      font-size: 16px
+      font-size: 1.2em
