@@ -3,13 +3,16 @@
 - ~~look up the guests of Ceremony of Carols~~ **unrelated to
   actual development**
 - ~~use Markdown wherever possible~~ &#x2713;
-- make YouTube embedding clearer
+- ~~make YouTube embedding clearer~~ &#x2713;
 - use compass spriting in #facebook
-R elongate photos in "about" by one line
 - ~~remove all unnecessary block elements and fix CSS~~ &#x2713;
-- try to bold stuff in quotes without breaking smart quotes
-- make CSS3 selector fallbacks
+- ~~elongate photos in "about" by one line~~ **fixed it in a different
+  way**
+- ~~remove all unnecessary block elements and fix CSS~~ &#x2713;
 - resize images from Flickr to fit the rhythm
+- bold stuff in quotes without breaking smart quotes
+- make CSS3 selector fallbacks
+- ~~translate the appending part of JS to CSS~~ &#x2713;
 
 #janko-m
 
