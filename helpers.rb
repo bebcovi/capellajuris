@@ -29,15 +29,6 @@ helpers do
     session[:logged_in]
   end
 
-  def voice_to_cro(voice)
-    case voice
-    when 'S'; 'Soprani'
-    when 'A'; 'Alti'
-    when 'T'; 'Tenori'
-    when 'B'; 'Basi'
-    end
-  end
-
   def string_to_id(string)
     string.parameterize
   end
