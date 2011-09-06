@@ -5,6 +5,8 @@ require 'compass'
 require 'sequel'
 require 'sqlite3'
 require 'bluecloth'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/inflections'
 
 require_relative 'helpers'
 require_relative 'extras/cro_dates'

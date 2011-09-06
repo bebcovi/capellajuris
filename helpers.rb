@@ -39,7 +39,7 @@ helpers do
   end
 
   def string_to_id(string)
-    string.downcase.delete(' ').gsub(/[ČĆčć]/, 'c').gsub(/[Šš]/, 's').gsub(/[Đđ]/, 'd').gsub(/[Žž]/, 'z')
+    string.parameterize
   end
 
   def validate!(&block)
