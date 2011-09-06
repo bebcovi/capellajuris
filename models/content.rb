@@ -5,8 +5,6 @@ class Content < Sequel::Model
     column :body, 'text'
   end
 
-  create_table unless table_exists?
-
   def body=(text)
     text = text.gsub("\r\n", "\n") if text.respond_to? :gsub
     super(text)

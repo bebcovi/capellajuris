@@ -5,6 +5,4 @@ class Post < Sequel::Model
     column :body, 'text'
     column :created_at, 'date'
   end
-
-  create_table unless table_exists?
 end
