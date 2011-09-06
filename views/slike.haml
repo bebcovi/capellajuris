@@ -1,9 +1,9 @@
 - @page_title = 'Slike'
 
 %ul
-  - for i in (1..19) do
+  - for i in (1..19)
     %li
-      %img{src: "/images/galerija/#{i}.jpg"}
+      %img{src: "images/galerija/#{i}.jpg", alt: "#{i}"}
 
 %p.arrow.top
   %a{href: '#'} Povratak na vrh
