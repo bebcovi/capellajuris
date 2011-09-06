@@ -1,7 +1,9 @@
+# encoding:utf-8
 require 'haml'
 require 'sass'
 require 'compass'
 require 'sequel'
+require 'sqlite3'
 require 'bluecloth'
 
 require_relative 'helpers'
