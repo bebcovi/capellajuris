@@ -26,12 +26,14 @@ body
   #log
     text-align: right
 
+  #login label:after
+    content: ':'
+
   .controls
     input[type='submit'], .edit
       font-weight: bold
       color: darken(white, 25%)
       &:hover
-        cursor: pointer
         color: darken(white, 40%)
         text-decoration: none
 
@@ -46,8 +48,8 @@ body
       +trailer
 
     h1
-      font-size: 3em
-      +trailer(2)
+      +adjust-font-size-to(3em, 3)
+      +trailer
 
     article
 
@@ -55,7 +57,7 @@ body
         font-weight: bold
 
     #intro
-      +trailer(2)
+      +trailer
 
       .main p:last-child
         +trailer(0)
@@ -63,15 +65,14 @@ body
       aside section h2
         +trailer
         font-size: 1.5em
-
-    .members .first
-      font-weight: bold
+        &:after
+          content: ':'
 
     #news article
 
       h1
         +trailer
-        font-size: 1.75em
+        +adjust-font-size-to(1.75em, 2)
 
       time
         font-size: 0.8
@@ -87,7 +88,7 @@ body
 
         h1
           +trailer
-          font-size: 1.5em
+          +adjust-font-size-to(1.5em, 1)
 
         ol
           padding-left: rhythm(2)
@@ -112,6 +113,12 @@ body
     #top
       text-align: center
 
+    .members li
+      &:after
+        content: ', '
+      &:last-child:after
+        content: '.'
+
   footer
     font-family: $serif
 
@@ -121,9 +128,14 @@ body
 
       .label
         font-weight: bold
+        &:after
+          content: ':'
 
     #facebook
       font-size: 1.2em
+
+      p:after
+        content: ':'
 
 #gollum-editor
   font-size: 11px
