@@ -28,9 +28,10 @@
 
         %nav
           %ol
-            - ['','o_nama','slike','video'].each do |page|
+            - Page.order(:order).each do |page|
               %li
-                %a{href: "/#{page}", class: current?(page) && 'current'}= page_on_croatian(page)
+                %a{href: "/#{page.haml_name}", class: current?(page) && 'current'}
+                  = page.cro_name
 
       #main
         = yield
