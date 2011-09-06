@@ -1,16 +1,7 @@
 # encoding:utf-8
 helpers do
-  def page_on_croatian(page)
-    case page
-    when ''; 'Početna'
-    when 'o_nama'; 'O Nama'
-    when 'slike'; 'Slike'
-    when 'video'; 'Video'
-    end
-  end
-
   def current?(page)
-    '/' + page == request.path_info
+    '/' + page.haml_name == request.path_info
   end
 
   def form?(page)
