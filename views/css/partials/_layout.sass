@@ -50,42 +50,54 @@ body
 
     input
       &[type='text'], &[type='password']
-        +rhythm-borders(1px, 0.5)
+        +form-text
 
     textarea
-      display: block
+      +form-text
       max-width: $wrapper-width
-      @extend input[type='text']
+
+    .submit
+      +clearfix
+
+      input
+        +button(right, false)
+        float: right
 
   #login table
-    height: rhythm(6)
+    height: rhythm(8)
     width: 320px
 
-  #post
+    .username, .password
+      input
+        width: 91%
+
+  .post
+    +clearfix
+
     input[type='text'], textarea
       +trailer(0.5)
+
+    input
+
+      &[type='text']
+        width: 300px
+
+      &[type='submit']
+        +button(left, false)
 
   .controls
     +trailer
     height: rhythm()
 
-    input
-      &[type='button'], &[type='submit']
-        border: 0
+    form
+      display: inline
 
-  .button
-    display: inline
+      input
+        border: 0
 
   .add
     +trailer
-    $dir: left
-    display: block
-    float: $dir
-    +rhythm-borders(1px, 0.5)
-    & + *
-      clear: $dir
-
-  .add, .controls
+    +button
 
   #main
     +padding-trailer
@@ -144,7 +156,7 @@ body
     img
       outline: 1px solid
       float: left
-      margin-right: rhythm()
+      margin: rhythm(0.5) rhythm() 0 0
 
     #photos
 
@@ -172,17 +184,21 @@ body
       float: left
 
     #facebook
+      $text-width: 230px
+      $icon-width: 32px
+
       +clearfix
       float: right
-      width: 270px
+      width: 280px
+      width: $text-width + $icon-width + 18px
 
       p
         float: left
-        width: 220px
+        width: $text-width
 
       a
         display: block
         float: right
-        width: 32px
+        width: $icon-width
         height: 32px
         border: 1px solid
