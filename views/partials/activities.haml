@@ -1,13 +1,16 @@
-%article{id: string_to_id(@title)}
+%article{id: string_to_id(@content.title)}
 
-  %h1= @title
+  %h1= @content.title
 
   .inner
 
-    %a.add{href: '/activity/new'} Dodaj +
+    - if logged_in?
+      - add_button('/activity_year/new')
 
-    - Activity.order(:year.desc).each do |activity|
+    - ActivityYear.order(:title.desc).each do |activity_year|
       %section
-        %h1= activity.year
-        = BlueCloth.new(activity.things).to_html
-        %a.edit{href: "/activity/#{activity.id}"} Izmjeni
+        %h1= activity_year.title
+        = render_markdown activity_year.body
+        - if logged_in?
+          - edit_button("/activity_year/#{activity_year.title}")
+          - delete_button("/activity_year/#{activity_year.title}")
