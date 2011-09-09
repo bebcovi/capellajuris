@@ -6,8 +6,6 @@ class Member < Sequel::Model
     column :voice, 'char(1)'
   end
 
-  create_table unless table_exists?
-
   VOICES = {
     'S' => 'soprani',
     'A' => 'alti',
@@ -27,4 +25,9 @@ class Member < Sequel::Model
     "#{first_name} #{last_name}"
   end
   alias to_s name
+
+  def validate
+    super
+    validates_presence [:first_name, :last_name], :message => 'Ime i prezime ne smiju biti prazni.'
+  end
 end
