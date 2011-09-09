@@ -13,12 +13,14 @@
 #janko-m
 
 - ~~add article IDs (using function which converts title to ID)~~ &#x2713;
-- validations (i.e. titles can't be empty)
+- validations
 - ~~generate members with Ruby~~ &#x2713;
-- make cms for members and activities
-- make cms for photos and videos
-- fix duration of login cookie
-- implement images through Flickr and resize them to fit the rhythm
+- make general form for everything
+- add duration of login cookie
+- resize images from Flickr to fit the rhythm
 - ~~help silvenon fix CSS~~ &#x2713;
 - implement archive
 - add a feature to be able to see a separate post or content
+- implement floating with css
+- set_restricted_columns
+- check in index if photo height/width calculation works
