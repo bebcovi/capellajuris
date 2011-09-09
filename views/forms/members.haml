@@ -1,23 +1,21 @@
 - @page_title = 'Izmjena članova zbora'
 
-- session[:members_to_create] = [] if session[:members_to_create] == nil
-- session[:members_to_delete] = [] if session[:members_to_delete] == nil
-
 - for voice in Member.voices
   %p= voice.capitalize
   %ul.members
     - for member in Member.by_voice(voice).order(:last_name)
-      - unless session[:members_to_delete].include? member.id
-        %li
-          = member
-          - delete_button("/member/#{member.id}")
+      %li
+        = member
+        - delete_button("/member/#{member.id}", 'x')
+    %li
+      - form_tag(action: '/member/new', method: 'post') do
+        %input{type: 'text', name: 'first_name'}
+        %input{type: 'text', name: 'last_name'}
+        %input{type: 'hidden', name: 'voice', value: Member::VOICES.key(voice)}
+        %input{type: 'submit', value: 'Dodaj'}
 
-  - form_tag(action: '/member/new', method: 'put') do
-    %input{type: 'text', name: 'first_name'}
-    %input{type: 'text', name: 'last_name'}
-    %input{type: 'hidden', name: 'voice', value: voice}
-    %input{type: 'submit', value: 'Dodaj'}
+- @member.errors.each_value do |value|
+  - value.each do |error|
+    %p= error
 
-- form_tag(action: '/members', method: 'put') do
-  %input{type: 'submit', name: 'action', value: 'Spremi promjene'}
-  %input{type: 'submit', name: 'action', value: 'Odustani'}
+%a{href: "/#{Content[:type => 'members'].page}"} Završi
