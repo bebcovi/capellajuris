@@ -1,9 +1,57 @@
 # encoding:utf-8
 require 'sinatra'
-require_relative 'config'
+require 'haml'
+require 'sass'
+require 'compass'
+require 'sequel'
+require 'sqlite3'
+require 'bluecloth'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/inflections'
+require 'fleakr'
+require 'flickraw'
 
-get '/create' do
+require_relative 'helpers'
+require_relative 'extras/cro_dates'
+
+# Haml & Sass/Compass
+configure do
+  Compass.configuration do |config|
+    config.project_path = File.dirname(__FILE__)
+    config.sass_dir = 'views/css'
+    config.images_dir = 'public/images'
+    config.line_comments = false
+  end
+
+  set :haml, { :format => :html5 }
+  set :sass, Compass.sass_engine_options
 end
+
+# Sequel
+DB = Sequel.sqlite 'development.db'
+
+module Sequel
+  extension :blank
+
+  class Model
+    plugin :schema
+    plugin :validation_helpers
+  end
+end
+
+# Sinatra
+enable :sessions
+
+# Database Models
+Dir['models/*.rb'].each { |model| require_relative model}
+
+# Flickr
+Fleakr.api_key = FlickRaw.api_key = '1e7490875accc5b9c1ca91a2f27b5604'
+
+
+
+# Application
+
 
 get '/' do
   haml :index
@@ -20,7 +68,8 @@ get '/:page' do
 end
 
 get '/:form' do
-  haml "forms/#{params[:form]}".to_sym unless not logged_in? and params[:form] != 'login'
+  halt 404 if not logged_in?
+  haml "forms/#{params[:form]}".to_sym
 end
 
 post '/login' do
@@ -30,147 +79,160 @@ post '/login' do
   end
 end
 
-put '/user' do
-  redirect :/ if params[:action] == 'Odustani'
-  authenticate! do
-    User.first.update(:username => params[:new_username], :password => params[:new_password])
+
+get '/intro/' do
+  halt 404 if not logged_in?
+  @content = Intro.first
+  haml :'forms/edit'
+end
+
+put '/intro/' do
+  redirect :/ if cancel_pressed?
+  @content = Intro.first.set(params.reject {|key, value| ['action', '_method'].include? key})
+  if @content.valid?
+    @content.save
     redirect :/
+  else
+    haml :'forms/edit'
   end
 end
 
 
-get '/post/new' do
-  if logged_in?
-    @post = Post.new
-    haml :'forms/post'
-  end
+get '/news/new' do
+  halt 404 if not logged_in?
+  @content = News.new
+  haml :'forms/edit'
 end
 
-post '/post/new' do
-  redirect :/ if params[:action] == 'Odustani'
-  validate! do
-    Post.create(:title => params[:title], :body => params[:body], :created_at => Date.today)
-    redirect :/
-  end
-end
-
-
-get '/post/:id' do
-  if logged_in?
-    @post = Post[params[:id]]
-    haml :'forms/post'
-  end
-end
-
-put '/post/:id' do
-  redirect :/ if params[:action] == 'Odustani'
-  validate! do
-    Post[params[:id]].update(:title => params[:title], :body => params[:body])
-    redirect :/
-  end
-end
-
-delete '/post/:id' do
-  Post[params[:id]].delete
+post '/news/new' do
+  News.create(params.merge(:created_at => Date.today).reject {|key, value| key == 'action'}) unless cancel_pressed?
   redirect :/
 end
 
 
-get '/content/new' do
-  if logged_in?
-    @content = Content.new
-    haml :'forms/content'
-  end
+get '/news/:id' do
+  halt 404 if not logged_in?
+  @content = News[params[:id]]
+  haml :'forms/edit'
 end
 
-post '/content/new' do
-  redirect :o_nama if params[:action] == 'Odustani'
-  validate! do
-    Content.create(:title => params[:title], :body => params[:body])
-    Order.insert(:title => params[:title], :order => Order.max(:order) + 1)
-    redirect ("/o_nama##{string_to_id Content[:body => params[:body]].title}".to_sym)
-  end
+put '/news/:id' do
+  News[params[:id]].update(params.reject {|key, value| ['action', '_method'].include? key}) unless cancel_pressed?
+  redirect :/
 end
 
-
-get '/content/:id' do
-  if logged_in?
-    @content = Content[params[:id]]
-    haml :'forms/content'
-  end
-end
-
-put '/content/:id' do
-  if params[:action] == 'Odustani'
-    params[:id] == '1' ? redirect(:/) : redirect(:o_nama)
-  end
-  validate! do
-    Order[:title => Content[params[:id]].title].update(:title => params[:title])
-    Content[params[:id]].update(:title => params[:title], :body => params[:body])
-    params[:id] == '1' ? redirect(:/) : redirect("/o_nama##{string_to_id Content[params[:id]].title}".to_sym)
-  end
-end
-
-delete '/content/:id' do
-  unless params[:id] == '1'
-    Order[:title => Content[params[:id]].title].delete
-    Content[params[:id]].delete
-  end
-  redirect :o_nama
+delete '/news/:id' do
+  News[params[:id]].delete
+  redirect :/
 end
 
 
-put '/member/new' do
-  session[:members_to_create] << Member.create(:first_name => params[:first_name],
-                                               :last_name => params[:last_name],
-                                               :voice => params[:voice]).values[:id]
-  redirect :members
+get '/other_content/new' do
+  halt 404 if not logged_in?
+  session[:page] = back.split('/').last
+  @content = OtherContent.new
+  haml :'forms/edit'
 end
 
-put '/member/:id' do
-  session[:members_to_delete] << params[:id].to_i
-  redirect :members
-end
-
-put '/members' do
-  if params[:action] == 'Odustani'
-    Member.filter(:id => session[:members_to_create]).delete
+post '/other_content/new' do
+  redirect session[:page] if cancel_pressed?
+  @content = OtherContent.new(params.reject {|key, value| key == 'action'})
+  if @content.valid?
+    @content.save
+    redirect session[:page]
   else
-    Member.filter(:id => session[:members_to_delete]).delete
-  end
-  session[:members_to_create] = session[:members_to_delete] = nil
-  redirect :'o_nama#clanovizbora'
-end
-
-
-get '/activity/new' do
-  if logged_in?
-    @activity = Activity.new
-    @activity.year = Activity.order(:year).last.year + 1
-    haml :'forms/activity'
+    haml :'forms/edit'
   end
 end
 
-post '/activity/new' do
-  Activity.create(:year => params[:year], :thing => params[:things]) if params[:action] != 'Odustani'
-  redirect :'o_nama#aktivnosti'
+
+get '/other_content/:id' do
+  halt 404 if not logged_in?
+  session[:page] = back.split('/').last
+  @content = OtherContent[params[:id]]
+  haml :'forms/edit'
 end
 
-
-get '/activity/:id' do
-  if logged_in?
-    @activity = Activity[params[:id]]
-    haml :'forms/activity'
+put '/other_content/:id' do
+  redirect session[:page] if cancel_pressed?
+  @content = OtherContent[params[:id]].set(params.reject {|key, value| ['action', 'id', '_method'].include? key})
+  if @content.valid?
+    @content.save
+    redirect session[:page]
+  else
+    haml :'forms/edit'
   end
 end
 
-put '/activity/:id' do
-  Activity[params[:id]].update(:year => params[:year],
-                               :things => params[:things]) if params[:action] != 'Odustani'
-  redirect :'o_nama#aktivnosti'
+delete '/other_content/:id' do
+  OtherContent[params[:id]].destroy
+  redirect back
+end
+
+
+post '/member/new' do
+  @member = Member.new(params)
+  if @member.valid?
+    @member.save
+    redirect :'forms/members'
+  else
+    haml :'forms/members'
+  end
+end
+
+delete '/member/:id' do
+  Member[params[:id]].delete
+  redirect :'forms/members'
+end
+
+
+get '/activity_year/new' do
+  halt 404 if not logged_in?
+  @content = ActivityYear.new(:title => ActivityYear.max(:title) + 1)
+  haml :'forms/edit'
+end
+
+post '/activity_year/new' do
+  redirect Content[:type => 'activities'].page if cancel_pressed?
+  @content = ActivityYear.new(params.reject {|key, value| key == 'action'})
+  if @content.valid?
+    @content.save
+    redirect Content[:type => 'activities'].page
+  else
+    haml :'forms/edit'
+  end
+end
+
+
+get '/activity_year/:id' do
+  halt 404 if not logged_in?
+  session[:page] = back.split('/').last
+  @content = ActivityYear[params[:id]]
+  haml :'forms/edit'
+end
+
+put '/activity_year/:id' do
+  redirect session[:page] if cancel_pressed?
+  @content = ActivityYear[params[:id]].set(params.reject {|key, value| ['action', 'id', '_method']})
+  if @content.valid?
+    @content.save
+    redirect session[:page]
+  else
+    haml :'forms/edit'
+  end
+end
+
+delete '/activity_year/:id' do
+  ActivityYear[params[:id]].delete
+  redirect back
 end
 
 
 get '/css/screen.css' do
   sass :'css/screen'
+end
+
+
+not_found do
+  "A 'Not found' message here."
 end
