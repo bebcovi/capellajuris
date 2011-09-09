@@ -1,12 +1,15 @@
+# encoding:utf-8
 class Content < Sequel::Model
   set_schema do
     primary_key :id
+    column :content_id, 'smallint'
     column :title, 'varchar(255)'
-    column :body, 'text'
+    column :type, 'varchar(30)'
+    column :order, 'tinyint'
+    column :page, 'varchar(30)'
   end
 
-  def body=(text)
-    text = text.gsub("\r\n", "\n") if text.respond_to? :gsub
-    super(text)
+  def self.by_page(page)
+    filter(:page => page)
   end
 end
