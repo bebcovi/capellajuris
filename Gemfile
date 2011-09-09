@@ -9,8 +9,15 @@ gem 'bluecloth'
 gem 'sqlite3'
 gem 'i18n'
 gem 'activesupport'
+gem 'fleakr'
+gem 'flickraw'
 
 group :development do
   gem 'thin'
   gem 'shotgun'
+end
+
+group :development, :test do
+  gem 'ruby-debug', :require => nil, :platforms => :mri_18
+  gem 'ruby-debug19', :require => nil, :platforms => :mri_19
 end
