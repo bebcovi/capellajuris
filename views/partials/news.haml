@@ -1,0 +1,18 @@
+- if logged_in?
+  - add_button('/news/new')
+
+- News.order(:created_at.desc).each do |news|
+  %article
+    %h1= news.title
+    %time{datetime: news.created_at, pubdate: true}
+      = news.created_at.to_s(:cro)
+    - news.body.split("\n").each do |paragraph|
+      %p= paragraph
+    - if logged_in?
+      .controls
+        - edit_button("/news/#{news.id}")
+        - delete_button("/news/#{news.id}")
+
+%p
+  %a{href: '/arhiva'} Arhiva vijesti
+  %a.arrow{href: '/arhiva'} ▶
