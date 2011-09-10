@@ -13,6 +13,7 @@
 - bold stuff in quotes without breaking smart quotes
 - make CSS3 selector fallbacks
 - ~~translate the appending part of JS to CSS~~ &#x2713;
+- clearfix all articles
 
 #janko-m
 
