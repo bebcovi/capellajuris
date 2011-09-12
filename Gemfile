@@ -9,8 +9,6 @@ gem 'bluecloth'
 gem 'sqlite3'
 gem 'i18n'
 gem 'activesupport'
-gem 'fleakr'
-gem 'flickraw'
 gem 'faraday-stack'
 
 group :development do

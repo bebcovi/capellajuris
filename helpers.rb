@@ -72,62 +72,21 @@ helpers do
   end
 end
 
-class Fleakr::Objects::Photo
-  def get_sizes
-    flickr.photos.getSizes(:photo_id => id).inject([]) do |sizes, element|
-      sizes << element['label'].downcase.delete(' ')
-    end
-  end
-
-  def get_sizes_and_info
-    flickr.photos.getSizes(:photo_id => id)
-  end
-
-  alias medium500 medium
-
-  def medium640
-    unless (info = get_sizes_and_info[4]) == nil
-      result = medium
-      result.url = info['source']
-      result.width = info['width']
-      result.height = info['height']
-      return result
-    else
-      return nil
-    end
-  end
-
-  def largest
-    original || large || medium640 || medium500 || small || thumbnail || square
-  end
-end
-
-
-def flickr_photo_sizes
-  ['square', 'thumbnail', 'small', 'medium', 'medium500', 'medium640', 'large', 'original']
-end
-
-def nearest_size(photo_size)
-  if photo_size.split('x').first.match(/[^0-9]+/) == nil
-    case photo_size.split('x').first.to_i
-    when 1..75
-      'square'
-    when 76..100
-      'thumbnail'
-    when 101..240
-      'small'
-    when 241..500
-      'medium'
-    when 501..640
-      'medium640'
-    else
-      'large'
-    end
-  else
-    photo_size
-  end
+def flickr_sizes
+  Flickr::Photo::SIZE_NAMES.keys
 end
 
 def string_to_method(string)
   string.downcase.delete(' ')
+end
+
+def flickr_method(method, flickr_error = 'Greška dohvaćanja Flickr slike: ',
+                          timeout_error = 'Veza sa Flickrom je trenutno spora. Pokušaj ponovno.')
+  begin
+    Flickr.send(method)
+  rescue Flickr::Error => e
+    flickr_error + e.message + '.'
+  rescue Timeout::Error
+    timeout_error
+  end
 end

@@ -3,9 +3,8 @@
 .spacer
 
 %ul#photos
-  = list_of(Fleakr.user('janko.marohnic@gmail.com').sets.first.photos) do |photo|
-    - @photo = photo.largest
-    %img{src: @photo.url, alt: photo.title, width: @photo.width, height: @photo.height}
+  = list_of(Flickr.photos_from_set '72157627460265059') do |photo|
+    %img{src: photo.url, width: photo.width, height: photo.height}
 
 %p#top
   %a{href: '#'} Povratak na vrh

@@ -10,16 +10,16 @@
 
   :ruby
     @intro = Intro.first
-    @photo = Fleakr::Objects::Photo.find_by_id(@intro.photo_id).send(nearest_size(@intro.photo_size))
-    @photo_with, @photo_height = @intro.photo_size.split('x')
+    @photo = Flickr.find_photo(@intro.photo_id).send(string_to_method(@intro.photo_size))
 
   %h1= @intro.title
 
   .inner
 
     %article.main
-      %img{src: @photo.url, alt: @intro.photo_alt, width: @photo_width, height: @photo_height}
-        = render_markdown @intro.body
+      %img{src: @photo.url, alt: @photo.title, width: @photo.width, height: @photo.height}
+      = render_markdown @intro.body
+
       %p
         %a{href: '/o_nama'} Opširnije
         %a.arrow{href: '/o_nama'} ▶
