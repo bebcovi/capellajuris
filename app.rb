@@ -53,7 +53,6 @@ enable :sessions
 
 # Application
 
-
 get '/' do
   haml :index
 end
@@ -64,13 +63,7 @@ get '/logout' do
 end
 
 get '/:page' do
-  pass if form?(params[:page])
   haml params[:page].to_sym
-end
-
-get '/:form' do
-  halt 404 if not logged_in?
-  haml "forms/#{params[:form]}".to_sym
 end
 
 post '/login' do
@@ -80,24 +73,32 @@ post '/login' do
   end
 end
 
-
-get '/intro/' do
+get '/content/new' do
   halt 404 if not logged_in?
-  @content = Intro.first
-  haml :'forms/edit'
+  @content = Content.new
+  haml :'forms/content'
 end
 
-put '/intro/' do
-  redirect :/ if cancel_pressed?
-  @content = Intro.first.set(params.reject {|key, value| ['action', '_method'].include? key})
-  if @content.valid?
-    @content.save
-    redirect :/
-  else
-    haml :'forms/edit'
-  end
+post '/content/new' do
+  Content.create(text: params[:text], type: 'content', page: params[:page])
+  redirect params[:page]
 end
 
+get '/content/:id' do
+  halt 404 if not logged_in?
+  @content = Content[params[:id]]
+  haml :'forms/content'
+end
+
+put '/content/:id' do
+  Content[params[:id]].update(text: params[:text])
+  redirect params[:page]
+end
+
+delete '/content/:id' do
+  Content[params[:id]].destroy
+  redirect back
+end
 
 get '/sidebar/:id' do
   halt 404 if not logged_in?
@@ -119,23 +120,22 @@ end
 get '/news/new' do
   halt 404 if not logged_in?
   @content = News.new
-  haml :'forms/edit'
+  haml :'forms/content'
 end
 
 post '/news/new' do
-  News.create(params.merge(:created_at => Date.today).reject {|key, value| key == 'action'}) unless cancel_pressed?
+  News.create(text: params[:text], created_at: Date.today)
   redirect :/
 end
-
 
 get '/news/:id' do
   halt 404 if not logged_in?
   @content = News[params[:id]]
-  haml :'forms/edit'
+  haml :'forms/content'
 end
 
 put '/news/:id' do
-  News[params[:id]].update(params.reject {|key, value| ['action', '_method'].include? key}) unless cancel_pressed?
+  News[params[:id]].update(text: params[:text])
   redirect :/
 end
 
@@ -144,105 +144,14 @@ delete '/news/:id' do
   redirect :/
 end
 
-
-get '/other_content/new' do
-  halt 404 if not logged_in?
-  session[:page] = back.split('/').last
-  @content = OtherContent.new
-  haml :'forms/edit'
-end
-
-post '/other_content/new' do
-  redirect session[:page] if cancel_pressed?
-  @content = OtherContent.new(params.reject {|key, value| key == 'action'})
-  if @content.valid?
-    @content.save
-    redirect session[:page]
-  else
-    haml :'forms/edit'
-  end
-end
-
-
-get '/other_content/:id' do
-  halt 404 if not logged_in?
-  session[:page] = back.split('/').last
-  @content = OtherContent[params[:id]]
-  haml :'forms/edit'
-end
-
-put '/other_content/:id' do
-  redirect session[:page] if cancel_pressed?
-  @content = OtherContent[params[:id]].set(params.reject {|key, value| ['action', 'id', '_method'].include? key})
-  if @content.valid?
-    @content.save
-    redirect session[:page]
-  else
-    haml :'forms/edit'
-  end
-end
-
-delete '/other_content/:id' do
-  OtherContent[params[:id]].destroy
-  redirect back
-end
-
-
 post '/member/new' do
-  @member = Member.new(params)
-  if @member.valid?
-    @member.save
-    redirect :'forms/members'
-  else
-    haml :'forms/members'
-  end
+  Member.create(first_name: params[:first_name], last_name: params[:last_name], voice: params[:voice])
+  haml :'forms/memebers'
 end
 
 delete '/member/:id' do
   Member[params[:id]].delete
-  redirect :'forms/members'
-end
-
-
-get '/activity_year/new' do
-  halt 404 if not logged_in?
-  @content = ActivityYear.new(:title => ActivityYear.max(:title) + 1)
-  haml :'forms/edit'
-end
-
-post '/activity_year/new' do
-  redirect Content[:type => 'activities'].page if cancel_pressed?
-  @content = ActivityYear.new(params.reject {|key, value| key == 'action'})
-  if @content.valid?
-    @content.save
-    redirect Content[:type => 'activities'].page
-  else
-    haml :'forms/edit'
-  end
-end
-
-
-get '/activity_year/:id' do
-  halt 404 if not logged_in?
-  session[:page] = back.split('/').last
-  @content = ActivityYear[params[:id]]
-  haml :'forms/edit'
-end
-
-put '/activity_year/:id' do
-  redirect session[:page] if cancel_pressed?
-  @content = ActivityYear[params[:id]].set(params.reject {|key, value| ['action', 'id', '_method']})
-  if @content.valid?
-    @content.save
-    redirect session[:page]
-  else
-    haml :'forms/edit'
-  end
-end
-
-delete '/activity_year/:id' do
-  ActivityYear[params[:id]].delete
-  redirect back
+  haml :'forms/members'
 end
 
 

@@ -3,11 +3,8 @@
 
 - News.order(:created_at.desc).each do |news|
   %article
-    %h1= news.title
-    %time{datetime: news.created_at, pubdate: true}
-      = news.created_at.to_s(:cro)
-    - news.body.split("\n").each do |paragraph|
-      %p= paragraph
+    %time{datetime: news.created_at, pubdate: true}= news.created_at.to_s(:cro)
+    = render_markdown(news.text)
     - if logged_in?
       - edit_delete_buttons("/news/#{news.id}")
 

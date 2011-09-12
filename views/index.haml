@@ -8,17 +8,12 @@
 
 #intro
 
-  :ruby
-    @intro = Intro.first
-    @photo = Flickr.find_photo(@intro.photo_id).send(string_to_method(@intro.photo_size))
-
-  %h1= @intro.title
-
   .inner
 
+    - @intro = Content[type: 'intro']
+
     %article.main
-      %img{src: @photo.url, alt: @photo.title, width: @photo.width, height: @photo.height}
-      = render_markdown @intro.body
+      = render_markdown(@intro.text)
 
       %p
         %a{href: '/o_nama'} Opširnije
@@ -57,6 +52,6 @@
 
 %section#news
 
-  %h1= Content.by_page('index').first.title
+  %h1= Content[type: 'news'].text
 
   = haml :'partials/news'

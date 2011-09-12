@@ -1,0 +1,3 @@
+%article
+  = render_markdown @content.text
+  - edit_delete_buttons("/content/#{@content.id}")

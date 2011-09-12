@@ -2,14 +2,18 @@
 class Content < Sequel::Model
   set_schema do
     primary_key :id
-    column :content_id, 'smallint'
-    column :title, 'varchar(255)'
-    column :type, 'varchar(30)'
+    column :text, 'text'
+    column :type, 'varchar(255)'
+    column :page, 'varchar(255)'
     column :order, 'tinyint'
-    column :page, 'varchar(30)'
   end
 
   def self.by_page(page)
     filter(:page => page)
+  end
+
+  def before_create
+    self.order = Content.by_page(page).max(:order) + 1
+    super
   end
 end
