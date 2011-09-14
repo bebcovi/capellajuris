@@ -8,6 +8,7 @@ require 'sqlite3'
 require 'bluecloth'
 require 'active_support/core_ext/string/inflections'
 require 'active_support/inflections'
+require 'active_support/core_ext/object/blank'
 require 'extras/flickr'
 
 require_relative 'helpers'
@@ -30,8 +31,6 @@ end
 DB = Sequel.sqlite 'development.db'
 
 module Sequel
-  extension :blank
-
   class Model
     plugin :schema
     plugin :validation_helpers
