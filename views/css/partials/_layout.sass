@@ -185,7 +185,8 @@ body
 
     #facebook
       $text-width: 230px
-      $icon-width: 32px
+      $icon-url: 'icon/fb.png'
+      $icon-width: image-width($icon-url)
 
       +clearfix
       float: right
@@ -200,5 +201,5 @@ body
         display: block
         float: right
         width: $icon-width
-        height: 32px
+        height: image-height($icon-url)
         border: 1px solid
