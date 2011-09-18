@@ -25,8 +25,7 @@
         %a.arrow{href: '/o_nama'} ▶
 
       - if logged_in?
-        .controls
-          - edit_button('/intro/')
+        - edit_button("/content/#{@intro.id}")
 
     %aside
 
@@ -52,6 +51,9 @@
                  flashvars: "audioUrl=/audio/#{@sidebar.audio}.mp3",
                  src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf',
                  width: 300, height: 27, quality: 'best'}
+
+      - if logged_in?
+        - edit_button("/sidebar/#{@sidebar.id}")
 
 %section#news
 

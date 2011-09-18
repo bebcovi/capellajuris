@@ -54,12 +54,27 @@ helpers do
   end
 
   def edit_button(link, value = 'Izmjeni')
-    haml_tag :a, value, {:href => link, :class => 'edit'}
+    haml_tag 'div.controls' do
+      haml_tag :a, value, {:href => link, :class => 'edit'}
+    end
   end
 
   def delete_button(link, value = 'Izbriši')
-    form_tag(:action => link, :method => 'delete') do
-      haml_tag :input, {type: 'submit', value: value, :class => 'delete'}
+    haml_tag 'div.controls' do
+      # haml_tag :a, value, {:href => "/confirmation#{link}", :class => 'delete'}
+      form_tag(action: link, method: 'delete') do
+        haml_tag :input, {type: 'submit', :class => 'delete', value: value}
+      end
+    end
+  end
+
+  def edit_delete_buttons(link, values = {:edit => 'Izmjeni', :delete => 'Izbriši'})
+    haml_tag 'div.controls' do
+      haml_tag :a, values[:edit], {:href => link, :class => 'edit'}
+      # haml_tag :a, values[:delete], {:href => "/confirmation#{link}", :class => 'delete'}
+      form_tag(action: link, method: 'delete') do
+        haml_tag :input, {type: 'submit', :class => 'delete', value: values[:delete]}
+      end
     end
   end
 

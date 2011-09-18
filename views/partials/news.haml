@@ -9,9 +9,7 @@
     - news.body.split("\n").each do |paragraph|
       %p= paragraph
     - if logged_in?
-      .controls
-        - edit_button("/news/#{news.id}")
-        - delete_button("/news/#{news.id}")
+      - edit_delete_buttons("/news/#{news.id}")
 
 %p
   %a{href: '/arhiva'} Arhiva vijesti
