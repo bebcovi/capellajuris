@@ -2,3 +2,4 @@
 .sass-cache
 tmp
 db/databases
+.bundle
