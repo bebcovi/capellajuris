@@ -1,8 +1,5 @@
 # encoding:utf-8
 require 'sinatra'
-require 'haml'
-require 'sass'
-require 'compass'
 require 'sequel'
 require 'sqlite3'
 require 'redcarpet'
@@ -13,20 +10,17 @@ require 'extras/flickr'
 require 'uri'
 require 'bcrypt'
 
+require_relative 'sinatra_boilerplate'
 require_relative 'helpers'
 require_relative 'extras/cro_dates'
 
 # Haml & Sass/Compass
 configure do
   Compass.configuration do |config|
-    config.project_path = File.dirname(__FILE__)
     config.sass_dir = 'views/css'
     config.images_dir = 'public/images'
     config.line_comments = false
   end
-
-  set :haml, { :format => :html5 }
-  set :sass, Compass.sass_engine_options
 end
 
 
@@ -50,6 +44,8 @@ Dir['db/models/*'].each { |model| require_relative model }
 enable :sessions
 
 
+# Sinatra Boilerplate
+set :js_assets, %w[js/post.coffee, js/init.coffee]
 
 
 # Application
