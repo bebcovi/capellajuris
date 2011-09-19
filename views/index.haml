@@ -36,16 +36,8 @@
 
         %h2= @sidebar.audio_title
 
-        %audio{src: "/audio/#{@sidebar.audio}.mp3", controls: true}
-
-        %object.flash{width: 300, height: 27}
-          %param{name: 'flashvars', value: "audioUrl=/audio/#{@sidebar.audio}.mp3"}
-          %param{name: 'src', value: 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
-          %param{name: 'quality', value: 'best'}
-          %embed{type: 'application/x-shockwave-flash',
-                 flashvars: "audioUrl=/audio/#{@sidebar.audio}.mp3",
-                 src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf',
-                 width: 300, height: 27, quality: 'best'}
+        %audio{controls: true, preload: true}
+          %source{src: "/audio/#{@sidebar.audio}.mp3"}
 
       - if logged_in?
         - edit_button("/sidebar/#{@sidebar.id}")
