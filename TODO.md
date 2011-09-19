@@ -21,6 +21,7 @@
 - ~~try to get rid of .spacer~~ &#x2713;
 - ~~edit the new helpers to allow JS subfolders~~ &#x2713;
 - bold stuff in quotes without breaking smart quotes
+- improve Sinatra Boilerplate by making it infer js assets
 - consider getting rid of CSS3 selectors
 - fix a tabbing bug
 - make design responsive
