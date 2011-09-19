@@ -30,10 +30,6 @@
 
     %aside
 
-      :ruby
-        @object_width = 300
-        @video_height = 176
-        @audio_height = 27
 
       %section#video
 
@@ -51,11 +47,14 @@
 
         %audio{src: "/audio/#{@intro.audio_url}", controls: true}
 
-        %object.flash{width: @object_width, height: @audio_height}
-          %param{name: 'flashvars', value: "audioUrl=/audio/#{@intro.audio_url}"}
+        %object.flash{width: 300, height: 27}
+          %param{name: 'flashvars', value: "audioUrl=/audio/#{@sidebar.audio}.mp3"}
           %param{name: 'src', value: 'http://www.google.com/reader/ui/3523697345-audio-player.swf'}
           %param{name: 'quality', value: 'best'}
-          %embed{type: 'application/x-shockwave-flash', flashvars: "audioUrl=/audio/#{@intro.audio_url}", src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf', width: @object_width, height: @audio_height, quality: 'best'}
+          %embed{type: 'application/x-shockwave-flash',
+                 flashvars: "audioUrl=/audio/#{@sidebar.audio}.mp3",
+                 src: 'http://www.google.com/reader/ui/3523697345-audio-player.swf',
+                 width: 300, height: 27, quality: 'best'}
 
 %section#news
 
