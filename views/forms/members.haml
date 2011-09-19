@@ -14,8 +14,4 @@
         %input{type: 'hidden', name: 'voice', value: Member::VOICES.key(voice)}
         %input{type: 'submit', value: 'Dodaj'}
 
-- @member.errors.each_value do |value|
-  - value.each do |error|
-    %p= error
-
-%a{href: "/#{Content[:type => 'members'].page}"} Završi
+%a{href: "/#{Content[type: 'members'].page}"} Završi

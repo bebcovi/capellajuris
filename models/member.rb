@@ -25,9 +25,4 @@ class Member < Sequel::Model
     "#{first_name} #{last_name}"
   end
   alias to_s name
-
-  def validate
-    super
-    validates_presence [:first_name, :last_name], :message => 'Ime i prezime ne smiju biti prazni.'
-  end
 end
