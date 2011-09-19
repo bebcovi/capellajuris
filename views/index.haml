@@ -20,7 +20,9 @@
         %a.arrow{href: '/o_nama'} ▶
 
       - if logged_in?
-        - edit_button("/content/#{@intro.id}")
+        %ol.controls
+          %li
+            - edit_button('/intro/')
 
     %aside
 

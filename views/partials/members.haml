@@ -12,4 +12,6 @@
           = member
 
   - if logged_in?
-    - edit_button('/members')
+    %ol.controls
+      %li
+        - edit_button('/members')
