@@ -51,6 +51,14 @@ set :js_assets, %w[js/post.coffee, js/init.coffee]
 
 # Application
 
+get '/js/init.js' do
+  coffee :'js/init'
+end
+
+get '/js/post.js' do
+  coffee :'js/post'
+end
+
 get '/' do
   haml :index
 end
