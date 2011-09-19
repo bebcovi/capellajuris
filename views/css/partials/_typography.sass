@@ -30,8 +30,12 @@ body
       +trailer
 
     h1
-      +adjust-font-size-to(3em, 3)
       +trailer
+      +adjust-font-size-to(3em, 3)
+
+    h2
+      +trailer
+      font-size: 1.5em
 
     article
 
@@ -44,11 +48,8 @@ body
       .main p:last-child
         +trailer(0)
 
-      aside section h2
-        +trailer
-        font-size: 1.5em
-        &:after
-          content: ':'
+      aside section h2:after
+        content: ':'
 
     #news article
 
