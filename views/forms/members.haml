@@ -1,17 +1,29 @@
 - @page_title = 'Izmjena članova zbora'
 
-- for voice in Member.voices
-  %p= voice.capitalize
-  %ul.members
-    - for member in Member.by_voice(voice).order(:last_name)
-      %li
-        = member
-        - delete_button("/member/#{member.id}", 'x')
-    %li
-      - form_tag(action: '/member/new', method: 'post') do
-        %input{type: 'text', name: 'first_name'}
-        %input{type: 'text', name: 'last_name'}
-        %input{type: 'hidden', name: 'voice', value: Member::VOICES.key(voice)}
-        %input{type: 'submit', value: 'Dodaj'}
+%section.members
 
-%a{href: "/#{Content[type: 'members'].page}"} Završi
+  - for voice in Member.voices
+    %section
+
+      %h2= voice.capitalize
+
+      %ol
+        = list_of Member.by_voice(voice).order(:last_name) do |member|
+          = member
+          %ol.controls
+            %li
+              - delete_button("/member/#{member.id}", 'x')
+
+      -# - form_tag(action: '/member/new', method: 'post') do
+      -#   %input{type: 'text', name: 'first_name'}
+      -#   %input{type: 'text', name: 'last_name'}
+      -#   %input{type: 'hidden', name: 'voice', value: Member::VOICES.key(voice)}
+      -#   %input{type: 'submit', value: 'Dodaj'}
+
+      - add_button('/member/new', 'Dodaj')
+
+-# - @member.errors.each_value do |value|
+-#   - value.each do |error|
+-#     %p.error= error
+
+-# %a{href: "/#{Content[:type => 'members'].page}"} Završi

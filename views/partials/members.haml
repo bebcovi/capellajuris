@@ -3,10 +3,13 @@
     = render_markdown @content.text
 
   - for voice in Member.voices
-    %p= voice.capitalize
-    %ul.members
-      = list_of Member.by_voice(voice).order(:last_name) do |member|
-        = member
+    %section.members
+
+      %h2= voice.capitalize
+
+      %ol
+        = list_of Member.by_voice(voice).order(:last_name) do |member|
+          = member
 
   - if logged_in?
     - edit_button('/members')

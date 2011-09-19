@@ -95,11 +95,22 @@ body
     #top
       text-align: center
 
-    .members li
-      &:after
-        content: ', '
-      &:last-child:after
-        content: '.'
+    article .members
+
+      h2
+        +adjust-font-size-to(1em, 1)
+        font-weight: bold
+        &:after
+          content: ':'
+
+      ol
+        padding-left: rhythm(0)
+
+        li
+          &:after
+            content: ', '
+          &:last-child:after
+            content: '.'
 
   footer
     font-family: $serif
