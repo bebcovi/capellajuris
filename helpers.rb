@@ -1,4 +1,5 @@
 # encoding:utf-8
+
 helpers do
   def current?(page)
     '/' + page.haml_name == request.path_info
@@ -66,20 +67,20 @@ helpers do
 
   def edit_button(link, value = 'Izmjeni')
     haml_tag 'div.controls' do
-      link_to value, link, :class => 'edit'
+      link_to value, link
     end
   end
 
   def delete_button(link, value = 'Izbriši')
     haml_tag 'div.controls' do
-      haml_tag :a, value, {:href => "/confirmation#{link}", :class => 'delete'}
+      haml_tag :a, value, {:href => "/confirmation#{link}"}
     end
   end
 
   def edit_delete_buttons(link, values = {:edit => 'Izmjeni', :delete => 'Izbriši'})
     haml_tag 'div.controls' do
-      link_to values[:edit], link, :class => 'edit'
-      haml_tag :a, values[:delete], {:href => "/confirmation#{link}", :class => 'delete'}
+      link_to values[:edit], link
+      haml_tag :a, values[:delete], {:href => "/confirmation#{link}"}
     end
   end
 
