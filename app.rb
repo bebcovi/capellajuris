@@ -171,12 +171,10 @@ get '/:page' do
   haml params[:page].to_sym
 end
 
-
 get '/css/screen.css' do
   sass :'css/screen'
 end
 
-
 not_found do
-  "A 'Not found' message here."
+  haml :'404'
 end
