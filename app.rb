@@ -31,6 +31,8 @@ end
 DB = Sequel.sqlite 'development.db'
 
 module Sequel
+  extension :pretty_table
+
   class Model
     plugin :schema
     plugin :validation_helpers
