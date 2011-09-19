@@ -30,22 +30,19 @@
 
     %aside
 
+      - @sidebar = Sidebar.first
 
       %section#video
 
-        %h2= @intro.video_title
+        %h2= @sidebar.video_title
 
-        %object{width: @object_width, height: @video_height}
-          %param{name: 'movie', value: @intro.video_url}
-          %param{name: 'allowFullScreen', value: 'true'}
-          %param{name: 'allowscriptaccess', value: 'always'}
-          %embed{src: @intro.video_url, type: 'application/x-shockwave-flash', allowscriptaccess: 'always', width: @object_width, height: @video_height}
+        = @sidebar.video
 
       %section#audio
 
-        %h2= @intro.audio_title
+        %h2= @sidebar.audio_title
 
-        %audio{src: "/audio/#{@intro.audio_url}", controls: true}
+        %audio{src: "/audio/#{@sidebar.audio}.mp3", controls: true}
 
         %object.flash{width: 300, height: 27}
           %param{name: 'flashvars', value: "audioUrl=/audio/#{@sidebar.audio}.mp3"}

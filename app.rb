@@ -95,6 +95,23 @@ put '/intro/' do
 end
 
 
+get '/sidebar/:id' do
+  halt 404 if not logged_in?
+  @sidebar = Sidebar[params[:id]]
+  haml :'forms/sidebar'
+end
+
+put '/sidebar/:id' do
+  @sidebar = Sidebar[params[:id]].set(video_title: params[:video_title], video: params[:video],
+                                      audio_title: params[:audio_title], audio: params[:audio])
+  if @sidebar.valid?
+    @sidebar.save
+    redirect :/
+  else
+    haml :'forms/sidebar'
+  end
+end
+
 get '/news/new' do
   halt 404 if not logged_in?
   @content = News.new
