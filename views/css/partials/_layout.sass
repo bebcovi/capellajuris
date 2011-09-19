@@ -40,15 +40,15 @@ body
 
   #main
     +padding-trailer
+    +clearfix
 
     & > *:first-child:not(#log)
       +leader
 
     article
       +trailer
+      +clearfix
 
-      time + *
-        clear: both
 
     #intro
       $intro-padding: 1.5
@@ -89,6 +89,8 @@ body
       time
         float: right
 
+        & + *
+          clear: both
 
     article .members
       +trailer
