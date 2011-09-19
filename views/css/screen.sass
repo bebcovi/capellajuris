@@ -8,16 +8,16 @@ $icon-spacing: 1px
 @import compass/reset
 @import compass/layout
 
-=button($float-dir: left, $after: true)
+=button($dir: left, $after: true)
   display: block
-  float: $float-dir
+  float: $dir
   +rhythm-borders(1px, 0.5)
   background-color: darken(white, 5%)
   border-color: darken(white, 25%)
   color: lighten(black, 40%)
   @if $after
     & + *
-      clear: $float-dir
+      clear: $dir
   &:hover
     background-color: darken(white, 7%)
     border-color: darken(white, 40%)
