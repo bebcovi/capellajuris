@@ -42,60 +42,6 @@ body
 
   .spacer
     +trailer(3)
-
-  form
-
-    input
-      &[type='text'], &[type='password']
-        +form-text
-
-    textarea
-      +form-text
-      max-width: $wrapper-width
-
-    .submit
-      +clearfix
-
-      input
-        +button(right, false)
-        float: right
-
-  #login table
-    height: rhythm(8)
-    width: 320px
-
-    .username, .password
-      input
-        width: 91%
-
-  .post
-    +clearfix
-
-    input[type='text'], textarea
-      +trailer(0.5)
-
-    input
-
-      &[type='text']
-        width: 300px
-
-      &[type='submit']
-        +button(left, false)
-
-  .controls
-    +trailer
-    height: rhythm()
-
-    form
-      display: inline
-
-      input
-        border: 0
-
-  .add
-    +trailer
-    +button
-
   #main
     +padding-trailer
 

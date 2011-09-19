@@ -1,0 +1,126 @@
+#wrapper
+
+  form
+
+    input, textarea
+      font: $base-font-size $sans-serif
+      line-height: rhythm()
+
+    input
+
+      &[type='text'], &[type='password']
+        +form-text
+
+      &[type='submit']
+        margin: 0
+        padding: 0
+        &:hover
+          cursor: pointer
+
+    textarea
+      +form-text
+      max-width: $wrapper-width - 20px
+
+    .submit
+      +clearfix
+
+      input
+        +button(right, false)
+
+  #login table
+    height: rhythm(8)
+    width: 320px
+
+    .username, .password
+      input
+        width: 91%
+
+  .edit
+    +trailer
+    +clearfix
+
+    input[type='text'], textarea
+      +trailer(0.5)
+
+    input
+
+      &[type='text']
+        width: 300px
+
+      &[type='submit']
+        +button(left, false)
+        margin-right: rhythm(0.5)
+
+    img
+      float: left
+      margin-top: 2px
+
+    textarea
+      width: 800px
+
+  .preloader
+    $image: 'preloader.gif'
+
+    float: left
+    margin-top: 2px
+    width: image-width($image)
+    height: image-height($image)
+    background-image: image-url($image)
+
+  .add
+    +trailer
+    +clearfix
+
+    a
+      +button(left, false)
+      margin-right: rhythm(0.5)
+      text-align: center
+      &:hover
+        text-decoration: none
+
+  .controls
+    height: rhythm()
+
+    form input
+      background-color: transparent
+      border: 0
+
+    form input, a
+      font-weight: bold
+      color: darken(white, 25%)
+      &:hover
+        color: darken(white, 40%)
+        text-decoration: none
+
+  #main
+
+    article .controls
+      +trailer
+      +clearfix
+      padding-left: rhythm(0)
+      list-style-type: none
+
+      li
+        float: left
+        margin-right: rhythm(0.5)
+
+    .members
+      +trailer
+      +clearfix
+
+      section
+        +trailer(0)
+        width: 195px
+        float: left
+        margin-left: rhythm(2)
+
+        & > ol li
+          +clearfix
+          +rhythm(0, 0.5, 0.5, 0)
+
+          .controls
+            float: right
+
+        .add
+          +leader
+          +trailer(0)
