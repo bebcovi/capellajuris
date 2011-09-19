@@ -40,10 +40,11 @@ body
           display: block
           padding: 0 rhythm(0.5)
 
-  .spacer
-    +trailer(3)
   #main
     +padding-trailer
+
+    & > *:first-child:not(#log)
+      +leader
 
     article
       +trailer

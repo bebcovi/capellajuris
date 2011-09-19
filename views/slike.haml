@@ -1,7 +1,5 @@
 - @page_title = 'Slike'
 
-.spacer
-
 %ul#photos
   = list_of(Flickr.photos_from_set '72157627460265059') do |photo|
     %img{src: photo.url, width: photo.width, height: photo.height}
