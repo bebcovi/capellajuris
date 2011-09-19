@@ -39,6 +39,10 @@ body
 
     article
 
+      ol
+        padding-left: rhythm(2)
+        list-style: disc outside
+
       em, strong
         font-weight: bold
 
@@ -73,12 +77,8 @@ body
           +trailer
           +adjust-font-size-to(1.5em, 1)
 
-        ol
-          padding-left: rhythm(2)
-          list-style: disc outside
-
-          li
-            +trailer
+        ol li
+          +trailer
 
     #photos
       text-align: center
