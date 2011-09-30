@@ -71,11 +71,24 @@ get '/logout' do
   redirect :/
 end
 
+get '/confirmation/:type/:id' do
+  @type, @id = params[:type], params[:id]
+  haml :confirmation
+end
+
+
 get '/content/new' do
   halt 404 if not logged_in?
   referrer = URI.parse(request.referrer) if request.referrer
   @content = Content.new(page: referrer.path)
   haml :'forms/content'
+end
+
+[:post, :put].each do |method|
+  send(method, '/preview') do
+    @text = params[:text]
+    haml :preview
+  end
 end
 
 post '/content/new' do
