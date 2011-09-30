@@ -156,9 +156,13 @@ delete '/news/:id' do
   redirect :/
 end
 
+get '/members' do
+  haml :'forms/members'
+end
+
 post '/member/new' do
   Member.create(first_name: params[:first_name], last_name: params[:last_name], voice: params[:voice])
-  haml :'forms/memebers'
+  haml :'forms/members'
 end
 
 delete '/member/:id' do
