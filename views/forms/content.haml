@@ -1,8 +1,5 @@
 - @page_title = 'Izmjena sadržaja'
 
-- if @content.respond_to?(:page)
-  - @content.page = request.referrer.match(/(\/[^\/]*)$/)[1]
-
 #gollum-editor{class: 'edit'}
   - form_tag(action: request.path_info, :method => @content.id ? 'put' : 'post', name: 'gollum-editor') do
     %fieldset#gollum-editor-fields
@@ -66,11 +63,15 @@
           #gollum-editor-help-content
             %p
       %textarea#gollum-editor-body{:'data-markup-lang' => 'markdown', name: 'text'}= @content.text
-      %input{type: 'hidden', name: 'page', value: @content.page}
       %span.jaws
-      %br
-      %input{type: 'submit', value: 'Spremi'}
-      %a{href: @content.page} Odustani
-      %a{href: '/smth'} Preview
+        %br
+      %input#gollum-editor-submit{type: 'submit', value: 'Spremi'}
+      - link_to 'Prikaži', "javascript:void(0)", class: 'minibutton', id: 'gollum-editor-preview'
+
+      - if @content.respond_to? :page
+        %input{type: 'hidden', name: 'page', value: @content.page}
+        - link_to 'Odustani', @content.page, class: 'cancel'
+      - else
+        - link_to 'Odustani', '/', class: 'cancel'
 
 %script== $.GollumEditor({Debug:#{settings.development?}})

@@ -10,6 +10,7 @@ require 'active_support/core_ext/string/inflections'
 require 'active_support/inflections'
 require 'active_support/core_ext/object/blank'
 require 'extras/flickr'
+require 'uri'
 
 require_relative 'helpers'
 require_relative 'extras/cro_dates'
@@ -57,14 +58,6 @@ get '/' do
   haml :index
 end
 
-get '/logout' do
-  log_out!
-  redirect :/
-end
-
-get '/:page' do
-  haml params[:page].to_sym
-end
 
 post '/login' do
   authenticate! do
@@ -73,9 +66,15 @@ post '/login' do
   end
 end
 
+get '/logout' do
+  log_out!
+  redirect :/
+end
+
 get '/content/new' do
   halt 404 if not logged_in?
-  @content = Content.new
+  referrer = URI.parse(request.referrer) if request.referrer
+  @content = Content.new(page: referrer.path)
   haml :'forms/content'
 end
 
@@ -152,6 +151,11 @@ end
 delete '/member/:id' do
   Member[params[:id]].delete
   haml :'forms/members'
+end
+
+
+get '/:page' do
+  haml params[:page].to_sym
 end
 
 

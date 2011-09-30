@@ -68,7 +68,7 @@ module Flickr
       new sizes.each_with_object({}) { |data, hash|
         label = data['label']
         label = 'Medium 500' if data['label'] == 'Medium'
-        size = SIZE_NAMES[string_to_method(label)]
+        size = SIZE_NAMES[label.downcase.delete(' ')]
         hash["url_#{size}"] = data['source']
         hash["width_#{size}"] = data['width']
         hash["height_#{size}"] = data['height']

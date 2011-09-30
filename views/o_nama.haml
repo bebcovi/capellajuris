@@ -2,7 +2,7 @@
 
 .spacer
 
-  - Content.by_page('o_nama').order(:order).each do |content|
+  - Content.by_page('/o_nama').order(:order).each do |content|
     - @content = content
     = haml "partials/#{@content.type}".to_sym
 
