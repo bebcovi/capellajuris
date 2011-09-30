@@ -83,7 +83,7 @@ helpers do
   end
 
   def render_markdown(text)
-    BlueCloth.new(text).to_html
+    Redcarpet.new(text, :hard_wrap).to_html
   end
 end
 
