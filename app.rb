@@ -44,7 +44,6 @@ module Sequel
 end
 
 Dir['db/models/*'].each { |model| require_relative model }
-Dir['db/migrations/*'].each { |migration| require_relative migration }
 
 
 # Sinatra
