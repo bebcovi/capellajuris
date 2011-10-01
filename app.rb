@@ -27,11 +27,13 @@ configure do
   set :sass, Compass.sass_engine_options
 end
 
+
 # Sequel
 DB = Sequel.sqlite 'databases/master.db'
 
 module Sequel
   extension :pretty_table
+  extension :migration
 
   class Model
     plugin :schema
@@ -39,11 +41,13 @@ module Sequel
   end
 end
 
+Dir['db/models/*'].each { |model| require_relative model }
+Dir['db/migrations/*'].each { |migration| require_relative migration }
+
+
 # Sinatra
 enable :sessions
 
-# Database Models
-Dir['models/*.rb'].each { |model| require_relative model}
 
 
 
