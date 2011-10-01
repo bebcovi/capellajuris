@@ -1,3 +1,3 @@
 class Page < Sequel::Model
-  create_table unless table_exists?
+  unrestrict_primary_key
 end

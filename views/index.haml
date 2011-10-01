@@ -52,6 +52,6 @@
 
 %section#news
 
-  %h1= Content[type: 'news'].text
+  = render_markdown Content[type: 'news'].text
 
   = haml :'partials/news'

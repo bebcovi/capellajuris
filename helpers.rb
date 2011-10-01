@@ -15,7 +15,7 @@ helpers do
       yield
     elsif not @user
       @error = 'Krivo korisničko ime ili lozinka.'
-      haml "forms#{request.path_info}".to_sym
+      haml :login
     elsif @user.password_hash != BCrypt::Engine.hash_secret(params[:password], @user.password_salt)
       @error = 'Krivo korisničko ime ili lozinka.'
       haml :login
@@ -25,15 +25,15 @@ helpers do
   end
 
   def log_in!
-    session[:logged_in] = true
+    session[:id] = User.first.id
   end
 
   def log_out!
-    session[:logged_in] = false
+    session[:id] = nil
   end
 
   def logged_in?
-    session[:logged_in]
+    session[:id]
   end
 
   def string_to_id(string)

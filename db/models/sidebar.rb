@@ -1,4 +1,3 @@
-# encoding:utf-8
 class Sidebar < Sequel::Model
   def validates_audio_existence(column)
     if not Dir['public/audio/*'].include? "public/audio/#{audio}.mp3"
@@ -11,7 +10,10 @@ class Sidebar < Sequel::Model
     validates_audio_existence :audio
   end
 
-  def before_update
-    self.video.sub!(/height\="\d+"/, 'height="176"').sub!(/width\="\d+"/, 'width="300"')
+  def before_save
+    self.video.
+      sub!(/height=('|")\d+('|")/, "height=\"176\"").
+      sub!(/width=('|")\d+('|")/, "width=\"300\"")
+    super
   end
 end

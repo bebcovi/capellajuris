@@ -6,4 +6,4 @@
 
   = list_of(Video.all) do |video|
     %h1= video.title
-    %iframe{title: 'YouTube video player', width: 560, height: 338, src: video.url, frameborder: 0, allowfullscreen: true}
+    = video.url
