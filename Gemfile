@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'i18n'
 gem 'activesupport'
 gem 'faraday-stack'
+gem 'bcrypt-ruby'
 
 group :development do
   gem 'thin'

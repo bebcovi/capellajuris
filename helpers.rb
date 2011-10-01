@@ -9,9 +9,16 @@ helpers do
   end
 
   def authenticate!(&block)
-    if not User[:username => params[:username], :password => params[:password]]
+    @user = User[username: params[:username]]
+    if User.empty?
+      User.create(username: params[:username], password_hash: params[:password])
+      yield
+    elsif not @user
       @error = 'Krivo korisničko ime ili lozinka.'
       haml "forms#{request.path_info}".to_sym
+    elsif @user.password_hash != BCrypt::Engine.hash_secret(params[:password], @user.password_salt)
+      @error = 'Krivo korisničko ime ili lozinka.'
+      haml :login
     else
       yield
     end

@@ -11,6 +11,7 @@ require 'active_support/inflections'
 require 'active_support/core_ext/object/blank'
 require 'extras/flickr'
 require 'uri'
+require 'bcrypt'
 
 require_relative 'helpers'
 require_relative 'extras/cro_dates'
