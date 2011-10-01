@@ -28,7 +28,7 @@ configure do
 end
 
 # Sequel
-DB = Sequel.sqlite 'development.db'
+DB = Sequel.sqlite 'databases/master.db'
 
 module Sequel
   extension :pretty_table
