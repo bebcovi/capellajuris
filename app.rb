@@ -31,7 +31,7 @@ end
 
 
 # Sequel
-DB = Sequel.sqlite 'databases/master.db'
+DB = Sequel.sqlite 'db/databases/master.db'
 
 module Sequel
   extension :pretty_table
