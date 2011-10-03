@@ -4,129 +4,126 @@ $sans-serif: Verdana, 'Helvetica Neue', Helvetica, Geneva, sans-serif
 body
   font-family: $sans-serif
 
-#wrapper
+h1, h2
+  font-family: $serif
 
-  #{headings()}
-    font-family: $serif
+h1
+  +adjust-font-size-to(3em, 3)
+
+h2
+  font-size: 1.5em
+
+h1, h2, section, p
+  +trailer
+
+p:last-child
+  +trailer(0)
+
+a
+  +hover-link
+
+em, strong
+  font-weight: bold
+
+ol
+  padding-left: rhythm(2)
+  list-style: disc outside
+
+nav
+
+  ol
+    padding: 0
+    list-style: none
 
   a
-    +hover-link
-
-  nav ol li a
     font-family: $serif
     text-transform: uppercase
     &:hover
       text-decoration: none
 
-  #log
-    text-align: right
+.arrow:hover
+  text-decoration: none
 
-  #main
+#log
+  text-align: right
 
-    p
-      +trailer
+#intro section h2:after
+  content: ':'
+
+#news article
+
+  h1
+    +trailer
+    +adjust-font-size-to(1.75em, 2)
+
+  time
+    font-size: 0.8
+
+#aktivnosti
+
+  .inner
+    width: 750px
+    padding-left: rhythm()
+
+  section
+    +trailer
 
     h1
       +trailer
-      +adjust-font-size-to(3em, 3)
+      +adjust-font-size-to(1.5em, 1)
 
-    h2
-      +trailer
-      font-size: 1.5em
-
-    article
-
-      ol
-        padding-left: rhythm(2)
-        list-style: disc outside
-
-      em, strong
-        font-weight: bold
-
-    #intro
+    ol li
       +trailer
 
-      .main p:last-child
-        +trailer(0)
+#photos, #videos
+  text-align: center
 
-      aside section h2:after
-        content: ':'
+#videos h1
+  +trailer
+  font-size: 2em
 
-    #news article
+#top
+  text-align: center
 
-      h1
-        +trailer
-        +adjust-font-size-to(1.75em, 2)
 
-      time
-        font-size: 0.8
+article .members
 
-    #aktivnosti
+  h2
+    +adjust-font-size-to(1em, 1)
+    font-weight: bold
+    &:after
+      content: ':'
 
-      .inner
-        width: 750px
-        padding-left: rhythm()
+  ol
+    padding-left: rhythm(0)
 
-      section
-        +trailer
+    li
+      &:after
+        content: ', '
+      &:last-child:after
+        content: '.'
 
-        h1
-          +trailer
-          +adjust-font-size-to(1.5em, 1)
+footer
+  font-family: $serif
 
-        ol li
-          +trailer
+#contact
+  +leader(0.5)
+  +trailer(0)
+  font-size: 1.25em
 
-    #photos
-      text-align: center
+.label
+  font-weight: bold
+  &:after
+    content: ':'
 
-    #videos
-      text-align: center
+#facebook
+  +trailer(0)
+  font-size: 1.2em
 
-      h1
-        +trailer
-        font-size: 2em
-
-    .arrow:hover
-      text-decoration: none
-
-    #top
-      text-align: center
-
-    article .members
-
-      h2
-        +adjust-font-size-to(1em, 1)
-        font-weight: bold
-        &:after
-          content: ':'
-
-      ol
-        padding-left: rhythm(0)
-
-        li
-          &:after
-            content: ', '
-          &:last-child:after
-            content: '.'
-
-  footer
-    font-family: $serif
-
-    #contact
-      +leader(0.5)
-      font-size: 1.25em
-
-      .label
-        font-weight: bold
-        &:after
-          content: ':'
-
-    #facebook
-      font-size: 1.2em
-
-      p:after
-        content: ':'
+  p
+    +trailer(0)
+    &:after
+      content: ':'
 
 #gollum-editor
   font-size: 11px

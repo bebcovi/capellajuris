@@ -6,43 +6,39 @@ $link: #c70000
 body
   color: $text
 
-#wrapper
+a
+  color: $link
+
+.error
+  color: red
+
+nav
+  background-color: darken(white, 3%)
+  border-color: darken(white, 20%)
 
   a
-    color: $link
+    +link-colors(lighten($text, 20%), $link)
+    &.current
+      color: $link
 
-  .error
-    color: red
+img
+  outline-color: $text
 
-  nav
-    background-color: darken(white, 3%)
-    border-color: darken(white, 20%)
+#intro
+  background-color: darken(white, 2%)
+  border-color: darken(white, 10%)
 
-    a
-      +link-colors(lighten($text, 20%), $link)
-      &.current
-        color: $link
+#news article
+  border-color: darken(white, 15%)
 
-  #main
+time
+  color: lighten($text, 30%)
 
-    img
-      outline-color: $text
+footer
+  background-color: darken(white, 3%)
+  border-color: darken(white, 20%)
 
-    #intro
-      background-color: darken(white, 2%)
-      border-color: darken(white, 10%)
-
-    #news article
-      border-color: darken(white, 15%)
-
-      time
-        color: lighten($text, 30%)
-
-  footer
-    background-color: darken(white, 3%)
-    border-color: darken(white, 20%)
-
-    #facebook a
-      border-color: lighten(black, 40%)
-      &:hover
-        border-color: #344466
+#facebook a
+  color: lighten(black, 40%)
+  &:hover
+    color: #344466
