@@ -39,8 +39,8 @@
         %h2= @sidebar.audio_title
 
         %audio{controls: true, preload: true}
-          %source{src: "/audio/#{@intro.audio_url}.mp3"}
-          %source{src: "/audio/#{@intro.audio_url}.ogg"}
+          %source{src: "/audio/#{@sidebar.audio}.mp3"}
+          %source{src: "/audio/#{@sidebar.audio}.ogg"}
 
       - if logged_in?
         - edit_button("/sidebar/#{@sidebar.id}")
