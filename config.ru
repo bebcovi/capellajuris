@@ -16,4 +16,6 @@ if 'shotgun' == File.basename($0)
   end
 end
 
+ENV['TMPDIR'] = "/tmp" unless ENV['TMPDIR']
+
 run Sinatra::Application

@@ -73,11 +73,9 @@ module SinatraBoilerplate
         config.sass_dir = app.settings.views
       end
 
-      tmp_dir = !ENV['TMPDIR'] ? File.join(File.dirname(__FILE__), 'tmp') : ENV['TMPDIR']
-
       Compass.sass_engine_options.merge \
         style: app.settings.production? ? :compressed : :nested,
-        cache_location: File.join(tmp_dir, 'sass-cache')
+        cache_location: File.join(ENV['TMPDIR'], 'sass-cache')
     end
 
     # poor man's Sprockets
