@@ -21,7 +21,7 @@ end
 
 group :development, :test do
   gem 'ruby-debug', :require => nil, :platforms => :mri_18
-  gem 'ruby-debug19', :require => nil, :platforms => :mri_19
+  gem 'ruby-debug19', :require => nil, :platforms => :mri_19 unless '1.9.3' == RUBY_VERSION
 end
 
 group :production do
