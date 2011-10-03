@@ -1,3 +1,4 @@
 %article
   = render_markdown @content.text
-  - edit_delete_buttons("/content/#{@content.id}")
+  - if logged_in?
+    - edit_delete_buttons("/content/#{@content.id}")
