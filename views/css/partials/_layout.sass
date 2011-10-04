@@ -34,9 +34,9 @@ body
         float: left
         margin: 0 rhythm(0.5)
 
-        a
-          display: block
-          padding: 0 rhythm(0.5)
+    a
+      display: block
+      padding: 0 rhythm(0.5)
 
   #main
     +padding-trailer
@@ -53,14 +53,14 @@ body
         float: left
         margin: rhythm(0.5) rhythm() 0 0
 
-    #intro
-      $intro-padding: 1.5
-      $aside-width: 300px
+  #intro
+    $intro-padding: 1.5
+    $aside-width: 300px
 
-      +rhythm-borders(1px, $intro-padding)
+    +rhythm-borders(1px, $intro-padding)
 
-      .inner
-        +clearfix
+    .inner
+      +clearfix
 
       .main
         +trailer(0)
@@ -79,44 +79,40 @@ body
           &:last-child
             +trailer(0)
 
-    #news article
-      +trailer(1.5)
-      +trailing-border(1px, 0.5, $base-font-size, dotted)
-      &:last-of-type
-        +trailing-border(0, 0)
-        +trailer(2.0)
-
-      h1
-        float: left
-
-      time
-        float: right
-
-        & + *
-          clear: both
-
-    article .members
-      +trailer
-
-      h2, ol, ol li
-        display: inline
-
-    #photos
-
-      li
-        +trailer(2)
-
-        // @for $i from 1 through 19
-        //   &:nth-child(#{$i})
-        //     height: floor(image-height("galerija/#{$i}.jpg")/18) * 18
-
-      img
-        float: none
-        display: inline
-        max-height: 100%
-
-    #videos li
+  #news article
+    +trailer(1.5)
+    +trailing-border(1px, 0.5, $base-font-size, dotted)
+    &:last-of-type
+      +trailing-border(0, 0)
       +trailer(2)
+
+    h1
+      float: left
+
+    time
+      float: right
+
+      & + *
+        clear: both
+
+  article .members
+    +trailer
+
+    h2, ol, ol li
+      display: inline
+
+  #photos
+
+    li
+      +trailer(2)
+
+    img
+      float: none
+      display: inline
+      max-height: 100%
+
+  #videos li
+    +trailer(2)
 
   footer
     +clearfix
@@ -133,7 +129,6 @@ body
 
       +clearfix
       float: right
-      width: 280px
       width: $text-width + $icon-width + 18px
 
       p

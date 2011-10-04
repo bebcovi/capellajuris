@@ -1,129 +1,123 @@
-#wrapper
+form
 
-  form
+  label:after
+    content: ':'
 
-    label:after
-      content: ':'
+  input, textarea
+    font: $base-font-size $sans-serif
+    line-height: rhythm()
 
-    input, textarea
-      font: $base-font-size $sans-serif
-      line-height: rhythm()
+  input
 
-    input
-
-      &[type='text'], &[type='password']
-        +form-text
-
-      &[type='submit']
-        margin: 0
-        padding: 0
-        &:hover
-          cursor: pointer
-
-    textarea
+    &[type='text'], &[type='password']
       +form-text
-      max-width: $wrapper-width - 20px
 
-    .submit
-      +clearfix
+    &[type='submit']
+      margin: 0
+      padding: 0
+      &:hover
+        cursor: pointer
 
-      input
-        +button(right, false)
+  textarea
+    +form-text
+    max-width: $wrapper-width - 20px
 
-  #login table
-    height: rhythm(8)
-    width: 320px
-
-    .username, .password
-      input
-        width: 91%
-
-  .edit
-    +trailer
+  .submit
     +clearfix
-
-    input[type='text'], textarea
-      +trailer(0.5)
 
     input
+      +button(right, false)
 
-      &[type='text']
-        width: 300px
+#login table
+  height: rhythm(8)
+  width: 320px
 
-      &[type='submit']
-        +button(left, false)
-        margin-right: rhythm(0.5)
+  .username, .password
+    input
+      width: 91%
 
-    img
-      float: left
-      margin-top: 2px
+.edit
+  +trailer
+  +clearfix
 
-    textarea
-      width: 800px
+  input[type='text'], textarea
+    +trailer(0.5)
 
-  .preloader
-    $image: 'preloader.gif'
+  input
 
-    float: left
-    margin-top: 2px
-    width: image-width($image)
-    height: image-height($image)
-    background-image: image-url($image)
+    &[type='text']
+      width: 300px
 
-  .add
-    +trailer
-    +clearfix
-
-    a
+    &[type='submit']
       +button(left, false)
       margin-right: rhythm(0.5)
-      text-align: center
-      &:hover
-        text-decoration: none
 
-  .controls
-    height: rhythm()
+  img
+    float: left
+    margin-top: 2px
 
-    form input
-      background-color: transparent
-      border: 0
+  textarea
+    width: 800px
 
-    form input, a
-      font-weight: bold
-      color: darken(white, 25%)
-      &:hover
-        color: darken(white, 40%)
-        text-decoration: none
+.preloader
+  $image: 'preloader.gif'
 
-  #main
+  float: left
+  margin-top: 2px
+  width: image-width($image)
+  height: image-height($image)
+  background-image: image-url($image)
 
-    article .controls
-      +trailer
+.add
+  +trailer
+  +clearfix
+
+  a
+    +button(left, false)
+    margin-right: rhythm(0.5)
+    text-align: center
+    &:hover
+      text-decoration: none
+
+.controls
+  height: rhythm()
+
+  form input, a
+    background-color: transparent
+    border: 0
+    font-weight: bold
+    color: darken(white, 25%)
+    &:hover
+      color: darken(white, 40%)
+      text-decoration: none
+
+article .controls
+  +trailer
+  +clearfix
+  padding-left: rhythm(0)
+  list-style-type: none
+
+  li
+    float: left
+    margin-right: rhythm(0.5)
+
+.members
+  +trailer
+  +clearfix
+
+  section
+    +trailer(0)
+    width: 195px
+    float: left
+    margin-left: rhythm(2)
+
+    & > ol li
       +clearfix
-      padding-left: rhythm(0)
-      list-style-type: none
+      +rhythm(0, 0.5, 0.5, 0)
 
-      li
-        float: left
-        margin-right: rhythm(0.5)
+      .controls
+        float: right
 
-    .members
-      +trailer
-      +clearfix
-
-      section
-        +trailer(0)
-        width: 195px
-        float: left
-        margin-left: rhythm(2)
-
-        & > ol li
-          +clearfix
-          +rhythm(0, 0.5, 0.5, 0)
-
-          .controls
-            float: right
-
-        .add
-          +leader
-          +trailer(0)
+    .add
+      +leader
+      +trailer(0)
