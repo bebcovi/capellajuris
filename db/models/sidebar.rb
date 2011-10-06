@@ -1,19 +1,17 @@
-class Sidebar < Sequel::Model
-  def validates_audio_existence(column)
+class Sidebar < ActiveRecord::Base
+  validate :audio_existence
+
+  def audio_existence
     if not Dir['public/audio/*'].include? "public/audio/#{audio}.mp3"
-      errors.add(columns, "Audio snimka s tim imenom ne postoji.")
+      errors.add(:audio, "Audio snimka s tim imenom ne postoji.")
     end
   end
 
-  def validate
-    super
-    validates_audio_existence :audio
-  end
+  before_save :set_equal_dimensions
 
-  def before_save
+  def set_equal_dimensions
     self.video.
       sub!(/height=('|")\d+('|")/, "height=\"176\"").
-      sub!(/width=('|")\d+('|")/, "width=\"300\"")
-    super
+      sub!(/width=('|")\d+('|")/, "width=\"300\"") if video.present?
   end
 end

@@ -30,7 +30,7 @@
 
         %nav
           %ol
-            - Page.order(:order).each do |page|
+            - Page.order(:order_no).each do |page|
               %li
                 %a{href: "/#{page.haml_name}", class: current?(page) && 'current'}
                   = page.cro_name

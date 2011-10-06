@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'rake'
 gem 'sinatra'
 gem 'haml'
 gem 'sass'
@@ -13,6 +14,9 @@ gem 'i18n'
 gem 'activesupport'
 gem 'faraday-stack'
 gem 'bcrypt-ruby'
+
+gem 'sinatra-activerecord'
+gem 'activerecord'
 
 group :development do
   gem 'thin'

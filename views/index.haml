@@ -10,7 +10,7 @@
 
   .inner
 
-    - @intro = Content[type: 'intro']
+    - @intro = Content.find_by_content_type('intro')
 
     %article.main
       = render_markdown(@intro.text)

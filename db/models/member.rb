@@ -1,4 +1,4 @@
-class Member < Sequel::Model
+class Member < ActiveRecord::Base
   VOICES = {
     'S' => 'soprani',
     'A' => 'alti',
@@ -11,7 +11,7 @@ class Member < Sequel::Model
   end
 
   def self.by_voice(name)
-    filter(:voice => VOICES.index(name))
+    where(:voice => VOICES.key(name))
   end
 
   def name

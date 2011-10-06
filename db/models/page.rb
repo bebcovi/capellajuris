@@ -1,3 +1,3 @@
-class Page < Sequel::Model
-  unrestrict_primary_key
+class Page < ActiveRecord::Base
+  validates :haml_name, :uniqueness => true
 end

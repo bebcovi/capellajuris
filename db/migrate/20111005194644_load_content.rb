@@ -1,18 +1,18 @@
 # encoding:utf-8
-Sequel.migration do
-  up do
+class LoadContent < ActiveRecord::Migration
+  def up
     # pages
-    Page.create(haml_name: '', cro_name: 'Početna', order: 1)
-    Page.create(haml_name: 'o_nama', cro_name: 'O Nama', order: 2)
-    Page.create(haml_name: 'slike', cro_name: 'Slike', order: 3)
-    Page.create(haml_name: 'video', cro_name: 'Video', order: 4)
+    Page.create(haml_name: '', cro_name: 'Početna', order_no: 1)
+    Page.create(haml_name: 'o_nama', cro_name: 'O Nama', order_no: 2)
+    Page.create(haml_name: 'slike', cro_name: 'Slike', order_no: 3)
+    Page.create(haml_name: 'video', cro_name: 'Video', order_no: 4)
 
     # intro
     Content.create(
       text: "# Capella juris\n\n" \
             '<a href="http://www.flickr.com/photos/67131352@N04/6109212127/" title="Capella juris by Janko Marohnić, on Flickr"><img src="http://farm7.static.flickr.com/6077/6109212127_ebdf4f9f49.jpg" width="269" height="180" alt="Capella juris"></a>' + "\n\n" \
             'Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. *Ive Josipovića*, sadašnjeg predsjednika RH i prof. *Wolfganga Ruscha*, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro [Jurica Petar Petrač](o_nama#jurica). Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, [Ćirilometodska 4](http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17). Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…',
-      type: 'intro',
+      content_type: 'intro',
       page: '/')
 
     # sidebar
@@ -24,8 +24,8 @@ Sequel.migration do
 
     # news
     Content.create(
-      text: "# Vijesti",
-      type: 'news',
+      text: "Vijesti",
+      content_type: 'news',
       page: '/')
     News.create(
       text: "# Misa Criolla\n\n" \
@@ -45,21 +45,18 @@ Sequel.migration do
             "Iza Capelle juris stoji natjecanje i četiri vrlo uspješna samostalna koncerta.\n\n" \
             "Prvi, božićni koncert, “*Magnificat anima mea Dominum*”, uz pratnju Hrvatskog baroknog ansambla održan je 2006. koji je obuhvaćao barokne božićne skladbe. Sljedeće godine, 2007., održana su dva božićna koncerta, u Varaždinu i Zagrebu, pod nazivom “*Gloria in excelsis Deo*”, u pratnji gudačkog kvarteta Rucner, a sastojali su se od europske narodne božićne glazbe. Godine 2008. zbor je sudjelovao na 9. natjecanju amaterskih pjevačkih zborova u Zagrebu, gdje je u Hrvatskom glazbenom zavodu osvojio brončanu plaketu. 25. studenog 2008. zbor je održao i koncert “*Omnia vincit Amor!*”, svojevrsnu posvetu ljubavi kroz raznolike glazbene oblike, a mjesec dana kasnije sad već i tradicionalni, božićni koncert pod nazivom “*Bog se rodi v Vitliomi*”, koji se sastojao od niza (relativno nepoznatih) hrvatskih božićnih napjeva, uz gostovanje tenora Hrvoja Meštrova.\n\n" \
             "Voditelj zbora od 2008. godine je mlad i perspektivan prof. *Jurica Petar Petrač*.",
-      type: 'content',
-      page: '/o_nama',
-      order: 1)
+      content_type: 'content',
+      page: '/o_nama')
     Content.create(
       text: "# Biografija dirigenta\n\n" \
             '<a href="http://www.flickr.com/photos/67131352@N04/6109212199/" title="biografija_dirigenta by Janko Marohnić, on Flickr"><img src="http://farm7.static.flickr.com/6090/6109212199_3a843ae74c_m.jpg" width="158" height="108" alt="biografija_dirigenta"></a>' + "\n\n" \
             "Jurica Petar Petrač, prof. (Zagreb, 1985.) se nakon završene opće gimnazije [Tituš Brezovački](http://www.gimnazija-osma-tbrezovackog-zg.skole.hr/) i srednje glazbene škole [Blagoje Bersa] upisuje na studij glazbene teorije Muzičke akademije Sveučilišta u Zagrebu, diplomiravši u veljači 2009. godine. Istovremeno upisuje i studij Povijesti umjetnosti te Etnologije i kulturne antropologije na Filozofskom fakultetu u Zagrebu. Sa 17 godina osniva i Mješoviti pjevački zbor “Capella miércoles”, koji djeluje u crkvi sv. Kvirina na Pantovčaku. Od 2008. godine, nakon prvobitnog pjevačkog sudjelovanja, postaje glazbeni voditelj zbora “Capella juris”, a od 2011. glazbeni voditelj oratorijskog zbora crkve sv. Marka u Zagrebu, “Cantores Sancti Marci”.",
-      type: 'content',
-      page: '/o_nama',
-      order: 2)
+      content_type: 'content',
+      page: '/o_nama')
     Content.create(
-      text: '# Članovi zbora',
-      type: 'members',
-      page: '/o_nama',
-      order: 3)
+      text: 'Članovi zbora',
+      content_type: 'members',
+      page: '/o_nama')
     Content.create(
       text: "# Aktivnosti\n\n" \
             "## 2011\n" \
@@ -89,9 +86,8 @@ Sequel.migration do
             "## 2006\n" \
             "- Nastup na svečanosti obilježavanja *230 godina Pravnog fakulteta* Sveučilišta u Zagrebu (6. studenog, HNK Zagreb)\n" \
             "- “*Magnificat anima mea dominum!*”, koncert Capelle juris uz pratnju [Hrvatskog baroknog ansambla](http://www.hrba.hr/hr/) (21. prosinca, Crkva Sv. Franje Asiškog, Zagreb)",
-      type: 'content',
-      page: '/o_nama',
-      order: 4)
+      content_type: 'content',
+      page: '/o_nama')
 
     # members
     ['Alisa Besek','Ana Miletić','Ana Vlašić','Ana Zavada','Anja Juršetić','Barbara Bogojević','Daria Dubajić','Ines Malenica','Ivana Peulić','Ivana Radman','Katarina Sabljić','Klara Marinčević','Kristina Gotvald','Lidija Živković','Marija Ercegovac','Marija Vučurević','Mia Nazalević','Mirjana Vladić','Nikolina Hržina','Veronika Veršić','Vesna Juretić','Vinka Lozica','Zrinka Marija Krnjak'].each do |member|
@@ -146,7 +142,8 @@ Sequel.migration do
       url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/Bo3OhSP6OW8' title='YouTube video player' width='560'></iframe>")
   end
 
-  down do
-    Content.delete; Member.delete; News.delete; Page.delete; Sidebar.delete; Video.delete
+  def down
+    Content.delete_all; Member.delete_all; News.delete_all
+    Page.delete_all; Sidebar.delete_all; Video.delete_all
   end
 end

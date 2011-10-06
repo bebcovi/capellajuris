@@ -1,6 +1,7 @@
 # encoding:utf-8
 require 'sinatra'
 require 'sequel'
+require 'sinatra/activerecord'
 require 'sqlite3'
 require 'redcarpet'
 require 'active_support/core_ext/string/inflections'
@@ -25,19 +26,10 @@ configure do
 end
 
 
-# Sequel
-DB = Sequel.sqlite 'db/databases/master.db'
+# ActiveRecord
+set :database, "sqlite://master.db"
 
-module Sequel
-  extension :pretty_table
-  extension :migration
-
-  class Model
-    plugin :schema
-    plugin :validation_helpers
-  end
-end
-
+# Models
 Dir['db/models/*'].each { |model| require_relative model }
 
 
@@ -97,41 +89,38 @@ end
 end
 
 post '/content/new' do
-  Content.create(text: params[:text], type: 'content', page: params[:page])
+  Content.create(text: params[:text], content_type: 'content', page: params[:page])
   redirect params[:page]
 end
 
 get '/content/:id' do
   halt 404 if not logged_in?
-  @content = Content[params[:id]]
+  @content = Content.find(params[:id])
   haml :'forms/content'
 end
 
 put '/content/:id' do
-  Content[params[:id]].update(text: params[:text])
+  Content.find(params[:id]).update(text: params[:text])
   redirect params[:page]
 end
 
 delete '/content/:id' do
-  Content[params[:id]].destroy
+  Content.find(params[:id]).destroy
   redirect back
 end
 
 get '/sidebar/:id' do
   halt 404 if not logged_in?
-  @sidebar = Sidebar[params[:id]]
+  @sidebar = Sidebar.find(params[:id])
   haml :'forms/sidebar'
 end
 
 put '/sidebar/:id' do
-  @sidebar = Sidebar[params[:id]].set(video_title: params[:video_title], video: params[:video],
-                                      audio_title: params[:audio_title], audio: params[:audio])
-  if @sidebar.valid?
-    @sidebar.save
-    redirect :/
-  else
-    haml :'forms/sidebar'
-  end
+  @sidebar = Sidebar.find(params[:id]).update(
+    video_title: params[:video_title], video: params[:video],
+    audio_title: params[:audio_title], audio: params[:audio])
+
+  @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
 end
 
 get '/news/new' do
@@ -152,12 +141,12 @@ get '/news/:id' do
 end
 
 put '/news/:id' do
-  News[params[:id]].update(text: params[:text])
+  News.find(params[:id]).update(text: params[:text])
   redirect :/
 end
 
 delete '/news/:id' do
-  News[params[:id]].delete
+  News.find(params[:id]).destroy
   redirect :/
 end
 
@@ -171,7 +160,7 @@ post '/member/new' do
 end
 
 delete '/member/:id' do
-  Member[params[:id]].delete
+  Member.find(params[:id]).destroy
   haml :'forms/members'
 end
 

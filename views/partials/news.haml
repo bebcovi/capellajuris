@@ -1,10 +1,13 @@
+%h1= Content.find_by_content_type('news').text
+
 - if logged_in?
   - add_button('/news/new')
 
-- News.order(:created_at.desc).each do |news|
+- News.limit(5).order('created_at DESC').each do |news|
   %article
     %time{datetime: news.created_at, pubdate: true}= news.created_at.to_s(:cro)
     = render_markdown(news.text)
+
     - buttons({:edit => true, :delete => true}, "/news/#{news.id}") if logged_in?
 
 %p

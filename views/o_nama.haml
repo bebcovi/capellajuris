@@ -1,8 +1,8 @@
 - @page_title = 'O nama'
 
-- Content.by_page('/o_nama').order(:order).each do |content|
+- Content.by_page('/o_nama').order(:order_no).each do |content|
   - @content = content
-  = haml "partials/#{@content.type}".to_sym
+  = haml "partials/#{@content.content_type}".to_sym
 
 - if logged_in?
   - add_button('/content/new')

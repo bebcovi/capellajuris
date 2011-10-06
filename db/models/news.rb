@@ -1,5 +1,5 @@
-class News < Sequel::Model
-  def before_create
-    self.created_at = Date.today
+class News < ActiveRecord::Base
+  before_create do |news|
+    news.created_at = Date.today
   end
 end
