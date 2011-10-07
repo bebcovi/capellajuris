@@ -60,11 +60,17 @@ form
     +button(left, false)
     margin-right: rhythm(0.5)
     text-align: center
-    &:hover
-      text-decoration: none
 
 .controls
+  +trailer
+  +clearfix
   height: rhythm()
+  padding-left: rhythm(0)
+  list-style: none
+
+  li
+    float: left
+    margin-right: rhythm(0.5)
 
   form input, a
     background-color: transparent
@@ -75,14 +81,10 @@ form
       color: darken(white, 40%)
       text-decoration: none
 
-article .controls
 .confirm
   +trailer
   +clearfix
-  padding-left: rhythm(0)
-  list-style-type: none
 
-  li
   p
     $height: rhythm(2)
     +trailer(0)
@@ -109,8 +111,9 @@ article .controls
       +clearfix
       +rhythm(0, 0.5, 0.5, 0)
 
-      .controls
-        float: right
+        .controls
+          +trailer(0)
+          float: right
 
     .add
       +leader
