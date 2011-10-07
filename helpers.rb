@@ -83,7 +83,9 @@ helpers do
   end
 
   def add_button(link, value = 'Dodaj +')
-    link_to value, link, :class => 'add'
+    haml_tag 'div.add' do
+      link_to value, link
+    end
   end
 
   def render_markdown(text)
