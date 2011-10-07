@@ -3,4 +3,3 @@
 tmp
 db/databases
 .bundle
-Gemfile.lock
