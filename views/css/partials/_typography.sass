@@ -18,9 +18,6 @@ h2
 h1, h2, section, p
   +trailer
 
-p:last-child
-  +trailer(0)
-
 a
   +hover-link
 
@@ -28,12 +25,15 @@ em, strong
   font-weight: bold
 
 ol
+ol, ul
+  +trailer
   padding-left: rhythm(2)
   list-style: disc outside
 
 nav
 
   ol
+    +trailer(0)
     padding: 0
     list-style: none
 
@@ -111,6 +111,9 @@ article .members
 footer
   font-family: $serif
 
+  p
+    +trailer(0)
+
 #contact
   +leader(0.5)
   +trailer(0)
@@ -125,8 +128,5 @@ footer
   +trailer(0)
   font-size: 1.2em
 
-  p
-    +trailer(0)
-    &:after
-      content: ':'
-
+  p:after
+    content: ':'
