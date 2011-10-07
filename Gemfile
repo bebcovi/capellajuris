@@ -14,6 +14,7 @@ gem 'i18n'
 gem 'activesupport'
 gem 'faraday-stack'
 gem 'bcrypt-ruby'
+gem 'will_paginate', '~> 3.0.2'
 
 gem 'sinatra-activerecord'
 gem 'activerecord'

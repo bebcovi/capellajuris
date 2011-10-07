@@ -9,6 +9,8 @@ require 'active_support/inflections'
 require 'active_support/core_ext/object/blank'
 require 'uri'
 require 'bcrypt'
+require 'will_paginate'
+require 'will_paginate/active_record'
 
 require 'sinatra_boilerplate'
 require 'helpers'
@@ -188,6 +190,11 @@ put %r{/(\d+)/(up|down)} do |id, direction|
   redirect content.page
 end
 
+
+get '/arhiva' do
+  @news = News.order('created_at DESC').paginate(:page => params[:page])
+  haml :arhiva
+end
 
 get '/:page' do
   haml params[:page].to_sym

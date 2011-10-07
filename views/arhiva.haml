@@ -3,3 +3,10 @@
 %section#news
 
   %h1 Arhiva vijesti
+
+  - @news.each do |news|
+    %article
+      %time{datetime: news.created_at, pubdate: true}= news.created_at.to_s(:cro)
+      = render_markdown(news.text)
+
+  = will_paginate @news
