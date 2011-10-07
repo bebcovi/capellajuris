@@ -68,9 +68,6 @@ get '/logout' do
   redirect :/
 end
 
-get '/confirmation/:type/:id' do
-  @type, @id = params[:type], params[:id]
-  haml :confirmation
 
 before ':page/:smth' do
   if params[:smth] == 'new' or params[:smth] =~ /^\d+$/
@@ -108,8 +105,12 @@ put '/content/:id' do
 end
 
 delete '/content/:id' do
-  Content.find(params[:id]).destroy
-  redirect back
+  if params[:confirmation].blank?
+    haml :confirmation
+  else
+    content = Content.find(params[:id]).destroy
+    redirect content.page
+  end
 end
 
 get '/sidebar/:id' do
@@ -146,8 +147,12 @@ put '/news/:id' do
 end
 
 delete '/news/:id' do
-  News.find(params[:id]).destroy
-  redirect :/
+  if params[:confirmation].blank?
+    haml :confirmation
+  else
+    News.find(params[:id]).destroy
+    redirect :/
+  end
 end
 
 get '/members' do
@@ -160,8 +165,12 @@ post '/member/new' do
 end
 
 delete '/member/:id' do
-  Member.find(params[:id]).destroy
-  haml :'forms/members'
+  if params[:confirmation].blank?
+    haml :confirmation
+  else
+    Member.find(params[:id]).destroy
+    haml :'forms/members'
+  end
 end
 
 
