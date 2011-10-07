@@ -1,6 +1,6 @@
 - @page_title = 'Izmjena sadržaja'
 
-#gollum-editor{class: 'edit'}
+#gollum-editor
   - form_tag(action: request.path_info, :method => @content.id ? 'put' : 'post', name: 'gollum-editor') do
     %fieldset#gollum-editor-fields
       %input#gollum-editor-page-title{name: 'page', type: 'hidden', value: 'Gollum Editor'}
@@ -70,8 +70,8 @@
 
       - if @content.respond_to? :page
         %input{type: 'hidden', name: 'page', value: @content.page}
-        - link_to 'Odustani', @content.page, class: 'cancel'
+        - link_to 'Odustani', @content.page, class: 'minibutton', id: 'gollum-editor-cancel'
       - else
-        - link_to 'Odustani', '/', class: 'cancel'
+        - link_to 'Odustani', '/', class: 'minibutton', id: 'gollum-editor-cancel'
 
 %script== $.GollumEditor({Debug:#{settings.development?}})

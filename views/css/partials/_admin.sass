@@ -36,28 +36,12 @@ form
     input
       width: 91%
 
-.edit
+#gollum-editor
   +trailer
-  +clearfix
+  font-size: 11px
 
-  input[type='text'], textarea
-    +trailer(0.5)
-
-  input
-
-    &[type='text']
-      width: 300px
-
-    &[type='submit']
-      +button(left, false)
-      margin-right: rhythm(0.5)
-
-  img
-    float: left
-    margin-top: 2px
-
-  textarea
-    width: 800px
+  #gollum-editor-cancel
+    @extend #gollum-editor-preview
 
 .preloader
   $image: 'preloader.gif'
