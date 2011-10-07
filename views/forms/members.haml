@@ -10,9 +10,7 @@
       %ol
         = list_of Member.by_voice(voice).order(:last_name) do |member|
           = member
-          %ol.controls
-            %li
-              - delete_button("/member/#{member.id}", 'x')
+          - buttons({:delete => 'x'}, "/member/#{member.id}")
 
       -# - form_tag(action: '/member/new', method: 'post') do
       -#   %input{type: 'text', name: 'first_name'}

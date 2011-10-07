@@ -5,8 +5,7 @@
   %article
     %time{datetime: news.created_at, pubdate: true}= news.created_at.to_s(:cro)
     = render_markdown(news.text)
-    - if logged_in?
-      - edit_delete_buttons("/news/#{news.id}")
+    - buttons({:edit => true, :delete => true}, "/news/#{news.id}") if logged_in?
 
 %p
   %a{href: '/arhiva'} Arhiva vijesti

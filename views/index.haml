@@ -19,10 +19,7 @@
         %a{href: '/o_nama'} Opširnije
         %a.arrow{href: '/o_nama'} ▶
 
-      - if logged_in?
-        %ol.controls
-          %li
-            - edit_button('/intro/')
+      - buttons({:edit => true}, "/content/#{@intro.id}") if logged_in?
 
     %aside
 
@@ -42,8 +39,7 @@
           %source{src: "/audio/#{@sidebar.audio}.mp3"}
           %source{src: "/audio/#{@sidebar.audio}.ogg"}
 
-      - if logged_in?
-        - edit_button("/sidebar/#{@sidebar.id}")
+      - buttons({:edit => true}, "/sidebar/#{@sidebar.id}") if logged_in?
 
 %section#news
 
