@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
 
   def set_equal_dimensions
     self.url.
-      gsub!(/height=('|")\d+('|")/, "height=\"338\"").
-      gsub!(/width=('|")\d+('|")/, "width=\"560\"")
+      sub!(/height=('|")\d+('|")/, "height=\"338\"").
+      sub!(/width=('|")\d+('|")/, "width=\"560\"") if url.present?
   end
 end

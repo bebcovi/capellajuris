@@ -3,9 +3,9 @@ class Content < ActiveRecord::Base
     where(:page => page)
   end
 
-  before_create do |content|
+  before_create do
     unless order_no.present?
-      content.order_no = Content.by_page(page).maximum(:order_no).to_i + 1
+      self.order_no = Content.by_page(page).maximum(:order_no).to_i + 1
     end
   end
 end

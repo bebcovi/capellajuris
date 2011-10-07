@@ -7,13 +7,13 @@ require 'redcarpet'
 require 'active_support/core_ext/string/inflections'
 require 'active_support/inflections'
 require 'active_support/core_ext/object/blank'
-require 'extras/flickr'
 require 'uri'
 require 'bcrypt'
 
-require_relative 'sinatra_boilerplate'
-require_relative 'helpers'
-require_relative 'extras/cro_dates'
+require 'sinatra_boilerplate'
+require 'helpers'
+require 'extras/cro_dates'
+require 'extras/flickr'
 
 # Haml & Sass/Compass
 configure do
@@ -57,25 +57,29 @@ end
 
 
 post '/login' do
-  authenticate! do
-    log_in!
+  authenticate! do |user|
+    log_in(user)
     redirect :/
   end
 end
 
 get '/logout' do
-  log_out!
+  log_out
   redirect :/
 end
 
 get '/confirmation/:type/:id' do
   @type, @id = params[:type], params[:id]
   haml :confirmation
+
+before ':page/:smth' do
+  if params[:smth] == 'new' or params[:smth] =~ /^\d+$/
+    halt 404 if not logged_in?
+  end
 end
 
 
 get '/content/new' do
-  halt 404 if not logged_in?
   referrer = URI.parse(request.referrer) if request.referrer
   @content = Content.new(page: referrer.path)
   haml :'forms/content'
@@ -94,13 +98,12 @@ post '/content/new' do
 end
 
 get '/content/:id' do
-  halt 404 if not logged_in?
   @content = Content.find(params[:id])
   haml :'forms/content'
 end
 
 put '/content/:id' do
-  Content.find(params[:id]).update(text: params[:text])
+  Content.find(params[:id]).update_attributes(text: params[:text])
   redirect params[:page]
 end
 
@@ -110,13 +113,12 @@ delete '/content/:id' do
 end
 
 get '/sidebar/:id' do
-  halt 404 if not logged_in?
   @sidebar = Sidebar.find(params[:id])
   haml :'forms/sidebar'
 end
 
 put '/sidebar/:id' do
-  @sidebar = Sidebar.find(params[:id]).update(
+  @sidebar = Sidebar.find(params[:id]).update_attributes(
     video_title: params[:video_title], video: params[:video],
     audio_title: params[:audio_title], audio: params[:audio])
 
@@ -124,24 +126,22 @@ put '/sidebar/:id' do
 end
 
 get '/news/new' do
-  halt 404 if not logged_in?
   @content = News.new
   haml :'forms/content'
 end
 
 post '/news/new' do
-  News.create(text: params[:text], created_at: Date.today)
+  News.create(text: params[:text])
   redirect :/
 end
 
 get '/news/:id' do
-  halt 404 if not logged_in?
   @content = News[params[:id]]
   haml :'forms/content'
 end
 
 put '/news/:id' do
-  News.find(params[:id]).update(text: params[:text])
+  News.find(params[:id]).update_attributes(text: params[:text])
   redirect :/
 end
 

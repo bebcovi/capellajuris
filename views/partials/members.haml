@@ -1,6 +1,6 @@
 %article{id: string_to_id(@content.text)}
   %header
-    = render_markdown @content.text
+    %h1= @content.text
 
   - for voice in Member.voices
     %section.members
