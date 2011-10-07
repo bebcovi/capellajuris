@@ -85,3 +85,9 @@ helpers do
     Redcarpet.new(text, :hard_wrap).to_html
   end
 end
+
+class Time
+  def to_timestamp
+    self.to_s.match(/\d+\-\d+\-\d+ \d+:\d+:\d+/)[0]
+  end
+end
