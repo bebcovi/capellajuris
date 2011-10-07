@@ -6,6 +6,5 @@
   %input{type: 'submit', value: 'Spremi'}
   %a{href: '/'} Odustani
 
-- @sidebar.errors.each_value do |value|
-  - value.each do |error|
-    %p= error
+- @sidebar.errors.each do |attr, msg|
+  %p.error= msg

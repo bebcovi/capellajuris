@@ -17,7 +17,7 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :news do |t|
       t.primary_key :id
-      t.date :created_at
+      t.timestamp :created_at
       t.text :text
     end
 

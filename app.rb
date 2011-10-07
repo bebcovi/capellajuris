@@ -25,24 +25,20 @@ configure do
   end
 end
 
-
 # ActiveRecord
 set :database, "sqlite://master.db"
 
 # Models
 Dir['db/models/*'].each { |model| require_relative model }
 
-
 # Sinatra
 enable :sessions
-
 
 # Sinatra Boilerplate
 set :js_assets, %w[js/post.coffee, js/init.coffee, js/gollum.editor.js, js/markdown.js]
 
 
-# Application
-
+# Javascript
 get '/js/init.js' do
   coffee :'js/init'
 end
@@ -51,13 +47,19 @@ get '/js/post.js' do
   coffee :'js/post'
 end
 
+# CSS
+get '/css/screen.css' do
+  sass :'css/screen'
+end
+
+
 get '/' do
   haml :index
 end
 
 
 post '/login' do
-  authenticate! do |user|
+  send(User.exists? ? "authenticate" : "register") do |user|
     log_in(user)
     redirect :/
   end
@@ -106,7 +108,7 @@ end
 
 delete '/content/:id' do
   if params[:confirmation].blank?
-    haml :confirmation
+    haml :'forms/confirm'
   else
     content = Content.find(params[:id]).destroy
     redirect content.page
@@ -137,7 +139,7 @@ post '/news/new' do
 end
 
 get '/news/:id' do
-  @content = News[params[:id]]
+  @content = News.find(params[:id])
   haml :'forms/content'
 end
 
@@ -148,7 +150,7 @@ end
 
 delete '/news/:id' do
   if params[:confirmation].blank?
-    haml :confirmation
+    haml :'forms/confirm'
   else
     News.find(params[:id]).destroy
     redirect :/
@@ -156,17 +158,24 @@ delete '/news/:id' do
 end
 
 get '/members' do
+  halt 404 if not logged_in?
   haml :'forms/members'
 end
 
-post '/member/new' do
+get '/member/:voice/new' do
+  halt 404 if not logged_in?
+  @voice = params[:voice]
+  haml :'forms/member'
+end
+
+post '/member/:voice/new' do
   Member.create(first_name: params[:first_name], last_name: params[:last_name], voice: params[:voice])
-  haml :'forms/members'
+  redirect '/members'
 end
 
 delete '/member/:id' do
   if params[:confirmation].blank?
-    haml :confirmation
+    haml :'forms/confirm'
   else
     Member.find(params[:id]).destroy
     haml :'forms/members'
@@ -178,9 +187,6 @@ get '/:page' do
   haml params[:page].to_sym
 end
 
-get '/css/screen.css' do
-  sass :'css/screen'
-end
 
 not_found do
   haml :'404'

@@ -12,16 +12,6 @@
           = member
           - buttons({:delete => 'x'}, "/member/#{member.id}")
 
-      -# - form_tag(action: '/member/new', method: 'post') do
-      -#   %input{type: 'text', name: 'first_name'}
-      -#   %input{type: 'text', name: 'last_name'}
-      -#   %input{type: 'hidden', name: 'voice', value: Member::VOICES.key(voice)}
-      -#   %input{type: 'submit', value: 'Dodaj'}
+      - buttons({:add => 'Dodaj'}, "/member/#{Member.voice_abbr(voice)}/new")
 
-      - add_button('/member/new', 'Dodaj')
-
--# - @member.errors.each_value do |value|
--#   - value.each do |error|
--#     %p.error= error
-
--# %a{href: "/#{Content[:type => 'members'].page}"} Završi
+%a{href: Content.find_by_content_type('members').page} Natrag

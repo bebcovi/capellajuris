@@ -109,6 +109,15 @@ form
     float: left
     margin-left: rhythm(2)
 
+    & > form
+      +clearfix
+
+      input[type='text']
+        +trailer(0.5)
+
+      input[type='submit']
+        +button(left, false)
+
     & > ol
       +trailer(0)
       padding: 0

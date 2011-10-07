@@ -4,5 +4,4 @@
   - @content = content
   = haml "partials/#{@content.content_type}".to_sym
 
-- if logged_in?
-  - add_button('/content/new')
+- buttons({:add => true}, '/content/new') if logged_in?

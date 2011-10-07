@@ -1,9 +1,9 @@
 class Member < ActiveRecord::Base
   VOICES = {
-    'S' => 'soprani',
-    'A' => 'alti',
-    'T' => 'tenori',
-    'B' => 'basi'
+    's' => 'soprani',
+    'a' => 'alti',
+    't' => 'tenori',
+    'b' => 'basi'
   }
 
   def self.voices
@@ -11,7 +11,11 @@ class Member < ActiveRecord::Base
   end
 
   def self.by_voice(name)
-    where(:voice => VOICES.key(name))
+    where(:voice => VOICES.key(name).capitalize)
+  end
+
+  def self.voice_abbr(voice)
+    VOICES.key(voice)
   end
 
   def name

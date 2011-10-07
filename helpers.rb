@@ -9,13 +9,17 @@ helpers do
     Dir['views/forms/*'].include? "views/forms/#{page}.haml"
   end
 
-  def authenticate!(&block)
+  def authenticate(&block)
     if user = User.authenticate(params[:username], params[:password])
       yield user
     else
       @error = 'Krivo korisničko ime ili lozinka.'
       haml :login
     end
+  end
+
+  def register(&block)
+    yield User.create(:username => params[:username], :password => params[:password])
   end
 
   def log_in(user)
@@ -38,10 +42,6 @@ helpers do
     params[:action] == 'Odustani'
   end
 
-  def error?(column)
-    @content.errors.has_key?(column)
-  end
-
   def link_to(text, href, attributes = {})
     haml_tag :a, text, {href: href}.update(attributes)
   end
@@ -59,25 +59,30 @@ helpers do
   end
 
   def buttons(buttons, link)
-    buttons[:edit] = 'Izmjeni' if buttons[:edit] == true
-    buttons[:delete] = 'Izbriši' if buttons[:delete] == true
-    haml_tag 'ol.controls' do
-      if buttons.has_key? :edit
-        haml_tag :li do
-          link_to(buttons[:edit], link, {:class => 'edit'})
+    if buttons[:edit].present? or buttons[:delete].present?
+      haml_tag 'ol.controls' do
+        if buttons.has_key? :edit
+          haml_tag :li do
+            link_to (buttons[:edit] == true ? 'Izmjeni' : buttons[:edit]), link, {:class => 'edit'}
+          end
+        end
+        if buttons.has_key? :delete
+          haml_tag :li do
+            form_tag(action: link, method: 'delete', class: 'delete') do
+              haml_tag :input, {type: 'submit', value: buttons[:delete] == true ? 'Izbriši' : buttons[:delete]}
+            end
+          end
         end
       end
-      if buttons.has_key? :delete
-        haml_tag :li do
-          link_to(buttons[:delete], "/confirmation#{link}", {:class => 'delete'})
-        end
+    end
+
+    if buttons[:add].present?
+      haml_tag 'div.add' do
+        link_to (buttons[:add] == true ? 'Dodaj +' : buttons[:add]), link
       end
     end
   end
 
-  def add_button(link, value = 'Dodaj +')
-    haml_tag 'div.add' do
-      link_to value, link
     end
   end
 
