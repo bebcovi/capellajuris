@@ -46,7 +46,7 @@ enable :sessions
 
 
 # Sinatra Boilerplate
-set :js_assets, %w[js/post.coffee, js/init.coffee]
+set :js_assets, %w[js/post.coffee, js/init.coffee, js/gollum.editor.js, js/markdown.js]
 
 
 # Application
