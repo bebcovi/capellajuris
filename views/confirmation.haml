@@ -1,6 +1,6 @@
 - @page_title = 'Provjera'
 
-%p Jeste li sigurni?
-- form_tag(action: "/#{@type}/#{@id}", method: 'delete') do
+- form_tag(action: "/#{@type}/#{@id}", method: 'delete', class: 'confirm') do
+  %p Jeste li sigurni?
   %input{type: 'submit', value: 'Da'}
   %a{href: URI.parse(request.referrer).path} Ne
