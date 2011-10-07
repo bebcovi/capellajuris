@@ -183,6 +183,12 @@ delete '/member/:id' do
 end
 
 
+put %r{/(\d+)/(up|down)} do |id, direction|
+  content = Content.find(id).move(direction)
+  redirect content.page
+end
+
+
 get '/:page' do
   haml params[:page].to_sym
 end

@@ -83,11 +83,23 @@ helpers do
     end
   end
 
+  def put_button(value, link, form_attr = {})
+    form_tag({action: link, method: 'put'}.merge(form_attr)) do
+      haml_tag :input, {type: 'submit', value: value}
     end
   end
 
   def render_markdown(text)
     Redcarpet.new(text, :hard_wrap).to_html
+  end
+
+  def generate_arrows
+    if @content.order_no > 1
+      put_button '▲', "/#{@content.id}/up"
+    end
+    if @content.order_no < Content.by_page(request.path_info).maximum(:order_no)
+      put_button '▼', "/#{@content.id}/down"
+    end
   end
 end
 
