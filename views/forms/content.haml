@@ -69,4 +69,5 @@
       - link_to 'Prikaži', "javascript:void(0)", class: 'minibutton', id: 'gollum-editor-preview'
       - link_to 'Odustani', content.try(:page) || '/', class: 'minibutton', id: 'gollum-editor-cancel'
 
-%script== $.GollumEditor({Debug:#{settings.development?}})
+  :javascript
+    $.GollumEditor()
