@@ -83,14 +83,22 @@ helpers do
     end
   end
 
+  def render_markdown(text)
+    content = Hpricot(Redcarpet.new(text, :hard_wrap).to_html)
+    content.search(:p).each do |paragraph|
+      if img = paragraph.at(:img)
+        paragraph.set_attribute :class, 'img'
+        paragraph.set_attribute :style, "height: #{(img['height'].to_i / 18) * 18}"
+        paragraph.inner_html = img.to_html
+      end
+    end
+    return content.to_html
+  end
+
   def put_button(value, link, form_attr = {})
     form_tag({action: link, method: 'put'}.merge(form_attr)) do
       haml_tag :input, {type: 'submit', value: value}
     end
-  end
-
-  def render_markdown(text)
-    Redcarpet.new(text, :hard_wrap).to_html
   end
 
   def generate_arrows

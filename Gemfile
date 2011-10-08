@@ -15,6 +15,7 @@ gem 'activesupport'
 gem 'faraday-stack'
 gem 'bcrypt-ruby'
 gem 'will_paginate', '~> 3.0.2'
+gem 'hpricot'
 
 gem 'sinatra-activerecord'
 gem 'activerecord'

@@ -11,6 +11,7 @@ require 'uri'
 require 'bcrypt'
 require 'will_paginate'
 require 'will_paginate/active_record'
+require 'hpricot'
 
 require 'sinatra_boilerplate'
 require 'helpers'
