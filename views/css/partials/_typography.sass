@@ -32,21 +32,16 @@ ol, ul
   padding-left: rhythm(2)
   list-style: disc outside
 
-nav
-
-  ol
-    +trailer(0)
-    padding: 0
-    list-style: none
+nav ol, #members ol
   +trailer(0)
   padding-left: rhythm(0)
   list-style: none
 
-  a
-    font-family: $serif
-    text-transform: uppercase
-    &:hover
-      text-decoration: none
+nav a
+  font-family: $serif
+  text-transform: uppercase
+  &:hover
+    text-decoration: none
 
 .arrow:hover
   text-decoration: none
