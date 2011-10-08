@@ -38,6 +38,9 @@ nav
     +trailer(0)
     padding: 0
     list-style: none
+  +trailer(0)
+  padding-left: rhythm(0)
+  list-style: none
 
   a
     font-family: $serif
@@ -93,7 +96,7 @@ nav
 #main img
   outline: 1px solid
 
-article .members
+article#members section
 
   h2
     +adjust-font-size-to(1em, 1)
@@ -101,14 +104,11 @@ article .members
     &:after
       content: ':'
 
-  ol
-    padding-left: rhythm(0)
-
-    li
-      &:after
-        content: ', '
-      &:last-child:after
-        content: '.'
+  ol li
+    &:after
+      content: ', '
+    &:last-child:after
+      content: '.'
 
 footer
   font-family: $serif
