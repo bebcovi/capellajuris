@@ -2,8 +2,6 @@ class Post
 
   constructor: (@add) ->
 
-  @preloader: $('<div class="preloader">')
-
   @update: ->
 
     $('.controls form input[type="submit"]').click ->
@@ -20,11 +18,8 @@ class Post
     console.error msg
     $(@).click()
 
-  @always: ->
-    Post.preloader.remove()
 
   ok: =>
-    @form.append @constructor.preloader
 
     xhr = $.post @form.attr('action'),
       title: @form.find('input[type="text"]').val(),
@@ -43,7 +38,6 @@ class Post
       @constructor.update()
 
     xhr.fail @constructor.fail
-    xhr.always @constructor.always
 
     event.preventDefault()
 
@@ -52,7 +46,6 @@ class Post
     @add.delay('fast').fadeIn 'fast'
 
   init: =>
-    @add.append @constructor.preloader
 
     xhr = $.get @add.find('a').attr('href'), (data) =>
       @form = $(data).find 'form'
@@ -67,7 +60,6 @@ class Post
       submit.last().click @cancel
 
     xhr.fail @constructor.fail
-    xhr.always @constructor.always
 
     event.preventDefault()
 
