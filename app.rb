@@ -52,7 +52,7 @@ require 'db/models'
 enable :sessions
 
 # Sinatra Boilerplate
-set :js_assets, %w[js/post.coffee, js/init.coffee, js/gollum.editor.js, js/markdown.js]
+set :js_assets, %w[js/gollum.editor.js, js/markdown.js, js/post.coffee, js/init.coffee]
 
 
 # Javascript
