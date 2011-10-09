@@ -29,7 +29,7 @@ configure do
 end
 
 # ActiveRecord
-set :database, "sqlite://master.db"
+set :database, "sqlite://development.db"
 
 # Models
 Dir['db/models/*'].each { |model| require_relative model }

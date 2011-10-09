@@ -1,8 +1,8 @@
 - @page_title = 'Slike'
 
 %ul#photos
-  = list_of(Flickr.photos_from_set '72157627460265059') do |photo|
-    %img{src: photo.url, width: photo.width, height: photo.height}
+  = list_of(Dir['public/images/galerija/*']) do |photo|
+    %img{src: photo.sub(/public\//,''), alt: photo.match(/\/([^\/]+)$/)[0]}
 
 %p#top
   %a{href: '#'} Povratak na vrh
