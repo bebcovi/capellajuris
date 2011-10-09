@@ -2,7 +2,7 @@
 
 helpers do
   def current?(page)
-    '/' + page.haml_name == request.path_info
+    '/' + page.url_name == request.path_info
   end
 
   def form?(page)
@@ -61,15 +61,17 @@ helpers do
   def buttons(buttons, link)
     if buttons[:edit].present? or buttons[:delete].present?
       haml_tag 'ol.controls' do
-        if buttons.has_key? :edit
+        if buttons[:edit].present?
+          edit_value = buttons[:edit] == true ? 'Izmjeni' : buttons[:edit]
           haml_tag :li do
-            link_to (buttons[:edit] == true ? 'Izmjeni' : buttons[:edit]), link, {:class => 'edit'}
+            link_to edit_value, link, :class => 'edit'
           end
         end
-        if buttons.has_key? :delete
+        if buttons[:delete].present?
+          delete_value = buttons[:delete] == true ? 'Izbriši' : buttons[:delete]
           haml_tag :li do
             form_tag(action: link, method: 'delete', class: 'delete') do
-              haml_tag :input, {type: 'submit', value: buttons[:delete] == true ? 'Izbriši' : buttons[:delete]}
+              haml_tag :input, {type: 'submit', value: delete_value}
             end
           end
         end
@@ -94,25 +96,11 @@ helpers do
     end
     return content.to_html
   end
-
-  def put_button(value, link, form_attr = {})
-    form_tag({action: link, method: 'put'}.merge(form_attr)) do
-      haml_tag :input, {type: 'submit', value: value}
+  def generate_arrows(content)
+    form_tag(action: "/content/#{content.id}/move", method: 'put') do
+      haml_tag :input, value: '▲', name: 'direction', type: 'submit'
+      haml_tag :input, value: '▼', name: 'direction', type: 'submit'
     end
   end
 
-  def generate_arrows
-    if @content.order_no > 1
-      put_button '▲', "/#{@content.id}/up"
-    end
-    if @content.order_no < Content.by_page(request.path_info).maximum(:order_no)
-      put_button '▼', "/#{@content.id}/down"
-    end
-  end
-end
-
-class Time
-  def to_timestamp
-    self.to_s.match(/\d+\-\d+\-\d+ \d+:\d+:\d+/)[0]
-  end
 end

@@ -90,12 +90,16 @@ class LoadContent < ActiveRecord::Migration
       page: '/o_nama')
 
     # members
-    ['Alisa Besek','Ana Miletić','Ana Vlašić','Ana Zavada','Anja Juršetić','Barbara Bogojević','Daria Dubajić','Ines Malenica','Ivana Peulić','Ivana Radman','Katarina Sabljić','Klara Marinčević','Kristina Gotvald','Lidija Živković','Marija Ercegovac','Marija Vučurević','Mia Nazalević','Mirjana Vladić','Nikolina Hržina','Veronika Veršić','Vesna Juretić','Vinka Lozica','Zrinka Marija Krnjak'].each do |member|
+    ['Alisa Besek','Ana Miletić','Ana Vlašić','Ana Zavada','Anja Juršetić','Barbara Bogojević','Daria Dubajić','Ines Malenica','Ivana Peulić','Ivana Radman','Katarina Sabljić','Klara Marinčević','Kristina Gotvald','Lidija Živković','Marija Ercegovac','Marija Vučurević','Mia Nazalević','Mirjana Vladić','Nikolina Hržina','Veronika Veršić','Vesna Juretić','Vinka Lozica'].each do |member|
       Member.create(
         first_name: member.split(' ').first,
         last_name: member.split(' ').last,
         voice: 'S')
     end
+      Member.create(
+        first_name: 'Zrinka Marija',
+        last_name: 'Krnjak',
+        voice: 'S')
     ['Ana Lukac','Ana Mažuranić','Ana Zidar','Barbara Pavlek','Daria Kolezarić','Darja Petro','Dina Jularić','Ingrid Marman','Iva Bojanovsky','Jelena Pepelnik','Lucija Petrač','Mirjana Martinković','Mirna Radosavljević','Nikol Namjesnik','Nikolina Zlopaša','Rafaela Tripalo','Valentina Samardžija','Vida Brezak'].each do |member|
       Member.create(
         first_name: member.split(' ').first,

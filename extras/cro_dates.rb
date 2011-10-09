@@ -1,15 +1,15 @@
 #encoding:utf-8
-class Date
+class Time
   CRO_NAMES = {
-    1 => "siječnja",
-    2 => "veljače",
-    3 => "ožujka",
-    4 => "travnja",
-    5 => "svibnja",
-    6 => "lipnja",
-    7 => "srpnja",
-    8 => "kolovoza",
-    9 => "rujna",
+    1  => "siječnja",
+    2  => "veljače",
+    3  => "ožujka",
+    4  => "travnja",
+    5  => "svibnja",
+    6  => "lipnja",
+    7  => "srpnja",
+    8  => "kolovoza",
+    9  => "rujna",
     10 => "listopada",
     11 => "studenoga",
     12 => "prosinca"
@@ -19,8 +19,7 @@ class Date
 
   def to_s(how = nil)
     if how == :cro
-      month_name = CRO_NAMES[self.month]
-      "#{self.day}. #{month_name}, #{self.year}"
+      "#{self.day}. #{CRO_NAMES[self.month]}, #{self.year}"
     else
       original_to_s
     end

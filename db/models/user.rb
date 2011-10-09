@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  before_create :encrypt_password
   attr_accessor :password
 
   def encrypt(password)
@@ -11,6 +10,8 @@ class User < ActiveRecord::Base
       return user if user.password_hash == encrypt(password)
     end
   end
+
+  before_create :encrypt_password
 
   def encrypt_password
     self.password_salt = BCrypt::Engine.generate_salt

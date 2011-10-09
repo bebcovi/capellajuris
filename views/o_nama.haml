@@ -1,7 +1,6 @@
 - @page_title = 'O nama'
 
 - Content.by_page('/o_nama').order(:order_no).each do |content|
-  - @content = content
-  = haml "partials/#{@content.content_type}".to_sym
+  = haml :"partials/#{content.content_type}", locals: {content: content}
 
 - buttons({:add => true}, '/content/new') if logged_in?

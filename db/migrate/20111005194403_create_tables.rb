@@ -23,7 +23,7 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :pages do |t|
       t.primary_key :id
-      t.string :haml_name
+      t.string :url_name
       t.string :cro_name
       t.integer :order_no, :limit => 1
     end

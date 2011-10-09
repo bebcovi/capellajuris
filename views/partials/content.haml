@@ -1,6 +1,6 @@
 %article
-  - generate_arrows if logged_in?
+  - generate_arrows(content) if logged_in?
 
-  = render_markdown @content.text
+  = render_markdown content.text
 
-  - buttons({:edit => true, :delete => true}, "/content/#{@content.id}") if logged_in?
+  - buttons({:edit => true, :delete => true}, "/content/#{content.id}") if logged_in?

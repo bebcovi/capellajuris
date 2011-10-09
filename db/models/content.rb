@@ -1,12 +1,24 @@
+# encoding:utf-8
 class Content < ActiveRecord::Base
   def move(direction)
-    case direction
-    when 'up'; switch_content = Content.by_page(page).find_by_order_no(order_no - 1)
-    when 'down'; switch_content = Content.by_page(page).find_by_order_no(order_no + 1)
+    delta = case direction
+    when '▲' then -1
+    when '▼' then 1
     end
-    self.order_no, switch_content.order_no = switch_content.order_no, self.order_no
-    self.save; switch_content.save
+    if other = on_same_page.find_by_order_no(order_no + delta)
+      switch_positions other
+    end
     return self
+  end
+
+  def switch_positions(other)
+    self.order_no, other.order_no = other.order_no, self.order_no
+    self.save
+    other.save
+  end
+
+  def on_same_page
+    self.class.by_page(page)
   end
 
   def self.by_page(page)

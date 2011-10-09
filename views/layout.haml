@@ -32,7 +32,7 @@
           %ol
             - Page.order(:order_no).each do |page|
               %li
-                %a{href: "/#{page.haml_name}", class: current?(page) && 'current'}
+                %a{href: "/#{page.url_name}", class: current?(page) && 'current'}
                   = page.cro_name
 
       #main

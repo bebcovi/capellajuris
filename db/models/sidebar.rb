@@ -7,11 +7,9 @@ class Sidebar < ActiveRecord::Base
     end
   end
 
-  before_save :set_equal_dimensions
-
-  def set_equal_dimensions
-    self.video.
-      sub!(/height=('|")\d+('|")/, "height=\"176\"").
-      sub!(/width=('|")\d+('|")/, "width=\"300\"") if video.present?
+  def video
+    video = Hpricot(read_attribute(:video)).at(:iframe)
+    video[:height], video[:width] = '180', '306'
+    return video.to_html
   end
 end

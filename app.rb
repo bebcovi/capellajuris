@@ -186,8 +186,8 @@ delete '/member/:id' do
 end
 
 
-put %r{/(\d+)/(up|down)} do |id, direction|
-  content = Content.find(id).move(direction)
+put '/content/:id/move' do
+  content = Content.find(params[:id]).move(params[:direction])
   redirect content.page
 end
 
