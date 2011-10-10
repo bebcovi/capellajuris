@@ -122,28 +122,28 @@ class LoadContent < ActiveRecord::Migration
     # videos
     Video.create(
       title: 'Ohridski zborski festival – Makedonska humoreska',
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/FAi48kKVTS4' title='YouTube video player' width='560'></iframe>")
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/FAi48kKVTS4?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Dobro jutro Hrvatska – Čardaš iz Međimurja",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/70aYBGv0rhU' title='YouTube video player' width='425'></iframe>")
+      title: 'Dobro jutro Hrvatska – Čardaš iz Međimurja',
+      url: '<iframe width="420" height="315" src="http://www.youtube.com/embed/70aYBGv0rhU?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Nastup u Hrvatskom Saboru",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/wzpqKWEn_v0' title='YouTube video player' width='425'></iframe>")
+      title: 'Nastup u Hrvatskom Saboru',
+      url: '<iframe width="420" height="315" src="http://www.youtube.com/embed/wzpqKWEn_v0?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Promocija u Lisinskom – U boj, u boj!",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/SGEXnxxH4GM' title='YouTube video player' width='560'></iframe>")
+      title: 'Promocija u Lisinskom – U boj, u boj!',
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/SGEXnxxH4GM?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "10. natjecanje zborova – Jesu dulcis",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/lcq21Oe0iQA' title='YouTube video player' width='560'></iframe>")
+      title: '10. natjecanje zborova – Jesu dulcis',
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/lcq21Oe0iQA?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Praga Cantat – Napadly pisne",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/jxjufTatTec' title='YouTube video player' width='560'></iframe>")
+      title: 'Praga Cantat – Napadly pisne',
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/jxjufTatTec?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Misa Criolla – La peregriacion",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/kG2Ww4baGyo' title='YouTube video player' width='560'></iframe>")
+      title: 'Misa Criolla – La peregriacion',
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/kG2Ww4baGyo?rel=0" frameborder="0" allowfullscreen></iframe>')
     Video.create(
-      title: "Misa Criolla – Gloria",
-      url: "<iframe allowfullscreen='allowfullscreen' frameborder='0' height='349' src='http://www.youtube.com/embed/Bo3OhSP6OW8' title='YouTube video player' width='560'></iframe>")
+      title: 'Misa Criolla – Gloria',
+      url: '<iframe width="560" height="315" src="http://www.youtube.com/embed/Bo3OhSP6OW8?rel=0" frameborder="0" allowfullscreen></iframe>')
   end
 
   def down

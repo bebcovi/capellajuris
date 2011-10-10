@@ -90,17 +90,16 @@ helpers do
     content.search(:p).each do |paragraph|
       if img = paragraph.at(:img)
         paragraph.set_attribute :class, 'img'
-        paragraph.set_attribute :style, "height: #{(img['height'].to_i / 18) * 18}"
         paragraph.inner_html = img.to_html
       end
     end
     return content.to_html
   end
+
   def generate_arrows(content)
     form_tag(action: "/content/#{content.id}/move", method: 'put') do
       haml_tag :input, value: '▲', name: 'direction', type: 'submit'
       haml_tag :input, value: '▼', name: 'direction', type: 'submit'
     end
   end
-
 end
