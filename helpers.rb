@@ -103,3 +103,10 @@ helpers do
     end
   end
 end
+
+
+module Encryption
+  def self.encrypt(password, password_salt)
+    BCrypt::Engine.hash_secret(password, password_salt)
+  end
+end

@@ -1,13 +1,12 @@
+# encoding: UTF-8
 class User < ActiveRecord::Base
   attr_accessor :password
 
-  def encrypt(password)
-    BCrypt::Engine.hash_secret(password, password_salt)
-  end
-
   def self.authenticate(username, password)
-    if user = where(:username => username).first
-      return user if user.password_hash == encrypt(password)
+    if user = find_by_username(username)
+      if user.password_hash == Encryption::encrypt(password, user.password_salt)
+        return user
+      end
     end
   end
 
@@ -15,6 +14,6 @@ class User < ActiveRecord::Base
 
   def encrypt_password
     self.password_salt = BCrypt::Engine.generate_salt
-    self.password_hash = encrypt(password)
+    self.password_hash = Encryption::encrypt(password, password_salt)
   end
 end
