@@ -29,7 +29,7 @@ end
 
 # ActiveRecord
 set :database, "sqlite://development.db"
-Dir['db/models/*'].each { |model| require model }
+require 'db/models'
 
 # Sinatra
 enable :sessions
