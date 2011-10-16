@@ -1,4 +1,3 @@
-# encoding:utf-8
 require 'sinatra'
 require 'sequel'
 require 'sinatra/activerecord'
@@ -15,8 +14,8 @@ require 'hpricot'
 
 require 'sinatra_boilerplate'
 require 'helpers'
-require 'extras/cro_dates'
-require 'extras/flickr'
+
+Dir['extras/*'].each { |extra| require extra }
 
 # Haml & Sass/Compass
 configure do
@@ -30,9 +29,7 @@ end
 
 # ActiveRecord
 set :database, "sqlite://development.db"
-
-# Models
-Dir['db/models/*'].each { |model| require_relative model }
+Dir['db/models/*'].each { |model| require model }
 
 # Sinatra
 enable :sessions
@@ -87,13 +84,6 @@ get '/content/new' do
   haml :'forms/content'
 end
 
-[:post, :put].each do |method|
-  send(method, '/preview') do
-    @text = params[:text]
-    haml :preview
-  end
-end
-
 post '/content/new' do
   Content.create(text: params[:text], content_type: 'content', page: params[:page])
   redirect params[:page]
@@ -115,6 +105,13 @@ delete '/content/:id' do
   else
     content = Content.find(params[:id]).destroy
     redirect content.page
+  end
+end
+
+[:post, :put].each do |method|
+  send(method, '/preview') do
+    @text = params[:text]
+    haml :preview
   end
 end
 
@@ -176,6 +173,7 @@ post '/member/:voice/new' do
   redirect '/members'
 end
 
+
 delete '/member/:id' do
   if params[:confirmation].blank?
     haml :'forms/confirm'
@@ -184,7 +182,6 @@ delete '/member/:id' do
     haml :'forms/members'
   end
 end
-
 
 put '/content/:id/move' do
   content = Content.find(params[:id]).move(params[:direction])
@@ -197,7 +194,9 @@ get '/arhiva' do
   haml :arhiva
 end
 
+
 get '/:page' do
+  halt 404 unless File.exist? File.join(settings.views, params[:page] + '.haml')
   haml params[:page].to_sym
 end
 

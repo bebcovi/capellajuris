@@ -1,4 +1,4 @@
-#encoding:utf-8
+# encoding: UTF-8
 class Time
   CRO_NAMES = {
     1  => "siječnja",
@@ -20,6 +20,8 @@ class Time
   def to_s(how = nil)
     if how == :cro
       "#{self.day}. #{CRO_NAMES[self.month]}, #{self.year}"
+    elsif how == :time_tag
+      original_to_s.sub(/ /,'T').delete(' ').sub(/\d{2}$/, ':\0')
     else
       original_to_s
     end

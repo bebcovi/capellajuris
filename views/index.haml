@@ -19,7 +19,7 @@
         %a{href: '/o_nama'} Opširnije
         %a.arrow{href: '/o_nama'} ▶
 
-      - buttons({:edit => true}, "/content/#{@intro.id}") if logged_in?
+      - buttons({edit: 'Izmjeni'}, "/content/#{@intro.id}") if logged_in?
 
     %aside
 
@@ -39,7 +39,7 @@
           %source{src: "/audio/#{@sidebar.audio}.mp3"}
           %source{src: "/audio/#{@sidebar.audio}.ogg"}
 
-      - buttons({:edit => true}, "/sidebar/#{@sidebar.id}") if logged_in?
+      - buttons({edit: 'Izmjeni'}, "/sidebar/#{@sidebar.id}") if logged_in?
 
 %section#news
 

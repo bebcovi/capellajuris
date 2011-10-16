@@ -1,12 +1,7 @@
-# encoding:utf-8
-
+# encoding: UTF-8
 helpers do
   def current?(page)
     '/' + page.url_name == request.path_info
-  end
-
-  def form?(page)
-    Dir['views/forms/*'].include? "views/forms/#{page}.haml"
   end
 
   def authenticate(&block)
@@ -38,51 +33,35 @@ helpers do
     string.parameterize
   end
 
-  def cancel_pressed?
-    params[:action] == 'Odustani'
-  end
-
   def link_to(text, href, attributes = {})
     haml_tag :a, text, {href: href}.update(attributes)
   end
 
   def form_tag(form_attr, &block)
-    if form_attr[:method] == 'get' or form_attr[:method] == 'post'
-      haml_tag(:form, form_attr) { yield if block_given? }
+    if ['get', 'post'].include? form_attr[:method]
+      haml_tag(:form, form_attr, &block)
     else
       haml_tag(:form, form_attr.merge(method: 'post')) do
-        haml_tag(:input, {type: 'hidden', name: '_method', value: form_attr[:method]}) do
-          yield if block_given?
-        end
+        haml_tag(:input, {type: 'hidden', name: '_method', value: form_attr[:method]}, &block)
       end
     end
   end
 
   def buttons(buttons, link)
-    if buttons[:edit].present? or buttons[:delete].present?
-      haml_tag 'ol.controls' do
-        if buttons[:edit].present?
-          edit_value = buttons[:edit] == true ? 'Izmjeni' : buttons[:edit]
-          haml_tag :li do
-            link_to edit_value, link, :class => 'edit'
-          end
+    haml_tag 'ol.controls' do
+      haml_tag :li do
+        link_to buttons[:edit], link, class: 'edit'
+      end if buttons[:edit].present?
+      haml_tag :li do
+        form_tag(action: link, method: 'delete', class: 'delete') do
+          haml_tag :input, type: 'submit', value: buttons[:delete]
         end
-        if buttons[:delete].present?
-          delete_value = buttons[:delete] == true ? 'Izbriši' : buttons[:delete]
-          haml_tag :li do
-            form_tag(action: link, method: 'delete', class: 'delete') do
-              haml_tag :input, {type: 'submit', value: delete_value}
-            end
-          end
-        end
-      end
-    end
+      end if buttons[:delete].present?
+    end if buttons[:edit].present? or buttons[:delete].present?
 
-    if buttons[:add].present?
-      haml_tag 'div.add' do
-        link_to (buttons[:add] == true ? 'Dodaj +' : buttons[:add]), link
-      end
-    end
+    haml_tag 'div.add' do
+      link_to buttons[:add], link
+    end if buttons[:add].present?
   end
 
   def render_markdown(text)

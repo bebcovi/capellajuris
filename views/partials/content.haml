@@ -3,4 +3,4 @@
 
   = render_markdown content.text
 
-  - buttons({:edit => true, :delete => true}, "/content/#{content.id}") if logged_in?
+  - buttons({edit: 'Izmjeni', delete: 'Izbriši'}, "/content/#{content.id}") if logged_in?

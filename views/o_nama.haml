@@ -3,4 +3,4 @@
 - Content.by_page('/o_nama').order(:order_no).each do |content|
   = haml :"partials/#{content.content_type}", locals: {content: content}
 
-- buttons({:add => true}, '/content/new') if logged_in?
+- buttons({add: 'Dodaj +'}, '/content/new') if logged_in?

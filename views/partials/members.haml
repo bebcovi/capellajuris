@@ -13,4 +13,4 @@
         = list_of Member.by_voice(voice).order(:last_name) do |member|
           = member
 
-  - buttons({:edit => true}, '/members') if logged_in?
+  - buttons({edit: 'Izmjeni'}, '/members') if logged_in?

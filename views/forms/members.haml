@@ -10,8 +10,8 @@
       %ol
         = list_of Member.by_voice(voice).order(:last_name) do |member|
           = member
-          - buttons({:delete => 'x'}, "/member/#{member.id}")
+          - buttons({delete: 'x'}, "/member/#{member.id}")
 
-      - buttons({:add => 'Dodaj'}, "/member/#{Member.voice_abbr(voice)}/new")
+      - buttons({add: 'Dodaj'}, "/member/#{Member.voice_abbr(voice)}/new")
 
 %a{href: Content.find_by_content_type('members').page} Natrag
