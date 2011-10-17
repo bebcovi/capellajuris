@@ -106,8 +106,8 @@ get '/content/new' do
 end
 
 post '/content/new' do
-  Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
-  redirect params[:page]
+  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
+  redirect content.page
 end
 
 get '/content/:id' do
@@ -116,7 +116,7 @@ end
 
 put '/content/:id' do
   Content.find(params[:id]).update_attributes(text: params[:text])
-  redirect params[:page]
+  redirect Content.find(params[:id]).page
 end
 
 delete '/content/:id' do
