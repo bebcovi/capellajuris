@@ -13,6 +13,7 @@
     - @intro = Content.find_by_content_type('intro')
 
     %article.main
+
       = render_markdown(@intro.text)
 
       %p
@@ -43,4 +44,4 @@
 
 %section#news
 
-  = haml :'partials/news'
+  = render_partial :news

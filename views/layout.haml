@@ -30,10 +30,9 @@
 
         %nav
           %ol
-            - Page.order(:order_no).each do |page|
-              %li
-                %a{href: "/#{page.url_name}", class: current?(page) && 'current'}
-                  = page.cro_name
+            = list_of Page.order(:order_no) do |page|
+              %a{href: "/#{page.url_name}", class: current?(page) && 'current'}
+                = page.cro_name
 
       #main
         = yield

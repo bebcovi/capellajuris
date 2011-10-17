@@ -2,7 +2,7 @@
 
 %ul#photos
   = list_of(Dir['public/images/galerija/*']) do |photo|
-    %img{src: photo.sub(/public\//,''), alt: photo.match(/\/([^\/]+)$/)[0]}
+    %img{src: photo.match(/^public\/(.+)$/)[1], alt: photo.match(/([^\/\.]+)\.\w{3}$/)[1]}
 
 %p#top
   %a{href: '#'} Povratak na vrh

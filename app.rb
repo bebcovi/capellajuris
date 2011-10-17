@@ -93,7 +93,7 @@ get '/logout' do
 end
 
 
-before ':page/:smth' do
+before '/:page/:smth' do
   if params[:smth] == 'new' or params[:smth] =~ /^\d+$/
     halt 404 if not logged_in?
   end
@@ -101,19 +101,17 @@ end
 
 
 get '/content/new' do
-  referrer = URI.parse(request.referrer) if request.referrer
-  @content = Content.new(page: referrer.path)
-  haml :'forms/content'
+  session[:referrer] = URI.parse(request.referrer) if request.referrer
+  haml :'forms/content', locals: {content: Content.new(page: session[:referrer].path)}
 end
 
 post '/content/new' do
-  Content.create(text: params[:text], content_type: 'content', page: params[:page])
+  Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
   redirect params[:page]
 end
 
 get '/content/:id' do
-  @content = Content.find(params[:id])
-  haml :'forms/content'
+  haml :'forms/content', locals: {content: Content.find(params[:id])}
 end
 
 put '/content/:id' do
@@ -132,27 +130,24 @@ end
 
 [:post, :put].each do |method|
   send(method, '/preview') do
-    @text = params[:text]
-    haml :preview
+    haml :preview, locals: {text: params[:text]}
   end
 end
 
 get '/sidebar/:id' do
-  @sidebar = Sidebar.find(params[:id])
-  haml :'forms/sidebar'
+  haml :'forms/sidebar', locals: {sidebar: Sidebar.find(params[:id])}
 end
 
 put '/sidebar/:id' do
-  @sidebar = Sidebar.find(params[:id]).update_attributes(
+  sidebar = Sidebar.find(params[:id]).update_attributes(
     video_title: params[:video_title], video: params[:video],
     audio_title: params[:audio_title], audio: params[:audio])
 
-  @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
+  sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar', locals: {sidebar: sidebar})
 end
 
 get '/news/new' do
-  @content = News.new
-  haml :'forms/content'
+  haml :'forms/content', locals: {content: News.new}
 end
 
 post '/news/new' do
@@ -161,8 +156,7 @@ post '/news/new' do
 end
 
 get '/news/:id' do
-  @content = News.find(params[:id])
-  haml :'forms/content'
+  haml :'forms/content', locals: {content: News.find(params[:id])}
 end
 
 put '/news/:id' do
@@ -186,8 +180,7 @@ end
 
 get '/member/:voice/new' do
   halt 404 if not logged_in?
-  @voice = params[:voice]
-  haml :'forms/member'
+  haml :'forms/member', locals: {voice: params[:voice]}
 end
 
 post '/member/:voice/new' do
@@ -206,14 +199,12 @@ delete '/member/:id' do
 end
 
 put '/content/:id/move' do
-  content = Content.find(params[:id]).move(params[:direction])
-  redirect content.page
+  redirect Content.find(params[:id]).move(params[:direction]).page
 end
 
 
 get '/arhiva' do
-  @news = News.order('created_at DESC').paginate(:page => params[:page])
-  haml :arhiva
+  haml :arhiva, locals: {news: News.order('created_at DESC').paginate(:page => params[:page])}
 end
 
 
