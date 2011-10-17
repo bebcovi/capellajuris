@@ -1,5 +1,3 @@
-# preloadImg = (src) ->
-#   $("<img src='/images/#{src}'>")
 
 $ ->
 
