@@ -1,19 +1,15 @@
 class Post
 
   constructor: (@add) ->
-
-  @update: ->
 $ = jQuery
 
-    $('.controls form input[type="submit"]').click ->
-      xhr = $.ajax
-        type: 'DELETE'
-        url: $(@).closest('form').attr('action')
-
-      xhr.fail Post.fail
 
       $(@).closest('article').fadeOut 'fast', -> $(@).remove()
       event.preventDefault()
+  @register: (obj) ->
+    obj.find('.delete').submit ->
+      post = new Post($(@).closest('article'))
+      post.remove()
 
   @fail: (xhr, status, msg) ->
     console.error msg
@@ -36,7 +32,6 @@ $ = jQuery
 
       @id = @article.find('form').attr('action').match(/\d+/)[0] - 0
 
-      @constructor.update()
 
     xhr.fail @constructor.fail
 
