@@ -79,9 +79,9 @@ helpers do
   end
 
   def generate_arrows(content)
-    form_tag(action: "/content/#{content.id}/move", method: 'put') do
-      haml_tag :input, value: '▲', name: 'direction', type: 'submit'
-      haml_tag :input, value: '▼', name: 'direction', type: 'submit'
+    form_tag(action: "/content/#{content.id}/move", method: 'put', :class => 'order') do
+      haml_tag :input, value: '▲', name: 'direction', type: 'submit', :class => 'up'
+      haml_tag :input, value: '▼', name: 'direction', type: 'submit', :class => 'down'
     end
   end
 end

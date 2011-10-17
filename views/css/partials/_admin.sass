@@ -95,6 +95,15 @@ form
     +button(left, false)
     margin-right: rhythm(0.5)
 
+.order
+  +padding-leader
+  +clearfix
+  float: right
+
+  article:first-of-type & .up,
+  article:last-of-type & .down
+    display: none
+
 div#members
   +trailer
   +clearfix
