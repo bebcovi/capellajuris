@@ -3,6 +3,7 @@ class Post
   constructor: (@add) ->
 
   @update: ->
+$ = jQuery
 
     $('.controls form input[type="submit"]').click ->
       xhr = $.ajax
