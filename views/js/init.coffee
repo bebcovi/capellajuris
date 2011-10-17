@@ -6,5 +6,5 @@ $ ->
   Post.update()
 
   $('.add a').click ->
-    post = new Post $(@).parent()
-    post.init()
+    add = new AddButton $(@).parent()
+    add.fetch()
