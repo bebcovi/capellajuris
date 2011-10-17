@@ -26,8 +26,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'ruby-debug', :require => nil, :platforms => :mri_18
-  gem 'ruby-debug19', :require => nil, :platforms => :mri_19 unless '1.9.3' == RUBY_VERSION
+  unless RUBY_VERSION == '1.9.3'
+    gem 'ruby-debug', :require => nil, :platforms => :mri_18
+    gem 'ruby-debug19', :require => nil, :platforms => :mri_19
+  end
 end
 
 group :production do
