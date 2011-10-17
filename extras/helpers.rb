@@ -87,6 +87,13 @@ helpers do
   end
 end
 
+class Object
+  def try(method, *values)
+    if respond_to? method
+      send(method, *values)
+    end
+  end
+end
 
 module Encryption
   def self.encrypt(password, password_salt)
