@@ -66,13 +66,7 @@ form
     margin-right: rhythm(0.5)
 
   .edit, .delete input[type='submit']
-    background-color: transparent
-    border: 0
-    font-weight: bold
-    color: darken(white, 25%)
-    &:hover
-      color: darken(white, 40%)
-      text-decoration: none
+    +subtle
 
 .confirm
   +trailer
@@ -103,6 +97,9 @@ form
   article:first-of-type & .up,
   article:last-of-type & .down
     display: none
+
+  input[type='submit']
+    +subtle
 
 div#members
   +trailer
