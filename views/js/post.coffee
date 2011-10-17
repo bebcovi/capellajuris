@@ -1,11 +1,8 @@
-class Post
-
-  constructor: (@add) ->
 $ = jQuery
 
+class Post
+  constructor: (@obj) ->
 
-      $(@).closest('article').fadeOut 'fast', -> $(@).remove()
-      event.preventDefault()
   @register: (obj) ->
     obj.find('.delete').submit ->
       post = new Post($(@).closest('article'))
@@ -15,47 +12,40 @@ $ = jQuery
     console.error msg
     $(@).click()
 
+  remove: =>
+    controls = @obj.find '.controls'
+    url = controls.find('.delete').attr 'action'
 
-  ok: =>
+    xhr = $.ajax
+      type: 'DELETE'
+      url: url
+      success: (data) =>
+        @data = $(data).find '.confirm'
+        controls.after @data
+        controls.fadeOut 'fast'
+        @data.fadeOut 0
+        @data.delay('fast').fadeIn 'fast'
 
-    xhr = $.post @form.attr('action'),
-      title: @form.find('input[type="text"]').val(),
-      body: @form.find('textarea').val()
-    , (data) =>
-      @article = $(data).find('#news article').first()
+        @data.submit =>
+          $.ajax
+            type: 'DELETE'
+            url: url
+            data:
+              confirmation: @data.find('input[name="confirmation"]').val()
 
-      @form.fadeOut 'fast', -> $(@).remove()
-      @add.after @article
-      @article.fadeOut 0
-      @article.delay('fast').fadeIn 'fast'
-      @add.delay().fadeIn 'fast'
+          controls.closest('article').fadeOut 'fast', -> $(@).remove()
 
-      @id = @article.find('form').attr('action').match(/\d+/)[0] - 0
+          event.preventDefault()
 
+        @data.find('a').click =>
+          @data.fadeOut 'fast', -> $(@).remove()
+          controls.delay('fast').fadeIn 'fast'
 
-    xhr.fail @constructor.fail
+          event.preventDefault()
 
-    event.preventDefault()
-
-  cancel: =>
-    @form.fadeOut 'fast', -> $(@).remove()
-    @add.delay('fast').fadeIn 'fast'
-
-  init: =>
-
-    xhr = $.get @add.find('a').attr('href'), (data) =>
-      @form = $(data).find 'form'
-      @add.fadeOut 'fast'
-      @add.before @form
-      @form.fadeOut 0
-      @form.delay('fast').fadeIn 'fast'
-
-      submit = @form.find('input[type="submit"]')
-
-      submit.first().click @ok
-      submit.last().click @cancel
-
-    xhr.fail @constructor.fail
+      error: (xhr, status, msg) ->
+        console.error msg
+        $(@).click()
 
     event.preventDefault()
 
