@@ -68,8 +68,7 @@ helpers do
     content = Hpricot(Redcarpet.new(text, :hard_wrap).to_html)
     content.search(:p).each do |paragraph|
       if img = paragraph.at(:img)
-        paragraph.set_attribute :class, 'img'
-        paragraph.inner_html = img.to_html
+        paragraph.swap(img.to_html)
       end
     end
     return content.to_html
