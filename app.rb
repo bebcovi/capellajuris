@@ -12,9 +12,6 @@ require 'will_paginate'
 require 'will_paginate/active_record'
 require 'hpricot'
 
-require 'sinatra_boilerplate'
-require 'helpers'
-
 Dir['extras/*'].each { |extra| require extra }
 
 # Haml & Sass/Compass

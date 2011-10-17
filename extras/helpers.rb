@@ -75,6 +75,10 @@ helpers do
     return content.to_html
   end
 
+  def render_partial(partial, *rest)
+    haml :"partials/_#{partial}", rest.first || {}
+  end
+
   def generate_arrows(content)
     form_tag(action: "/content/#{content.id}/move", method: 'put') do
       haml_tag :input, value: '▲', name: 'direction', type: 'submit'
