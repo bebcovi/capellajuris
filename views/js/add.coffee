@@ -1,3 +1,5 @@
+$ = jQuery
+
 class AddButton
   constructor: (@obj) ->
 
