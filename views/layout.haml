@@ -16,16 +16,11 @@
   %body
 
     #wrapper
-
       %header
-
         .inner
-
           %a#logo{href: '/'}
             %img{src: '/images/logo.png', alt: 'logo', width: 225, height: 111}
-
           %img#photo{src: '/images/header.jpg', alt: 'header photo', width: 600, height: 180}
-
         %nav
           %ol
             = list_of Page.order(:order_no) do |page|
@@ -36,13 +31,11 @@
         = yield
 
       %footer
-
         %section#contact
           %p
             %span.label Kontakt
             %span.value
               %a{href: 'mailto:capellajuris@gmail.com'} capellajuris@gmail.com
-
         %section#facebook
           %p Pratite nas na Facebooku za novosti, najave nastupa i slike
           %a.icon-fb{href: 'http://www.facebook.com/group.php?gid=15322005634', target: '_blank'}
