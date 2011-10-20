@@ -12,6 +12,7 @@ body
 
   img
     display: block
+    max-height: 100%
 
   header .inner
     +clearfix
@@ -51,7 +52,7 @@ body
       +trailer
       +clearfix
 
-      img
+      & > img
 
         &:nth-of-type(2n+1)
           float: left
@@ -75,7 +76,7 @@ body
         float: left
         width: $wrapper-width - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
 
-        img
+        & > img
           +leader(0.5)
 
         *:last-child
@@ -119,7 +120,6 @@ body
     img
       float: none
       display: inline
-      max-height: 100%
 
   #videos li
     +trailer(2)
