@@ -57,7 +57,7 @@ set :js_assets, %w[js/gollum.editor.js js/markdown.js js/add.coffee js/post.coff
 
 # Javascript
 get '/js/add.js' do
-  coffee :'js/post'
+  coffee :'js/add'
 end
 
 get '/js/post.js' do
