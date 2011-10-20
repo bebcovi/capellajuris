@@ -52,10 +52,14 @@ require 'db/models'
 enable :sessions
 
 # Sinatra Boilerplate
-set :js_assets, %w[js/gollum.editor.js js/markdown.js js/add.coffee js/post.coffee js/init.coffee]
+set :js_assets, %w[js/gollum.editor.js js/markdown.js js/ajax.coffee js/add.coffee js/post.coffee js/init.coffee]
 
 
 # Javascript
+get '/js/ajax.js' do
+  coffee :'js/ajax'
+end
+
 get '/js/add.js' do
   coffee :'js/add'
 end

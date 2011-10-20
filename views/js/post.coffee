@@ -3,15 +3,6 @@ $ = jQuery
 class Post
   constructor: (@obj) ->
 
-  @register: (obj) ->
-    obj.find('.delete').submit ->
-      post = new Post($(@).closest('article'))
-      post.remove()
-
-  @fail: (xhr, status, msg) ->
-    console.error msg
-    $(@).click()
-
   remove: =>
     controls = @obj.find '.controls'
     url = controls.find('.delete').attr 'action'

@@ -6,7 +6,7 @@ $ ->
     add = new AddButton $(@).parent()
     add.fetch()
 
-  Post.register $('article').not('#intro article')
+  Ajax.register $('article').not('#intro article')
 
   $('article, #photos').find('img').each ->
     rhythm = parseInt $('footer').last().css('margin-bottom')

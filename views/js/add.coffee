@@ -19,7 +19,7 @@ class AddButton
         @data.delay('fast').fadeIn 'fast'
         @obj.delay().fadeIn 'fast'
 
-        Post.register @data
+        Ajax.register @data
 
       error: (xhr, status, msg) ->
         console.error msg
@@ -51,7 +51,7 @@ class AddButton
 
       $.GollumEditor()
 
-    xhr.fail fail
+    xhr.fail Ajax.fail
 
     event.preventDefault()
 
