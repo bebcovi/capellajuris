@@ -202,6 +202,23 @@ put '/content/:id/move' do
   redirect Content.find(params[:id]).move(params[:direction]).page
 end
 
+get '/video/new' do
+  haml :'forms/video'
+end
+
+post '/video/new' do
+  Video.create(title: params[:title], url: params[:url])
+  redirect :video
+end
+
+delete '/video/:id' do
+  if params[:confirmation].nil?
+    haml :'forms/confirm'
+  else
+    Video.find(params[:id]).destroy
+    redirect :video
+  end
+end
 
 get '/arhiva' do
   haml :arhiva, locals: {news: News.order('created_at DESC').paginate(:page => params[:page])}
