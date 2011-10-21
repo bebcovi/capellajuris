@@ -102,14 +102,17 @@ form
     +subtle
 
 div#members
-  +trailer
+  +trailer(2)
   +clearfix
 
   section
     +trailer(0)
-    width: 195px
+    width: 210px
     float: left
-    margin-left: rhythm(2)
+    margin-left: rhythm(1.5)
+
+    h2, & > ol > li
+      padding-left: rhythm(0.5)
 
     & > form
       +clearfix

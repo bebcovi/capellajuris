@@ -14,4 +14,6 @@
 
       - buttons({add: 'Dodaj'}, "/member/#{Member.voice_abbr(voice)}/new")
 
-%a{href: Content.find_by_content_type('members').page} Natrag
+%p
+  %a.arrow{href: Content.find_by_content_type('members').page} ←
+  %a{href: Content.find_by_content_type('members').page} Natrag
