@@ -86,9 +86,7 @@ class Post
 
           event.preventDefault()
 
-      error: (xhr, status, msg) ->
-        console.error msg
-        $(@).click()
+      error: Ajax.fail
 
     event.preventDefault()
 
