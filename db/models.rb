@@ -63,7 +63,6 @@ class News < ActiveRecord::Base
 end
 
 class Page < ActiveRecord::Base
-  validates :url_name, :uniqueness => true
 end
 
 class Sidebar < ActiveRecord::Base

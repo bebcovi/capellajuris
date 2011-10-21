@@ -84,12 +84,7 @@ helpers do
       haml_tag :input, value: '▼', name: 'direction', type: 'submit', :class => 'down'
     end
   end
-end
 
-class Object
-  def try(method, *values)
-    if respond_to? method
-      send(method, *values)
     end
   end
 end

@@ -111,7 +111,7 @@ get '/content/new' do
 end
 
 post '/content/new' do
-  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
+  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer].path)
   redirect content.page
 end
 
@@ -128,7 +128,7 @@ delete '/content/:id' do
   if params[:confirmation].nil?
     haml :'forms/confirm'
   else
-    content = Content.find(params[:id]).destroy
+    content = Content.destroy(params[:id])
     redirect content.page
   end
 end
@@ -173,7 +173,7 @@ delete '/news/:id' do
   if params[:confirmation].nil?
     haml :'forms/confirm'
   else
-    News.find(params[:id]).destroy
+    News.destroy(params[:id])
     redirect :/
   end
 end
@@ -197,7 +197,7 @@ delete '/member/:id' do
   if params[:confirmation].nil?
     haml :'forms/confirm'
   else
-    Member.find(params[:id]).destroy
+    Member.destroy(params[:id])
     haml :'forms/members'
   end
 end
@@ -219,7 +219,7 @@ delete '/video/:id' do
   if params[:confirmation].nil?
     haml :'forms/confirm'
   else
-    Video.find(params[:id]).destroy
+    Video.destroy(params[:id])
     redirect :video
   end
 end
