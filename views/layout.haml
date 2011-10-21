@@ -26,6 +26,9 @@
             = list_of Page.order(:order_no) do |page|
               %a{href: "/#{page.url_name}", class: current?(page) && 'current'}
                 = page.cro_name
+          - if request.path_info =~ /^\/[^\/]*$/
+            - buttons({delete: '-'}, "/page/#{Page.find_by_url_name(current_page).id}")
+            - buttons({add: '+'}, '/page/new')
 
       #main
         = yield

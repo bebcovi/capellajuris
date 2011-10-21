@@ -224,6 +224,30 @@ delete '/video/:id' do
   end
 end
 
+get '/page/new' do
+  haml :'forms/page', locals: {page: Page.new}
+end
+
+post '/page/new' do
+  page = Page.create(cro_name: params[:cro_name])
+  if page.valid?
+    create_new_haml_file(params[:cro_name])
+    redirect :"#{page.url_name}"
+  else
+    haml :'forms/page', locals: {page: page}
+  end
+end
+
+delete '/page/:id' do
+  if params[:confirmation].nil?
+    haml :'forms/confirm'
+  else
+    page = Page.destroy(params[:id])
+    File.delete(File.join(settings.views, page.url_name + '.haml'))
+    redirect :/
+  end
+end
+
 get '/arhiva' do
   haml :arhiva, locals: {news: News.order('created_at DESC').paginate(:page => params[:page])}
 end

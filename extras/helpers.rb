@@ -4,6 +4,12 @@ helpers do
     '/' + page.url_name == request.path_info
   end
 
+  def current_page
+    Page.all.select do |page|
+      current?(page)
+    end.first.url_name
+  end
+
   def authenticate(&block)
     if user = User.authenticate(params[:username], params[:password])
       yield user
@@ -85,6 +91,13 @@ helpers do
     end
   end
 
+  def create_new_haml_file(title)
+    new_haml_file = File.join(settings.views, Helpers.urlize(title) + '.haml')
+    File.open(new_haml_file, 'w') do |file|
+      file.puts "- @page_title = '#{title}'\n"
+      file.puts "- Content.by_page('/#{Helpers.urlize(title)}').order(:order_no).each do |content|\n" \
+                "  = render_partial content.content_type, locals: {content: content}\n"
+      file.puts "- buttons({add: 'Dodaj +'}, '/content/new') if logged_in?"
     end
   end
 end
@@ -92,5 +105,11 @@ end
 module Encryption
   def self.encrypt(password, password_salt)
     BCrypt::Engine.hash_secret(password, password_salt)
+  end
+end
+
+module Helpers
+  def self.urlize(string)
+    string.downcase.gsub(/\s/, '_')
   end
 end
