@@ -55,6 +55,49 @@ class Post
 
     event.preventDefault()
 
+  edit: =>
+    button = @obj.find('.edit')
+
+    if not button.attr('disabled')?
+      button.attr('disabled', 'disabled')
+      xhr = $.get button.attr('href'), (data) =>
+        editor = $(data).find '#gollum-editor'
+        @obj.fadeOut 'fast'
+        @obj.before editor
+        editor.fadeOut(0).delay('fast').fadeIn 'fast'
+
+        $.GollumEditor()
+
+        editor.find('#gollum-editor-submit').click =>
+          xhr = $.ajax
+            type: 'PUT'
+            url: editor.find('form').attr 'action'
+            data:
+              page: editor.find('input[name="page"]').val()
+              text: editor.find('#gollum-editor-body').val()
+            success: (data) =>
+              editor.fadeOut 'fast', -> $(@).remove()
+              @obj = Post.getAll($(data)).eq(Post.items.indexOf(@)).replaceAll @obj
+              @obj.fadeOut(0).delay('fast').fadeIn 'fast'
+              button.removeAttr('disabled')
+
+            error: Ajax.fail
+
+          event.preventDefault()
+
+        editor.find('#gollum-editor-preview').click =>
+          event.preventDefault()
+
+        editor.find('#gollum-editor-cancel').click =>
+          editor.fadeOut 'fast', -> $(@).remove()
+          @obj.delay('fast').fadeIn 'fast'
+          button.removeAttr('disabled')
+          event.preventDefault()
+
+      xhr.fail Ajax.fail
+
+    event.preventDefault()
+
   remove: =>
     controls = @obj.find '.controls'
     url = controls.find('.delete').attr 'action'
