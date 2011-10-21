@@ -2,11 +2,11 @@ $ = jQuery
 
 $ ->
 
-  $('.add a').click ->
-    add = new AddButton $(@).parent()
-    add.fetch()
+  Post.getAll($('body')).each -> new Post $(@)
+  $('.add a').not('#members .add a').click Post.add
 
-  Ajax.register $('article').not('#intro article')
+  Member.getAll($('body')).each -> new Member $(@)
+  $('#members .add a').click Member.add
 
   $('article, #photos').find('img').each ->
     rhythm = parseInt $('footer').last().css('margin-bottom')
