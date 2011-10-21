@@ -74,11 +74,9 @@ get '/css/screen.css' do
   css.to_css
 end
 
-
 get '/' do
   haml :index
 end
-
 
 post '/login' do
   send(User.exists? ? "authenticate" : "register") do |user|
@@ -92,13 +90,11 @@ get '/logout' do
   redirect :/
 end
 
-
 before '/:page/:smth' do
   if params[:smth] == 'new' or params[:smth] =~ /^\d+$/
     halt 404 if not logged_in?
   end
 end
-
 
 get '/content/new' do
   session[:referrer] = URI.parse(request.referrer) if request.referrer
@@ -120,7 +116,7 @@ put '/content/:id' do
 end
 
 delete '/content/:id' do
-  if params[:confirmation].blank?
+  if params[:confirmation].nil?
     haml :'forms/confirm'
   else
     content = Content.find(params[:id]).destroy
@@ -165,7 +161,7 @@ put '/news/:id' do
 end
 
 delete '/news/:id' do
-  if params[:confirmation].blank?
+  if params[:confirmation].nil?
     haml :'forms/confirm'
   else
     News.find(params[:id]).destroy
@@ -188,9 +184,8 @@ post '/member/:voice/new' do
   redirect '/members'
 end
 
-
 delete '/member/:id' do
-  if params[:confirmation].blank?
+  if params[:confirmation].nil?
     haml :'forms/confirm'
   else
     Member.find(params[:id]).destroy
@@ -224,12 +219,10 @@ get '/arhiva' do
   haml :arhiva, locals: {news: News.order('created_at DESC').paginate(:page => params[:page])}
 end
 
-
 get '/:page' do
   halt 404 unless File.exist? File.join(settings.views, params[:page] + '.haml')
   haml params[:page].to_sym
 end
-
 
 not_found do
   haml :'404'
