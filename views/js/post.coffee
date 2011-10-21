@@ -106,27 +106,28 @@ class Post
       type: 'DELETE'
       url: url
       success: (data) =>
-        @data = $(data).find '.confirm'
-        controls.after @data
+        confirm = $(data).find '.confirm'
+        controls.after confirm
         controls.fadeOut 'fast'
-        @data.fadeOut 0
-        @data.delay('fast').fadeIn 'fast'
+        confirm.fadeOut 0
+        confirm.delay('fast').fadeIn 'fast'
 
-        @data.submit =>
+        confirm.find('.submit').click =>
           $.ajax
             type: 'DELETE'
             url: url
             data:
-              confirmation: @data.find('input[name="confirmation"]').val()
+              confirmation: confirm.find('.submit').val()
+            success: =>
+              Post.items.remove Post.items.indexOf(@)
 
-          controls.closest('article').fadeOut 'fast', -> $(@).remove()
+          @obj.fadeOut 'fast', -> $(@).remove()
 
           event.preventDefault()
 
-        @data.find('a').click =>
-          @data.fadeOut 'fast', -> $(@).remove()
+        confirm.find('.cancel').click =>
+          confirm.fadeOut 'fast', -> $(@).remove()
           controls.delay('fast').fadeIn 'fast'
-
           event.preventDefault()
 
       error: Ajax.fail
