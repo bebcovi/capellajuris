@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'sinatra'
 require 'sequel'
 require 'sinatra/activerecord'
@@ -150,6 +151,16 @@ put '/sidebar/:id' do
     audio_title: params[:audio_title], audio: params[:audio])
 
   @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
+end
+
+post '/sidebar/:id' do
+  if params[:audio].present?
+    upload_an_audio_file(params[:audio])
+    convert_mp3_to_ogg(params[:audio])
+    @message = 'Audio snimka je uspješno učitana.'
+  end
+  @sidebar = Sidebar.find(params[:id])
+  haml :'forms/sidebar'
 end
 
 get '/news/new' do

@@ -1,10 +1,17 @@
 - @page_title = 'Izmjena sadržaja'
 
-- form_tag(action: "/sidebar/#{@sidebar.id}", method: 'put') do
+- form_tag(action: request.path_info, method: 'put') do
   - ['video_title', 'video', 'audio_title', 'audio'].each do |column|
     %input{type: 'text', name: column, value: @sidebar.send(column)}
   %input{type: 'submit', value: 'Spremi'}
   - link_to 'Odustani', '/', class: 'cancel'
+
+- form_tag(action: request.path_info, method: 'post', enctype: 'multipart/form-data') do
+  %input{type: 'file', name: 'audio'}
+  %input{type: 'submit', value: 'Učitaj'}
+
+- if @message
+  %p.message= @message
 
 - @sidebar.errors.each do |attr, msg|
   %p.error= msg
