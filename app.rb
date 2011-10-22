@@ -213,11 +213,22 @@ put '/content/:id/move' do
 end
 
 get '/video/new' do
+  @video = Video.new
   haml :'forms/video'
 end
 
 post '/video/new' do
   Video.create(title: params[:title], url: params[:url])
+  redirect :video
+end
+
+get '/video/:id' do
+  @video = Video.find(params[:id])
+  haml :'forms/video'
+end
+
+put '/video/:id' do
+  Video.update(params[:id], title: params[:title], url: params[:url])
   redirect :video
 end
 
