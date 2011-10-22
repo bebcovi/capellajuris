@@ -63,20 +63,21 @@ class News < ActiveRecord::Base
 end
 
 class Page < ActiveRecord::Base
+  before_validation do |page|
+    page.haml_name = Helpers.urlize(page.cro_name)
+  end
+
+  validates :haml_name,
+    :exclusion => {:in => Dir['views/*.haml'].collect { |file| file.match(/([^\/]+)\.haml$/)[1] },
+                   :message => 'Stranica s tim imenom već postoji.'}
+
   before_create do |page|
-    page.url_name = Helpers.urlize(page.cro_name)
-    page.order_no = Page.find_by_url_name('slike').order_no
-    Page.where("order_no >= ?", page.order_no).each do |page_to_be_moved|
-      page_to_be_moved.order_no += 1
-      page_to_be_moved.save
-    end
+    page.order_no = page.class.find_by_haml_name('slike').order_no
+    Page.where("order_no >= ?", page.order_no).each { |page| page.increment!(:order_no) }
   end
 
   after_destroy do |page|
-    Page.where("order_no > ?", page.order_no).each do |page_to_be_moved|
-      page_to_be_moved.order_no -= 1
-      page_to_be_moved.save
-    end
+    Page.where("order_no > ?", page.order_no).each { |page| page.decrement!(:order_no) }
   end
 end
 
