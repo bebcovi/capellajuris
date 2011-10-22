@@ -54,7 +54,6 @@ enable :sessions
 # Sinatra Boilerplate
 set :js_assets, %w[js/gollum.editor.js js/markdown.js js/patch.js js/ajax.coffee js/post.coffee js/init.coffee]
 
-
 # Javascript
 get '/js/ajax.js' do
   coffee :'js/ajax'
@@ -71,7 +70,6 @@ end
 get '/js/init.js' do
   coffee :'js/init'
 end
-
 
 # CSS
 get '/css/screen.css' do
@@ -106,17 +104,19 @@ before '/:page/:smth' do
 end
 
 get '/content/new' do
-  session[:referrer] = URI.parse(request.referrer) if request.referrer
-  haml :'forms/content', locals: {content: Content.new(page: session[:referrer].path)}
+  session[:referrer] ||= URI.parse(request.referrer).path if request.referrer
+  @content = Content.new(page: session[:referrer])
+  haml :'forms/content'
 end
 
 post '/content/new' do
-  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer].path)
+  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
   redirect content.page
 end
 
 get '/content/:id' do
-  haml :'forms/content', locals: {content: Content.find(params[:id])}
+  @content = Content.find(params[:id])
+  haml :'forms/content'
 end
 
 put '/content/:id' do
@@ -140,19 +140,21 @@ end
 end
 
 get '/sidebar/:id' do
-  haml :'forms/sidebar', locals: {sidebar: Sidebar.find(params[:id])}
+  @sidebar = Sidebar.find(params[:id])
+  haml :'forms/sidebar'
 end
 
 put '/sidebar/:id' do
-  sidebar = Sidebar.find(params[:id]).update_attributes(
+  @sidebar = Sidebar.update(params[:id],
     video_title: params[:video_title], video: params[:video],
     audio_title: params[:audio_title], audio: params[:audio])
 
-  sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar', locals: {sidebar: sidebar})
+  @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
 end
 
 get '/news/new' do
-  haml :'forms/content', locals: {content: News.new}
+  @content = News.new
+  haml :'forms/content'
 end
 
 post '/news/new' do
@@ -161,11 +163,12 @@ post '/news/new' do
 end
 
 get '/news/:id' do
-  haml :'forms/content', locals: {content: News.find(params[:id])}
+  @content = News.find(params[:id])
+  haml :'forms/content'
 end
 
 put '/news/:id' do
-  News.find(params[:id]).update_attributes(text: params[:text])
+  News.update(params[:id], text: params[:text])
   redirect :/
 end
 
@@ -185,12 +188,14 @@ end
 
 get '/member/:voice/new' do
   halt 404 if not logged_in?
-  haml :'forms/member', locals: {voice: params[:voice]}
+  haml :'forms/member'
 end
 
 post '/member/:voice/new' do
-  Member.create(first_name: params[:first_name], last_name: params[:last_name], voice: params[:voice])
-  redirect '/members'
+  Member.create(first_name: params[:first_name],
+                last_name: params[:last_name],
+                voice: params[:voice].capitalize)
+  redirect :members
 end
 
 delete '/member/:id' do
@@ -203,7 +208,8 @@ delete '/member/:id' do
 end
 
 put '/content/:id/move' do
-  redirect Content.find(params[:id]).move(params[:direction]).page
+  content = Content.find(params[:id]).move(params[:direction])
+  redirect content.page
 end
 
 get '/video/new' do
@@ -225,16 +231,18 @@ delete '/video/:id' do
 end
 
 get '/page/new' do
-  haml :'forms/page', locals: {page: Page.new}
+  session[:referrer] ||= URI.parse(request.referrer).path if request.referrer
+  @page = Page.new
+  haml :'forms/page'
 end
 
 post '/page/new' do
-  page = Page.create(cro_name: params[:cro_name])
-  if page.valid?
+  @page = Page.create(cro_name: params[:cro_name])
+  if @page.valid?
     create_new_haml_file(params[:cro_name])
-    redirect :"#{page.url_name}"
+    redirect :"#{@page.haml_name}"
   else
-    haml :'forms/page', locals: {page: page}
+    haml :'forms/page'
   end
 end
 
@@ -243,17 +251,19 @@ delete '/page/:id' do
     haml :'forms/confirm'
   else
     page = Page.destroy(params[:id])
-    File.delete(File.join(settings.views, page.url_name + '.haml'))
+    File.delete(File.join(settings.views, page.haml_name + '.haml'))
     redirect :/
   end
 end
 
 get '/arhiva' do
-  haml :arhiva, locals: {news: News.order('created_at DESC').paginate(:page => params[:page])}
+  @news = News.order('created_at DESC').paginate(:page => params[:page])
+  haml :arhiva
 end
 
 get '/:page' do
   halt 404 unless File.exist? File.join(settings.views, params[:page] + '.haml')
+  session[:referrer] = nil
   haml params[:page].to_sym
 end
 

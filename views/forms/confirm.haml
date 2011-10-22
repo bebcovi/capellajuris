@@ -3,4 +3,4 @@
 - form_tag(action: request.path_info, method: 'delete', class: 'confirm') do
   %p Jeste li sigurni?
   %input.submit{type: 'submit', name: 'confirmation', value: 'Da'}
-  %a.cancel{href: URI.parse(request.referrer).path} Ne
+  - link_to 'Ne', URI.parse(request.referrer).path, class: 'cancel'

@@ -1,7 +1,7 @@
 - @page_title = "Dodavanje novog člana"
 
-- form_tag(action: '/member/new', method: 'post') do
+- form_tag(action: request.path_info, method: 'post') do
   %input{type: 'text', name: 'first_name'}
   %input{type: 'text', name: 'last_name'}
-  %input{type: 'hidden', name: 'voice', value: voice.capitalize}
   %input{type: 'submit', value: 'Dodaj'}
+  - link_to 'Odustani', '/members', class: 'cancel'

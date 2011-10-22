@@ -1,9 +1,9 @@
 - @page_title = 'Izmjena stranica'
 
 - form_tag(action: request.path_info, method: 'post') do
-  %input{type: 'text', name: 'cro_name', value: page.cro_name}
+  %input{type: 'text', name: 'cro_name', value: @page.cro_name}
   %input{type: 'submit', value: 'Spremi'}
-  - link_to 'Odustani', request.referrer
+  - link_to 'Odustani', session[:referrer], class: 'cancel'
 
-- page.errors.each do |attr, msg|
+- @page.errors.each do |attr, msg|
   %p.error= msg

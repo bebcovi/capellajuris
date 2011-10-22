@@ -4,7 +4,7 @@
 
   %h1 Arhiva vijesti
 
-  - news.each do |news|
+  - @news.each do |news|
     %article
       %time{datetime: news.created_at.to_s(:time_tag), pubdate: true}= news.created_at.to_s(:cro)
       = render_markdown(news.text)

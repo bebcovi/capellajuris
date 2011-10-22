@@ -1,10 +1,10 @@
 - @page_title = 'Izmjena sadržaja'
 
-- form_tag(action: "/sidebar/#{sidebar.id}", method: 'put') do
+- form_tag(action: "/sidebar/#{@sidebar.id}", method: 'put') do
   - ['video_title', 'video', 'audio_title', 'audio'].each do |column|
-    %input{type: 'text', name: column, value: sidebar.send(column)}
+    %input{type: 'text', name: column, value: @sidebar.send(column)}
   %input{type: 'submit', value: 'Spremi'}
-  %a{href: '/'} Odustani
+  - link_to 'Odustani', '/', class: 'cancel'
 
-- sidebar.errors.each do |attr, msg|
+- @sidebar.errors.each do |attr, msg|
   %p.error= msg

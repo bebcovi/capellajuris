@@ -6,7 +6,7 @@ class Content < ActiveRecord::Base
     when '▼' then 1
     end
     if other = on_same_page.find_by_order_no(order_no + delta)
-      switch_positions other
+      switch_positions(other)
     end
     return self
   end
@@ -81,13 +81,9 @@ class Page < ActiveRecord::Base
 end
 
 class Sidebar < ActiveRecord::Base
-  validate :audio_existence
-
-  def audio_existence
-    if not Dir['public/audio/*'].include? "public/audio/#{audio}.mp3"
-      errors.add(:audio, "Audio snimka s tim imenom ne postoji.")
-    end
-  end
+  validates :audio,
+    :inclusion => {:in => Dir['public/audio/*'].collect { |file| file.match(/([^\/]+)\.\w{3}$/)[1] },
+                   :message => 'Audio snimka s tim imenom ne postoji.'}
 
   def video
     video = Hpricot(read_attribute(:video)).at(:iframe)

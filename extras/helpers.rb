@@ -1,13 +1,17 @@
 # encoding: UTF-8
 helpers do
   def current?(page)
-    '/' + page.url_name == request.path_info
+    if request.path_info == '/'
+      true if page.haml_name == 'index'
+    else
+      '/' + page.haml_name == request.path_info
+    end
   end
 
   def current_page
     Page.all.select do |page|
       current?(page)
-    end.first.url_name
+    end.first.try(:haml_name)
   end
 
   def authenticate(&block)
