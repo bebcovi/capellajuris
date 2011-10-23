@@ -5,6 +5,9 @@ $ ->
   Post.getAll($('body')).each -> new Post $(@)
   $('.add a').not('#members .add a').click Post.add
 
+  Member.getAll($('body')).each -> new Member $(@)
+  $('#members .add a').click Member.add
+
   $('article, #photos').find('img').each ->
     rhythm = parseInt $('footer').last().css('margin-bottom')
     oldHeight = parseInt $(@).attr('height')

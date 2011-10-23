@@ -117,8 +117,15 @@ div#members
     & > form
       +clearfix
 
+    .confirm
+      +trailer(0)
+
+    form.member
+      +leader(0.5)
+
       input[type='text']
         +trailer(0.5)
+        width: 90%
 
       input[type='submit']
         +button(left, false)
