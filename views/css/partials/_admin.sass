@@ -172,6 +172,10 @@ div#members
     ol div
       float: left
 
+    .controls
+      +trailer(0)
+      float: right
+
     .recent
       outline: 1px solid darken(white, 8%)
       background: darken(white, 5%)
@@ -197,10 +201,6 @@ div#members
       & > li
         +clearfix
         +rhythm(0, 0.5, 0.5, 0)
-
-        .controls
-          +trailer(0)
-          float: right
 
     .add
       +leader
