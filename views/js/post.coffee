@@ -4,9 +4,11 @@ class Post
   constructor: (@obj) ->
     @obj.find('.edit').click @edit
     @obj.find('.delete input[type="submit"]').click @remove
-    if @obj.parent('#news') then Post.items.push(@) else Post.items.unshift(@)
+    if Post.isInNews @obj then Post.items.push(@) else Post.items.unshift(@)
 
   @items: []
+
+  @isInNews: (obj) -> obj.closest('#news').length > 0
 
   @getAll: (obj) ->
     obj.find('#main article').not('#intro article, #members')
@@ -31,9 +33,14 @@ class Post
               page: editor.find('input[name="page"]').val()
               text: editor.find('#gollum-editor-body').val()
             success: (data) =>
-              post = Post.getAll($(data)).first()
+              if Post.isInNews $(@)
+                post = Post.getAll($(data)).first()
+                button.after post
+              else
+                post = Post.getAll($(data)).last()
+                button.before post
 
-              editor.fadeOut 'fast', -> $(@).replaceWith post
+              editor.fadeOut 'fast', -> $(@).remove()
               post.fadeOut(0).delay('fast').fadeIn 'fast'
               button.delay().fadeIn 'fast'
               $(@).removeAttr('disabled')
@@ -109,8 +116,7 @@ class Post
         confirm = $(data).find '.confirm'
         controls.after confirm
         controls.fadeOut 'fast'
-        confirm.fadeOut 0
-        confirm.delay('fast').fadeIn 'fast'
+        confirm.fadeOut(0).delay('fast').fadeIn 'fast'
 
         confirm.find('.submit').click =>
           $.ajax
