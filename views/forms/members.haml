@@ -9,7 +9,7 @@
 
       %ol
         = list_of Member.by_voice(voice).order(:last_name) do |member|
-          = member
+          %div= member
           - buttons({delete: 'x'}, "/member/#{member.id}")
 
       - buttons({add: 'Dodaj'}, "/member/#{Member.voice_abbr(voice)}/new")

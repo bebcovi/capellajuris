@@ -1,6 +1,20 @@
 /* admin.css
 
-form
+@-webkit-keyframes highlight
+  from
+    outline-color: darken(white, 8%)
+    background: darken(white, 5%)
+  to
+    outline-color: white
+    background: white
+
+@-moz-keyframes highlight
+  from
+    outline-color: darken(white, 8%)
+    background: darken(white, 5%)
+  to
+    outline-color: white
+    background: white
 
   label:after
     content: ':'
@@ -116,6 +130,14 @@ div#members
 
     & > form
       +clearfix
+    ol div
+      float: left
+
+    .recent
+      outline: 1px solid darken(white, 8%)
+      background: darken(white, 5%)
+      -webkit-animation: highlight 4s forwards
+      -moz-animation: highlight 4s forwards
 
     .confirm
       +trailer(0)
@@ -145,3 +167,4 @@ div#members
     .add
       +leader
       +trailer(0)
+      margin-left: rhythm(0.5)
