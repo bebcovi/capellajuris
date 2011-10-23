@@ -5,6 +5,7 @@
   = list_of(Video.all) do |video|
     %h1= video.title
     = video.url
-    - buttons({delete: 'Izbriši', edit: 'Izmjeni'}, "/video/#{video.id}") if logged_in?
+    .center
+      - buttons({delete: 'Izbriši', edit: 'Izmjeni'}, "/video/#{video.id}") if logged_in?
 
   - buttons({add: 'Dodaj +'}, '/video/new') if logged_in?
