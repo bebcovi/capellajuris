@@ -10,21 +10,21 @@ $wrapper-width: 960px
 @import compass/reset
 @import compass/layout
 
-=button($dir: left, $after: true)
+=button($dir: left)
+  margin: 0
+  +rhythm-borders(1px, 0.5)
   display: block
   float: $dir
-  +rhythm-borders(1px, 0.5)
+  margin-#{opposite-position($dir)}: rhythm(0.5)
   background-color: darken(white, 5%)
   border-color: darken(white, 25%)
   color: lighten(black, 40%)
-  @if $after
-    & + *
-      clear: $dir
   &:hover
     background-color: darken(white, 7%)
     border-color: darken(white, 40%)
     color: lighten(black, 30%)
     text-decoration: none
+    cursor: pointer
 
 =subtle
   display: block
@@ -39,6 +39,7 @@ $wrapper-width: 960px
 =form-text
   +rhythm-borders(1px, 0.5)
   display: block
+  width: 200px
   border-color: darken(white, 40%)
   color: lighten(black, 20%)
 

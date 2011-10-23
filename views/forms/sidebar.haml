@@ -1,14 +1,26 @@
 - @page_title = 'Izmjena sadržaja'
 
 - form_tag(action: request.path_info, method: 'put') do
-  - ['video_title', 'video', 'audio_title', 'audio'].each do |column|
-    %input{type: 'text', name: column, value: @sidebar.send(column)}
-  %input{type: 'submit', value: 'Spremi'}
-  - link_to 'Odustani', '/', class: 'cancel'
+  %p
+    %label{for: 'sidebar-video-title'} Video naslov
+    %input#sidebar-video-title{type: 'text', name: 'video_title', value: @sidebar.send('video_title')}
+  %p
+    %label{for: 'sidebar-video-code'} Video kod
+    %input#sidebar-video-code{type: 'text', name: 'video', value: @sidebar.send('video')}
+  %p
+    %label{for: 'sidebar-audio-title'} Audio naslov
+    %input#sidebar-audio-title{type: 'text', name: 'audio_title', value: @sidebar.send('audio_title')}
+  %p
+    %label{for: 'sidebar-audio-file'} Audio datoteka
+    %input#sidebar-audio-file{type: 'text', name: 'audio', value: @sidebar.send('audio')}
+  %p
+    - link_to 'Odustani', '/', class: 'cancel'
+    %input.submit{type: 'submit', value: 'Spremi'}
 
 - form_tag(action: request.path_info, method: 'post', enctype: 'multipart/form-data') do
-  %input{type: 'file', name: 'audio'}
-  %input{type: 'submit', value: 'Učitaj'}
+  %p
+    %input.file{type: 'file', name: 'audio'}
+    %input{type: 'submit', value: 'Učitaj'}
 
 - if @message
   %p.message= @message
