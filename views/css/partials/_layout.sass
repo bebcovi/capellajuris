@@ -14,20 +14,22 @@ body
     display: block
     max-height: 100%
 
-  header .inner
-    +clearfix
-    padding: 0 rhythm(2)
+  header
+    +trailer
 
-    #logo
-      +leader(2)
-      float: left
+    .inner
+      +clearfix
+      padding: 0 rhythm(2)
 
-    #photo
-      float: right
+      #logo
+        +leader(2)
+        float: left
+
+      #photo
+        float: right
 
   nav
     +clearfix
-    +trailer
     +rhythm-borders
 
     #pages
@@ -44,14 +46,14 @@ body
 
   #main
     +padding-trailer
-    +clearfix
+    +pie-clearfix
 
     & > *:first-child:not(#log)
-      +leader
+      +leader(2)
 
     article
       +trailer
-      +clearfix
+      +pie-clearfix
 
       & > img
 
