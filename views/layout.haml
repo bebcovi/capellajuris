@@ -22,16 +22,16 @@
             %img{src: '/images/logo.png', alt: 'logo', width: 225, height: 111}
           %img#photo{src: '/images/header.jpg', alt: 'header photo', width: 600, height: 180}
         %nav
-          %ol
+          %ol#pages
             = list_of Page.order(:order_no) do |page|
               %a{href: "/#{page.haml_name == 'index' ? '' : page.haml_name}",
                  class: current?(page) && 'current'}= page.cro_name
           :ruby
-            if current_page.present?
+            if current_page.present? and logged_in?
+              buttons({add: '+'}, '/page/new')
               unless %w[index o_nama slike video].include? current_page
                 buttons({delete: '-'}, "/page/#{Page.find_by_haml_name(current_page).id}")
               end
-              buttons({add: '+'}, '/page/new')
             end
 
       #main
