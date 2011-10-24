@@ -15,7 +15,7 @@ helpers do
   end
 
   def authenticate(&block)
-    if user = User.authenticate(params[:username], params[:password])
+    if user = User.authenticate(params[:user])
       yield user
     else
       @error = 'Krivo korisničko ime ili lozinka.'
@@ -24,7 +24,7 @@ helpers do
   end
 
   def register(&block)
-    yield User.create(:username => params[:username], :password => params[:password])
+    yield User.create(params[:user])
   end
 
   def log_in(user)
@@ -37,10 +37,6 @@ helpers do
 
   def logged_in?
     session[:id]
-  end
-
-  def string_to_id(string)
-    string.parameterize
   end
 
   def link_to(text, href, attributes = {})
@@ -75,7 +71,7 @@ helpers do
   end
 
   def render_markdown(text)
-    content = Hpricot(Redcarpet.new(text, :hard_wrap).to_html)
+    content = Hpricot(Redcarpet.new(text || "", :hard_wrap).to_html)
     content.search(:p).each do |paragraph|
       if img = paragraph.at(:img)
         paragraph.swap(img.to_html)
@@ -84,14 +80,14 @@ helpers do
     return content.to_html
   end
 
-  def render_partial(partial, *rest)
-    haml :"partials/_#{partial}", rest.first || {}
+  def render_partial(partial, options = {}, locals = {})
+    haml :"partials/_#{partial}", options, locals
   end
 
   def generate_arrows(content)
-    form_tag(action: "/content/#{content.id}/move", method: 'put', :class => 'order') do
-      haml_tag :input, value: '▲', name: 'direction', type: 'submit', :class => 'up'
-      haml_tag :input, value: '▼', name: 'direction', type: 'submit', :class => 'down'
+    form_tag(action: "/content/#{content.id}/move", method: 'put', class: 'order') do
+      haml_tag :input, value: '▲', name: 'direction', type: 'submit', class: 'up'
+      haml_tag :input, value: '▼', name: 'direction', type: 'submit', class: 'down'
     end
   end
 

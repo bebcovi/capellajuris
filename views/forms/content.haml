@@ -62,7 +62,7 @@
         #gollum-editor-help-wrapper
           #gollum-editor-help-content
             %p
-      %textarea#gollum-editor-body{:'data-markup-lang' => 'markdown', name: 'text'}= @content.text
+      %textarea#gollum-editor-body{:'data-markup-lang' => 'markdown', name: 'content[text]'}= @content.text
       %span.jaws
         %br
       %input#gollum-editor-submit{type: 'submit', value: 'Spremi'}

@@ -115,7 +115,7 @@ get '/content/new' do
 end
 
 post '/content/new' do
-  content = Content.create(text: params[:text], content_type: 'content', page: session[:referrer])
+  content = Content.create(params[:content].update(content_type: 'content', page: session[:referrer]))
   redirect content.page
 end
 
@@ -125,8 +125,8 @@ get '/content/:id' do
 end
 
 put '/content/:id' do
-  Content.find(params[:id]).update_attributes(text: params[:text])
-  redirect Content.find(params[:id]).page
+  content = Content.update(params[:id], params[:content])
+  redirect content.page
 end
 
 delete '/content/:id' do
@@ -150,10 +150,7 @@ get '/sidebar/:id' do
 end
 
 put '/sidebar/:id' do
-  @sidebar = Sidebar.update(params[:id],
-    video_title: params[:video_title], video: params[:video],
-    audio_title: params[:audio_title], audio: params[:audio])
-
+  @sidebar = Sidebar.update(params[:id], params[:sidebar])
   @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
 end
 
@@ -173,7 +170,7 @@ get '/news/new' do
 end
 
 post '/news/new' do
-  News.create(text: params[:text])
+  News.create(params[:content])
   redirect :/
 end
 
@@ -183,7 +180,7 @@ get '/news/:id' do
 end
 
 put '/news/:id' do
-  News.update(params[:id], text: params[:text])
+  News.update(params[:id], params[:content])
   redirect :/
 end
 

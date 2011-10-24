@@ -51,11 +51,6 @@ class Member < ActiveRecord::Base
   def self.voice_abbr(voice)
     VOICES.key(voice)
   end
-
-  def name
-    "#{first_name} #{last_name}"
-  end
-  alias to_s name
 end
 
 class News < ActiveRecord::Base
@@ -96,9 +91,9 @@ end
 class User < ActiveRecord::Base
   attr_accessor :password
 
-  def self.authenticate(username, password)
-    if user = find_by_username(username)
-      if user.password_hash == Encryption::encrypt(password, user.password_salt)
+  def self.authenticate(user_hash)
+    if user = find_by_username(user_hash[:username])
+      if user.password_hash == Encryption::encrypt(user_hash[:password], user.password_salt)
         return user
       end
     end
