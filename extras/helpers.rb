@@ -101,21 +101,6 @@ helpers do
     end
   end
 
-  def convert_mp3_to_ogg(file)
-    audio = file[:filename].downcase.gsub(/\s/, '_')
-    mp3 = File.expand_path("public/audio/#{audio}")
-    ogg = mp3.sub(/\.mp3$/, '.ogg')
-    unless File.exists? ogg
-      system "ffmpeg -i \"#{mp3}\" -acodec libvorbis -ac 2 \"#{ogg}\""
-    end
-  end
-
-  def upload_an_audio_file(file)
-    filename = file[:filename].downcase.gsub(/\s/, '_')
-    File.open('public/audio/' + filename, 'w') do |f|
-      f.write(params[:audio][:tempfile].read)
-    end
-  end
 end
 
 module Encryption
@@ -126,6 +111,6 @@ end
 
 module Helpers
   def self.urlize(string)
-    string.downcase.gsub(/\s/, '_')
+    string.tr('ČĆŽŠĐčćžšđ', 'CCZSDcczsd').downcase.gsub(/\s/, '_')
   end
 end

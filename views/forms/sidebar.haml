@@ -8,18 +8,17 @@
     %label{for: 'sidebar-video-code'} Video kod
     %input#sidebar-video-code{type: 'text', name: 'sidebar[video]', value: @sidebar.video}
   %p
-    %label{for: 'sidebar-audio-title'} Audio naslov
-    %input#sidebar-audio-title{type: 'text', name: 'sidebar[audio_title]', value: @sidebar.audio_title}
-  %p
-    %label{for: 'sidebar-audio-file'} Audio datoteka
-    %input#sidebar-audio-file{type: 'text', name: 'sidebar[audio]', value: @sidebar.audio}
+    %label{for: 'sidebar-audio'} Audio
+    %select#sidebar-audio{name: 'sidebar[audio]'}
+      - Audio.all.each do |audio|
+        %option{selected: audio.original_name == @sidebar.audio}= audio.original_name
   %p
     - link_to 'Odustani', '/', class: 'cancel'
     %input.submit{type: 'submit', value: 'Spremi'}
 
 - form_tag(action: request.path_info, method: 'post', enctype: 'multipart/form-data') do
   %p
-    %input.file{type: 'file', name: 'audio'}
+    %input.file{type: 'file', name: 'audio_file'}
     %input{type: 'submit', value: 'Učitaj'}
 
 - if @message

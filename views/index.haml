@@ -34,11 +34,14 @@
 
       %section#audio
 
-        %h2= @sidebar.audio_title
+        %h2= @sidebar.audio
+
+        - audio = Audio.find_by_original_name(@sidebar.audio)
 
         %audio{controls: true, preload: true}
-          %source{src: "/audio/#{@sidebar.audio}.mp3"}
-          %source{src: "/audio/#{@sidebar.audio}.ogg"}
+          %source{src: "/audio/#{audio.uploaded_filename}"}
+          - if audio.has_ogg?
+            %source{src: "/audio/#{audio.ogg_filename}"}
 
       - buttons({edit: 'Izmjeni'}, "/sidebar/#{@sidebar.id}") if logged_in?
 

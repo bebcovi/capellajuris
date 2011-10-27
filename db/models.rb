@@ -77,10 +77,6 @@ class Page < ActiveRecord::Base
 end
 
 class Sidebar < ActiveRecord::Base
-  validates :audio,
-    :inclusion => {:in => Dir['public/audio/*'].collect { |file| file.match(/([^\/]+)\.\w{3}$/)[1] },
-                   :message => 'Audio snimka s tim imenom ne postoji.'}
-
   def video
     video = Hpricot(read_attribute(:video)).at(:iframe)
     video[:height], video[:width] = '180', '306'
@@ -103,9 +99,60 @@ class User < ActiveRecord::Base
 
   def encrypt_password
     self.password_salt = BCrypt::Engine.generate_salt
-    self.password_hash = Encryption::encrypt(password, password_salt)
+    self.password_hash = Helpers.encrypt(password, password_salt)
   end
 end
 
 class Video < ActiveRecord::Base
+end
+
+class Audio < ActiveRecord::Base
+  attr_accessor :audio_file
+
+  def received_audio_file?
+    audio_file
+  end
+
+  before_create :fill_columns, :upload_file, :if => :received_audio_file?
+  before_create :convert_to_ogg, :if => :ogg
+  before_create :take_care_about_the_number_of_files
+
+  def fill_columns
+    self.original_name = audio_file[:filename].sub(/\.\w{2,5}$/, '')
+    self.uploaded_filename = Helpers.urlize(audio_file[:filename])
+    self.ogg = false if ogg.nil?
+  end
+
+  def upload_file
+    path_to_file = "public/audio/#{uploaded_filename}"
+    File.open(path_to_file, 'w') { |f| f.write audio_file[:tempfile].read }
+  end
+
+  def convert_to_ogg
+    original_filename = File.expand_path "public/audio/#{uploaded_filename}"
+    ogg_filename = original_filename.sub(/\.\w{2,5}$/, '.ogg')
+    system "ffmpeg -i \"#{original_filename}\" -acodec libvorbis -ac 2 \"#{ogg_filename}\""
+    self.ogg = false if not File.exists? ogg_filename
+  end
+
+  def take_care_about_the_number_of_files
+    Audio.first.destroy if Audio.count == 5
+  end
+
+  def has_ogg?
+    ogg
+  end
+
+  def ogg_filename
+    uploaded_filename.sub(/\.\w{2,5}$/, '.ogg')
+  end
+
+  before_destroy :delete_audio_files
+
+  def delete_audio_files
+    original = File.expand_path "public/audio/#{uploaded_filename}"
+    ogg = original.sub(/\.\w{2,5}$/, '.ogg')
+    File.delete original
+    File.delete ogg if File.exists? ogg
+  end
 end

@@ -155,9 +155,8 @@ put '/sidebar/:id' do
 end
 
 post '/sidebar/:id' do
-  if params[:audio].present?
-    upload_an_audio_file(params[:audio])
-    convert_mp3_to_ogg(params[:audio])
+  if params[:audio_file].present?
+    Audio.create(:audio_file => params[:audio_file], :ogg => true)
     @message = 'Audio snimka je uspješno učitana.'
   end
   @sidebar = Sidebar.find(params[:id])
