@@ -13,7 +13,7 @@ require 'will_paginate'
 require 'will_paginate/active_record'
 require 'hpricot'
 
-Dir['extras/*'].each { |extra| require extra }
+Dir['extras/*.rb'].each { |extra| require extra }
 
 # Haml & Sass/Compass
 configure do
@@ -115,7 +115,7 @@ get '/content/new' do
 end
 
 post '/content/new' do
-  content = Content.create(params[:content].update(content_type: 'content', page: session[:referrer]))
+  content = Content.create(params[:content])
   redirect content.page
 end
 
@@ -140,7 +140,8 @@ end
 
 [:post, :put].each do |method|
   send(method, '/preview') do
-    haml :preview, locals: {text: params[:text]}
+    @text = params[:text]
+    haml :preview
   end
 end
 
@@ -229,7 +230,7 @@ get '/video/new' do
 end
 
 post '/video/new' do
-  Video.create(title: params[:title], url: params[:url])
+  Video.create(params[:video])
   redirect :video
 end
 
@@ -239,7 +240,7 @@ get '/video/:id' do
 end
 
 put '/video/:id' do
-  Video.update(params[:id], title: params[:title], url: params[:url])
+  Video.update(params[:id], params[:video])
   redirect :video
 end
 
@@ -261,7 +262,6 @@ end
 post '/page/new' do
   @page = Page.create(cro_name: params[:cro_name])
   if @page.valid?
-    create_new_haml_file(params[:cro_name])
     redirect :"#{@page.haml_name}"
   else
     haml :'forms/page'
@@ -272,8 +272,7 @@ delete '/page/:id' do
   if params[:confirmation].nil?
     haml :'forms/confirm'
   else
-    page = Page.destroy(params[:id])
-    File.delete(File.join(settings.views, page.haml_name + '.haml'))
+    Page.destroy(params[:id])
     redirect :/
   end
 end

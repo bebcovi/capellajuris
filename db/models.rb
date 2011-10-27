@@ -26,9 +26,7 @@ class Content < ActiveRecord::Base
   end
 
   before_create do
-    unless order_no.present?
-      self.order_no = Content.by_page(page).maximum(:order_no).to_i + 1
-    end
+    self.order_no = Content.by_page(page).maximum(:order_no).to_i + 1
   end
 end
 
@@ -66,13 +64,25 @@ class Page < ActiveRecord::Base
     :exclusion => {:in => Dir['views/*.haml'].collect { |file| file.match(/([^\/]+)\.haml$/)[1] },
                    :message => 'Stranica s tim imenom već postoji.'}
 
-  before_create do |page|
-    page.order_no = page.class.find_by_haml_name('slike').order_no
-    Page.where("order_no >= ?", page.order_no).each { |page| page.increment!(:order_no) }
+  before_create :move_right_pages_forward, :create_haml_file
+
+  def move_right_pages_forward
+    self.order_no = Page.find_by_haml_name('slike').order_no
+    Page.where("order_no >= ?", order_no).each { |page| page.increment!(:order_no) }
+  end
+
+  def create_haml_file
+    File.open(File.join(settings.views, "#{haml_name}.haml"), 'w') do |file|
+      file.puts "- @page_title = '#{cro_name}'\n"
+      file.puts "- Content.by_page('/#{haml_name}').order(:order_no).each do |content|\n" \
+                "  = render_partial content.content_type, locals: {content: content}\n"
+      file.puts "- buttons({add: 'Dodaj +'}, '/content/new') if logged_in?"
+    end
   end
 
   after_destroy do |page|
     Page.where("order_no > ?", page.order_no).each { |page| page.decrement!(:order_no) }
+    File.delete File.join(settings.views, "#{page.haml_name}.haml")
   end
 end
 
@@ -89,7 +99,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(user_hash)
     if user = find_by_username(user_hash[:username])
-      if user.password_hash == Encryption::encrypt(user_hash[:password], user.password_salt)
+      if user.password_hash == Helpers.encrypt(user_hash[:password], user.password_salt)
         return user
       end
     end

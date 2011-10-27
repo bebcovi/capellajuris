@@ -3,10 +3,10 @@
 - form_tag(action: request.path_info, method: @video.id? ? 'put' : 'post') do
   %p
     %label{for: 'video-title'} Naslov
-    %input#video-title{type: 'text', name: 'title', value: @video.title}
+    %input#video-title{type: 'text', name: 'video[title]', value: @video.title}
   %p
-    %label{for: 'video-code'} YouTube kod
-    %input{type: 'text', name: 'url', value: @video.url}
+    %label{for: 'video-code'} YouTube kôd
+    %input#video-code{type: 'text', name: 'video[embed_code]', value: @video.embed_code}
   %p
     - link_to 'Odustani', '/video', :class => 'cancel'
-    %input.submit{type: 'submit', value: 'Dodaj'}
+    %input.submit{type: 'submit', value: 'Spremi'}

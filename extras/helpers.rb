@@ -90,26 +90,13 @@ helpers do
       haml_tag :input, value: '▼', name: 'direction', type: 'submit', class: 'down'
     end
   end
-
-  def create_new_haml_file(title)
-    new_haml_file = File.join(settings.views, Helpers.urlize(title) + '.haml')
-    File.open(new_haml_file, 'w') do |file|
-      file.puts "- @page_title = '#{title}'\n"
-      file.puts "- Content.by_page('/#{Helpers.urlize(title)}').order(:order_no).each do |content|\n" \
-                "  = render_partial content.content_type, locals: {content: content}\n"
-      file.puts "- buttons({add: 'Dodaj +'}, '/content/new') if logged_in?"
-    end
-  end
-
-end
-
-module Encryption
-  def self.encrypt(password, password_salt)
-    BCrypt::Engine.hash_secret(password, password_salt)
-  end
 end
 
 module Helpers
+  def self.encrypt(password, password_salt)
+    BCrypt::Engine.hash_secret(password, password_salt)
+  end
+
   def self.urlize(string)
     string.tr('ČĆŽŠĐčćžšđ', 'CCZSDcczsd').downcase.gsub(/\s/, '_')
   end

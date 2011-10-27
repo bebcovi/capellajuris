@@ -3,9 +3,10 @@
 %ul#videos
 
   = list_of(Video.all) do |video|
-    %h1= video.title
-    = video.url
-    .center
-      - buttons({delete: 'Izbriši', edit: 'Izmjeni'}, "/video/#{video.id}") if logged_in?
+    %h1= video.title.gsub('-', '&ndash;')
+    = video.embed_code
+    - if logged_in?
+      .center
+        - buttons({delete: 'Izbriši', edit: 'Izmjeni'}, "/video/#{video.id}")
 
   - buttons({add: 'Dodaj +'}, '/video/new') if logged_in?
