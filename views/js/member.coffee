@@ -34,9 +34,6 @@ class Member
                   obj = $(@)
                   index = i
 
-              console.log oldSection
-              console.log newSection
-
               ol = oldParent.children('ol')
 
               if index >= ol.children('li').length - 1
