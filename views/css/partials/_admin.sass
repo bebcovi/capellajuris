@@ -34,7 +34,7 @@ nav
     float: right
 
 form
-  +clearfix
+  +pie-clearfix
 
   select
     margin: 0
@@ -61,8 +61,6 @@ form
   &:last-child
     +trailer(0)
 
-  p
-    +clearfix
     +trailer(0.5)
     width: 340px
 
@@ -82,6 +80,8 @@ form
         +trailer(0)
         width: 200px
         float: right
+    p
+      +pie-clearfix
 
       &[type='submit']
         float: right
