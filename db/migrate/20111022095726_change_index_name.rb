@@ -1,9 +1,9 @@
 class ChangeIndexName < ActiveRecord::Migration
   def up
-    Page.find(1).update_attribute(:haml_name, 'index')
+    Page.first.update_attribute(:haml_name, 'index')
   end
 
   def down
-    Page.find(1).update_attribute(:haml_name, '')
+    Page.first.update_attribute(:haml_name, '')
   end
 end

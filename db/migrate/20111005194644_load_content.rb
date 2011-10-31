@@ -1,5 +1,18 @@
 # encoding: UTF-8
 class LoadContent < ActiveRecord::Migration
+  class Page < ActiveRecord::Base
+  end
+  class Sidebar < ActiveRecord::Base
+  end
+  class News < ActiveRecord::Base
+  end
+  class Member < ActiveRecord::Base
+  end
+  class Video < ActiveRecord::Base
+  end
+  class Content < ActiveRecord::Base
+  end
+
   def up
     # pages
     Page.create(url_name: '', cro_name: 'Početna', order_no: 1)
