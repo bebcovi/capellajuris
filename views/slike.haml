@@ -1,9 +1,11 @@
 - @page_title = 'Slike'
 
-%ul#photos
-  = list_of(Dir['public/images/galerija/*']) do |photo|
-    %img{src: photo.match(/^public\/(.+)$/)[1], alt: photo.match(/([^\/\.]+)\.\w{3}$/)[1]}
+#photos
 
-%p#top
-  %a{href: '#'} Povratak na vrh
-  %a.arrow{href: '#'} ▲
+  %ul
+    = list_of(Dir['public/images/galerija/*']) do |photo|
+      %img{src: photo.match(/^public\/(.+)$/)[1], alt: photo.match(/([^\/\.]+)\.\w{3}$/)[1]}
+
+  %p#top
+    %a{href: '#'} Povratak na vrh
+    %a.arrow{href: '#'} ▲
