@@ -143,10 +143,18 @@ form
     +trailer(0.5)
     clear: both
 
+  ol
+    +pie-clearfix
+    +trailer(0)
+    padding-left: rhythm(0)
+    list-style: none
+
+    li
+      float: left
+
   p
     +trailer(0)
     $height: rhythm(2)
-    float: left
     margin-right: rhythm(0.5)
     height: $height
     line-height: $height

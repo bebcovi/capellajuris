@@ -1,6 +1,10 @@
 - @page_title = 'Potvrda'
 
 - form_tag(action: request.path_info, method: 'delete', class: 'confirm') do
-  %p Jeste li sigurni?
-  %input.submit{type: 'submit', name: 'confirmation', value: 'Da'}
-  - link_to 'Ne', URI.parse(request.referrer).path, class: 'cancel'
+  %ol
+    %li
+      %p Jeste li sigurni?
+    %li
+      %input.submit{type: 'submit', name: 'confirmation', value: 'Da'}
+    %li
+      - link_to 'Ne', URI.parse(request.referrer).path, class: 'cancel'
