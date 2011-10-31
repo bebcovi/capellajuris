@@ -23,12 +23,12 @@ class Post
         $.GollumEditor()
 
         editor.find('#gollum-editor-submit').click =>
+          params = Ajax.params editor
+
           xhr = $.ajax
             type: 'POST'
             url: editor.find('form').attr 'action'
-            data:
-              page: editor.find('input[name="page"]').val()
-              text: editor.find('#gollum-editor-body').val()
+            data: params
             success: (data) =>
               if Post.isInNews $(@)
                 post = Post.getAll($(data)).first()
@@ -73,12 +73,12 @@ class Post
         $.GollumEditor()
 
         editor.find('#gollum-editor-submit').click =>
+          params = Ajax.params editor
+
           xhr = $.ajax
             type: 'PUT'
             url: editor.find('form').attr 'action'
-            data:
-              page: editor.find('input[name="page"]').val()
-              text: editor.find('#gollum-editor-body').val()
+            data: params
             success: (data) =>
               editor.fadeOut 'fast', -> $(@).remove()
               index = @obj.siblings('article').andSelf().index @obj
@@ -117,11 +117,12 @@ class Post
         confirm.fadeOut(0).delay('fast').fadeIn 'fast'
 
         confirm.find('.submit').click =>
+          params = Ajax.params confirm
+
           $.ajax
             type: 'DELETE'
             url: url
-            data:
-              confirmation: confirm.find('.submit').val()
+            data: params
 
           @obj.fadeOut 'fast', -> $(@).remove()
 

@@ -24,21 +24,19 @@ class Member
         form.fadeOut(0).delay('fast').fadeIn 'fast'
 
         form.find('.submit').click =>
-          fname = form.find('input[name="first_name"]').val()
-          lname = form.find('input[name="last_name"]').val()
+          params = Ajax.params form
+
           xhr = $.ajax
             type: 'POST'
             url: form.attr 'action'
-            data:
-              first_name: fname
-              last_name: lname
+            data: params
             success: (data) =>
               oldSection = $(@).closest('section')
               newSection = $(data).find('#members section').eq oldSection.siblings().andSelf().index(oldSection)
               obj = []
               index = 0
               newSection.find('> ol > li').each (i) ->
-                if $(@).find('div').text() is "#{fname} #{lname}"
+                if $(@).find('div').text() is "#{params['member[last_name]']} #{params['member[first_name]']}"
                   obj = $(@)
                   index = i
 
@@ -86,11 +84,12 @@ class Member
         confirm.fadeOut(0).delay('fast').fadeIn 'fast'
 
         confirm.find('.submit').click =>
+          params = Ajax.params confirm
+
           $.ajax
             type: 'DELETE'
             url: url
-            data:
-              confirmation: confirm.find('.submit').val()
+            data: params
 
           confirm.fadeOut 'fast', -> $(@).remove()
           @obj.remove()
