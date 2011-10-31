@@ -8,6 +8,9 @@ $ ->
   Member.getAll($('body')).each -> new Member $(@)
   $('#members .add a').click Member.add
 
+  Video.getAll($('body')).each -> new Video $(@)
+  $('#videos .add a').unbind('click').click Video.add
+
   $('article, #photos').find('img').each ->
     rhythm = parseInt $('footer').last().css('margin-bottom')
     oldHeight = parseInt $(@).attr('height')

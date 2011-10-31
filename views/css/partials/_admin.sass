@@ -91,8 +91,19 @@ form
 .center
   +horizontally-center
 
-  #videos &
+#videos
+
+  .center
     +leader(0.5)
+
+  .controls
+    +trailer(0)
+
+  form.video
+    text-align: left
+
+    .submit, .cancel
+      +button
 
 #gollum-editor
   +trailer
