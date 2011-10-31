@@ -36,10 +36,14 @@ nav
 form
   +clearfix
 
-  input
+  select
+    margin: 0
+
+  input, select
     font: $base-font-size $sans-serif
     line-height: rhythm()
 
+  input
     &[type='text'], &[type='password']
       +trailer(0.5)
       +form-text
@@ -47,6 +51,10 @@ form
 .error
   +leader
   color: red
+  select
+    +trailer(0.5)
+    +form-text
+    width: auto
 
 #main > form
   +trailer(0.5)
