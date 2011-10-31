@@ -3,10 +3,10 @@
 - form_tag(action: request.path_info, method: 'post', :class => 'member') do
   %p
     %label{for: 'member-first-name'} Ime
-    %input#member-first-name{type: 'text', name: 'first_name'}
+    %input#member-first-name{type: 'text', name: 'member[first_name]'}
   %p
     %label{for: 'member-last-name'} Prezime
-    %input#member-last-name{type: 'text', name: 'last_name'}
+    %input#member-last-name{type: 'text', name: 'member[last_name]'}
   %p
     %input.submit{type: 'submit', value: 'Dodaj'}
     - link_to 'Odustani', '/members', class: 'cancel'

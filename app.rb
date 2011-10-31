@@ -208,9 +208,7 @@ get '/member/:voice/new' do
 end
 
 post '/member/:voice/new' do
-  Member.create(first_name: params[:first_name],
-                last_name: params[:last_name],
-                voice: params[:voice].capitalize)
+  Member.create(params[:member].update(voice: params[:voice].capitalize))
   redirect :members
 end
 
