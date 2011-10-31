@@ -60,10 +60,6 @@ get '/js/ajax.js' do
   coffee :'js/ajax'
 end
 
-get '/js/add.js' do
-  coffee :'js/add'
-end
-
 get '/js/post.js' do
   coffee :'js/post'
 end
