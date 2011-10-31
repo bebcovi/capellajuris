@@ -13,8 +13,8 @@
       - Audio.all.each do |audio|
         %option{selected: audio.original_name == @sidebar.audio}= audio.original_name
   %p
-    - link_to 'Odustani', '/', class: 'cancel'
     %input.submit{type: 'submit', value: 'Spremi'}
+    - link_to 'Odustani', '/', class: 'cancel'
 
 - form_tag(action: request.path_info, method: 'post', enctype: 'multipart/form-data') do
   %p
