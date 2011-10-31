@@ -90,6 +90,10 @@ get '/' do
   haml :index
 end
 
+get '/login' do
+  haml :'forms/login'
+end
+
 post '/login' do
   send(User.exists? ? "authenticate" : "register") do |user|
     log_in(user)
