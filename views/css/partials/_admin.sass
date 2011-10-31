@@ -48,18 +48,11 @@ form
       +trailer(0.5)
       +form-text
 
-.error
-  +leader
-  color: red
   select
     +trailer(0.5)
     +form-text
     width: auto
 
-#main > form
-  +trailer(0.5)
-  &:last-child
-    +trailer(0)
   label
     display: block
     float: left
@@ -73,10 +66,13 @@ form
     & + *
       clear: both
 
+  #main > &
     +trailer(0.5)
     width: 340px
 
     input
+    &:last-child
+      +trailer(0)
 
       &[type='text'], &[type='password']
         +trailer(0)
@@ -85,11 +81,9 @@ form
     p
       +pie-clearfix
 
-      &[type='submit']
-        float: right
+      .submit, .cancel
+        +button
 
-    .submit, .cancel
-      +button(right)
 
     .file
       width: 250px
@@ -97,6 +91,9 @@ form
 
   &.confirm p
     width: 120px
+.error
+  +leader
+  color: red
 
 .center
   +horizontally-center

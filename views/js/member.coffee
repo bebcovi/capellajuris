@@ -25,11 +25,11 @@ class Member
             url: form.attr 'action'
             data: params
             success: (data) =>
-              oldSection = $(@).closest('section')
-              newSection = $(data).find('#members section').eq oldSection.siblings().andSelf().index(oldSection)
+              oldParent = $(@).closest('section')
+              newParent = $(data).find('#members section').eq oldParent.siblings().andSelf().index(oldParent)
               obj = []
               index = 0
-              newSection.find('> ol > li').each (i) ->
+              newParent.find('> ol > li').each (i) ->
                 if $(@).find('div').text() is "#{params['member[last_name]']} #{params['member[first_name]']}"
                   obj = $(@)
                   index = i
@@ -37,7 +37,7 @@ class Member
               console.log oldSection
               console.log newSection
 
-              ol = oldSection.children('ol')
+              ol = oldParent.children('ol')
 
               if index >= ol.children('li').length - 1
                 ol.append obj
