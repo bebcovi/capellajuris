@@ -78,10 +78,13 @@ form
       .submit, .cancel
         +button
 
+      .file
+        +leader(0.5)
+        width: 220px
+        float: left
 
-    .file
-      width: 250px
-      float: left
+        & + input[type='submit']
+          +button
 
   &.confirm p
     width: 120px
