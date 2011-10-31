@@ -3,10 +3,10 @@ $ = jQuery
 $ ->
 
   Post.getAll($('body')).each -> new Post $(@)
-  $('#main .add a').not('#members .add a').click Post.add
+  $('#main .add a').click Post.add
 
   Member.getAll($('body')).each -> new Member $(@)
-  $('#members .add a').click Member.add
+  $('#members .add a').unbind('click').click Member.add
 
   Video.getAll($('body')).each -> new Video $(@)
   $('#videos .add a').unbind('click').click Video.add
