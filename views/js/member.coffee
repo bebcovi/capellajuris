@@ -3,33 +3,6 @@ $ = jQuery
 class Member
   constructor: (@obj) ->
     @obj.find('.delete input[type="submit"]').click @remove
-    @voice = Member.croToEn[@obj.closest('section').find('h2').text().toLowerCase()]
-    Member.items[@voice].push @
-    Member.items[@voice].sort Member.alphabetical
-
-  @items:
-    sopran: []
-    alt: []
-    tenor: []
-    bass: []
-
-  @voicesCro: ['soprani', 'alti', 'tenori', 'basi']
-  @croToEn:
-    soprani: 'sopran'
-    alti: 'alt'
-    tenori: 'tenor'
-    basi: 'bass'
-
-  @alphabetical: (a, b) ->
-    aString = a.obj.text().trim().split(' ')[1]
-    bString = b.obj.text().trim().split(' ')[1]
-
-    if aString < bString
-      return -1
-    else if aString == bString
-      return 0
-    else if aString > bString
-      return 1
 
   @getAll: (obj) ->
     obj.find '#members section > ol > li'
@@ -118,8 +91,6 @@ class Member
             url: url
             data:
               confirmation: confirm.find('.submit').val()
-            success: =>
-              Member.items[@voice].remove Member.items[@voice].indexOf(@)
 
           confirm.fadeOut 'fast', -> $(@).remove()
           @obj.remove()

@@ -4,9 +4,6 @@ class Post
   constructor: (@obj) ->
     @obj.find('.edit').click @edit
     @obj.find('.delete input[type="submit"]').click @remove
-    if Post.isInNews @obj then Post.items.push(@) else Post.items.unshift(@)
-
-  @items: []
 
   @isInNews: (obj) -> obj.closest('#news').length > 0
 
@@ -84,7 +81,8 @@ class Post
               text: editor.find('#gollum-editor-body').val()
             success: (data) =>
               editor.fadeOut 'fast', -> $(@).remove()
-              @obj = Post.getAll($(data)).eq(Post.items.indexOf(@)).replaceAll @obj
+              index = @obj.siblings('article').andSelf().index @obj
+              @obj = Post.getAll($(data)).add('#members').eq(index).replaceAll @obj
               @obj.fadeOut(0).delay('fast').fadeIn 'fast'
               button.removeAttr('disabled')
 
@@ -124,8 +122,6 @@ class Post
             url: url
             data:
               confirmation: confirm.find('.submit').val()
-            success: =>
-              Post.items.remove Post.items.indexOf(@)
 
           @obj.fadeOut 'fast', -> $(@).remove()
 
