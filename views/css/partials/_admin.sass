@@ -36,7 +36,7 @@ nav
 form
   +pie-clearfix
 
-  select
+  input[type='text'], input[type='password'], select
     margin: 0
 
   input, select
@@ -60,19 +60,21 @@ form
   +trailer(0.5)
   &:last-child
     +trailer(0)
+  label
+    display: block
+    float: left
+    padding: 0 3px
+    background: darken(white, 40%)
+    color: white
+
+    &:hover
+      cursor: pointer
+
+    & + *
+      clear: both
 
     +trailer(0.5)
     width: 340px
-
-    label
-      display: block
-      width: 110px
-      float: left
-      line-height: rhythm(2)
-      &:after
-        content: ':'
-      &:hover
-        pointer: cursor
 
     input
 

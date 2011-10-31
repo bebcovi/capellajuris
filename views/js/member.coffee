@@ -15,12 +15,6 @@ class Member
         form = $(data).find 'form.member'
         button.fadeOut 'fast'
         button.before form
-        label = form.find('label')
-        text = form.find('input[type="text"]')
-        label.each (i) ->
-          $(@).unwrap()
-          text.eq(i).attr('placeholder', $(@).text())
-          $(@).remove()
         form.fadeOut(0).delay('fast').fadeIn 'fast'
 
         form.find('.submit').click =>
