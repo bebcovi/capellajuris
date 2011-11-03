@@ -57,6 +57,8 @@ class Post
           $(@).removeAttr('disabled')
           event.preventDefault()
 
+        editor.find('#gollum-editor-preview').remove()
+
     event.preventDefault()
 
   edit: =>
@@ -98,6 +100,8 @@ class Post
           @obj.delay('fast').fadeIn 'fast'
           button.removeAttr('disabled')
           event.preventDefault()
+
+        editor.find('#gollum-editor-preview').remove()
 
       xhr.fail Ajax.fail
 

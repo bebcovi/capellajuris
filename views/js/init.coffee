@@ -4,6 +4,8 @@ $ ->
 
   $.GollumEditor()
 
+  $('#gollum-editor-preview').remove()
+
   $('#gollum-editor-function-bar a')
     .each ->
       title = $(this).find('span').text().toLowerCase()
