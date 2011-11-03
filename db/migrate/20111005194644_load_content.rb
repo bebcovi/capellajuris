@@ -15,7 +15,7 @@ class LoadContent < ActiveRecord::Migration
 
   def up
     # pages
-    Page.create(url_name: '', cro_name: 'Početna', order_no: 1)
+    Page.create(url_name: 'index', cro_name: 'Početna', order_no: 1)
     Page.create(url_name: 'o_nama', cro_name: 'O Nama', order_no: 2)
     Page.create(url_name: 'slike', cro_name: 'Slike', order_no: 3)
     Page.create(url_name: 'video', cro_name: 'Video', order_no: 4)
@@ -26,7 +26,8 @@ class LoadContent < ActiveRecord::Migration
             "<img src='images/capella_juris.jpg' alt='Capella juris' />\n\n" \
             'Capella juris pjevački je zbor Pravnog fakulteta Sveučilišta u Zagrebu, a sastoji se od pedesetak studentica i studenata te prijatelja Pravnog fakulteta. Osnovan je u svibnju 2006. na inicijativu prof. **Ive Josipovića**, sadašnjeg predsjednika RH i prof. **Wolfganga Ruscha**, koji je zbor vodio prve dvije godine. Sadašnji dirigent je mladi maestro [Jurica Petar Petrač](o_nama#jurica). Zbor nastupa na svim manifestacijama Fakulteta, a iza zbora stoji sedam samostalnih koncerta i pet domaćih i inozemnih natjecanja na kojima zbor uvijek osvaja nagrade. Probe se obično održavaju svakog ponedjeljka i četvrtka u 19:30 na Gornjem gradu, [Ćirilometodska 4](http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%C4%87irilometodska+4,+zagreb&aq=&sll=37.0625,-95.677068&sspn=44.928295,107.138672&ie=UTF8&hq=&hnear=%C4%86irilometodska+4,+Zagreb,+Croatia&ll=45.813808,15.978659&spn=0.004853,0.013078&z=17). Zbor je naravno i susret prijatelja i bogatstvo druženja, ukratko Capella juris je iskustvo za svakoga…',
       content_type: 'intro',
-      page: '/')
+      page: '/',
+      order_no: '1')
 
     # sidebar
     Sidebar.create(
@@ -39,7 +40,8 @@ class LoadContent < ActiveRecord::Migration
     Content.create(
       text: "Vijesti",
       content_type: 'news',
-      page: '/')
+      page: '/',
+      order_no: '2')
     News.create(
       text: "# Misa Criolla\n\n" \
             "Ovaj petak. Majke mi, bolje vam je da budete tamo.",
@@ -59,17 +61,20 @@ class LoadContent < ActiveRecord::Migration
             "Prvi, božićni koncert, “**Magnificat anima mea Dominum**”, uz pratnju Hrvatskog baroknog ansambla održan je 2006. koji je obuhvaćao barokne božićne skladbe. Sljedeće godine, 2007., održana su dva božićna koncerta, u Varaždinu i Zagrebu, pod nazivom “**Gloria in excelsis Deo**”, u pratnji gudačkog kvarteta Rucner, a sastojali su se od europske narodne božićne glazbe. Godine 2008. zbor je sudjelovao na 9. natjecanju amaterskih pjevačkih zborova u Zagrebu, gdje je u Hrvatskom glazbenom zavodu osvojio brončanu plaketu. 25. studenog 2008. zbor je održao i koncert “**Omnia vincit Amor!**”, svojevrsnu posvetu ljubavi kroz raznolike glazbene oblike, a mjesec dana kasnije sad već i tradicionalni, božićni koncert pod nazivom “**Bog se rodi v Vitliomi**”, koji se sastojao od niza (relativno nepoznatih) hrvatskih božićnih napjeva, uz gostovanje tenora Hrvoja Meštrova.\n\n" \
             "Voditelj zbora od 2008. godine je mlad i perspektivan prof. **Jurica Petar Petrač**.",
       content_type: 'content',
-      page: '/o_nama')
+      page: '/o_nama',
+      order_no: '1')
     Content.create(
       text: "# Biografija dirigenta\n\n" \
             "<img src='images/biografija_dirigenta.jpg' alt='Jurica Petar Petrač' />\n\n" \
             "Jurica Petar Petrač, prof. (Zagreb, 1985.) se nakon završene opće gimnazije [Tituš Brezovački](http://www.gimnazija-osma-tbrezovackog-zg.skole.hr/) i srednje glazbene škole [Blagoje Bersa] upisuje na studij glazbene teorije Muzičke akademije Sveučilišta u Zagrebu, diplomiravši u veljači 2009. godine. Istovremeno upisuje i studij Povijesti umjetnosti te Etnologije i kulturne antropologije na Filozofskom fakultetu u Zagrebu. Sa 17 godina osniva i Mješoviti pjevački zbor “Capella miércoles”, koji djeluje u crkvi sv. Kvirina na Pantovčaku. Od 2008. godine, nakon prvobitnog pjevačkog sudjelovanja, postaje glazbeni voditelj zbora “Capella juris”, a od 2011. glazbeni voditelj oratorijskog zbora crkve sv. Marka u Zagrebu, “Cantores Sancti Marci”.",
       content_type: 'content',
-      page: '/o_nama')
+      page: '/o_nama',
+      order_no: '2')
     Content.create(
       text: 'Članovi zbora',
       content_type: 'members',
-      page: '/o_nama')
+      page: '/o_nama',
+      order_no: '3')
     Content.create(
       text: "# Aktivnosti\n\n" \
             "## 2011\n" \
@@ -100,7 +105,8 @@ class LoadContent < ActiveRecord::Migration
             "- Nastup na svečanosti obilježavanja **230 godina Pravnog fakulteta** Sveučilišta u Zagrebu (6. studenog, HNK Zagreb)\n" \
             "- “**Magnificat anima mea dominum!**”, koncert Capelle juris uz pratnju [Hrvatskog baroknog ansambla](http://www.hrba.hr/hr/) (21. prosinca, Crkva Sv. Franje Asiškog, Zagreb)",
       content_type: 'content',
-      page: '/o_nama')
+      page: '/o_nama',
+      order_no: '4')
 
     # members
     ['Alisa Besek','Ana Miletić','Ana Vlašić','Ana Zavada','Anja Juršetić','Barbara Bogojević','Daria Dubajić','Ines Malenica','Ivana Peulić','Ivana Radman','Katarina Sabljić','Klara Marinčević','Kristina Gotvald','Lidija Živković','Marija Ercegovac','Marija Vučurević','Mia Nazalević','Mirjana Vladić','Nikolina Hržina','Veronika Veršić','Vesna Juretić','Vinka Lozica'].each do |member|
