@@ -2,6 +2,13 @@ $ = jQuery
 
 $ ->
 
+  $('#gollum-editor-function-bar a')
+    .each ->
+      title = $(this).find('span').text().toLowerCase()
+      title = title.replace(/h(\d)/, 'heading $1')
+      $(this).attr('title', title)
+    .twipsy()
+
   Post.getAll($('body')).each -> new Post $(@)
   $('#main .add a').click Post.add
 
