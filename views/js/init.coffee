@@ -8,8 +8,8 @@ $ ->
 
   $('#gollum-editor-function-bar a')
     .each ->
-      title = $(this).find('span').text().toLowerCase()
-      title = title.replace(/h(\d)/, 'heading $1')
+      title = $(this).find('span').text()
+      title = title.replace(/h(\d)/, 'Heading $1')
       $(this).attr('title', title)
     .twipsy()
 
