@@ -71,3 +71,12 @@
       %input#gollum-editor-submit{type: 'submit', value: 'Spremi'}
       - link_to 'Prikaži', "javascript:void(0)", class: 'minibutton', id: 'gollum-editor-preview'
       - link_to 'Odustani', @content.respond_to?(:page) ? @content.page : '/', class: 'minibutton', id: 'gollum-editor-cancel'
+
+:javascript
+  $.GollumEditor()
+  $('#gollum-editor-function-bar a')
+    .each ->
+      title = $(this).find('span').text()
+      title = title.replace(/h(\d)/, 'Heading $1')
+      $(this).attr('title', title)
+    .twipsy()
