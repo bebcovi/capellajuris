@@ -15,14 +15,20 @@ require 'hpricot'
 
 Dir['extras/*.rb'].each { |extra| require extra }
 
-# Haml & Sass/Compass
-configure do
+# Sass/Compass
+set :sass do
+  require 'compass'
   Compass.configuration do |config|
-    config.sass_dir = 'views/css'
+    config.project_path = settings.root
+    config.sass_dir = settings.views
     config.images_dir = 'public/images'
     config.http_images_path = File.join(config.http_path, 'images')
     config.line_comments = false
   end
+
+  options = {style: settings.production? ? :compressed : :nested}
+  options[:cache_location] = File.join(ENV['TMPDIR'], 'sass-cache') if ENV['TMPDIR']
+  Compass.sass_engine_options.merge options
 end
 
 configure :development do
@@ -53,28 +59,7 @@ require 'db/models'
 enable :sessions
 
 # Sinatra Boilerplate
-set :js_assets, %w[js/gollum.editor.js js/markdown.js js/bootstrap-twipsy.js js/patch.js js/ajax.coffee js/post.coffee js/member.coffee js/video.coffee js/init.coffee]
-
-# Javascript
-get '/js/ajax.js' do
-  coffee :'js/ajax'
-end
-
-get '/js/post.js' do
-  coffee :'js/post'
-end
-
-get '/js/member.js' do
-  coffee :'js/member'
-end
-
-get '/js/video.js' do
-  coffee :'js/video'
-end
-
-get '/js/init.js' do
-  coffee :'js/init'
-end
+set :js_assets, %w[/js/gollum.editor.js /js/markdown.js /js/bootstrap-twipsy.js /js/patch.js /js/ajax.coffee /js/post.coffee /js/member.coffee /js/video.coffee /js/init.coffee]
 
 # CSS
 get '/css/screen.css' do
