@@ -65,11 +65,11 @@
   height: 0;
 }
 .fade {
-  -webkit-transition: opacity 0.15s linear;
-  -moz-transition: opacity 0.15s linear;
-  -ms-transition: opacity 0.15s linear;
-  -o-transition: opacity 0.15s linear;
-  transition: opacity 0.15s linear;
+  -webkit-transition: opacity 0s linear;
+  -moz-transition: opacity 0s linear;
+  -ms-transition: opacity 0s linear;
+  -o-transition: opacity 0s linear;
+  transition: opacity 0s linear;
   opacity: 0;
 }
 .fade.in {
