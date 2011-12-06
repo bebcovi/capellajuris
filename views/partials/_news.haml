@@ -10,5 +10,4 @@
     - buttons({edit: 'Izmjeni', delete: 'Izbriši'}, "/news/#{news.id}") if logged_in?
 
 %p
-  %a{href: '/arhiva'} Arhiva vijesti
-  %a.arrow{href: '/arhiva'} →
+  - link_to('Arhiva vijesti →', '/arhiva')

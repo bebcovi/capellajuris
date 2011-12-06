@@ -14,5 +14,4 @@
   - buttons({add: 'Dodaj +'}, '/video/new') if logged_in?
 
   %p#top
-    %a{href: '#'} Povratak na vrh
-    %a.arrow{href: '#'} ▲
+    - link_to 'Povratak na vrh ↑', '#'

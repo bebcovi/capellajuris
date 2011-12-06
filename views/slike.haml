@@ -7,5 +7,4 @@
       %img{src: photo.match(/^public\/(.+)$/)[1], alt: photo.match(/([^\/\.]+)\.\w{3}$/)[1]}
 
   %p#top
-    %a{href: '#'} Povratak na vrh
-    %a.arrow{href: '#'} ▲
+    - link_to 'Povratak na vrh ↑', '#'

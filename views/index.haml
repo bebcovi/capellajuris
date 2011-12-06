@@ -17,8 +17,7 @@
       = render_markdown(@intro.text)
 
       %p
-        %a{href: '/o_nama'} Opširnije
-        %a.arrow{href: '/o_nama'} →
+        - link_to 'Opširnije →', '/o_nama'
 
       - buttons({edit: 'Izmjeni'}, "/content/#{@intro.id}") if logged_in?
 
