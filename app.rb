@@ -1,6 +1,5 @@
 # encoding: UTF-8
 require 'sinatra'
-require 'sequel'
 require 'sinatra/activerecord'
 require 'sqlite3'
 require 'redcarpet'
