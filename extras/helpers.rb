@@ -9,9 +9,8 @@ helpers do
   end
 
   def current_page
-    Page.all.select do |page|
-      current?(page)
-    end.first.try(:haml_name)
+    Page.all.select { |page| current?(page) }.first.try(:haml_name)
+  end
   end
 
   def authenticate(&block)
@@ -36,8 +35,7 @@ helpers do
   end
 
   def logged_in?
-    true
-    # session[:id]
+    true # session[:id]
   end
 
   def link_to(text, href, attributes = {})
@@ -91,14 +89,14 @@ helpers do
       haml_tag :input, value: '▼', name: 'direction', type: 'submit', class: 'down'
     end
   end
+
+  def previous_page
+    session[:referrer] || URI.parse(request.referrer).path
+  end
 end
 
-module Helpers
-  def self.encrypt(password, password_salt)
-    BCrypt::Engine.hash_secret(password, password_salt)
-  end
-
-  def self.urlize(string)
-    string.tr('ČĆŽŠĐčćžšđ', 'CCZSDcczsd').downcase.gsub(/\s/, '_')
+class String
+  def underscorize
+    tr('ČĆŽŠĐčćžšđ', 'CCZSDcczsd').downcase.gsub(/\s/, '_')
   end
 end

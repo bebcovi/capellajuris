@@ -1,5 +1,9 @@
 # encoding: UTF-8
 class Content < ActiveRecord::Base
+  before_create do
+    self.order_no = self.class.by_page(page).maximum(:order_no).to_i + 1
+  end
+
   def move(direction)
     delta = case direction
     when '▲' then -1
@@ -23,10 +27,6 @@ class Content < ActiveRecord::Base
 
   def self.by_page(page)
     where(:page => page)
-  end
-
-  before_create do
-    self.order_no = Content.by_page(page).maximum(:order_no).to_i + 1
   end
 end
 
@@ -57,7 +57,7 @@ end
 
 class Page < ActiveRecord::Base
   before_validation do |page|
-    page.haml_name = Helpers.urlize(page.cro_name)
+    page.haml_name = page.cro_name.underscorize
   end
 
   validates :haml_name,
@@ -67,8 +67,8 @@ class Page < ActiveRecord::Base
   before_create :move_right_pages_forward, :create_haml_file
 
   def move_right_pages_forward
-    self.order_no = Page.find_by_haml_name('slike').order_no
-    Page.where("order_no >= ?", order_no).each { |page| page.increment!(:order_no) }
+    self.order_no = self.class.find_by_haml_name('slike').order_no
+    self.class.where("order_no >= ?", order_no).each { |page| page.increment!(:order_no) }
   end
 
   def create_haml_file
@@ -81,7 +81,7 @@ class Page < ActiveRecord::Base
   end
 
   after_destroy do |page|
-    Page.where("order_no > ?", page.order_no).each { |page| page.decrement!(:order_no) }
+    self.class.where("order_no > ?", page.order_no).each { |page| page.decrement!(:order_no) }
     File.delete File.join(settings.views, "#{page.haml_name}.haml")
   end
 end
@@ -97,9 +97,14 @@ end
 class User < ActiveRecord::Base
   attr_accessor :password
 
+  def self.encrypt(password, password_salt)
+    BCrypt::Engine.hash_secret(password, password_salt)
+  end
+
+
   def self.authenticate(user_hash)
     if user = find_by_username(user_hash[:username])
-      if user.password_hash == Helpers.encrypt(user_hash[:password], user.password_salt)
+      if user.password_hash == encrypt(user_hash[:password], user.password_salt)
         return user
       end
     end
@@ -109,7 +114,7 @@ class User < ActiveRecord::Base
 
   def encrypt_password
     self.password_salt = BCrypt::Engine.generate_salt
-    self.password_hash = Helpers.encrypt(password, password_salt)
+    self.password_hash = self.class.encrypt(password, password_salt)
   end
 end
 

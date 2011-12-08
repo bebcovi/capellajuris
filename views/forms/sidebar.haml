@@ -14,12 +14,12 @@
         %option{selected: audio.original_name == @sidebar.audio}= audio.original_name
   %p
     %input.submit{type: 'submit', value: 'Spremi'}
-    - link_to 'Odustani', '/', class: 'cancel'
 
 - form_tag(action: request.path_info, method: 'post', enctype: 'multipart/form-data') do
   %p
     %input.file{type: 'file', name: 'audio_file'}
     %input{type: 'submit', value: 'Učitaj'}
+    %a.cancel{href: '/'} Odustani
 
 - if @message
   %p.message= @message

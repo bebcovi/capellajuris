@@ -69,8 +69,8 @@
       %span.jaws
         %br
       %input#gollum-editor-submit{type: 'submit', value: 'Spremi'}
-      - link_to 'Prikaži', "javascript:void(0)", class: 'minibutton', id: 'gollum-editor-preview'
-      - link_to 'Odustani', @content.respond_to?(:page) ? @content.page : '/', class: 'minibutton', id: 'gollum-editor-cancel'
+      %a.minibutton#gollum-editor-preview{href: 'javascript:void(0)'} Prikaži
+      %a.minibutton#gollum-editor-cancel{href: @content.respond_to?(:page) ? @content.page : '/'} Odustani
 
 :javascript
   $.GollumEditor()

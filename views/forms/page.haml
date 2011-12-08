@@ -6,7 +6,7 @@
     %input#page-name{type: 'text', name: 'cro_name', value: @page.cro_name}
   %p
     %input.submit{type: 'submit', value: 'Spremi'}
-    - link_to 'Odustani', session[:referrer], class: 'cancel'
+    %a.cancel{href: session[:referrer]} Odustani
 
 - @page.errors.each do |attr, msg|
   %p.error= msg

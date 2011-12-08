@@ -7,4 +7,4 @@
     %li
       %input.submit{type: 'submit', name: 'confirmation', value: 'Da'}
     %li
-      - link_to 'Ne', URI.parse(request.referrer).path, class: 'cancel'
+      %a.cancel{href: previous_page} Ne

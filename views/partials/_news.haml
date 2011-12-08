@@ -1,4 +1,6 @@
-%h1= Content.find_by_content_type('news').text
+- content = Content.find_by_content_type('news')
+
+%h1= content.text
 
 - buttons({add: 'Dodaj +'}, '/news/new') if logged_in?
 

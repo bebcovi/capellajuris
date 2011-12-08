@@ -74,10 +74,6 @@ get '/' do
   haml :index
 end
 
-get '/login' do
-  haml :'forms/login'
-end
-
 post '/login' do
   send(User.exists? ? "authenticate" : "register") do |user|
     log_in(user)
@@ -97,7 +93,7 @@ before '/:page/:smth' do
 end
 
 get '/content/new' do
-  session[:referrer] ||= URI.parse(request.referrer).path if request.referrer
+  session[:referrer] = previous_page
   @content = Content.new(page: session[:referrer])
   haml :'forms/content'
 end
@@ -192,7 +188,7 @@ get '/member/:voice/new' do
 end
 
 post '/member/:voice/new' do
-  Member.create(params[:member].update(voice: params[:voice].capitalize))
+  Member.create(params[:member].merge(voice: params[:voice].capitalize))
   redirect :members
 end
 
@@ -240,7 +236,7 @@ delete '/video/:id' do
 end
 
 get '/page/new' do
-  session[:referrer] ||= URI.parse(request.referrer).path if request.referrer
+  session[:referrer] = previous_page
   @page = Page.new
   haml :'forms/page'
 end

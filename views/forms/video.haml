@@ -9,4 +9,4 @@
     %input#video-code{type: 'text', name: 'video[embed_code]', value: @video.embed_code}
   %p
     %input.submit{type: 'submit', value: 'Spremi'}
-    - link_to 'Odustani', '/video', :class => 'cancel'
+    %a.cancel{href: '/video'} Odustani
