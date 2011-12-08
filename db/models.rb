@@ -122,35 +122,7 @@ class Video < ActiveRecord::Base
 end
 
 class Audio < ActiveRecord::Base
-  attr_accessor :audio_file
-
-  def received_audio_file?
-    audio_file
-  end
-
-  before_create :fill_columns, :upload_file, :if => :received_audio_file?
-  before_create :convert_to_ogg, :if => :ogg
-  before_create :take_care_about_the_number_of_files
-
-  def fill_columns
-    self.original_name = audio_file[:filename].sub(/\.\w{2,5}$/, '')
-    self.uploaded_filename = Helpers.urlize(audio_file[:filename])
-    self.ogg = false if ogg.nil?
-  end
-
-  def upload_file
-    path_to_file = "public/audio/#{uploaded_filename}"
-    File.open(path_to_file, 'w') { |f| f.write audio_file[:tempfile].read }
-  end
-
-  def convert_to_ogg
-    original_filename = File.expand_path "public/audio/#{uploaded_filename}"
-    ogg_filename = original_filename.sub(/\.\w{2,5}$/, '.ogg')
-    system "ffmpeg -i \"#{original_filename}\" -acodec libvorbis -ac 2 \"#{ogg_filename}\""
-    self.ogg = false if not File.exists? ogg_filename
-  end
-
-  def take_care_about_the_number_of_files
+  before_create do
     Audio.first.destroy if Audio.count == 5
   end
 

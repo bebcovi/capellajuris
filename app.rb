@@ -139,15 +139,6 @@ put '/sidebar/:id' do
   @sidebar.valid? ? redirect(:/) : haml(:'forms/sidebar')
 end
 
-post '/sidebar/:id' do
-  if params[:audio_file].present?
-    Audio.create(:audio_file => params[:audio_file], :ogg => true)
-    @message = 'Audio snimka je uspješno učitana.'
-  end
-  @sidebar = Sidebar.find(params[:id])
-  haml :'forms/sidebar'
-end
-
 get '/news/new' do
   @content = News.new
   haml :'forms/content'
