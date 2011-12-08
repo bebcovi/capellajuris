@@ -83,7 +83,7 @@ DEPENDENCIES
   hpricot
   i18n
   rake
-  redcarpet
+  redcarpet (~> 1.17.2)
   sass
   sequel
   shotgun
