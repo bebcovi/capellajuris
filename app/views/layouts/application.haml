@@ -1,0 +1,37 @@
+!!!
+%html{lang: 'hr'}
+
+  %head
+    %meta{charset: 'utf-8'}
+    %title!= "Capella juris &ndash; #{@page_title}"
+    %meta{name: 'description', content: 'Službene stranice Capelle juris.'}
+    %meta{name: 'author', content: 'Matija Marohnić &lt;matija.marohnic@gmail.com&gt;'}
+    = favicon_link_tag
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = javascript_include_tag "http://api.html5media.info/1.1.4/html5media.min.js"
+
+  %body
+
+    #wrapper
+      %header#header
+        .inner
+          = link_to home_path, :id => "logo" do
+            = image_tag "logo.png", :size => "225x111"
+          = image_tag "header.jpg", :size => "600x180", :id => "photo"
+        %nav
+          %ol#pages
+            = list_of navigation_pages do |page|
+              = link_to page[:name], page[:link], :class => current_page?(page[:link]) && "current"
+
+      #main
+        = yield
+
+      %footer
+        %section#contact
+          %p
+            %span.label Kontakt
+            %span.value= mail_to "capellajuris@gmail.com"
+        %section#facebook
+          %p Pratite nas na Facebooku za novosti, najave nastupa i slike
+          %a.icon-fb{href: 'http://www.facebook.com/group.php?gid=15322005634', target: '_blank'}

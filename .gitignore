@@ -1,6 +1,5 @@
 .DS_Store
-.sass-cache
-tmp
-db/databases
 .bundle
-*.db
+log/*.log
+tmp/
+.sass-cache/

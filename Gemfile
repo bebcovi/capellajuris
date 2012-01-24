@@ -1,36 +1,31 @@
-source :rubygems
+source 'http://rubygems.org'
 
-gem 'rake'
-gem 'sinatra'
-gem 'haml'
-gem 'sass'
-gem 'compass', '~> 0.12.alpha'
-gem 'coffee-script'
-gem 'uglifier'
-gem 'redcarpet', '~> 1.17.2'
-gem 'sqlite3'
-gem 'i18n'
-gem 'activesupport'
-gem 'faraday-stack'
-gem 'bcrypt-ruby'
-gem 'will_paginate', '~> 3.0.2'
-gem 'hpricot'
+gem 'thin'
+gem 'rails'
+gem 'pg'
 
-gem 'sinatra-activerecord'
-gem 'activerecord'
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+  gem 'compass', '~> 0.12.alpha'
+end
+
+gem 'jquery-rails'
+gem 'haml-rails'
+gem 'will_paginate'
 
 group :development do
-  gem 'thin'
-  gem 'shotgun'
+  # gem "linecache19", "0.5.13"
+  # gem "ruby-debug-base19", "0.11.26"
+  # gem "ruby-debug19", :require => 'ruby-debug'
 end
 
-group :development, :test do
-  unless RUBY_VERSION == '1.9.3'
-    gem 'ruby-debug', :require => nil, :platforms => :mri_18
-    gem 'ruby-debug19', :require => nil, :platforms => :mri_19
-  end
+group :test do
+  # Pretty printed test output
+  gem 'turn', :require => false
 end
 
-group :production do
-  gem 'therubyracer-heroku', '~> 0.8.1.pre3'
-end
+gem 'redcarpet'

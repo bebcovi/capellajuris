@@ -103,11 +103,9 @@ module Flickr
     end
 
     SIZE_NAMES.each do |name, size|
-      class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def #{name}
-          Photo.new(@hash, '#{size}')
-        end
-      RUBY
+      define_method(name) do
+        Photo.new(@hash, size)
+      end
     end
 
     def largest

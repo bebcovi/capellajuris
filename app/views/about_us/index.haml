@@ -1,0 +1,4 @@
+- @page_title = "O nama"
+
+- @about_us_contents.each do |content|
+  = render :partial => content[:type], :locals => {content[:type].to_sym => content[:object]}

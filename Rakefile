@@ -1,11 +1,7 @@
-require 'sinatra/activerecord/rake'
+#!/usr/bin/env rake
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-task "db:migrate" => :load_app
+require File.expand_path('../config/application', __FILE__)
 
-task :load_app => :fix_damn_loadpath do
-  require 'app'
-end
-
-task :fix_damn_loadpath do
-  $:.unshift File.expand_path('..', __FILE__)
-end
+CapellaJuris::Application.load_tasks

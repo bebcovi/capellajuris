@@ -1,0 +1,9 @@
+- @page_title = "Slike"
+
+#photos
+  %ul
+    = list_of(@photos) do |photo|
+      = image_tag photo
+
+  %p#top= link_to "Povratak na vrh ↑", "#"
+

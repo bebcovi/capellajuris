@@ -1,0 +1,9 @@
+Capella juris je zbor Pravnog fakulteta Sveučilišta u Zagrebu, osnovan u svibnju 2006. na inicijativu prof. **Josipovića** i prof. **Wolfganga Ruscha**, koji je zbor vodio prve dvije godine. Repertoar zbora je raznolik te se sastoji od renesansnih madrigala do suvremene glazbe, od hrvatske i europske narodne glazbe do jazza.
+
+Zbor se sastoji od 58 studentica, studenata i prijatelja Pravnog fakulteta Sveučilišta u Zagrebu te nastupa na promocijama diplomanata, ali i svim važnijim manifestacijama vezanim uz fakultet. Tako je, između ostalog, nastupao u Hrvatskom narodnom kazalištu prilikom obilježavanja 230 godina Pravnog fakulteta u Zagrebu, prilikom posjeta povjerenika Europske Unije za proširenje, gospodina Olia Rehna, te za Zakladu Zlatko Crnić u Hrvatskoj odvjetničkoj komori.
+
+Iza Capelle juris stoji natjecanje i četiri vrlo uspješna samostalna koncerta.
+
+Prvi, božićni koncert, “**Magnificat anima mea Dominum**”, uz pratnju Hrvatskog baroknog ansambla održan je 2006. koji je obuhvaćao barokne božićne skladbe. Sljedeće godine, 2007., održana su dva božićna koncerta, u Varaždinu i Zagrebu, pod nazivom “**Gloria in excelsis Deo**”, u pratnji gudačkog kvarteta Rucner, a sastojali su se od europske narodne božićne glazbe. Godine 2008. zbor je sudjelovao na 9. natjecanju amaterskih pjevačkih zborova u Zagrebu, gdje je u Hrvatskom glazbenom zavodu osvojio brončanu plaketu. 25. studenog 2008. zbor je održao i koncert “**Omnia vincit Amor!**”, svojevrsnu posvetu ljubavi kroz raznolike glazbene oblike, a mjesec dana kasnije sad već i tradicionalni, božićni koncert pod nazivom “**Bog se rodi v Vitliomi**”, koji se sastojao od niza (relativno nepoznatih) hrvatskih božićnih napjeva, uz gostovanje tenora Hrvoja Meštrova.
+
+Voditelj zbora od 2008. godine je mlad i perspektivan prof. **Jurica Petar Petrač**.

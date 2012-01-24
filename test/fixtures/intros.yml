@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  text: MyText
+  photo_link: MyText
+  video_title: MyString
+  video: MyString
+  audio_title: MyString
+  audio: MyString
+
+two:
+  title: MyString
+  text: MyText
+  photo_link: MyText
+  video_title: MyString
+  video: MyString
+  audio_title: MyString
+  audio: MyString

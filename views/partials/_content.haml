@@ -1,6 +1,0 @@
-%article
-  - generate_arrows(content) if logged_in?
-
-  = render_markdown content.text
-
-  - buttons({edit: 'Izmjeni', delete: 'Izbriši'}, "/content/#{content.id}") if logged_in?
