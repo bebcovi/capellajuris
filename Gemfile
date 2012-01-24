@@ -28,4 +28,4 @@ group :test do
   gem 'turn', :require => false
 end
 
-gem 'redcarpet'
+gem 'redcarpet', '< 2.0.0'

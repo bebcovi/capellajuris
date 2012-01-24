@@ -136,7 +136,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails
-  redcarpet
+  redcarpet (< 2.0.0)
   sass-rails
   thin
   turn
