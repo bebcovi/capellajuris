@@ -11,37 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124203749) do
-
-  create_table "about_us_contents", :force => true do |t|
-    t.integer  "content_id"
-    t.string   "content_type"
-    t.integer  "content_order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20120125083530) do
 
   create_table "activities", :force => true do |t|
     t.integer  "year"
     t.text     "bullets"
     t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "general_contents", :force => true do |t|
-    t.string   "title"
-    t.text     "photo_link"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "intros", :force => true do |t|
-    t.string   "title"
-    t.text     "text"
-    t.text     "photo_link"
-    t.string   "video_title"
-    t.string   "video"
     t.datetime "updated_at"
   end
 
@@ -55,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20120124203749) do
   create_table "news", :force => true do |t|
     t.string "title"
     t.text   "text"
-    t.text   "photo_link"
+    t.text   "photo"
     t.date   "created_at"
   end
 

@@ -4,20 +4,19 @@
   .inner
     %article.main
       %h1= @intro.title
-      != @intro.photo_link
+      != @intro.photo
       != render_markdown(@intro.text)
 
       %p= link_to 'Opširnije →', '/o_nama'
 
     %aside
       %section#video
-        %h2= @intro.video_title
-        != @intro.video
+        %h2= @sidebar.video_title
+        != @sidebar.video
 
       %section#audio
-        %h2 Makedonska humoreska
-        = audio_tag ["makedonsko_devojce.mp3", "makedonsko_devojce.ogg"],
-          :controls => true, :autobuffer => true
+        %h2= @sidebar.audio_title
+        = audio_tag @sidebar.audio, :controls => true, :autobuffer => true
 
 %section#news
   %h1 Vijesti
@@ -28,4 +27,4 @@
         %h1= news.title
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
       != render_markdown(news.text)
-      != news.photo_link
+      != news.photo

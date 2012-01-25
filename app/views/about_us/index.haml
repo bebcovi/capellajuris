@@ -1,4 +1,22 @@
 - @page_title = "O nama"
 
-- @about_us_contents.each do |content|
-  = render :partial => content[:type], :locals => {content[:type].to_sym => content[:object]}
+- @about_contents.each do |about_content|
+  %article
+    %h1= about_content.title
+    != about_content.photo
+    != render_markdown(about_content.text)
+
+%article#members
+  %h1 Članovi zbora
+  - %w[soprani alti tenori basi].each do |voice|
+    %section
+      %h2= voice.capitalize
+      %ol
+        = list_of @members.by_voice(voice) do |member|
+          = member
+
+%article#activities
+  %h1 Aktivnosti
+  - @activities.each do |activity_year|
+    %h2= activity_year.year
+    != render_markdown(activity_year.bullets)
