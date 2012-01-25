@@ -1,9 +1,48 @@
 /* layout.css
 
 +establish-baseline
++all-icon-sprites
 
 body
-  // +baseline-grid-background($base-line-height, darken(white, 30%))
+  font-family: $sans-serif
+  color: $text
+
+h1, h2
+  font-family: $serif
+
+h1
+  +adjust-font-size-to(3em, 3)
+h2
+  font-size: 1.5em
+
+h1, h2, section, p
+  +trailer
+
+a
+  +hover-link
+  color: $link
+
+strong
+  font-weight: bold
+
+em
+  font-style: italic
+
+hr
+  +trailer(0.5)
+  width: 400px
+  border: 0
+  border-top: 1px solid
+  border-color: darken(white, 30%)
+
+ol, ul
+  +trailer
+  padding-left: rhythm(2)
+  list-style: disc outside
+
+#main img
+  outline: 1px solid
+  outline-color: $text
 
 #wrapper
   +padding-leader
@@ -16,7 +55,6 @@ body
 
   #header
     +trailer
-
     .inner
       +clearfix
       padding: 0 rhythm(2)
@@ -31,6 +69,8 @@ body
   nav
     +clearfix
     +rhythm-borders
+    background-color: darken(white, 3%)
+    border-color: darken(white, 20%)
 
     #pages
       +clearfix
@@ -43,6 +83,13 @@ body
         a
           display: block
           padding: 0 rhythm(0.5)
+          +link-colors(lighten($text, 20%), $link)
+          &.current
+            color: $link
+          font-family: $serif
+          text-transform: uppercase
+          &:hover
+            text-decoration: none
 
   #main
     +padding-trailer
@@ -158,3 +205,36 @@ body
         width: $icon-width
         height: image-height($icon-url)
         border: 1px solid
+
+#top
+  text-align: center
+
+footer
+  background-color: darken(white, 3%)
+  border-color: darken(white, 20%)
+  font-family: $serif
+
+  p
+    +trailer(0)
+
+#contact
+  +leader(0.5)
+  +trailer(0)
+  font-size: 1.25em
+
+.label
+  font-weight: bold
+  &:after
+    content: ':'
+
+#facebook
+  +trailer(0)
+  font-size: 1.2em
+
+  p:after
+    content: ':'
+
+  a
+    color: lighten(black, 40%)
+    &:hover
+      color: #344466

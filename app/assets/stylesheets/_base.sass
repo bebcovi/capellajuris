@@ -1,0 +1,77 @@
+// vertical rhythm
+$base-font-size: 14px
+$base-line-height: 18px
+$relative-font-sizing: false
+
+// sprites
+$icon-spacing: 1px
+
+// dimensions
+$wrapper-width: 960px
+
+// fonts
+$serif: Georgia, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', Times, serif
+$sans-serif: Verdana, 'Helvetica Neue', Helvetica, Geneva, sans-serif
+
+// colors
+$text: lighten(black, 30%)
+$link: #c70000
+
+//mixins
+=button($dir: left)
+  margin: 0
+  +rhythm-borders(1px, 0.5)
+  display: block
+  float: $dir
+  margin-#{opposite-position($dir)}: rhythm(0.5)
+  background-color: darken(white, 5%)
+  border-color: darken(white, 25%)
+  color: lighten(black, 40%)
+  &:hover
+    background-color: darken(white, 7%)
+    border-color: darken(white, 40%)
+    color: lighten(black, 30%)
+    text-decoration: none
+    cursor: pointer
+
+=subtle
+  margin: 0
+  padding: 0
+  display: block
+  background: transparent
+  border: 0
+  font-weight: bold
+  color: darken(white, 25%)
+  &:hover
+    background: transparent
+    color: darken(white, 40%)
+    text-decoration: none
+    cursor: pointer
+
+=form-text
+  +rhythm-borders(1px, 0.5)
+  display: block
+  width: 200px
+  font-size: $base-font-size
+  background: transparent
+  border-color: darken(white, 40%)
+  color: lighten(black, 20%)
+
+// horizontally centered menu by Matthew James Taylor
+// http://matthewjamestaylor.com/blog/beautiful-css-centered-menus-no-hacks-full-cross-browser-support
+=horizontally-center
+  float: left
+  width: 100%
+  overflow: hidden
+  position: relative
+  ol, ul
+    clear: left
+    float: left
+    position: relative
+    left: 50%
+    text-align: center
+    li
+      display: block
+      float: left
+      position: relative
+      right: 50%
