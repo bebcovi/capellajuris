@@ -2,6 +2,7 @@ CapellaJuris::Application.routes.draw do
   root :to => 'home#index'
 
   get '', :to => "home#index", :as => :home
+  resources :news
 
   get 'o_nama', :to => "about_us#index", :as => :about_us
 

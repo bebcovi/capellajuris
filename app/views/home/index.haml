@@ -7,7 +7,7 @@
       != @intro.photo
       != render_markdown(@intro.text)
 
-      %p= link_to 'Opširnije →', '/o_nama'
+      %p= link_to 'Opširnije →', about_us_path
 
     %aside
       %section#video
@@ -21,6 +21,8 @@
 %section#news
   %h1 Vijesti
 
+  = link_to "Dodaj", new_news_path
+
   - @news.each do |news|
     %article
       %header
@@ -28,3 +30,5 @@
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
       != render_markdown(news.text)
       != news.photo
+      = link_to "Izmjeni", edit_news_path(news)
+      = link_to "Izbriši", news_path(news), :method => :delete
