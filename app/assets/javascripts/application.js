@@ -7,7 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require patch
-//= require markdown
 //= require gollum.editor
+//= require markdown
 //= require bootstrap-twipsy
 //= require_tree .
