@@ -3,20 +3,20 @@
 %section#intro
   .inner
     %article.main
-      %h1= @intro.title
-      != @intro.photo
-      != render_markdown(@intro.text)
+      %h1= @intro[:title]
+      != @intro[:photo]
+      != render_markdown(@intro[:text])
 
       %p= link_to 'Opširnije →', about_us_path
 
     %aside
       %section#video
-        %h2= @sidebar.video_title
-        != @sidebar.video
+        %h2= @sidebar[:video_title]
+        != @sidebar[:video]
 
       %section#audio
-        %h2= @sidebar.audio_title
-        = audio_tag @sidebar.audio, :controls => true, :autobuffer => true
+        %h2= @sidebar[:audio_title]
+        = audio_tag @sidebar[:audio], :controls => true, :autobuffer => true
 
 %section#news
   %h1 Vijesti

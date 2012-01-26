@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @intro = Intro.new
-    @sidebar = Sidebar.new
+    @intro, @sidebar = Home.get_intro, Home.get_sidebar
     @news = News.order("created_at DESC")
   end
 end
