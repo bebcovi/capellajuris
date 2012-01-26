@@ -5,8 +5,6 @@ CapellaJuris::Application.routes.draw do
   resources :news
 
   get 'o_nama', :to => "about_us#index", :as => :about_us
-
   get 'slike', :to => "photos#index", :as => :gallery
-
   get 'video', :to => "videos#index", :as => :videos
 end

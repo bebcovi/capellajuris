@@ -73,11 +73,14 @@
       = link_to "Prikaži", "javascript:void(0)", :id => "gollum-editor-preview", :class => "minibutton"
       = link_to "Odustani", home_path, :id => "gollum-editor-cancel", :class => "minibutton"
 
-  :javascript
-    $.GollumEditor()
-    $('#gollum-editor-function-bar a')
-      .each ->
-        title = $(this).find('span').text()
-        title = title.replace(/h(\d)/, 'Heading $1')
-        $(this).attr('title', title)
-      .twipsy()
+  = f.label :photo, "Slika"
+  = f.text_field :photo, :id => "photo_field"
+
+:javascript
+  $.GollumEditor()
+  $('#gollum-editor-function-bar a')
+    .each ->
+      title = $(this).find('span').text()
+      title = title.replace(/h(\d)/, 'Heading $1')
+      $(this).attr('title', title)
+    .twipsy()
