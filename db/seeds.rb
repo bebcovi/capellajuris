@@ -1,11 +1,12 @@
 # encoding: utf-8
-
 [News, Member, Activity, Video].each { |model| model.delete_all }
 
+# News
 News.create :title => "Božićni koncert",
             :text => File.read("db/seed/news.md"),
             :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6771643695/" title="Magnificat by Janko Marohnić, on Flickr"><img src="http://farm8.staticflickr.com/7001/6771643695_b861bddd73_b.jpg" width="456" height="650" alt="Magnificat"></a>'
 
+# Members
 %w[sopranos altos tenors bassos].each do |voice_range|
   file_with_singers = File.read("db/seed/#{voice_range}.txt")
   singers = file_with_singers.each_line.collect(&:strip).collect { |singer| singer.split(" ") }
@@ -18,6 +19,7 @@ News.create :title => "Božićni koncert",
   end
 end
 
+# Activities
 Dir["db/seed/activities/*.md"].each do |path|
   year = File.basename(path).chomp(".md").to_i
   activities = File.read(path)
@@ -25,6 +27,7 @@ Dir["db/seed/activities/*.md"].each do |path|
                   :bullets => activities
 end
 
+# Videos
 File.read("db/seed/videos.txt").each_line.collect(&:strip).each_with_object({}) do |line, video|
   if line.present?
     if line !~ /iframe/
