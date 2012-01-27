@@ -1,5 +1,13 @@
 # encoding: utf-8
 module HomeHelper
+  def login_or_logout_link
+    if not logged_in?
+      link_to "Prijava administratora", login_path
+    else
+      link_to "Odjava", logout_path, :method => :delete
+    end
+  end
+
   def render_markdown(text)
     Redcarpet.new(text).to_html
   end

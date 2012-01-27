@@ -1,0 +1,16 @@
+- @page_title = "Prijava"
+
+- if @error
+  %p= @error
+
+= labeled_form_for @user, :url => "/login" do |f|
+  = f.error_messages
+
+  = f.text_field :username, :label => "Korisničko ime"
+  = f.password_field :password, :label => "Lozinka"
+
+  - unless user_already_registered?
+    = f.password_field :password_confirmation, :label => "Potvrda lozinke"
+    = f.text_field :flickr_set_url, :label => "Flickr set"
+
+  = f.submit "Prijava"

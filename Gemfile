@@ -29,3 +29,4 @@ group :test do
 end
 
 gem 'redcarpet', '< 2.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125083530) do
+ActiveRecord::Schema.define(:version => 20120126222444) do
 
   create_table "activities", :force => true do |t|
     t.integer  "year"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20120125083530) do
     t.text   "text"
     t.text   "photo"
     t.date   "created_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string "username"
+    t.string "encrypted_password"
+    t.string "password_salt"
+    t.string "flickr_set_url"
   end
 
   create_table "videos", :force => true do |t|
