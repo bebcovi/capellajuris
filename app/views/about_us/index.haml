@@ -3,7 +3,7 @@
 - @about_contents.each do |about_content|
   %article
     %h1= about_content.title
-    != about_content.photo
+    != clear_flickr_photo(about_content.photo)
     != render_markdown(about_content.text)
 
 %article#members

@@ -124,6 +124,10 @@ module Flickr
       @hash["url_#{@size}"]
     end
 
+    def to_s
+      url
+    end
+
     private
 
     def detect_largest_size

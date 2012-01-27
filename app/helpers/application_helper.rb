@@ -23,4 +23,15 @@ module ApplicationHelper
     options[:builder] = LabeledFormBuilder
     form_for(object, options, &block)
   end
+
+  def admin_logged_in?
+    !!session[:admin_logged_in?]
+  end
+
+  def clear_flickr_photo(photo)
+    Nokogiri::HTML.parse(photo).at(:a).tap do |link|
+      link.delete("title")
+      link["class"] = "img"
+    end.to_s
+  end
 end

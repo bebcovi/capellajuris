@@ -6,7 +6,7 @@
   .inner
     %article.main
       %h1= @intro[:title]
-      != @intro[:photo]
+      != clear_flickr_photo(@intro[:photo])
       != render_markdown(@intro[:text])
 
       %p= link_to 'Opširnije →', about_us_path
@@ -31,6 +31,6 @@
         %h1= news.title
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
       != render_markdown(news.text)
-      != news.photo
+      != clear_flickr_photo(news.photo)
       = link_to "Izmjeni", edit_news_path(news)
       = link_to "Izbriši", news_path(news), :method => :delete

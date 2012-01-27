@@ -1,10 +1,10 @@
 # encoding: utf-8
 module HomeHelper
   def login_or_logout_link
-    if not logged_in?
-      link_to "Prijava administratora", login_path
-    else
+    if admin_logged_in?
       link_to "Odjava", logout_path, :method => :delete
+    else
+      link_to "Prijava administratora", login_path
     end
   end
 

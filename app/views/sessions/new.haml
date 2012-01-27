@@ -3,14 +3,15 @@
 - if @error
   %p= @error
 
-= labeled_form_for @user, :url => "/login" do |f|
-  = f.error_messages
+= form_tag "/login" do
 
-  = f.text_field :username, :label => "Korisničko ime"
-  = f.password_field :password, :label => "Lozinka"
+  .field
+    = label_tag :username, "Korisničko ime"
+    = text_field_tag :username, params[:username]
 
-  - unless user_already_registered?
-    = f.password_field :password_confirmation, :label => "Potvrda lozinke"
-    = f.text_field :flickr_set_url, :label => "Flickr set"
+  .field
+    = label_tag :password, "Lozinka"
+    = password_field_tag :password, params[:password]
 
-  = f.submit "Prijava"
+  = submit_tag "Prijava"
+  = link_to "Odustani", :back

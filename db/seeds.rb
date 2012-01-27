@@ -4,7 +4,7 @@
 
 News.create :title => "Božićni koncert",
             :text => File.read("db/seed/news.md"),
-            :photo => '<img src="/images/plakat.jpg" alt="Plakat" />'
+            :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6771643695/" title="Magnificat by Janko Marohnić, on Flickr"><img src="http://farm8.staticflickr.com/7001/6771643695_b861bddd73_b.jpg" width="456" height="650" alt="Magnificat"></a>'
 
 %w[sopranos altos tenors bassos].each do |voice_range|
   file_with_singers = File.read("db/seed/#{voice_range}.txt")

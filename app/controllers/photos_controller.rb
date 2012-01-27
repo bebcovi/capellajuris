@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
   def index
-    @photos = (1..19).collect { |number| "/images/gallery/#{number}.jpg" }
+    @photos = Flickr.photos_from_set(admin[:flickr_set]).collect(&:largest)
   end
 end
