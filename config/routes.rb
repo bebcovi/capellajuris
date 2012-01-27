@@ -11,4 +11,5 @@ CapellaJuris::Application.routes.draw do
   get 'o_nama', :to => "about_us#index", :as => :about_us
   get 'slike', :to => "photos#index", :as => :gallery
   get 'video', :to => "videos#index", :as => :videos
+  resources :videos, :only => [:new, :create, :destroy]
 end
