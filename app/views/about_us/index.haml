@@ -1,12 +1,17 @@
 - @page_title = "O nama"
 
-- @about_contents.each do |about_content|
-  %article
-    %h1= about_content.title
-    != clear_flickr_photo(about_content.photo)
-    != render_markdown(about_content.text)
+%article
+  %h1= @about_us_content.first.title
+  = rework_photo(@about_us_content.first.photo).html_safe
+  = render_markdown(@about_us_content.first.text).html_safe
 
-%article#members
+%article#jurica
+  %h1= @about_us_content.last.title
+  = rework_photo(@about_us_content.last.photo).html_safe
+  = render_markdown(@about_us_content.last.text).html_safe
+
+
+%article#clanovi
   %h1 Članovi zbora
   - %w[soprani alti tenori basi].each do |voice|
     %section
@@ -15,7 +20,7 @@
         = list_of @members.by_voice(voice) do |member|
           = member
 
-%article#activities
+%article#aktivnosti
   %h1 Aktivnosti
   - @activities.each do |activity_year|
     %h2= activity_year.year
