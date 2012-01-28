@@ -25,6 +25,7 @@
               = link_to page[:name], page[:link], :class => (current_page?(page[:link]) || nil) && "current"
 
       #main
+        = login_or_logout_link
         = yield
 
       %footer
