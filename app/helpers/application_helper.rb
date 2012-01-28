@@ -24,6 +24,11 @@ module ApplicationHelper
     form_for(object, options, &block)
   end
 
+  def extended_form_for(object, options = {}, &block)
+    options[:builder] = ExtendedFormBuilder
+    form_for(object, options, &block)
+  end
+
   def admin_logged_in?
     !!session[:admin_logged_in?]
   end

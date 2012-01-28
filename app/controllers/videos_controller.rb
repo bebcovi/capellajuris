@@ -8,8 +8,13 @@ class VideosController < ApplicationController
   end
 
   def create
-    Video.create(params[:video])
-    redirect_to :action => :index
+    @video = Video.create(params[:video])
+
+    if @video.valid?
+      redirect_to videos_path
+    else
+      render :new
+    end
   end
 
   def destroy
