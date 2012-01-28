@@ -1,0 +1,14 @@
+- @page_title = "Izmjena članova zbora"
+
+#members
+  - %w[soprani alti tenori basi].each do |vocal_range|
+    %section
+      %h1= vocal_range.capitalize
+      %ol
+        = list_of @members.by_voice(vocal_range) do |member|
+          %div= member
+          = link_to "x", member_path(member), :method => :delete
+      = link_to "Dodaj novog člana", new_member_path
+
+%p
+  = link_to "← Natrag", about_us_path

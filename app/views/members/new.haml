@@ -1,0 +1,10 @@
+- @page_title = "Novi član"
+
+= labeled_form_for @member do |f|
+  = f.custom_error_messages
+
+  = f.text_field :first_name, :label => "Ime"
+  = f.text_field :last_name, :label => "Prezime"
+  = f.text_field :vocal_range, :label => "Glas"
+  = f.submit "Dodaj"
+  = link_to "Odustani", :back

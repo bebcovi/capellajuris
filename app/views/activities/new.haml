@@ -1,0 +1,9 @@
+- @page_title = "Dodaj nove aktivnosti"
+
+= form_for @activity do |f|
+  = f.custom_error_messages
+
+  = f.label :year, "Godina"
+  = f.text_field :year
+
+  = render :partial => "layouts/gollum_editor", :locals => {:f => f, :text_column => :bullets}

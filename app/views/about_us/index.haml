@@ -19,9 +19,13 @@
       %ol
         = list_of @members.by_voice(voice) do |member|
           = member
+  = link_to "Izmjeni", members_path
 
 %article#aktivnosti
   %h1 Aktivnosti
   - @activities.each do |activity_year|
     %h2= activity_year.year
     != render_markdown(activity_year.bullets)
+  = link_to "Dodaj novu godinu", new_activity_path
+    = link_to "Izmjeni", edit_activity_path(activity)
+    = link_to "Izbriši", activity_path(activity), :method => :delete
