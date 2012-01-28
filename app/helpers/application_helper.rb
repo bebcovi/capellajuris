@@ -28,10 +28,15 @@ module ApplicationHelper
     !!session[:admin_logged_in?]
   end
 
-  def clear_flickr_photo(photo)
-    Nokogiri::HTML.parse(photo).at(:a).tap do |link|
-      link.delete("title")
-      link["class"] = "img"
-    end.to_s
+  def rework_photo(photo)
+    parsed_photo = Nokogiri::HTML.parse(photo).at(:a)
+    unless parsed_photo.nil?
+      parsed_photo.tap do |link|
+        link.delete("title") if link["title"] =~ /flickr/i
+        link["class"] = "img"
+      end.to_s
+    else
+      photo
+    end
   end
 end

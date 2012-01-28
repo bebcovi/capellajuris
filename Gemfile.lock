@@ -139,6 +139,7 @@ DEPENDENCIES
   faraday-stack
   haml-rails
   jquery-rails
+  nokogiri
   pg
   rails
   redcarpet (< 2.0.0)
