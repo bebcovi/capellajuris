@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def index
-    @videos = Video.all
+    @videos = Video.order(:id)
   end
 
   def new
@@ -19,6 +19,6 @@ class VideosController < ApplicationController
 
   def destroy
     Video.destroy(params[:id])
-    redirect_to :action => :index
+    redirect_to videos_path
   end
 end

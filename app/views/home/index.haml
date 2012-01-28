@@ -6,16 +6,15 @@
   .inner
     %article.main
       %h1= @intro[:title]
-      != clear_flickr_photo(@intro[:photo])
-      != render_markdown(@intro[:text])
+      = rework_photo(@intro[:photo]).html_safe
+      = render_markdown(@intro[:text]).html_safe
 
       %p= link_to 'Opširnije →', about_us_path
 
     %aside
       %section#video
         %h2= @sidebar[:video_title]
-        != @sidebar[:video]
-
+        = @sidebar[:video].html_safe
       %section#audio
         %h2= @sidebar[:audio_title]
         = audio_tag @sidebar[:audio], :controls => true, :autobuffer => true
@@ -30,7 +29,7 @@
       %header
         %h1= news.title
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
-      != render_markdown(news.text)
-      != clear_flickr_photo(news.photo)
+      = render_markdown(news.text).html_safe
+      = rework_photo(news.photo).html_safe
       = link_to "Izmjeni", edit_news_path(news)
       = link_to "Izbriši", news_path(news), :method => :delete

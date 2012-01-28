@@ -3,8 +3,9 @@
 #videos
   %ul
     = list_of(@videos) do |video|
-      %h1= video.title.try(:gsub, ' - ', ' &ndash; ')
-      != video.link
+      - if video.title.present?
+        %h1= video.title.gsub(' - ', ' &ndash; ')
+      = video.link.html_safe
       = link_to "Izbriši", video_path(video), :method => :delete
 
   = link_to "Dodaj novi video", new_video_path

@@ -23,9 +23,9 @@
 
 %article#aktivnosti
   %h1 Aktivnosti
-  - @activities.each do |activity_year|
-    %h2= activity_year.year
-    != render_markdown(activity_year.bullets)
   = link_to "Dodaj novu godinu", new_activity_path
+  - @activities.each do |activity|
+    %h2= activity.year
+    = render_markdown(activity.bullets).html_safe
     = link_to "Izmjeni", edit_activity_path(activity)
     = link_to "Izbriši", activity_path(activity), :method => :delete
