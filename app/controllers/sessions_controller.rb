@@ -1,12 +1,13 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
   def new
+    store_referer
   end
 
   def create
     if admin[:username] == params[:username] and admin[:password] == params[:password]
       log_in
-      redirect_to home_path
+      redirect_to referer
     else
       @error = "Pogrešno korisničko ime ili lozinka"
       render :new

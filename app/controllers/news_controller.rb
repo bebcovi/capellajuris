@@ -1,4 +1,8 @@
 class NewsController < ApplicationController
+  before_filter :only => [:new, :edit] do |controller|
+    controller.store_referer("#{request.referer}#vijesti")
+  end
+
   def new
     @news = News.new
   end
