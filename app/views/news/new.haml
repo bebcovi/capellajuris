@@ -1,86 +1,13 @@
 - @page_title = (@news.new_record? ? "Nova vijest" : "Izmjeni vijest")
 
-= form_for @news, :name => "gollum-editor" do |f|
+= extended_form_for @news do |f|
+
+  = f.custom_error_messages
 
   = f.label :title, "Naslov"
   = f.text_field :title
 
-  #gollum-editor
-    %fieldset#gollum-editor-fields
-      %input#gollum-editor-page-title{name: 'page', type: 'hidden', value: 'Gollum Editor'}
-      #gollum-editor-function-bar
-        #gollum-editor-function-buttons
-          %a#function-bold.function-button{href: '#'}
-            %span Bold
-          %a#function-italic.function-button{href: '#'}
-            %span Italic
-          %a#function-code.function-button{href: '#'}
-            %span Code
-          %span.function-divider &nbsp;
-          %a#function-ul.function-button{href: '#'}
-            %span Unordered List
-          %a#function-ol.function-button{href: '#'}
-            %span Ordered List
-          %a#function-blockquote.function-button{href: '#'}
-            %span Blockquote
-          %a#function-hr.function-button{href: '#'}
-            %span Horizontal Rule
-          %span.function-divider &nbsp;
-          %a#function-h1.function-button{href: '#'}
-            %span h1
-          %a#function-h2.function-button{href: '#'}
-            %span h2
-          %a#function-h3.function-button{href: '#'}
-            %span h3
-          %span.function-divider &nbsp;
-          %a#function-link.function-button{href: '#'}
-            %span Link
-          %a#function-image.function-button{href: '#'}
-            %span Image
-          %span.function-divider &nbsp;
-          %a#function-help.function-button{href: '#'}
-            %span Help
-      #gollum-editor-help.jaws
-        %ul#gollum-editor-help-parent
-          %li
-            %a.selected{href: 'javascript:void(0);'} Help 1
-          %li
-            %a{href: 'javascript:void(0);'} Help 1
-          %li
-            %a{href: 'javascript:void(0);'} Help 1
-        %ul#gollum-editor-help-list
-          %li
-            %a{href: 'javascript:void(0);'} Help 2
-          %li
-            %a{href: 'javascript:void(0);'} Help 3
-          %li
-            %a{href: 'javascript:void(0);'} Help 4
-          %li
-            %a{href: 'javascript:void(0);'} Help 5
-          %li
-            %a{href: 'javascript:void(0);'} Help 6
-          %li
-            %a{href: 'javascript:void(0);'} Help 7
-          %li
-            %a{href: 'javascript:void(0);'} Help 8
-        #gollum-editor-help-wrapper
-          #gollum-editor-help-content
-            %p
-      = f.text_area :text, :id => "gollum-editor-body", :"data-markup-lang" => "markdown"
-      %span.jaws
-        %br
-      = f.submit "Spremi", :id => "gollum-editor-submit"
-      = link_to "Prikaži", "javascript:void(0)", :id => "gollum-editor-preview", :class => "minibutton"
-      = link_to "Odustani", home_path, :id => "gollum-editor-cancel", :class => "minibutton"
+  = render :partial => "layouts/gollum_editor", :locals => {:f => f, :text_column => :text}
 
   = f.label :photo, "Slika"
   = f.text_field :photo, :id => "photo_field"
-
-:javascript
-  $.GollumEditor()
-  $('#gollum-editor-function-bar a')
-    .each ->
-      title = $(this).find('span').text()
-      title = title.replace(/h(\d)/, 'Heading $1')
-      $(this).attr('title', title)
-    .twipsy()
