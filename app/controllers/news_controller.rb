@@ -3,6 +3,10 @@ class NewsController < ApplicationController
     controller.store_referer("#{request.referer}#vijesti")
   end
 
+  def preview
+    @news = News.new(params[:news])
+  end
+
   def new
     @news = News.new
   end
