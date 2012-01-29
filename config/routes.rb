@@ -11,6 +11,7 @@ CapellaJuris::Application.routes.draw do
   end
 
   get 'o_nama', :to => "about_us#index", :as => :about_us
+  resources :general_contents, :only => [:edit, :update]
   resources :activities do
     post 'preview'
   end

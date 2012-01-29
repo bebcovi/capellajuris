@@ -1,0 +1,2 @@
+module GeneralContentsHelper
+end

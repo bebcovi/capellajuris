@@ -11,12 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125083530) do
+ActiveRecord::Schema.define(:version => 20120128234104) do
 
   create_table "activities", :force => true do |t|
     t.integer  "year"
     t.text     "bullets"
     t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "general_contents", :force => true do |t|
+    t.string   "title"
+    t.text     "photo"
+    t.text     "text"
     t.datetime "updated_at"
   end
 

@@ -1,10 +1,21 @@
 # encoding: utf-8
-[News, Member, Activity, Video].each { |model| model.delete_all }
+[News, Member, Activity, Video, GeneralContent].each { |model| model.delete_all }
 
 # News
 News.create :title => "Božićni koncert",
             :text => File.read("db/seed/news.md"),
             :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6771643695/" title="Magnificat by Janko Marohnić, on Flickr"><img src="http://farm8.staticflickr.com/7001/6771643695_b861bddd73_b.jpg" width="456" height="650" alt="Magnificat"></a>'
+
+# GeneralContent
+GeneralContent.create :title => "Capella Juris",
+                      :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6109212127/"><img src="http://farm7.staticflickr.com/6077/6109212127_ebdf4f9f49_m.jpg" width="240" height="161" alt="Capella juris"></a>',
+                      :text => File.read("db/seed/intro.md")
+GeneralContent.create :title => "Povijest zbora",
+                      :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6109212283/"><img src="http://farm7.staticflickr.com/6076/6109212283_41d11b788a_m.jpg" width="240" height="162" alt="povijest_zbora"></a>',
+                      :text => File.read("db/seed/povijest_zbora.md")
+GeneralContent.create :title => "Biografija dirigenta",
+                      :photo => '<a href="http://www.flickr.com/photos/67131352@N04/6109212199/"><img src="http://farm7.staticflickr.com/6090/6109212199_3a843ae74c_m.jpg" width="158" height="108" alt="biografija_dirigenta"></a>',
+                      :text => File.read("db/seed/biografija_dirigenta.md")
 
 # Members
 %w[sopranos altos tenors bassos].each do |voice_range|

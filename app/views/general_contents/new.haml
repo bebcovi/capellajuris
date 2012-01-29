@@ -1,0 +1,13 @@
+- @page_title = "Izmjeni sadržaj"
+
+= extended_form_for @general_content do |f|
+
+  = f.custom_error_messages
+
+  = f.label :title, "Naslov"
+  = f.text_field :title
+
+  = render :partial => "layouts/gollum_editor", :locals => {:f => f, :text_column => :text}
+
+  = f.label :photo, "Slika"
+  = f.text_field :photo, :id => "photo_field"
