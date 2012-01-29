@@ -45,9 +45,5 @@ module CapellaJuris
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    config.sass.preferred_syntax = :sass
-    config.compass.line_comments = false
-    config.compass.images_dir = File.join('app', 'assets', 'images')
   end
 end

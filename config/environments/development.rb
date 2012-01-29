@@ -27,4 +27,8 @@ CapellaJuris::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.sass.preferred_syntax = :sass
+  config.compass.line_comments = false
+  config.compass.images_dir = File.join('app', 'assets', 'images')
 end
