@@ -29,10 +29,6 @@ module ApplicationHelper
     form_for(object, options, &block)
   end
 
-  def admin_logged_in?
-    !!session[:admin_logged_in?]
-  end
-
   def rework_photo(photo)
     parsed_photo = Nokogiri::HTML.parse(photo).at(:a)
     unless parsed_photo.nil?

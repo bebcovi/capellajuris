@@ -20,7 +20,7 @@
 %section#vijesti
   %h1 Vijesti
 
-  = link_to "Dodaj", new_news_path
+  = link_to "Dodaj", new_news_path if admin_logged_in?
 
   - @news.each do |news|
     %article
@@ -29,5 +29,5 @@
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
       = render_markdown(news.text).html_safe
       = rework_photo(news.photo).html_safe
-      = link_to "Izmjeni", edit_news_path(news)
-      = link_to "Izbriši", news_path(news), :method => :delete
+      = link_to "Izmjeni", edit_news_path(news) if admin_logged_in?
+      = link_to "Izbriši", news_path(news), :method => :delete if admin_logged_in?

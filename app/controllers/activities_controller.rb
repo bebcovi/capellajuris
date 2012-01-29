@@ -1,4 +1,6 @@
 class ActivitiesController < ApplicationController
+  before_filter :handle_unauthorized_request
+
   before_filter :only => [:new, :edit] do
     store_referer("#{about_us_path}#aktivnosti")
   end

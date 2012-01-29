@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  before_filter :handle_unauthorized_request, :except => [:index]
+
   def index
     @videos = Video.order(:id)
   end

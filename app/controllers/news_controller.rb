@@ -1,4 +1,6 @@
 class NewsController < ApplicationController
+  before_filter :handle_unauthorized_request
+
   before_filter :only => [:new, :edit] do
     store_referer("#{home_path}#vijesti")
   end
