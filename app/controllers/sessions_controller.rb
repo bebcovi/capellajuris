@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to home_path
+    redirect_to :back
   end
 
 private

@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
-  before_filter :only => [:new, :edit] do |controller|
-    controller.store_referer("#{request.referer}#vijesti")
+  before_filter :only => [:new, :edit] do
+    store_referer("#{home_path}#vijesti")
   end
 
   def preview
@@ -15,7 +15,7 @@ class NewsController < ApplicationController
     @news = News.create(params[:news])
 
     if @news.valid?
-      redirect_to home_path
+      redirect_to referer
     else
       render :new
     end
@@ -30,7 +30,7 @@ class NewsController < ApplicationController
     @news = News.find(params[:id])
 
     if @news.update_attributes(params[:news])
-      redirect_to home_path
+      redirect_to referer
     else
       render :new
     end
@@ -38,6 +38,6 @@ class NewsController < ApplicationController
 
   def destroy
     News.destroy(params[:id])
-    redirect_to home_path
+    redirect_to "#{home_path}#vijesti"
   end
 end

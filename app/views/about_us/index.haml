@@ -1,15 +1,16 @@
 - @page_title = "O nama"
 
-%article
-  %h1= @about_us_content.first.title
-  = rework_photo(@about_us_content.first.photo).html_safe
-  = render_markdown(@about_us_content.first.text).html_safe
+%article#povijest
+  %h1= @history.title
+  = rework_photo(@history.photo).html_safe
+  = render_markdown(@history.text).html_safe
+  = link_to "Izmjeni", edit_general_content_path(@history) if admin_logged_in?
 
 %article#jurica
-  %h1= @about_us_content.last.title
-  = rework_photo(@about_us_content.last.photo).html_safe
-  = render_markdown(@about_us_content.last.text).html_safe
-
+  %h1= @conductor.title
+  = rework_photo(@conductor.photo).html_safe
+  = render_markdown(@conductor.text).html_safe
+  = link_to "Izmjeni", edit_general_content_path(@conductor) if admin_logged_in?
 
 %article#clanovi
   %h1 Članovi zbora

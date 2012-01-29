@@ -1,6 +1,6 @@
 class AboutUsController < ApplicationController
   def index
-    @about_us_content = GeneralContent.all
+    @history, @conductor = GeneralContent.last(2)
     @activities = Activity.order("year DESC")
     @members = Member.order(:last_name)
   end

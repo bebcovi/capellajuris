@@ -22,7 +22,7 @@
         %nav
           %ol#pages
             = list_of navigation_pages do |page|
-              = link_to page[:name], page[:link], :class => (current_page?(page[:link]) || nil) && "current"
+              = link_to page[:name], page[:link], :class => current_page?(page[:link]) ? "current" : nil
 
       #main
         = login_or_logout_link

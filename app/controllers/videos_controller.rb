@@ -11,7 +11,7 @@ class VideosController < ApplicationController
     @video = Video.create(params[:video])
 
     if @video.valid?
-      redirect_to videos_path
+      redirect_to "#{videos_path}#last"
     else
       render :new
     end
