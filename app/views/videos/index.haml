@@ -2,12 +2,11 @@
 
 #videos
   %ul
-    - @videos.each do |video|
-      %li{:id => (video == @videos.last) ? "last" : nil}
-        - if video.title.present?
-          %h1= video.title.gsub(' - ', ' &ndash; ')
-        = video.link.html_safe
-        = link_to "Izbriši", video_path(video), :method => :delete if admin_logged_in?
+    = list_of(@videos) do |video|
+      - if video.title.present?
+        %h1= video.title.gsub(' - ', ' &ndash; ')
+      = video.link.html_safe
+      = link_to "Izbriši", video_path(video), :method => :delete if admin_logged_in?
 
   = link_to "Dodaj novi video", new_video_path if admin_logged_in?
 
