@@ -24,12 +24,14 @@
 
 #vijesti article
   border-color: darken(white, 15%)
-
+  header
+    +clearfix
   h1
     +trailer
     +adjust-font-size-to(1.75em, 2)
-
+    float: left
   time
-    color: lighten($text, 30%)
     +leader(0.5)
+    float: right
+    color: lighten($text, 30%)
     font-size: 0.8
