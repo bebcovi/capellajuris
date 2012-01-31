@@ -39,7 +39,7 @@
         $.GollumEditor.Placeholder.add($('#gollum-editor-edit-summary input'));
         $('#gollum-editor form[name="gollum-editor"]').submit(function( e ) {
           e.preventDefault();
-          $.GollumEditor.Placeholder.clearAll();
+          // $.GollumEditor.Placeholder.clearAll();
           debug('submitting');
           $(this).unbind('submit');
           $(this).submit();
