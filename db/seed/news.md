@@ -1,1 +1,0 @@
-Pozivamo vas da nam se pridružite u ponedjeljak **19.12.** u 20h u [Crkvi sv. Blaža](/images/crkva_sv_blaza.png) i poslušate "Magnifica" Johna Ruttera u izvedbi Capelle juris, oratorijskog zbora Crkve sv. Marka Cantores Sancti Marci, komornog orkestra i soprana Ane Fortune.
