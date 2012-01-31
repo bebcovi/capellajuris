@@ -7,8 +7,8 @@
       %ol
         = list_of @members.by_voice(vocal_range) do |member|
           %div= member
-          = link_to "x", member_path(member), :method => :delete
-      = link_to "Dodaj novog člana", new_member_path
+          = delete_button "x", member_path(member)
+      = add_button "Dodaj novog člana", new_member_path
 
 %p
   = link_to "← Natrag", "#{about_us_path}#clanovi"

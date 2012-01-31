@@ -4,13 +4,13 @@
   %h1= @history.title
   = rework_photo(@history.photo).html_safe
   = render_markdown(@history.text).html_safe
-  = link_to "Izmjeni", edit_general_content_path(@history) if admin_logged_in?
+  = edit_button "Izmjeni", edit_general_content_path(@history) if admin_logged_in?
 
 %article#jurica
   %h1= @conductor.title
   = rework_photo(@conductor.photo).html_safe
   = render_markdown(@conductor.text).html_safe
-  = link_to "Izmjeni", edit_general_content_path(@conductor) if admin_logged_in?
+  = edit_button "Izmjeni", edit_general_content_path(@conductor) if admin_logged_in?
 
 %article#clanovi
   %h1 Članovi zbora
@@ -20,13 +20,13 @@
       %ol
         = list_of @members.by_voice(voice) do |member|
           = member
-  = link_to "Izmjeni", members_path if admin_logged_in?
+  = edit_button "Izmjeni", members_path if admin_logged_in?
 
 %article#aktivnosti
   %h1 Aktivnosti
-  = link_to "Dodaj novu godinu", new_activity_path if admin_logged_in?
+  = add_button "Dodaj novu godinu", new_activity_path if admin_logged_in?
   - @activities.each do |activity|
     %h2= activity.year
     = render_markdown(activity.bullets).html_safe
-    = link_to "Izmjeni", edit_activity_path(activity) if admin_logged_in?
-    = link_to "Izbriši", activity_path(activity), :method => :delete if admin_logged_in?
+    = edit_button "Izmjeni", edit_activity_path(activity) if admin_logged_in?
+    = delete_button "Izbriši", activity_path(activity) if admin_logged_in?

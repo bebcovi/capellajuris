@@ -6,9 +6,9 @@
       - if video.title.present?
         %h1= video.title.gsub(' - ', ' &ndash; ')
       = video.link.html_safe
-      = link_to "Izbriši", video_path(video), :method => :delete if admin_logged_in?
+      = delete_button "Izbriši", video_path(video) if admin_logged_in?
 
-  = link_to "Dodaj novi video", new_video_path if admin_logged_in?
+  = add_button "Dodaj novi video", new_video_path if admin_logged_in?
 
   %p#top
     = link_to 'Povratak na vrh ↑', '#'

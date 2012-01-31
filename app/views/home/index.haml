@@ -6,7 +6,7 @@
       %h1= @intro.title
       = rework_photo(@intro.photo).html_safe
       = render_markdown(@intro.text).html_safe
-      = link_to "Izmjeni", edit_general_content_path(@intro) if admin_logged_in?
+      = edit_button "Izmjeni", edit_general_content_path(@intro) if admin_logged_in?
 
       %p= link_to 'Opširnije →', about_us_path
 
@@ -21,7 +21,7 @@
 %section#vijesti
   %h1 Vijesti
 
-  = link_to "Dodaj", new_news_path if admin_logged_in?
+  = add_button "Dodaj", new_news_path if admin_logged_in?
 
   - @news.each do |news|
     %article
@@ -30,5 +30,5 @@
         = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
       = render_markdown(news.text).html_safe
       = rework_photo(news.photo).html_safe
-      = link_to "Izmjeni", edit_news_path(news) if admin_logged_in?
-      = link_to "Izbriši", news_path(news), :method => :delete if admin_logged_in?
+      = edit_button "Izmjeni", edit_news_path(news) if admin_logged_in?
+      = delete_button "Izbriši", news_path(news) if admin_logged_in?

@@ -40,4 +40,19 @@ module ApplicationHelper
       photo
     end
   end
+
+  def add_button(text, path, options = {})
+    opt = {}
+    link_to text, path, opt.merge(options)
+  end
+
+  def edit_button(text, path, options = {})
+    opt = {}
+    link_to text, path, opt.merge(options)
+  end
+
+  def delete_button(text, path, options = {})
+    opt = {:method => :delete, :confirm => "Jeste li sigurni?"}
+    link_to text, path, opt.merge(options)
+  end
 end
