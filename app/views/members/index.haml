@@ -8,7 +8,7 @@
         = list_of @members.by_voice(voice) do |member|
           %div= member
           = delete_button "x", member_path(member)
-      = add_button "Dodaj novog člana", new_member_path
+      = add_button "Dodaj novog člana", new_member_path(voice[0])
 
 %p
   = link_to "← Natrag", "#{about_us_path}#clanovi"

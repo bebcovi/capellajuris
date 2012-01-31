@@ -15,7 +15,8 @@ CapellaJuris::Application.routes.draw do
   resources :activities do
     post 'preview'
   end
-  resources :members
+  resources :members, :only => [:create, :index, :destroy]
+  get 'members/new/:voice', :to => "members#new", :as => :new_member
 
   get 'slike', :to => "photos#index", :as => :gallery
   get 'video', :to => "videos#index", :as => :videos

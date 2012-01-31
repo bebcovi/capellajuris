@@ -5,6 +5,6 @@
 
   = f.text_field :first_name, :label => "Ime"
   = f.text_field :last_name, :label => "Prezime"
-  = f.text_field :vocal_range, :label => "Glas"
+  = f.hidden_field :voice, :value => params[:voice]
   = f.submit "Dodaj"
   = cancel_button "Odustani", :back
