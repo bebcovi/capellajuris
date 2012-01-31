@@ -1,8 +1,26 @@
 #intro
+  $intro: 1.5
+  $aside: 300px
+  +rhythm-borders(1px, $intro)
   background-color: darken(white, 2%)
   border-color: darken(white, 10%)
-  section h2:after
-    content: ':'
+  .main
+    +trailer(0)
+    float: left
+    width: $site - 2*rhythm($intro) - $aside - rhythm(3)
+    img
+      +leader(0.5)
+    *:last-child
+      +trailer(0)
+  aside
+    float: right
+    width: $aside
+  section
+    +rhythm(0,1,1,0)
+    h2:after
+      content: ':'
+    &:last-child
+      +trailer(0)
 
 #log
   text-align: right

@@ -111,34 +111,10 @@ img
           float: right
           margin: rhythm(0.5) 1px 0 rhythm(0.5)
 
-  #intro
-    $intro-padding: 1.5
-    $aside-width: 300px
 
-    +rhythm-borders(1px, $intro-padding)
 
-    .inner
-      +clearfix
 
-      .main
-        +trailer(0)
-        float: left
-        width: $site - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
 
-        & > img
-          +leader(0.5)
-
-        *:last-child
-          +trailer(0)
-
-      aside
-        float: right
-        width: $aside-width
-
-        section
-          +trailer
-          &:last-child
-            +trailer(0)
 
   #news article
     +trailer(1.5)
