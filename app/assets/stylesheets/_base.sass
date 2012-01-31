@@ -19,7 +19,12 @@ $link: #c70000
 
 //mixins
 =button($dir: left)
+=unstyled-list
   margin: 0
+  padding: 0
+  +no-bullets
+
+=button
   +rhythm-borders(1px, 0.5)
   display: block
   float: $dir
