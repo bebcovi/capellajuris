@@ -31,9 +31,9 @@
         %ol#pages
           = list_of navigation_pages do |page|
             = link_to page[:name], page[:link], :class => current_page?(page[:link]) ? "current" : nil
+        #log= login_or_logout_link
 
     %section#main
-      = login_or_logout_link
       = yield
 
     %footer
