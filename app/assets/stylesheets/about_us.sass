@@ -5,8 +5,9 @@ article#clanovi section
     font-weight: bold
     &:after
       content: ':'
-
-  ol li
+  ol
+    +unstyled-list
+  li
     &:after
       content: ', '
     &:last-child:after

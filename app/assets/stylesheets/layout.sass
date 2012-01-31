@@ -73,6 +73,7 @@ ol, ul
 
     #pages
       +clearfix
+      +unstyled-list
       float: left
 
       li
@@ -140,18 +141,14 @@ ol, ul
     h2, ol, ol li
       display: inline
 
-  #slike
 
     ul li
       +trailer
 
-    img
-      float: none
-      display: inline
+#log
+  float: right
+  padding-right: rhythm(.5)
 
-  #video > ul > li
-    +clearfix
-    +trailer(2)
 
   footer
     +clearfix
