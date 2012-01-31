@@ -1,5 +1,20 @@
 # encoding: utf-8
 module ApplicationHelper
+  def login_or_logout_link
+    if admin_logged_in?
+      link_to "Odjava", logout_path, :method => :delete
+    else
+      link_to "Prijava administratora", login_path
+    end
+  end
+
+  def navigation_pages
+    [{:link => home_path, :name => "Početna"},
+     {:link => about_us_path, :name => "O nama"},
+     {:link => gallery_path, :name => "Slike"},
+     {:link => videos_path, :name => "Video"}]
+  end
+
   def croatian_date(date)
     croatian_months = {
       1  => "siječnja",
@@ -17,16 +32,6 @@ module ApplicationHelper
     }
 
     "#{date.day}. #{croatian_months[date.month]}, #{date.year}"
-  end
-
-  def labeled_form_for(object, options = {}, &block)
-    options[:builder] = LabeledFormBuilder
-    form_for(object, options, &block)
-  end
-
-  def extended_form_for(object, options = {}, &block)
-    options[:builder] = ExtendedFormBuilder
-    form_for(object, options, &block)
   end
 
   def rework_photo(photo)
@@ -59,5 +64,32 @@ module ApplicationHelper
   def cancel_button(text, path, options = {})
     opt = {}
     link_to text, path, opt.merge(options)
+  end
+
+  def render_markdown(text)
+    Redcarpet.new(text).to_html
+  end
+
+  def audio_tag(sources, options = {})
+    options.symbolize_keys!
+
+    if sources.is_a?(Array)
+      content_tag("audio", options) do
+        sources.collect { |source| tag("source", :src => path_to_audio(source)) }.join.html_safe
+      end
+    else
+      options[:src] = path_to_audio(sources)
+      tag("audio", options)
+    end
+  end
+
+  def labeled_form_for(object, options = {}, &block)
+    options[:builder] = LabeledFormBuilder
+    form_for(object, options, &block)
+  end
+
+  def extended_form_for(object, options = {}, &block)
+    options[:builder] = ExtendedFormBuilder
+    form_for(object, options, &block)
   end
 end

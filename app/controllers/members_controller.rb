@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   before_filter :handle_unauthorized_request
 
-  def index
+  def gui
     @members = Member.order(:last_name)
   end
 

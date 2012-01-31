@@ -1,6 +1,6 @@
 - @page_title = "Novi video"
 
-= labeled_form_for @video, :url => "/videos", do |f|
+= labeled_form_for @video, :url => "/videos" do |f|
   = f.custom_error_messages
 
   = f.text_field :title, :label => "Naslov"

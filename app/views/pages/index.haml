@@ -8,7 +8,7 @@
       = render_markdown(@intro.text).html_safe
       = edit_button "Izmjeni", edit_general_content_path(@intro) if admin_logged_in?
 
-      %p= link_to 'Opširnije →', about_us_path
+      %p= link_to "Opširnije →", about_us_path
 
     %aside
       %section#video
@@ -17,6 +17,7 @@
       %section#audio
         %h2= @sidebar[:audio_title]
         = audio_tag @sidebar[:audio], :controls => true, :autobuffer => true
+      = edit_button "Izmjeni", edit_sidebar_path(@sidebar) if admin_logged_in?
 
 %section#vijesti
   %h1 Vijesti

@@ -4,12 +4,9 @@ class GeneralContentsController < ApplicationController
   before_filter :only => :edit do
     ids = GeneralContent.pluck(:id).sort
     case params[:id].to_i
-    when ids.first
-      store_referer("#{home_path}#intro")
-    when ids.second
-      store_referer("#{about_us_path}#povijest")
-    when ids.third
-      store_referer("#{about_us_path}#jurica")
+    when ids.first; store_referer(intro_path)
+    when ids.second; store_referer(history_path)
+    when ids.third; store_referer(conductor_path)
     end
   end
 

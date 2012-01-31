@@ -20,7 +20,7 @@
       %ol
         = list_of @members.by_voice(voice) do |member|
           = member
-  = edit_button "Izmjeni", members_path if admin_logged_in?
+  = edit_button "Izmjeni", edit_members_path if admin_logged_in?
 
 %article#aktivnosti
   %h1 Aktivnosti

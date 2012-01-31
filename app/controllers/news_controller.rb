@@ -2,7 +2,7 @@ class NewsController < ApplicationController
   before_filter :handle_unauthorized_request
 
   before_filter :only => [:new, :edit] do
-    store_referer("#{home_path}#vijesti")
+    store_referer(news_path)
   end
 
   def preview
@@ -17,7 +17,7 @@ class NewsController < ApplicationController
     @news = News.create(params[:news])
 
     if @news.valid?
-      redirect_to referer
+      redirect_to news_path
     else
       render :new
     end
@@ -32,7 +32,7 @@ class NewsController < ApplicationController
     @news = News.find(params[:id])
 
     if @news.update_attributes(params[:news])
-      redirect_to referer
+      redirect_to news_path
     else
       render :new
     end
@@ -40,6 +40,6 @@ class NewsController < ApplicationController
 
   def destroy
     News.destroy(params[:id])
-    redirect_to "#{home_path}#vijesti"
+    redirect_to news_path
   end
 end

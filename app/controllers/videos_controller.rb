@@ -1,9 +1,5 @@
 class VideosController < ApplicationController
-  before_filter :handle_unauthorized_request, :except => [:index]
-
-  def index
-    @videos = Video.order(:id)
-  end
+  before_filter :handle_unauthorized_request
 
   def new
     @video = Video.new
@@ -13,7 +9,7 @@ class VideosController < ApplicationController
     @video = Video.create(params[:video])
 
     if @video.valid?
-      redirect_to "#{videos_path}#top"
+      redirect_to last_video_path
     else
       render :new
     end

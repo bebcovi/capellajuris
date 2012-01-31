@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131004604) do
+ActiveRecord::Schema.define(:version => 20120131023952) do
 
   create_table "activities", :force => true do |t|
     t.integer  "year"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20120131004604) do
     t.text   "text"
     t.text   "photo"
     t.date   "created_at"
+  end
+
+  create_table "sidebars", :force => true do |t|
+    t.string   "video_title"
+    t.text     "video"
+    t.string   "audio_title"
+    t.text     "audio_mp3"
+    t.text     "audio_ogg"
+    t.datetime "updated_at"
   end
 
   create_table "videos", :force => true do |t|

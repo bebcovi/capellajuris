@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def handle_unauthorized_request
     if admin_not_logged_in?
-      raise ActionController::RoutingError, "This page is supposed to not be found because you're not logged in as admin"
+      raise ActionController::RoutingError, "This page is not found, so fuck off!"
     end
   end
 
@@ -34,4 +34,12 @@ class ApplicationController < ActionController::Base
     session[:referer] || home_path
   end
   helper_method :referer
+
+  def intro_path;      "#{home_path}#intro"          end
+  def news_path;       "#{home_path}#vijesti"        end
+  def history_path;    "#{about_us_path}#povijest"   end
+  def conductor_path;  "#{about_us_path}#jurica"     end
+  def members_path;    "#{about_us_path}#clanovi"    end
+  def activities_path; "#{about_us_path}#aktivnosti" end
+  def last_video_path; "#{videos_path}#last"         end
 end
