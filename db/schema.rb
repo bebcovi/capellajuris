@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128234104) do
+ActiveRecord::Schema.define(:version => 20120131004604) do
 
   create_table "activities", :force => true do |t|
     t.integer  "year"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20120128234104) do
   create_table "members", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "vocal_range"
+    t.string   "voice"
     t.datetime "created_at"
   end
 
