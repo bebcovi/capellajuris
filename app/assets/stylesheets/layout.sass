@@ -11,9 +11,10 @@ h1, h2
   font-family: $serif
 
 h1
-  +adjust-font-size-to(3em, 3)
+  +adjust-font-size-to(42px, 3)
+
 h2
-  font-size: 1.5em
+  font-size: 25px
 
 h1, h2, section, p
   +trailer
@@ -220,20 +221,20 @@ footer
 #contact
   +leader(0.5)
   +trailer(0)
-  font-size: 1.25em
 
 .label
   font-weight: bold
   &:after
     content: ':'
+  font-size: 18px
 
 #facebook
   +trailer(0)
-  font-size: 1.2em
 
   p:after
     content: ':'
 
+  font-size: 17px
   a
     color: lighten(black, 40%)
     &:hover
