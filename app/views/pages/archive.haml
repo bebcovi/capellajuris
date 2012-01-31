@@ -1,0 +1,14 @@
+%p= link_to "← Natrag", "#{home_path}#arhiva"
+
+%section#arhiva
+  %h1 Arhiva
+
+  - @news.each do |news|
+    %article
+      %header
+        %h1= news.title
+        = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
+      = render_markdown(news.text).html_safe
+      = rework_photo(news.photo).html_safe
+
+  = will_paginate(@news)

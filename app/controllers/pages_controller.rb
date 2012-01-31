@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     @intro, @sidebar = GeneralContent.first, Sidebar.the_only
-    @news = News.order("created_at DESC")
+    @news = News.order("created_at DESC").limit(5)
   end
 
   def about_us
@@ -16,5 +16,9 @@ class PagesController < ApplicationController
 
   def videos
     @videos = Video.order(:id)
+  end
+
+  def archive
+    @news = News.order("created_at DESC").page(params[:page]).per_page(10)
   end
 end

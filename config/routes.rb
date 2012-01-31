@@ -9,6 +9,7 @@ CapellaJuris::Application.routes.draw do
   get "o_nama", :to => "pages#about_us", :as => :about_us
   get "slike", :to => "pages#gallery", :as => :gallery
   get "video", :to => "pages#videos", :as => :videos
+  get "arhiva", :to => "pages#archive", :as => :archive
 
   resources(:news) { post "preview", :on => :collection }
   resource :sidebar

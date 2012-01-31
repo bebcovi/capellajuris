@@ -33,3 +33,5 @@
       = rework_photo(news.photo).html_safe
       = edit_button "Izmjeni", edit_news_path(news) if admin_logged_in?
       = delete_button "Izbriši", news_path(news) if admin_logged_in?
+
+  %p#arhiva= link_to "Arhiva", archive_path
