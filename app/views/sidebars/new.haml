@@ -4,8 +4,6 @@
   = f.custom_error_messages
   = f.text_field :video_title, :label => "Naslov videa"
   = f.text_field :video, :label => "Video"
-  = f.text_field :audio_title, :label => "Naslov pjesme"
-  = f.text_field :audio_aac, :label => "Pjesma (AAC)"
-  = f.text_field :audio_ogg, :label => "Pjesma (Ogg)"
+  = f.collection_select :audio_id, Audio.all, :id, :title
   = f.submit "Spremi"
   = cancel_button "Odustani", home_path

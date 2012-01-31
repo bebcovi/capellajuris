@@ -1,5 +1,5 @@
 # encoding: utf-8
-[News, Member, Activity, Video, GeneralContent, Sidebar].each { |model| model.delete_all }
+[News, Member, Activity, Video, GeneralContent, Sidebar, Audio].each { |model| model.delete_all }
 
 def yaml(filename)
   YAML.load(File.open("db/seed/#{filename}")).symbolize_keys
@@ -11,7 +11,7 @@ News.create yaml("vijest.yml")
   GeneralContent.create yaml("#{filename}.yml")
 end
 
-Sidebar.new(yaml("sidebar.yml")).save(:validate => false)
+Sidebar.create(yaml("sidebar.yml")).create_audio(yaml("audio.yml"))
 
 %w[soprani alti tenori basi].each do |filename|
   names = File.read("db/seed/#{filename}.txt").each_line.collect { |singer| singer.chomp.split(" ") }
