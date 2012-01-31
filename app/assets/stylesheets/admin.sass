@@ -1,21 +1,5 @@
 @import editor
 
-@-webkit-keyframes highlight
-  from
-    outline-color: darken(white, 8%)
-    background: darken(white, 5%)
-  to
-    outline-color: white
-    background: white
-
-@-moz-keyframes highlight
-  from
-    outline-color: darken(white, 8%)
-    background: darken(white, 5%)
-  to
-    outline-color: white
-    background: white
-
 nav
 
   .add
@@ -201,12 +185,6 @@ div#members
     .controls
       +trailer(0)
       float: right
-
-    .recent
-      outline: 1px solid darken(white, 8%)
-      background: darken(white, 5%)
-      -webkit-animation: highlight 4s forwards
-      -moz-animation: highlight 4s forwards
 
     .confirm
       +trailer(0)
