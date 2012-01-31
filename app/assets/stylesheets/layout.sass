@@ -191,21 +191,33 @@ footer
 #contact
   +leader(0.5)
   +trailer(0)
+  font-size: 18px
+
+#facebook
+  $par: 230px
+  $url: 'icon/fb.png'
+  $icon: image-width($url)
+  +clearfix
+  +trailer(0)
+  float: right
+  width: $par + $icon + 18px
+  font-size: 17px
+  p
+    float: left
+    width: $par
+    &:after
+      content: ':'
+  a
+    display: block
+    float: right
+    width: $icon
+    height: image-height($url)
+    border: 1px solid
+    color: lighten(black, 40%)
+    &:hover
+      color: #344466
 
 .label
   font-weight: bold
   &:after
     content: ':'
-  font-size: 18px
-
-#facebook
-  +trailer(0)
-
-  p:after
-    content: ':'
-
-  font-size: 17px
-  a
-    color: lighten(black, 40%)
-    &:hover
-      color: #344466
