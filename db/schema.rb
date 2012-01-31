@@ -45,8 +45,7 @@ ActiveRecord::Schema.define(:version => 20120131023952) do
     t.string   "video_title"
     t.text     "video"
     t.string   "audio_title"
-    t.text     "audio_mp3"
-    t.text     "audio_ogg"
+    t.text     "audio"
     t.datetime "updated_at"
   end
 

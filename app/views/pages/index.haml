@@ -12,12 +12,12 @@
 
     %aside
       %section#video
-        %h2= @sidebar[:video_title]
-        = @sidebar[:video].html_safe
+        %h2= @sidebar.video_title
+        = @sidebar.video.html_safe
       %section#audio
-        %h2= @sidebar[:audio_title]
-        = audio_tag @sidebar[:audio], :controls => true, :autobuffer => true
-      = edit_button "Izmjeni", edit_sidebar_path(@sidebar) if admin_logged_in?
+        %h2= @sidebar.audio_title
+        = audio_tag @sidebar.audio, :controls => true, :autobuffer => true
+      = edit_button "Izmjeni", edit_sidebar_path if admin_logged_in?
 
 %section#vijesti
   %h1 Vijesti

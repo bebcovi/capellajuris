@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @intro, @sidebar = GeneralContent.first, Home.get_sidebar
+    @intro, @sidebar = GeneralContent.first, Sidebar.the_only
     @news = News.order("created_at DESC")
   end
 

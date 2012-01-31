@@ -11,6 +11,8 @@ News.create yaml("vijest.yml")
   GeneralContent.create yaml("#{filename}.yml")
 end
 
+Sidebar.new(yaml("sidebar.yml")).save(:validate => false)
+
 %w[soprani alti tenori basi].each do |filename|
   names = File.read("db/seed/#{filename}.txt").each_line.collect { |singer| singer.chomp.split(" ") }
   singers = names.collect { |name| {:first_name => name[0..-2].join(" "), :last_name => name.last, :voice => filename[0].capitalize} }
