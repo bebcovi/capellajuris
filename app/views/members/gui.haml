@@ -1,5 +1,7 @@
 - @page_title = "Izmjena članova zbora"
 
+%p= link_to "← Natrag", "#{about_us_path}#clanovi"
+
 #clanovi
   - %w[soprani alti tenori basi].each do |voice|
     %section
@@ -9,6 +11,3 @@
           %div= member
           = delete_button "x", member_path(member)
       = add_button "Dodaj novog člana", new_member_path(:voice => voice[0])
-
-%p
-  = link_to "← Natrag", "#{about_us_path}#clanovi"
