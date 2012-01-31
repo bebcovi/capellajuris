@@ -22,27 +22,25 @@
       })();
 
   %body
+    %header#header
+      .inner
+        = link_to home_path, :id => "logo" do
+          = image_tag "logo.png", :size => "225x111"
+        = image_tag "header.jpg", :size => "600x180", :id => "photo"
+      %nav
+        %ol#pages
+          = list_of navigation_pages do |page|
+            = link_to page[:name], page[:link], :class => current_page?(page[:link]) ? "current" : nil
 
-    #wrapper
-      %header#header
-        .inner
-          = link_to home_path, :id => "logo" do
-            = image_tag "logo.png", :size => "225x111"
-          = image_tag "header.jpg", :size => "600x180", :id => "photo"
-        %nav
-          %ol#pages
-            = list_of navigation_pages do |page|
-              = link_to page[:name], page[:link], :class => current_page?(page[:link]) ? "current" : nil
+    %section#main
+      = login_or_logout_link
+      = yield
 
-      #main
-        = login_or_logout_link
-        = yield
-
-      %footer
-        %section#contact
-          %p
-            %span.label Kontakt
-            %span.value= mail_to "capellajuris@gmail.com"
-        %section#facebook
-          %p Pratite nas na Facebooku za novosti, najave nastupa i slike
-          %a.icon-fb{href: 'http://www.facebook.com/group.php?gid=15322005634', target: '_blank'}
+    %footer
+      %section#contact
+        %p
+          %span.label Kontakt
+          %span.value= mail_to "capellajuris@gmail.com"
+      %section#facebook
+        %p Pratite nas na Facebooku za novosti, najave nastupa i slike
+        %a.icon-fb{href: 'http://www.facebook.com/group.php?gid=15322005634', target: '_blank'}

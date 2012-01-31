@@ -4,6 +4,9 @@
 +all-icon-sprites
 
 body
+  +padding-leader
+  width: $site
+  margin: 0 auto
   font-family: $sans-serif
   color: $text
 
@@ -45,24 +48,19 @@ ol, ul
   outline: 1px solid
   outline-color: $text
 
-#wrapper
-  +padding-leader
-  width: $wrapper-width
-  margin: 0 auto
+img
+  display: block
+  max-height: 100%
 
-  img
-    display: block
-    max-height: 100%
+#header
+  +trailer
+  .inner
+    +clearfix
+    padding: 0 rhythm(2)
 
-  #header
-    +trailer
-    .inner
-      +clearfix
-      padding: 0 rhythm(2)
-
-      #logo
-        +leader(2)
-        float: left
+    #logo
+      +leader(2)
+      float: left
 
       #photo
         float: right
@@ -125,7 +123,7 @@ ol, ul
       .main
         +trailer(0)
         float: left
-        width: $wrapper-width - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
+        width: $site - (2*rhythm($intro-padding)) - $aside-width - rhythm(3)
 
         & > img
           +leader(0.5)
