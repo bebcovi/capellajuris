@@ -55,4 +55,9 @@ module ApplicationHelper
     opt = {:method => :delete, :confirm => "Jeste li sigurni?"}
     link_to text, path, opt.merge(options)
   end
+
+  def cancel_button(text, path, options = {})
+    opt = {}
+    link_to text, path, opt.merge(options)
+  end
 end
