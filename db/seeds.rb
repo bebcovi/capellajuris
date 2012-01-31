@@ -11,7 +11,9 @@ News.create yaml("vijest.yml")
   GeneralContent.create yaml("#{filename}.yml")
 end
 
-Sidebar.create(yaml("sidebar.yml")).create_audio(yaml("audio.yml"))
+sidebar = Sidebar.create(yaml("sidebar.yml"))
+sidebar.create_audio(yaml("audio.yml"))
+sidebar.save
 
 %w[soprani alti tenori basi].each do |filename|
   names = File.read("db/seed/#{filename}.txt").each_line.collect { |singer| singer.chomp.split(" ") }
