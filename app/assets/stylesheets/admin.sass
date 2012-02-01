@@ -50,13 +50,6 @@ form
 
 .error
 
-#gollum-editor
-  +trailer
-  font-size: 11px
-
-  #gollum-editor-cancel
-    @extend #gollum-editor-preview
-
 .add
   +trailer
   +clearfix
@@ -84,8 +77,12 @@ form
   .edit, .delete input[type='submit']
     +subtle
 
+#gollum-editor
   +trailer
+  font-size: 11px
 
+#gollum-editor-cancel
+  @extend #gollum-editor-preview
 
 div#clanovi
   +clearfix
