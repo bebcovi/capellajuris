@@ -47,22 +47,22 @@ module ApplicationHelper
   end
 
   def add_button(text, path, options = {})
-    opt = {}
+    opt = {:class => 'new'}
     link_to text, path, opt.merge(options)
   end
 
   def edit_button(text, path, options = {})
-    opt = {}
+    opt = {:class => 'edit'}
     link_to text, path, opt.merge(options)
   end
 
   def delete_button(text, path, options = {})
-    opt = {:method => :delete, :confirm => "Jeste li sigurni?"}
+    opt = {:method => :delete, :confirm => "Jeste li sigurni?", :class => 'delete'}
     link_to text, path, opt.merge(options)
   end
 
   def cancel_button(text, path, options = {})
-    opt = {}
+    opt = {:class => 'cancel'}
     link_to text, path, opt.merge(options)
   end
 

@@ -4,10 +4,12 @@
 
   = f.custom_error_messages
 
-  = f.label :title, "Naslov"
-  = f.text_field :title
+  .field
+    = f.label :title, "Naslov"
+    = f.text_field :title
 
   = render :partial => "layouts/gollum_editor", :locals => {:f => f, :text_column => :text}
 
-  = f.label :photo, "Slika"
-  = f.text_field :photo, :id => "photo_field"
+  .field
+    = f.label :photo, "Slika"
+    = f.text_field :photo, :id => "photo_field"

@@ -5,77 +5,48 @@
 
 form
   +pie-clearfix
-
-  input[type='text'], input[type='password'], select
-    margin: 0
-
-  input, select
-    font: $base-font-size $sans-serif
-    line-height: rhythm()
-
-  input
-    &[type='text'], &[type='password']
-      +trailer(0.5)
-      +text-field
-
-  label
-    display: block
-    float: left
-    padding: 0 3px
-    background: darken(white, 40%)
-    color: white
-
-    &:hover
-      cursor: pointer
-
-    & + *
-      clear: both
-
   #main > &
     +trailer(0.5)
     &:last-child
       +trailer(0)
 
-    p
-      +pie-clearfix
-      +trailer(0.5)
+label
+  color: lighten($text, 20%)
+  &:hover
+    cursor: pointer
 
-      .submit, .cancel
-        +button
+input[type='text'], input[type='password'], select
+  margin: 0
 
+input, select
+  font: $base-font-size $sans-serif
+  line-height: rhythm()
 
-        & + input[type='submit']
-          +button
-
+input
+  &[type='text'], &[type='password']
+    +trailer(0.5)
+    +text-field
+    width: 400px
 
 .error
-
-.add
   +trailer
-  +clearfix
   +rhythm-borders
   background: hsl(0,80%,95%)
   @include border-radius
   border-color: hsl(0,50%,80%)
   color: hsl(0,50%,50%)
 
-  a
-    +button
-    text-align: center
+.new, input[type='submit'], .cancel
+  +button
 
-.controls
+.new
   +trailer
-  +pie-clearfix
-  height: rhythm()
-  padding-left: rhythm(0)
-  list-style: none
 
-  li
-    float: left
-    margin-right: rhythm(0.5)
+input[type='submit'], .cancel
+  +leader(.5)
 
-  .edit, .delete input[type='submit']
-    +subtle
+.edit, .delete
+  +subtle
 
 #gollum-editor
   +trailer
@@ -90,26 +61,17 @@ div#clanovi
     +trailer(0)
     width: 210px
     float: left
-    margin-left: rhythm(1.5)
-
-    h2, & > ol > li
-      padding-left: rhythm(0.5)
-
-    ol div
-      float: left
-
-    .controls
-      +trailer(0)
-      float: right
-
-    & > ol
-      +unstyled-list
-
-      & > li
-        +clearfix
-        +rhythm(0, 0.5, 0.5, 0)
-
-    .add
-      +leader
-      +trailer(0)
-      margin-left: rhythm(0.5)
+    margin-left: 27px
+  ol
+    +unstyled-list
+    +trailer
+  li
+    +clearfix
+    +rhythm(0,.5,.5,0)
+  div
+    +leader(.15)
+    float: left
+  .delete
+    margin: 0
+    font-size: 18px
+    float: right
