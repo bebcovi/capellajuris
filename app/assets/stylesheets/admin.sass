@@ -1,7 +1,14 @@
 @import editor
 
+$ui-font: 'Modern Pictograms'
+$prefix: 'modernpics/modernpics-webfont'
 
+@include font-face($ui-font, font-files('#{$prefix}.woff', woff, '#{$prefix}.ttf', truetype, '#{$prefix}.svg', svg), '#{$prefix}.eot')
 
+$ui-font: $ui-font, $sans-serif
+
+.icon
+  font-family: $ui-font
 
 form
   +pie-clearfix
