@@ -44,146 +44,94 @@ ol, ul
   padding-left: rhythm(2)
   list-style: disc outside
 
-#main img
+img
   outline: 1px solid
   outline-color: $text
 
 .img
   display: block
 
+.inner
+  +clearfix
+
 #header
   +trailer(2)
   .inner
     +clearfix
     padding: 0 rhythm(2)
+  img
+    outline: none
 
-    #logo
-      +leader(2)
-      float: left
+#logo
+  +leader(2)
+  float: left
 
-      #photo
-        float: right
+#photo
+  float: right
 
-  nav
-    +clearfix
-    +rhythm-borders
-    background-color: darken(white, 3%)
-    border-color: darken(white, 20%)
+nav
+  +clearfix
+  +rhythm-borders
+  background-color: darken(white, 3%)
+  border-color: darken(white, 20%)
+  ol
+    +unstyled-list
 
-    #pages
-      +clearfix
-      +unstyled-list
-      float: left
+#pages
+  +clearfix
+  float: left
 
-      li
-        float: left
-        margin: 0 rhythm(0.5)
+  li
+    float: left
+    margin: 0 rhythm(0.5)
 
-        a
-          display: block
-          padding: 0 rhythm(0.5)
-          +link-colors(lighten($text, 20%), $link)
-          &.current
-            color: $link
-          font-family: $serif
-          text-transform: uppercase
-          &:hover
-            text-decoration: none
-
-  #main
-    +padding-trailer
-    +pie-clearfix
-
-    & > *:first-child:not(#log)
-      +leader(2)
-
-    article
-      +trailer
-      +pie-clearfix
-
-      & > img
-
-        &:nth-of-type(2n+1)
-          float: left
-          margin: rhythm(0.5) rhythm() 0 1px
-
-        &:nth-of-type(2n)
-          float: right
-          margin: rhythm(0.5) 1px 0 rhythm(0.5)
-
-
-
-
-
-
-  #vijesti article
-    +trailer(1.5)
-    +trailing-border(1px, 0.5, $base-font-size, dotted)
-    &:last-of-type
-      +trailing-border(0, 0)
-      +trailer(2)
-
-    header
-      +clearfix
-
-    h1
-      float: left
-
-    time
-      float: right
-
-  article#clanovi section
-
-
-
-    ul li
-      +trailer
+  a
+    display: block
+    padding: 0 rhythm(0.5)
+    +link-colors(lighten($text, 20%), $link)
+    &.current
+      color: $link
+    font-family: $serif
+    text-transform: uppercase
+    &:hover
+      text-decoration: none
 
 #log
   float: right
   padding-right: rhythm(.5)
 
+#main
+  +padding-trailer
+  +pie-clearfix
 
-  footer
-    +clearfix
-    +trailer
-    +rhythm-borders
+article
+  +trailer
+  +pie-clearfix
 
-    #contact
+  .img
+    &:nth-of-type(2n+1)
       float: left
+      margin: rhythm(0.5) rhythm() 0 1px
 
-    #facebook
-      $text-width: 230px
-      $icon-url: 'icon/fb.png'
-      $icon-width: image-width($icon-url)
-
-      +clearfix
+    &:nth-of-type(2n)
       float: right
-      width: $text-width + $icon-width + 18px
-
-      p
-        float: left
-        width: $text-width
-
-      a
-        display: block
-        float: right
-        width: $icon-width
-        height: image-height($icon-url)
-        border: 1px solid
+      margin: rhythm(0.5) 1px 0 rhythm(0.5)
 
 #top
   text-align: center
 
 footer
+  +clearfix
+  +trailer
+  +rhythm-borders
   background-color: darken(white, 3%)
   border-color: darken(white, 20%)
   font-family: $serif
-
   p
     +trailer(0)
 
 #contact
+  float: left
   +leader(0.5)
   +trailer(0)
   font-size: 18px
