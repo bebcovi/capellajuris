@@ -1,21 +1,7 @@
 @import editor
 
-nav
 
-  .add
-    +trailer(0)
 
-    a
-      margin-right: 0
-      padding-top: 0
-      padding-bottom: 0
-      +subtle
-
-  .controls
-    +trailer(0)
-
-  .add, .controls
-    float: right
 
 form
   +pie-clearfix
@@ -31,11 +17,6 @@ form
     &[type='text'], &[type='password']
       +trailer(0.5)
       +text-field
-
-  select
-    +trailer(0.5)
-    +text-field
-    width: auto
 
   label
     display: block
@@ -62,39 +43,14 @@ form
       .submit, .cancel
         +button
 
-      .file
-        +leader(0.5)
-        width: 220px
-        float: left
 
         & + input[type='submit']
           +button
 
-    &.confirm p
-      width: auto
 
 .error
   +leader
   color: red
-
-.center
-  +horizontally-center
-
-#videos
-
-  .center
-    +leader(0.5)
-
-  .controls
-    +trailer(0)
-
-  form.video
-    +trailer
-    margin-left: 35%
-    text-align: left
-
-    .submit, .cancel
-      +button
 
 #gollum-editor
   +trailer
@@ -125,48 +81,9 @@ form
   .edit, .delete input[type='submit']
     +subtle
 
-.confirm
   +trailer
-  +clearfix
 
-  article &
-    +leader(-0.5)
-    +trailer(0.5)
-    clear: both
 
-  ol
-    +pie-clearfix
-    +trailer(0)
-    padding-left: rhythm(0)
-    list-style: none
-
-    li
-      float: left
-
-  p
-    +trailer(0)
-    $height: rhythm(2)
-    margin-right: rhythm(0.5)
-    height: $height
-    line-height: $height
-
-  .submit, .cancel
-    +button
-
-.order
-  +padding-leader(0.5)
-  +clearfix
-  float: left
-  margin-left: rhythm(-2)
-
-  article:first-of-type & .up,
-  article:last-of-type & .down
-    display: none
-
-  input[type='submit']
-    +subtle
-
-  +trailer(2)
 div#clanovi
   +clearfix
   section
@@ -184,18 +101,6 @@ div#clanovi
     .controls
       +trailer(0)
       float: right
-
-    .confirm
-      +trailer(0)
-
-    form.member
-      +leader(0.5)
-
-      input[type='text']
-        width: 90%
-
-      .submit, .cancel
-        +button
 
     & > ol
       +unstyled-list
