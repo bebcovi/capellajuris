@@ -10,10 +10,10 @@
       %p= link_to "Opširnije →", about_us_path
 
     %aside
-      %section#video
+      %section.video
         %h2= @sidebar.video_title
         = @sidebar.video.html_safe
-      %section#audio
+      %section.audio
         %h2= @sidebar.audio.title
         = audio_tag @sidebar.audio.files, :controls => true, :autobuffer => true
       = edit_button "Izmjeni", edit_sidebar_path if admin_logged_in?
