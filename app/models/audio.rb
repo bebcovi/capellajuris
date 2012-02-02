@@ -10,7 +10,7 @@ class Audio < ActiveRecord::Base
 
   def uniqueness_of_filename_on_amazon
     if file.present? and AmazonAudio.exists?(file)
-      errors[:file] << "Audio snimka s tim imenom datoteke već postoji"
+      errors[:file] << "Audio snimka s tim imenom datoteke već postoji (#{file.original_filename})"
     end
   end
 
