@@ -12,7 +12,7 @@ News.create yaml("vijest.yml")
 end
 
 sidebar = Sidebar.create(yaml("sidebar.yml"))
-sidebar.create_audio(yaml("audio.yml"))
+sidebar.build_audio(yaml("audio.yml")).save(:validate => false)
 sidebar.save
 
 %w[soprani alti tenori basi].each do |filename|
