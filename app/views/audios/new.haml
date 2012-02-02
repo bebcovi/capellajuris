@@ -1,0 +1,11 @@
+- @page_title = (@audio.new_record? ? "Nova pjesma" : "Izmjeni pjesmu")
+
+= form_tag "/audios", :multipart => true do |f|
+  = @audio.errors[:base].present? ? @audio.errors[:base] : nil
+
+  .field
+    = label_tag :title, "Naslov pjesme"
+    = text_field_tag :title
+  = file_field_tag :file
+
+  = submit_tag "Spremi"

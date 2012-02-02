@@ -13,6 +13,7 @@ CapellaJuris::Application.routes.draw do
 
   resources(:news) { post "preview", :on => :collection }
   resource :sidebar
+  resources :audios
   resources :general_contents
   resources(:activities) { post "preview", :on => :collection }
   resources(:members) { get "edit", :to => "members#gui", :on => :collection }

@@ -31,3 +31,5 @@ end
 gem 'redcarpet', '< 2.0.0'
 gem 'faraday-stack'
 gem 'nokogiri'
+
+gem 'aws-s3', :require => "aws/s3"
