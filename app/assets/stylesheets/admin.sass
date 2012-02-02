@@ -18,8 +18,17 @@ form
     &:last-child
       +trailer(0)
 
+.invisible
+  +opacity(0)
+  position: absolute
+  z-index: -1
+
+.field
+  position: relative
+
 label
   color: lighten($text, 20%)
+  display: block
   &:hover
     cursor: pointer
 
@@ -41,6 +50,11 @@ select
   +text-field
   width: auto
 
+.fakefile input[type='text']
+  +text-field
+  +inline-block
+  margin: 0 5px 0 0
+
 .error
   +trailer
   +rhythm-borders
@@ -49,7 +63,7 @@ select
   border-color: hsl(0,50%,80%)
   color: hsl(0,50%,50%)
 
-.new, input[type='submit'], .cancel
+.new, input[type='submit'], .cancel, input[type='button']
   +button
 
 .new
