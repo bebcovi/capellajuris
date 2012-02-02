@@ -5,6 +5,7 @@ $ ->
   $('.edit').append($('<span class="icon">').text(' e'))
   $('.delete').append($('<span class="icon">').text(' x'))
   $('#clanovi .delete').html($('<span class="icon">').text('X'))
+  $('.upload').append($('<span class="icon">').text(' ]'))
 
   $.GollumEditor()
   $('#gollum-editor-function-bar a')

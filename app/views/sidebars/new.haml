@@ -5,6 +5,6 @@
   = f.text_field :video_title, :label => "Naslov videa"
   = f.text_field :video, :label => "Video"
   = f.collection_select :audio_id, Audio.all, :id, :title
-  = link_to "Uploadaj novu pjesmu", new_audio_path
+  = link_to "Uploadaj novu pjesmu", new_audio_path, :class => 'upload'
   = f.submit "Spremi"
   = cancel_button "Odustani", home_path
