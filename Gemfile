@@ -20,7 +20,7 @@ gem 'will_paginate'
 group :development do
   gem "linecache19", "0.5.13"
   gem "ruby-debug-base19", "0.11.26"
-  gem "ruby-debug19", :require => 'ruby-debug'
+  gem "ruby-debug19"
 end
 
 group :test do
@@ -29,7 +29,7 @@ group :test do
 end
 
 gem 'redcarpet', '< 2.0.0'
-gem 'faraday-stack'
+gem 'faraday-stack', :require => false
 gem 'nokogiri'
 
-gem 'aws-s3', :require => "aws/s3"
+gem 'aws-s3', :require => false

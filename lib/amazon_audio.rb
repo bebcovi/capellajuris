@@ -1,3 +1,4 @@
+require 'aws/s3'
 module AmazonAudio
   include AWS::S3
 
