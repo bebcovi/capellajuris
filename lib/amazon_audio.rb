@@ -18,4 +18,8 @@ module AmazonAudio
   def self.url(file)
     "http://s3.amazonaws.com/#{bucket.name}/#{file.original_filename}"
   end
+
+  def self.delete(*filenames)
+    filenames.flatten.each { |filename| S3Object.delete(filename, bucket.name) }
+  end
 end

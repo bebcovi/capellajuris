@@ -6,10 +6,10 @@ class AudiosController < ApplicationController
   end
 
   def create
-    @audio = Audio.find_or_create_by_title(params[:title])
-    @audio.add_file(params[:file])
+    @audio = Audio.new(params[:audio])
 
     if @audio.valid?
+      Audio.find_or_create_by_title(params[:audio][:title]).add_file(params[:audio][:file])
       redirect_to edit_sidebar_path
     else
       render :new
