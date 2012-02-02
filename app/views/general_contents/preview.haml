@@ -1,0 +1,7 @@
+- @page_title = 'Prikaz'
+
+%article
+  %header
+    %h1= @general_content.title
+  = rework_photo(@general_content.photo).html_safe
+  = render_markdown(@general_content.text).html_safe

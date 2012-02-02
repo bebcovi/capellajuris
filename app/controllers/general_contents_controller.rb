@@ -10,6 +10,10 @@ class GeneralContentsController < ApplicationController
     end
   end
 
+  def preview
+    @general_content = GeneralContent.new(params[:general_content])
+  end
+
   def edit
     @general_content = GeneralContent.find(params[:id])
     render :new

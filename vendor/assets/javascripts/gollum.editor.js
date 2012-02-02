@@ -60,12 +60,19 @@
         $('#gollum-editor #gollum-editor-preview').click(function() {
           // make a dummy form, submit to new target window
           // get form fields
-          var oldAction = $('#gollum-editor form').attr('action');
-          var $form = $($('#gollum-editor form').get(0));
-          $form.attr('action', '/preview');
+          var oldAction = $('form').attr('action');
+          var newAction = oldAction.match(/^\/\w+/) + '/preview';
+          var $method = $('form input[name="_method"]');
+          var $form = $($('form').get(0));
+
+          $method.remove();
+
+          $form.attr('action', newAction);
+          $form.attr('method', 'post');
           $form.attr('target', '_blank');
           $form.submit();
 
+          $('form div').first().append($method);
 
           $form.attr('action', oldAction);
           $form.removeAttr('target');
