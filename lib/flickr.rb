@@ -18,7 +18,7 @@ module Flickr
         params: {
           format: 'json',
           nojsoncallback: '1',
-          api_key: '1e7490875accc5b9c1ca91a2f27b5604'
+          api_key: CapellaJuris::Application.config.flickr_api_key
         },
         request: {
           open_timeout: 2,
