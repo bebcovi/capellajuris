@@ -20,7 +20,7 @@ class Audio < ActiveRecord::Base
   end
 
   def filenames
-    files.collect { |url| url.match(/\/[^\/]+$/) }
+    files.collect { |url| url.match(/[^\/]+$/)[0] }
   end
 
   before_destroy do
