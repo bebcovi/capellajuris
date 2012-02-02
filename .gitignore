@@ -3,5 +3,4 @@
 log/*.log
 tmp/
 .sass-cache/
-config/amazon.yml
-config/flickr.txt
+config/config.yml
