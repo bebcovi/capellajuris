@@ -66,6 +66,11 @@ input[type='submit'], .cancel
   padding: 1em
   font-size: 11px
 
+  #gollum-editor-function-bar
+    @each $f in code, hr, h1, h2, h3, image
+      #function-#{$f}
+        display: none
+
 #gollum-editor-cancel
   @extend #gollum-editor-preview
 
