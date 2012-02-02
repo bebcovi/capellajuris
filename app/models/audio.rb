@@ -1,6 +1,6 @@
 class Audio < ActiveRecord::Base
-  validate :audio_files_must_exist_on_the_disk
   validates_uniqueness_of :filename
+  validate :audio_files_must_exist_on_the_disk
 
   def audio_files_must_exist_on_the_disk
     if not files.present?
