@@ -1,0 +1,4 @@
+%h2= "#{activity.year}."
+= render_markdown(activity.bullets).html_safe
+= edit_button "Izmjeni", edit_activity_path(activity) if admin_logged_in?
+= delete_button "Izbriši", activity_path(activity) if admin_logged_in?

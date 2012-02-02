@@ -23,6 +23,6 @@
 
   = add_button "Dodaj", new_news_path if admin_logged_in?
 
-  = render :partial => "news", :collection => @news
+  = render @news
 
   %p#arhiva= link_to "Arhiva →", archive_path

@@ -1,16 +1,7 @@
 - @page_title = "O nama"
 
-%article#povijest
-  %h1= @history.title
-  = rework_photo(@history.photo).html_safe
-  = render_markdown(@history.text).html_safe
-  = edit_button "Izmjeni", edit_general_content_path(@history) if admin_logged_in?
-
-%article#jurica
-  %h1= @conductor.title
-  = rework_photo(@conductor.photo).html_safe
-  = render_markdown(@conductor.text).html_safe
-  = edit_button "Izmjeni", edit_general_content_path(@conductor) if admin_logged_in?
+= render :partial => "general_contents/general_content", :object => @history, :locals => {:id => "povijest"}
+= render :partial => "general_contents/general_content", :object => @conductor, :locals => {:id => "jurica"}
 
 %article#clanovi
   %h1 Članovi zbora
@@ -25,8 +16,4 @@
 %article#aktivnosti
   %h1 Aktivnosti
   = add_button "Dodaj novu godinu", new_activity_path if admin_logged_in?
-  - @activities.each do |activity|
-    %h2= activity.year
-    = render_markdown(activity.bullets).html_safe
-    = edit_button "Izmjeni", edit_activity_path(activity) if admin_logged_in?
-    = delete_button "Izbriši", activity_path(activity) if admin_logged_in?
+  = render @activities
