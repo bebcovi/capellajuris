@@ -15,14 +15,11 @@
         = @sidebar.video.html_safe
       %section.audio
         %h2= @sidebar.audio.title
-        = audio_tag @sidebar.audio.files, :controls => true, :autobuffer => true
+        = audio_tag @sidebar.audio.files, :controls => true
       = edit_button "Izmjeni", edit_sidebar_path if admin_logged_in?
 
 %section#vijesti
   %h1 Vijesti
-
   = add_button "Dodaj", new_news_path if admin_logged_in?
-
   = render @news
-
   %p#arhiva= link_to "Arhiva →", archive_path

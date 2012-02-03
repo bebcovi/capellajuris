@@ -12,10 +12,10 @@ CapellaJuris::Application.routes.draw do
   get "arhiva", :to => "pages#archive", :as => :archive
 
   resources(:news) { post "preview", :on => :collection }
-  resource :sidebar
+  resource(:sidebar)
   resources(:audios) { get "autocomplete", :on => :collection }
   resources(:general_contents) { post "preview", :on => :collection }
   resources(:activities) { post "preview", :on => :collection }
   resources(:members) { get "edit", :to => "members#gui", :on => :collection }
-  resources :videos
+  resources(:videos)
 end
