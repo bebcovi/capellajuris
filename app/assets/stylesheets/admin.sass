@@ -65,6 +65,15 @@ select
     cursor: pointer
     border-color: darken(white, 35%)
 
+.success
+  $hue: 120
+  +trailer
+  +rhythm-borders
+  background: hsl($hue,80%,95%)
+  @include border-radius
+  border-color: hsl($hue,50%,80%)
+  color: hsl($hue,50%,50%)
+
 .error
   +trailer
   +rhythm-borders
