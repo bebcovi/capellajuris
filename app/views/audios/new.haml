@@ -3,7 +3,7 @@
 = labeled_form_for @audio do |f|
   = f.custom_error_messages
 
-  = f.text_field :title, :label => "Naslov pjesme"
+  = f.text_field :title, :label => "Naslov pjesme", :data => {:autocomplete_sources => autocomplete_audios_path}
   = f.file_field :file, :label => "Upload"
 
   = submit_tag "Spremi"

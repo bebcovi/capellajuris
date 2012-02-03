@@ -13,7 +13,7 @@ CapellaJuris::Application.routes.draw do
 
   resources(:news) { post "preview", :on => :collection }
   resource :sidebar
-  resources :audios
+  resources(:audios) { get "autocomplete", :on => :collection }
   resources(:general_contents) { post "preview", :on => :collection }
   resources(:activities) { post "preview", :on => :collection }
   resources(:members) { get "edit", :to => "members#gui", :on => :collection }

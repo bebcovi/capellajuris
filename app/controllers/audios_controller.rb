@@ -15,4 +15,9 @@ class AudiosController < ApplicationController
       render :new
     end
   end
+
+  def autocomplete
+    @audios = Audio.order(:title).where("title ILIKE ?", "%#{params[:term]}%")
+    render :json => @audios.collect(&:title)
+  end
 end
