@@ -28,4 +28,4 @@ $ ->
     $(@).after f
     i.click c
     b.click c
-    $(@).change -> i.val($(@).val())
+    $(@).change -> i.val($(@).val().match(/[^\/\\]+$/))
