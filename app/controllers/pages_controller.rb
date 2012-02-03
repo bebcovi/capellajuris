@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def videos
-    @videos = Video.order(:id)
+    @videos = Video.order(:id).page(params[:page]).per_page(3)
   end
 
   def archive
