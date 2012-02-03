@@ -1,10 +1,15 @@
-- @page_title = (@audio.new_record? ? "Nova pjesma" : "Izmjeni pjesmu")
+- @page_title = "Dodaj pjesmu"
 
-= labeled_form_for @audio do |f|
-  = f.custom_error_messages
 
-  = f.text_field :title, :label => "Naslov pjesme", :data => {:autocomplete_sources => autocomplete_audios_path}
-  = f.file_field :file, :label => "Upload"
+= form_tag "/audios", :multipart => true do |f|
+  = display_errors(@errors) if @errors.present?
+
+  .field
+    = label_tag :title, "Naslov pjesme"
+    = text_field_tag :title, params[:title], :data => {:autocomplete_sources => autocomplete_audios_path}
+  .field
+    = label_tag :file, "Upload"
+    = file_field_tag :file
 
   = submit_tag "Spremi"
   = cancel_button "Odustani", edit_sidebar_path
