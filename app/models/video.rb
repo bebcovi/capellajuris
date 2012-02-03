@@ -1,5 +1,5 @@
 class Video < ActiveRecord::Base
-  validates_presence_of :link, :message => "YouTube video ne smije biti prazan"
+  validates_presence_of :link, :message => "YouTube video ne smije biti prazan."
 
   before_create do
     if link =~ /"/
