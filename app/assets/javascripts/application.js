@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.pjax
 //= require patch
 //= require gollum.editor
 //= require markdown

@@ -16,6 +16,7 @@ end
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'will_paginate'
+gem 'rack-pjax'
 
 group :development do
   gem "linecache19", "0.5.13"
