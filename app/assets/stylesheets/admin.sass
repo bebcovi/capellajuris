@@ -11,6 +11,14 @@ $ui-font: $ui-font, $sans-serif
   font-family: $ui-font
   font-size: 18px
 
+.preloader
+  $img: 'preloader.gif'
+  +inline-block
+  width: image-width($img)
+  height: image-height($img)
+  margin-left: 10px
+  background: image-url($img)
+
 form
   +pie-clearfix
   #main > &
