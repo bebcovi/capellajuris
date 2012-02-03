@@ -8,8 +8,7 @@
         - if video.title.present?
           %h1= raw video.title.gsub(" - ", " &ndash; ")
         = video.link.html_safe
-        = delete_button "Izbriši", video_path(video) if admin_logged_in?
-
+        %div= delete_button "Izbriši", video_path(video) if admin_logged_in?
   = will_paginate(@videos)
 
 .center= add_button "Dodaj video", new_video_path if admin_logged_in?
