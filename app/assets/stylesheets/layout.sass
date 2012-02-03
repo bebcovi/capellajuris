@@ -108,8 +108,36 @@ img
   text-align: center
 
 .pagination
-  +trailer(1.5)
+  +trailer(2)
   text-align: center
+  *
+    +inline-block
+    +box-sizing(border-box)
+    padding: rhythm(.2)
+    width: 25px
+    text-align: center
+    +border-radius
+  a
+    border: 1px solid rgba(black, .1)
+    color: lighten($text, 25%)
+    &:hover
+      text-decoration: none
+      border-color: rgba(black, .3)
+      color: $link
+  em
+    font-style: normal
+  .previous_page, .next_page
+    padding-left: 7px
+    padding-right: 7px
+    width: auto
+  .current
+    color: $text
+    background-color: rgba(black, .05)
+  .gap
+    color: rgba(black, .5)
+  .disabled
+    border: 1px solid white
+    color: rgba(black, .3)
 
 #header
   +trailer(2)
