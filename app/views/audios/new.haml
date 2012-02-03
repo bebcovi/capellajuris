@@ -1,5 +1,13 @@
 - @page_title = "Dodaj pjesmu"
 
+%div
+  %p Dosad uploadane pjesme:
+  %ul
+    = list_of(Audio.all) do |audio|
+      = audio.title
+      %ul
+        = list_of(audio.filenames) do |filename|
+          = filename
 
 = form_tag "/audios", :multipart => true do |f|
   = display_errors(@errors) if @errors.present?
