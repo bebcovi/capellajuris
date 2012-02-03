@@ -13,7 +13,7 @@ jQuery ->
       $(this).attr('title', title)
     .twipsy()
 
-  $('.pagination a').pjax('[data-pjax-container]')
+  try $('.pagination a').pjax('[data-pjax-container]')
 
   fake = $('<div class="fakefile">').prepend($('<input type="text">'), $('<input type="button">').val('Potraži'))
   $('input[type="file"]').each ->
