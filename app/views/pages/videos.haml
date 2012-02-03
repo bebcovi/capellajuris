@@ -1,6 +1,7 @@
 - @page_title = "Video"
 
 %div{:"data-pjax-container" => true}
+  = will_paginate(@videos)
   %ul#video
     - @videos.each do |video|
       %li{:id => (video == @videos.last ? "last" : nil)}
