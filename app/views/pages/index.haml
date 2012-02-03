@@ -20,6 +20,6 @@
 
 %section#vijesti
   %h1 Vijesti
-  = add_button "Dodaj", new_news_path if admin_logged_in?
+  = add_button "Dodaj vijest", new_news_path if admin_logged_in?
   = render @news
   %p#arhiva= link_to "Arhiva →", archive_path

@@ -15,5 +15,5 @@
 
 %article#aktivnosti
   %h1 Aktivnosti
-  = add_button "Dodaj novu godinu", new_activity_path if admin_logged_in?
+  = add_button "Dodaj godinu", new_activity_path if admin_logged_in?
   = render @activities
