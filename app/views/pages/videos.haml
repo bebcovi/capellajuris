@@ -8,6 +8,6 @@
       = video.link.html_safe
       = delete_button "Izbriši", video_path(video) if admin_logged_in?
 
-= add_button "Dodaj novi video", new_video_path if admin_logged_in?
+.center= add_button "Dodaj novi video", new_video_path if admin_logged_in?
 
 %p#top= link_to "Povratak na vrh ↑", "#"
