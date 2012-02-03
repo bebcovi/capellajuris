@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_logged_in?
-    # !!session[:admin_logged_in?]
-    true
+    !!session[:admin_logged_in?]
   end
   helper_method :admin_logged_in?
 
