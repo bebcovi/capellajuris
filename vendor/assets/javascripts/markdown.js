@@ -158,7 +158,7 @@ var MarkDownHelp = [
 
                 {
                   menuName: 'Linkovi',
-                  data: '<p>Link se radi tako da se unutar uglatih zagrada stavlja naziv linka, odnosno ono što korisnik vidi, a unutar oblih zagrada stavlja se s&acirc;m link. Npr. [Ovaj link](http://capellajuris.hr/) postaje <a href="http://capellajuris.hr/">Ovaj link</a>.</p>'
+                  data: '<p>Link se radi tako da se unutar uglatih zagrada stavlja naziv linka, odnosno ono što korisnik vidi, a unutar oblih zagrada stavlja se s&acirc;m link.</p><p>Npr. [Ovaj link](http://capellajuris.hr/) postaje <a href="http://capellajuris.hr/">Ovaj link</a>.</p>'
                 }
 
               ]
