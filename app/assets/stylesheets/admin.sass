@@ -75,12 +75,13 @@ select
   color: hsl($hue,50%,50%)
 
 .error
+  $hue: 0
   +trailer
   +rhythm-borders
-  background: hsl(0,80%,95%)
+  background: hsl($hue,80%,95%)
   @include border-radius
-  border-color: hsl(0,50%,80%)
-  color: hsl(0,50%,50%)
+  border-color: hsl($hue,50%,80%)
+  color: hsl($hue,50%,50%)
 
 .new, input[type='submit'], .cancel, input[type='button']
   +button
