@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20120204101630) do
   create_table "activities", :force => true do |t|
     t.integer  "year"
     t.text     "bullets"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "audios", :force => true do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20120204101630) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "voice"
-    t.datetime "created_at"
+    t.datetime "created_at", :null => false
   end
 
   create_table "news", :force => true do |t|
