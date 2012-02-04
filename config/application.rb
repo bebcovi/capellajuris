@@ -14,7 +14,7 @@ require 'i18n/core_ext/hash.rb' # Hash#deep_symbolize_keys
 module CapellaJuris
   class Application < Rails::Application
     config.middleware.use Rack::Pjax
-    config.app_data = YAML.load(File.open("#{config.root}/config/config.yml")).deep_symbolize_keys
+    config.app_data = YAML.load(File.open("#{config.root}/config/settings.yml")).deep_symbolize_keys
 
     config.admin = config.app_data[:admin]
 

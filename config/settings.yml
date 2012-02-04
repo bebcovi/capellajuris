@@ -1,0 +1,11 @@
+admin:
+  username: <%= ENV["ADMIN_USERNAME"] %>
+  password: <%= ENV["ADMIN_PASSWORD"] %>
+  flickr_set: 72157628108442555
+
+amazon:
+  access_key: <%= ENV["AMAZON_ACCESS_KEY"] %>
+  access_secret: <%= ENV["AMAZON_ACCESS_SECRET"] %>
+
+flickr:
+  api_key: <%= ENV["FLICKR_API_KEY"] %>
