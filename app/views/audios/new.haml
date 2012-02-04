@@ -1,13 +1,5 @@
 - @page_title = "Dodaj pjesmu"
 
-%table.uploaded
-  %caption Dosad učitane pjesme
-  - Audio.all.each do |audio|
-    %tr
-      %th= audio.title
-      - audio.filenames.each do |filename|
-        %td= filename
-
 = labeled_form_for @audio do |f|
   = f.custom_error_messages
 
@@ -17,3 +9,11 @@
 
   = submit_tag "Spremi"
   = cancel_button "Odustani", edit_sidebar_path
+
+%table.uploaded
+  %caption Dosad učitane pjesme
+  - Audio.all.each do |audio|
+    %tr
+      %th= audio.title
+      - audio.filenames.each do |filename|
+        %td= filename
