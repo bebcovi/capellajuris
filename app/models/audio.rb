@@ -18,10 +18,10 @@ class Audio < ActiveRecord::Base
   end
 
   def filenames_must_be_of_a_proper_format
-    if aac.split(".").last != "aac"
+    if aac.original_filename.split(".").last != "aac"
       errors[:aac] << "AAC datoteka nije oblika 'ime_datoteke.aac'. (#{aac.original_filename})"
     end
-    if ogg.split(".").last != "ogg"
+    if ogg.original_filename.split(".").last != "ogg"
       errors[:ogg] << "Ogg datoteka nije oblika 'ime_datoteke.ogg'. (#{ogg.original_filename})"
     end
   end
