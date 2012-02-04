@@ -10,8 +10,7 @@ class AudiosController < ApplicationController
     @audio = Audio.create(params[:audio])
 
     if @audio.valid?
-      flash[:success] = "Pjesma je uspješno učitana."
-      redirect_to edit_sidebar_path
+      redirect_to edit_sidebar_path, :notice => "Pjesma je uspješno učitana."
     else
       render :new
     end

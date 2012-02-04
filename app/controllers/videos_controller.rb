@@ -1,3 +1,4 @@
+# encoding: utf-8
 class VideosController < ApplicationController
   before_filter :handle_unauthorized_request
 
@@ -9,15 +10,15 @@ class VideosController < ApplicationController
     @video = Video.create(params[:video])
 
     if @video.valid?
-      redirect_to last_video_page
+      redirect_to last_video_page, :success => "Video je uspješno dodan."
     else
       render :new
     end
   end
 
   def destroy
-    Video.destroy(params[:id])
-    redirect_to videos_path
+    video = Video.destroy(params[:id])
+    redirect_to videos_path, :success => "Video (\"#{video.title}\") je izbrisan."
   end
 
 private

@@ -1,9 +1,7 @@
+# encoding: utf-8
 class NewsController < ApplicationController
   before_filter :handle_unauthorized_request
-
-  before_filter :only => [:new, :edit] do
-    store_referer(news_path)
-  end
+  before_filter :store_referer, :only => [:new, :edit]
 
   def preview
     @news = News.new(params[:news])
@@ -17,7 +15,7 @@ class NewsController < ApplicationController
     @news = News.create(params[:news])
 
     if @news.valid?
-      redirect_to news_path
+      redirect_to home_path, :notice => "Vijest je uspješno dodana."
     else
       render :new
     end
@@ -32,7 +30,7 @@ class NewsController < ApplicationController
     @news = News.find(params[:id])
 
     if @news.update_attributes(params[:news])
-      redirect_to news_path
+      redirect_to home_path, :notice => "Vijest je uspješno izmjenjena."
     else
       render :new
     end
@@ -40,6 +38,6 @@ class NewsController < ApplicationController
 
   def destroy
     News.destroy(params[:id])
-    redirect_to news_path
+    redirect_to home_path, :notice => "Vijest je uspješno izbrisana."
   end
 end

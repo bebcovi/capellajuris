@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       log_in
       redirect_to referer
     else
-      @error = "Pogrešno korisničko ime ili lozinka"
+      flash[:error] = "Pogrešno korisničko ime ili lozinka."
       render :new
     end
   end

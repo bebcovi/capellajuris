@@ -1,3 +1,4 @@
+# encoding: utf-8
 class MembersController < ApplicationController
   before_filter :handle_unauthorized_request
 
@@ -13,14 +14,14 @@ class MembersController < ApplicationController
     @member = Member.create(params[:member])
 
     if @member.valid?
-      redirect_to members_path
+      redirect_to members_path, :notice => "Novi član je uspješno dodan."
     else
       render :new
     end
   end
 
   def destroy
-    Member.destroy(params[:id])
-    redirect_to members_path
+    member = Member.destroy(params[:id])
+    redirect_to members_path, :notice => "Član \"#{member}\" je izbrisan."
   end
 end

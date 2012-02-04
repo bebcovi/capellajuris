@@ -24,6 +24,11 @@
         #log= login_or_logout_link
 
     %section#main
+      - if flash[:notice]
+        %p.success= flash[:notice]
+      - elsif flash[:error]
+        %p.error= flash[:error]
+
       = yield
 
     %footer
