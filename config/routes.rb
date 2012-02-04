@@ -1,7 +1,6 @@
 CapellaJuris::Application.routes.draw do
-  get "errors/404"
-
-  get "errors/500"
+  get "errors/not-found", :to => "errors#not_found"
+  get "errors/system-error", :to => "errors#system_error"
 
   root :to => "pages#index"
 
@@ -23,5 +22,5 @@ CapellaJuris::Application.routes.draw do
   resources(:members) { get "edit", :to => "members#gui", :on => :collection }
   resources(:videos)
 
-  match '*a', :to => 'errors#404'
+  get "*not_found", :to => "errors#not_found"
 end

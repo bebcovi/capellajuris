@@ -1,7 +1,9 @@
 class ErrorsController < ApplicationController
-  def 404
+  def not_found
+    render "404"
   end
 
-  def 500
+  def system_error
+    render "500"
   end
 end
