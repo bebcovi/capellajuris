@@ -27,10 +27,12 @@ class Audio < ActiveRecord::Base
   end
 
   before_create do
-    AmazonAudio.create(aac)
-    AmazonAudio.create(ogg)
-    self.aac = aac.original_filename
-    self.ogg = ogg.original_filename
+    unless aac.is_a?(String) and ogg.is_a?(String)
+      AmazonAudio.create(aac)
+      AmazonAudio.create(ogg)
+      self.aac = aac.original_filename
+      self.ogg = ogg.original_filename
+    end
   end
 
   def filenames

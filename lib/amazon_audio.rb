@@ -23,8 +23,8 @@ module AmazonAudio
       S3Object.exists? filename, bucket_name
     end
 
-    def url(file)
-      "http://s3.amazonaws.com/#{bucket_name}/#{file.original_filename}"
+    def url(filename)
+      "http://s3.amazonaws.com/#{bucket_name}/#{filename}"
     end
 
     def delete(filenames)
