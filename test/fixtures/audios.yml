@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
-  filename: MyString
-
-two:
-  name: MyString
-  filename: MyString
+only:
+  title: Makedonsko devojče
+  aac: makedonsko_devojce.aac
+  ogg: makedonsko_devojce.ogg

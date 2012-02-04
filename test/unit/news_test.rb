@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class NewsTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "news validations" do
+    assert !News.new.save, "News with blank title and text was saved"
+  end
 end

@@ -1,15 +1,1 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  video_title: MyString
-  video: MyText
-  audio_title: MyString
-  audio_mp3: MyText
-  audio_ogg: MyText
-
-two:
-  video_title: MyString
-  video: MyText
-  audio_title: MyString
-  audio_mp3: MyText
-  audio_ogg: MyText
