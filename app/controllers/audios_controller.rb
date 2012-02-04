@@ -15,4 +15,12 @@ class AudiosController < ApplicationController
       render :new
     end
   end
+
+  def delete
+  end
+
+  def destroy
+    @audio = Audio.destroy(params[:id])
+    redirect_to :back, :notice => "Audio datoteka je izbrisana."
+  end
 end
