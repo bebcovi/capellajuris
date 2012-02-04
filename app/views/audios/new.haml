@@ -1,13 +1,12 @@
 - @page_title = "Dodaj pjesmu"
 
-%div
-  %p Dosad učitane pjesme:
-  %ul
-    = list_of(Audio.all) do |audio|
-      = audio.title
-      %ul
-        = list_of(audio.filenames) do |filename|
-          = filename
+%table.uploaded
+  %caption Dosad učitane pjesme
+  - Audio.all.each do |audio|
+    %tr
+      %th= audio.title
+      - audio.filenames.each do |filename|
+        %td= filename
 
 = labeled_form_for @audio do |f|
   = f.custom_error_messages

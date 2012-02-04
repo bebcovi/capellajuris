@@ -2,6 +2,21 @@
   +rhythm(0,.5,.5,0)
   display: block
 
+.uploaded
+  +trailer(2)
+  $b1: 2px solid darken(white, 30%)
+  $b2: 1px solid darken(white, 10%)
+  caption
+    font-size: 22px
+    font-family: $serif
+    +trailer(.5)
+  th, td
+    padding: rhythm(.5)
+    border: $b2
+  th
+    font-weight: bold
+    border-right: $b1
+
 .fakefile input[type='text']
   +text-field
   +inline-block
