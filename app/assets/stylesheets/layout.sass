@@ -47,26 +47,6 @@ ol
 ul
   list-style: disc
 
-ul.ui-autocomplete
-  position: absolute
-  +unstyled-list
-  +box-shadow(rgba(black,.3) 0 0 3px)
-  border: solid 1px darken(white, 30%)
-  cursor: default
-  li
-    background-color: white
-  a
-    color: lighten($text, 20%)
-    display: block
-    padding: rhythm(.5)
-    +apply-side-rhythm-border(top, 1px, .5)
-    border-color: darken(white, 15%)
-  a.ui-state-hover, a.ui-state-active
-    background-color: darken(white, 2%)
-    color: $link
-    text-decoration: none
-    cursor: pointer
-
 blockquote
   +trailer
   float: right

@@ -14,7 +14,7 @@
 
   .field
     = label_tag :title, "Naslov pjesme"
-    = text_field_tag :title, params[:title], :data => {:autocomplete_sources => autocomplete_audios_path}
+    = text_field_tag :title, params[:title]
   .field
     = label_tag :file, "Upload"
     = file_field_tag :file

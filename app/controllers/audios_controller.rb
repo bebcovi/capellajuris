@@ -16,11 +16,6 @@ class AudiosController < ApplicationController
     end
   end
 
-  def autocomplete
-    @audios = Audio.order(:title).where("title ILIKE ?", "%#{params[:term]}%")
-    render :json => @audios.collect(&:title)
-  end
-
 private
 
   def validations_pass?
