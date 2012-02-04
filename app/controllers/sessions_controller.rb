@@ -1,7 +1,8 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
+  before_filter :store_referer, :only => [:new]
+
   def new
-    store_referer
   end
 
   def create
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
       log_in
       redirect_to referer, :notice => "Uspješno ste se prijavili."
     else
-      flash[:error] = "Pogrešno korisničko ime ili lozinka."
+      flash.now[:error] = "Pogrešno korisničko ime ili lozinka."
       render :new
     end
   end

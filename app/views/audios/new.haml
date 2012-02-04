@@ -10,10 +10,13 @@
   = submit_tag "Spremi"
   = cancel_button "Odustani", edit_sidebar_path
 
-%table.uploaded
-  %caption Dosad učitane pjesme
-  - Audio.all.each do |audio|
-    %tr
-      %th= audio.title
-      - audio.filenames.each do |filename|
-        %td= filename
+- if Audio.any?
+  %table.uploaded
+    %caption Dosad učitane pjesme
+    - Audio.all.each do |audio|
+      %tr
+        %th= audio.title
+        - audio.filenames.each do |filename|
+          %td= filename
+- else
+  %p.empty Nema učitanih pjesama.

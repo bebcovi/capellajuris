@@ -1,10 +1,15 @@
 - @page_title = "Brisanje pjesama"
 
-%table.uploaded
-  %caption Dosad učitane pjesme
-  - Audio.all.each do |audio|
-    %tr
-      %th= audio.title
-      - audio.filenames.each do |filename|
-        %td= filename
-      %td= delete_button "Izbriši", audio_path(audio)
+%p= link_to "← Natrag", edit_sidebar_path
+
+- if Audio.any?
+  %table.uploaded
+    %caption Dosad učitane pjesme
+    - Audio.all.each do |audio|
+      %tr
+        %th= audio.title
+        - audio.filenames.each do |filename|
+          %td= filename
+        %td= delete_button "Izbriši", audio_path(audio)
+- else
+  %p.empty Nema učitanih pjesama.

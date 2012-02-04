@@ -7,10 +7,10 @@ class AudiosController < ApplicationController
   end
 
   def create
-    @audio = Audio.create(params[:audio])
+    @audio = Audio.new(params[:audio])
 
-    if @audio.valid?
-      redirect_to edit_sidebar_path, :notice => "Pjesma je uspješno učitana."
+    if @audio.save
+      redirect_to edit_sidebar_path, :notice => "Pjesma je uspješno spremljena."
     else
       render :new
     end
@@ -21,6 +21,6 @@ class AudiosController < ApplicationController
 
   def destroy
     @audio = Audio.destroy(params[:id])
-    redirect_to :back, :notice => "Audio datoteka je izbrisana."
+    redirect_to :back, :notice => "Pjesma je uspješno izbrisana."
   end
 end
