@@ -1,11 +1,13 @@
 - @page_title = "Izmjena multimedije na naslovnici"
 
+.manage
+  = link_to "Učitaj novu pjesmu", new_audio_path, :class => 'upload'
+  = link_to "Briši pjesme", delete_audios_path, :class => 'remove'
+
 = labeled_form_for @sidebar, :url => "/sidebar" do |f|
   = f.custom_error_messages
   = f.text_field :video_title, :label => "Naslov videa"
   = f.text_field :video, :label => "Video"
   = f.collection_select :audio_id, Audio.all, :id, :title
-  = link_to "Učitaj novu pjesmu", new_audio_path, :class => 'upload'
-  = link_to "Briši pjesme", delete_audios_path
   = f.submit "Spremi"
   = cancel_button "Odustani", home_path
