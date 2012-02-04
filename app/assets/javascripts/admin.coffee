@@ -1,6 +1,8 @@
 jQuery ->
-  $('.new').append($('<span class="icon">').text(' V'))
-  $('.edit').append($('<span class="icon">').text(' e'))
-  $('.delete').append($('<span class="icon">').text(' x'))
-  $('#clanovi .delete').html($('<span class="icon">').text('X'))
-  $('.upload').append($('<span class="icon">').text(' ]'))
+  i = '<span class="icon">'
+
+  $('.new').append($(i).text(' V'))
+  $('.edit').append($(i).text(' e'))
+  $('.delete').append($(i).text(' x'))
+  $('#clanovi .delete').html($(i).text('X'))
+  $('.upload').append($(i).text(' ]'))
