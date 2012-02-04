@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SidebarTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "sidebar validations" do
+    assert !Sidebar.new.save, "Saved sidebar with empty fields"
+  end
 end
