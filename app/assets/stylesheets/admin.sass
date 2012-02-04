@@ -1,5 +1,3 @@
-@import editor
-
 $ui-font: 'Modern Pictograms'
 $prefix: 'modernpics/modernpics-webfont'
 
@@ -57,14 +55,6 @@ select
   +text-field
   width: auto
 
-.fakefile input[type='text']
-  +text-field
-  +inline-block
-  margin: 0 5px 0 0
-  &:hover
-    cursor: pointer
-    border-color: darken(white, 35%)
-
 .success
   $hue: 120
   +trailer
@@ -95,10 +85,6 @@ input[type='submit'], .cancel
 .edit, .delete
   +subtle
 
-.upload
-  +rhythm(0,.5,.5,0)
-  display: block
-
 #gollum-editor
   +trailer
   padding: 1em
@@ -115,27 +101,3 @@ input[type='submit'], .cancel
 
 #gollum-editor-cancel
   @extend #gollum-editor-preview
-
-div#clanovi
-  +clearfix
-  section
-    +trailer(0)
-    width: 210px
-    float: left
-    margin-left: 27px
-  ol
-    +unstyled-list
-    +trailer
-  li
-    +clearfix
-    +rhythm(0,.5,.5,0)
-  div
-    +leader(.15)
-    float: left
-  .delete
-    margin: 0
-    font-size: 18px
-    float: right
-
-#video a
-  +leader(.5)

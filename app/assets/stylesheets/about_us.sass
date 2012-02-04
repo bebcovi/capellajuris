@@ -14,5 +14,26 @@ article#clanovi section
     &:last-child:after
       content: '.'
 
+div#clanovi
+  +clearfix
+  section
+    +trailer(0)
+    width: 210px
+    float: left
+    margin-left: 27px
+  ol
+    +unstyled-list
+    +trailer
+  li
+    +clearfix
+    +rhythm(0,.5,.5,0)
+  div
+    +leader(.15)
+    float: left
+  .delete
+    margin: 0
+    font-size: 18px
+    float: right
+
 #aktivnosti ol
   list-style: disc
