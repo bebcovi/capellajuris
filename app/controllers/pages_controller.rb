@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     @intro, @sidebar = GeneralContent.first, Sidebar.the_only
-    @news = News.order("created_at DESC").limit(5)
+    @news = News.order("id DESC").limit(5)
   end
 
   def about_us
