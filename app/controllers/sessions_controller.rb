@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     if admin[:username] == params[:username] and admin[:password] == params[:password]
       log_in
-      redirect_to referer
+      redirect_to referer, :notice => "Uspješno ste se prijavili."
     else
       flash[:error] = "Pogrešno korisničko ime ili lozinka."
       render :new
