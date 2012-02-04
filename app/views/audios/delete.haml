@@ -10,6 +10,6 @@
         %th= audio.title
         - audio.filenames.each do |filename|
           %td= filename
-        %td.button= delete_button "Izbriši", audio_path(audio)
+        %td.button= delete_button "x", audio_path(audio)
 - else
   %p.empty Nema učitanih pjesama.
