@@ -17,17 +17,13 @@ $ui-font: $ui-font, $sans-serif
   margin-left: 10px
   background: image-url($img)
 
-form
-  +pie-clearfix
-  #main > &
-    +trailer(0.5)
-    &:last-child
-      +trailer(0)
-
 .invisible
   +opacity(0)
   position: absolute
   z-index: -1
+
+form
+  +pie-clearfix
 
 .field
   +trailer(0.5)
@@ -53,7 +49,6 @@ input
 select
   +trailer(.5)
   +text-field
-  width: auto
 
 .success
   $hue: 120
