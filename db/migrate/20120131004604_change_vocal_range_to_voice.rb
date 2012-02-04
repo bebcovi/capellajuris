@@ -1,5 +1,5 @@
 class ChangeVocalRangeToVoice < ActiveRecord::Migration
-  def up
+  def change
     rename_column :members, :vocal_range, :voice
   end
 end
