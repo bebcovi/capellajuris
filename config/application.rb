@@ -9,18 +9,11 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-require 'i18n/core_ext/hash.rb' # Hash#deep_symbolize_keys
-
 module CapellaJuris
   class Application < Rails::Application
     config.middleware.use Rack::Pjax
-    config.app_data = YAML.load(File.open("#{config.root}/config/settings.yml")).deep_symbolize_keys
 
-    config.admin = config.app_data[:admin]
-
-    config.flickr_api_key = config.app_data[:flickr][:api_key]
-
-    config.amazon = config.app_data[:amazon]
+    config.from_file "settings.yml"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

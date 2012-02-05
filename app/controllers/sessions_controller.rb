@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if admin[:username] == params[:username] and admin[:password] == params[:password]
+    if admin.username == params[:username] and admin.password == params[:password]
       log_in
       redirect_to referer, :notice => "Uspješno ste se prijavili."
     else
