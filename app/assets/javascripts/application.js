@@ -11,4 +11,5 @@
 //= require gollum.editor
 //= require markdown
 //= require bootstrap-twipsy
+//= require google_analytics
 //= require_tree .
