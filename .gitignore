@@ -3,4 +3,3 @@
 log/*.log
 tmp/
 .sass-cache/
-config/settings.yml
