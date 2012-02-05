@@ -1,49 +1,38 @@
 # encoding: utf-8
-require 'amazon_audio'
 class Audio < ActiveRecord::Base
+  mount_uploader :aac, AudioUploader
+  mount_uploader :ogg, AudioUploader
+
   validates_presence_of :title, :message => "Naslov ne smije biti prazan."
-  validates_uniqueness_of :title, :message => "Već postoji pjesma pod tim naslovom."
-  validates_presence_of :aac, :message => "AAC format datoteteke nije učitan."
-  validates_presence_of :ogg, :message => "Ogg format datoteteke nije učitan."
-  validate :filenames_must_be_unique_on_amazon
-  validate :filenames_must_be_of_a_proper_format
+  validates_uniqueness_of :title, :message => "Već postoji pjesma pod imenom \"%{value}\"."
+  validates_presence_of :aac, :message => "AAC datoteka nije učitana."
+  validates_presence_of :ogg, :message => "Ogg datoteka nije učitana."
+  validate :uploaded_files_must_have_correct_formats
+  validate :uploaded_files_must_be_unique
 
-  def filenames_must_be_unique_on_amazon
-    if aac.present? and AmazonAudio.exists?(aac.original_filename)
-      errors[:aac] << "Već postoji AAC datoteka pod tim imenom. (#{aac.original_filename})"
+  def uploaded_files_must_have_correct_formats
+    if aac.present? and aac.identifier !~ /\.aac$/i
+      errors[:aac] << "\"#{aac.identifier}\" nije <strong>.aac</strong> datoteka."
     end
-    if ogg.present? and AmazonAudio.exists?(ogg.original_filename)
-      errors[:ogg] << "Već postoji Ogg datoteka pod tim imenom. (#{ogg.original_filename})"
+    if ogg.present? and ogg.identifier !~ /\.ogg/i
+      errors[:ogg] << "\"#{ogg.identifier}\" nije <strong>.ogg</strong> datoteka."
     end
   end
 
-  def filenames_must_be_of_a_proper_format
-    if aac.present? and aac.original_filename.split(".").last != "aac"
-      errors[:aac] << "#{aac.original_filename} nema ekstenziju <strong>.aac</strong>"
+  def uploaded_files_must_be_unique
+    if aac.present? and aac.identifier.in?(Audio.pluck(:aac))
+      errors[:aac] << "Već postoji AAC datoteka pod tim imenom. (#{aac.identifier})"
     end
-    if ogg.present? and ogg.original_filename.split(".").last != "ogg"
-      errors[:ogg] << "#{ogg.original_filename} nema ekstenziju <strong>.ogg</strong>"
-    end
-  end
-
-  before_create do
-    unless aac.is_a?(String) and ogg.is_a?(String)
-      AmazonAudio.create(aac)
-      AmazonAudio.create(ogg)
-      self.aac = aac.original_filename
-      self.ogg = ogg.original_filename
+    if ogg.present? and ogg.identifier.in?(Audio.pluck(:ogg))
+      errors[:ogg] << "Već postoji Ogg datoteka pod tim imenom. (#{ogg.identifier})"
     end
   end
 
   def filenames
-    [aac, ogg]
+    [aac, ogg].map { |file| file.identifier || file.to_s.split("/").last }
   end
 
   def files
-    filenames.collect { |filename| AmazonAudio.url(filename) }
-  end
-
-  before_destroy do
-    AmazonAudio.delete filenames
+    [aac, ogg].map(&:url)
   end
 end

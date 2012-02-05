@@ -33,5 +33,7 @@ gem 'redcarpet', '< 2.0.0'
 gem 'faraday-stack', :require => false
 gem 'nokogiri'
 
-gem 'aws-s3', :require => false
 gem 'choices'
+
+gem 'carrierwave'
+gem 'fog'

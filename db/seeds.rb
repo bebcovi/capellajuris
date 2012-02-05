@@ -1,5 +1,5 @@
 # encoding: utf-8
-[News, Member, Activity, Video, GeneralContent, Sidebar, Audio].each { |model| model.delete_all }
+[News, Member, Activity, Video, GeneralContent, Sidebar, Audio].each { |model| model.destroy_all }
 
 def yaml(filename)
   YAML.load(File.open("db/seed/#{filename}")).symbolize_keys
@@ -11,8 +11,9 @@ News.create yaml("vijest.yml")
   GeneralContent.create yaml("#{filename}.yml")
 end
 
-sidebar = Sidebar.create(yaml("sidebar.yml"))
-sidebar.build_audio(yaml("audio.yml")).save(:validate => false)
+puts "Uploading audios to Amazon..."
+sidebar = Sidebar.new(yaml("sidebar.yml"))
+sidebar.create_audio(:title => "Makedonsko devojče", :aac => File.open("db/seed/makedonsko_devojce.aac"), :ogg => File.open("db/seed/makedonsko_devojce.ogg"))
 sidebar.save
 
 %w[soprani alti tenori basi].each do |filename|

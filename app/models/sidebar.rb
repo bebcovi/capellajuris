@@ -3,7 +3,6 @@ class Sidebar < ActiveRecord::Base
 
   validates_presence_of :video_title, :message => "Naslov videa ne smije biti prazan."
   validates_presence_of :video, :message => "Video ne smije biti prazan."
-  validates_presence_of :audio, :message => "Audio datoteka nije prisutna"
 
   before_save do
     if video =~ /"/
