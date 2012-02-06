@@ -2,14 +2,4 @@
 
 %p= link_to "← Natrag", edit_sidebar_path
 
-- if Audio.any?
-  %table.uploaded
-    %caption Dosad učitane pjesme
-    - Audio.all.each do |audio|
-      %tr
-        %th= audio.title
-        - audio.filenames.each do |filename|
-          %td= filename
-        %td.button= delete_button "x", audio_path(audio)
-- else
-  %p.empty Nema učitanih pjesama.
+= render :partial => "list", :locals => {:delete => true}
