@@ -8,6 +8,6 @@
   = f.custom_error_messages
   = f.text_field :video_title, :label => "Naslov videa"
   = f.text_field :video, :label => "Video"
-  = f.collection_select :audio_id, Audio.all, :id, :title
+  = f.collection_select :audio_id, Audio.all, :id, :title, :include_blank => true
   = f.submit "Spremi"
   = cancel_button "Odustani", home_path
