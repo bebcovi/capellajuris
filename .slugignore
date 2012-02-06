@@ -1,0 +1,4 @@
+db/seed/
+db/migrate/
+test/
+doc/
