@@ -13,8 +13,8 @@
       %section.video
         %h2= @sidebar.video_title
         = @sidebar.video.html_safe
-      %section.audio
-        - if @sidebar.audio
+      - if @sidebar.audio
+        %section.audio
           %h2= @sidebar.audio.title
           = audio_tag @sidebar.audio.files, :controls => true, :autobuffer => false, :preload => "none"
       = edit_button "Izmjeni", edit_sidebar_path if admin_logged_in?

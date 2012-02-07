@@ -10,7 +10,7 @@ class AudiosController < ApplicationController
     @audio = Audio.new(params[:audio])
 
     if @audio.save
-      redirect_to edit_sidebar_path, :notice => "Pjesma je uspješno spremljena."
+      redirect_to edit_sidebar_path, :notice => "Pjesma je \"#{@audio.title}\" uspješno spremljena."
     else
       render :new
     end
