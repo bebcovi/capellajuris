@@ -12,25 +12,29 @@
   display: block
 
 .uploaded
-  +leader(2)
-  $b1: 2px solid darken(white, 30%)
-  $b2: 1px solid darken(white, 10%)
-  caption
-    font-size: 22px
-    font-family: $serif
-    +trailer(.5)
-  th, td
-    padding: rhythm(.5)
-    border: $b2
-  th
-    font-weight: bold
-    border-right: $b1
-  td
-    color: lighten($text, 20%)
-  .button
-    border: 0
-  .delete
-    margin: 0
+  +rhythm(2,0,0,0)
+  .songs
+    +clearfix
+    +unstyled-list
+    .title, .delete
+      float: left
+    .title
+      padding: rhythm(.5)
+      font-weight: bold
+      +border-radius
+      background: darken(white, 5%)
+    .delete
+      +leader(.5)
+      margin-left: 10px
+    & > li
+      +clearfix
+      float: left
+      margin-right: 20px
+  .files
+    clear: both
+    padding-left: 20px
+    li
+      list-style: disc
 
 .fakefile input[type='text']
   +text-field

@@ -1,12 +1,12 @@
 - if Audio.any?
-  %table.uploaded
-    %caption Dosad učitane pjesme
-    - Audio.all.each do |audio|
-      %tr
-        %th= audio.title
-        - audio.filenames.each do |filename|
-          %td= filename
-        - if defined?(delete)
-          %td.button= delete_button "x", audio_path(audio)
+  %section.uploaded
+    %h2 Dosad učitane pjesme
+    %ol.songs
+      = list_of(Audio.all.each) do |audio|
+        .title= audio.title
+        = delete_button "x", audio_path(audio)
+        %ul.files
+          = list_of(audio.filenames) do |filename|
+            = filename
 - else
   %p.empty Nema učitanih pjesama.
