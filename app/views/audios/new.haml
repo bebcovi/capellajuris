@@ -7,7 +7,9 @@
 
   = f.text_field :title, :label => "Naslov pjesme"
   = f.file_field :aac, :label => "AAC"
+  = f.hidden_field :aac_cache
   = f.file_field :ogg, :label => "Ogg"
+  = f.hidden_field :ogg_cache
 
   = submit_tag "Spremi"
   = cancel_button "Odustani", edit_sidebar_path
