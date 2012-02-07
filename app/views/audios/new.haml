@@ -2,16 +2,26 @@
 
 %p= link_to "← Natrag", edit_sidebar_path
 
-= labeled_form_for @audio do |f|
-  = f.custom_error_messages
+%section.upload
+  %h2 Učitaj pjesmu
+  = labeled_form_for @audio do |f|
+    = f.custom_error_messages
+    = f.text_field :title, :label => "Naslov pjesme"
+    = f.file_field :aac, :label => "AAC"
+    = f.hidden_field :aac_cache
+    = f.file_field :ogg, :label => "Ogg"
+    = f.hidden_field :ogg_cache
+    = submit_tag "Spremi"
 
-  = f.text_field :title, :label => "Naslov pjesme"
-  = f.file_field :aac, :label => "AAC"
-  = f.hidden_field :aac_cache
-  = f.file_field :ogg, :label => "Ogg"
-  = f.hidden_field :ogg_cache
-
-  = submit_tag "Spremi"
-  = cancel_button "Odustani", edit_sidebar_path
-
-= render :partial => "list"
+- if Audio.any?
+  %section.uploaded
+    %h2 Učitane pjesme
+    %ol.songs
+      = list_of(Audio.all.each) do |audio|
+        .title= audio.title
+        = delete_button "x", audio_path(audio)
+        %ul.files
+          = list_of(audio.filenames) do |filename|
+            = filename
+- else
+  %p.empty Nema učitanih pjesama.

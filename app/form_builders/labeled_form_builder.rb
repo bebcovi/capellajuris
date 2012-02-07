@@ -1,5 +1,5 @@
 class LabeledFormBuilder < ActionView::Helpers::FormBuilder
-  %w[text_field password_field email_field text_area collection_select file_field].each do |method_name|
+  %w[text_field password_field email_field text_area file_field].each do |method_name|
     define_method(method_name) do |name, *args|
       @template.content_tag :div, class: "field" do
         field_label(name, *args) + super(name, *args)

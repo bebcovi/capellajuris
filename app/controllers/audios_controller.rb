@@ -2,15 +2,16 @@
 class AudiosController < ApplicationController
   before_filter :handle_unauthorized_request
 
-  def new
+  def manage
     @audio = Audio.new
+    render :new
   end
 
   def create
     @audio = Audio.new(params[:audio])
 
     if @audio.save
-      redirect_to edit_sidebar_path, :notice => "Pjesma je \"#{@audio.title}\" uspješno spremljena."
+      redirect_to manage_audios_path, :notice => "Pjesma je \"#{@audio.title}\" uspješno spremljena."
     else
       render :new
     end
