@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::UnknownAction, :with => :render_not_found
   end
 
+protected
+
   def render_not_found(exception)
     logger.error(exception)
     render "errors/404", :status => 404
