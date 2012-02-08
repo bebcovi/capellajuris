@@ -23,7 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_logged_in?
-    !!session[:admin_logged_in?]
+    if Rails.env.development?
+      true
+    elsif Rails.env.production?
+      !!session[:admin_logged_in?]
+    end
   end
   helper_method :admin_logged_in?
 
