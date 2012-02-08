@@ -4,7 +4,6 @@ class SidebarsController < ApplicationController
 
   def edit
     @sidebar = Sidebar.the_only
-    render :new
   end
 
   def update
@@ -13,7 +12,7 @@ class SidebarsController < ApplicationController
     if @sidebar.update_attributes(params[:sidebar])
       redirect_to home_path, :notice => "Sadržaj je uspješno izmjenjen."
     else
-      render :new
+      render :edit
     end
   end
 end

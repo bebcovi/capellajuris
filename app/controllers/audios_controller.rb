@@ -4,16 +4,15 @@ class AudiosController < ApplicationController
 
   def manage
     @audio = Audio.new
-    render :new
   end
 
   def create
     @audio = Audio.new(params[:audio])
 
     if @audio.save
-      redirect_to manage_audios_path, :notice => "Pjesma je \"#{@audio.title}\" uspješno spremljena."
+      redirect_to manage_audios_path, :notice => "Pjesma \"#{@audio.title}\" je uspješno spremljena."
     else
-      render :new
+      render :manage
     end
   end
 
