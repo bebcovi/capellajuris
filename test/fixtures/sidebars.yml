@@ -1,1 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+only:
+  video_title: Naslov videa
+  video: Video
+  audio: makedonsko_devojce

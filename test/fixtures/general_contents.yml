@@ -1,0 +1,15 @@
+intro:
+  id: 1
+  title: Intro title
+  text: Intro text
+  photo: <a href="http://www.flickr.com/photos/70335333@N02/6797671411/" title="Capella juris by capellajuris, on Flickr"><img src="http://farm8.staticflickr.com/7024/6797671411_bfa8bf5148.jpg" width="269" height="180" alt="Capella juris"></a>
+
+conductor:
+  id: 2
+  title: Conductor title
+  text: Conductor text
+
+history:
+  id: 3
+  title: History title
+  text: History text

@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class GeneralContentTest < ActiveSupport::TestCase
-  test "general_content validations" do
-    assert !GeneralContent.new.save, "General content with blank title and text was saved"
+  test "validations" do
+    assert !GeneralContent.new(:text => "Some markdown").save, "General content with a blank title was saved."
+    assert !GeneralContent.new(:title => "Title").save, "General content with blank text was saved."
   end
 end

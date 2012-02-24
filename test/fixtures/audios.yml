@@ -1,6 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-only:
+makedonsko_devojce:
   title: Makedonsko devojče
   aac: makedonsko_devojce.aac
   ogg: makedonsko_devojce.ogg
+
+test:
+  title: Some title
+  aac: audio.aac
+  ogg: audio.ogg

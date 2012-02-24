@@ -1,1 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+test:
+  title: Title
+  text: Text
+
+for_delete:
+  title: Other title
+  text: Other text
