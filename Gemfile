@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'thin'
-gem 'rails'
+gem 'rails', '3.2.1'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -10,7 +10,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'compass', '~> 0.12.alpha'
+  gem 'compass', '0.12.alpha.4'
 end
 
 gem 'jquery-rails'
@@ -35,5 +35,5 @@ gem 'nokogiri'
 
 gem 'choices'
 
-gem 'carrierwave'
+gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
 gem 'fog'
