@@ -1,7 +1,4 @@
 CapellaJuris::Application.routes.draw do
-  get "errors/not-found", :to => "errors#not_found"
-  get "errors/system-error", :to => "errors#system_error"
-
   root :to => "pages#index"
 
   get "login", :to => "sessions#new"
