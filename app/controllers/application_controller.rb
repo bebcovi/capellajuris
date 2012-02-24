@@ -22,8 +22,8 @@ protected
   def admin_logged_in?
     if Rails.env.development?
       true
-    elsif Rails.env.production?
-      !!session[:admin_logged_in?]
+    else
+      !!session[:admin]
     end
   end
   helper_method :admin_logged_in?
