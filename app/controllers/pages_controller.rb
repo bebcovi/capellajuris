@@ -21,4 +21,9 @@ class PagesController < ApplicationController
   def archive
     @news = News.order("created_at DESC").page(params[:page]).per_page(10)
   end
+
+  def delete_photo_cache
+    FileUtils.rm_rf File.join(ENV["TMPDIR"], "juris-cache")
+    redirect_to gallery_path
+  end
 end

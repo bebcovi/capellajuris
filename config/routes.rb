@@ -10,6 +10,7 @@ CapellaJuris::Application.routes.draw do
   get "slike", :to => "pages#gallery", :as => :gallery
   get "video", :to => "pages#videos", :as => :videos
   get "arhiva", :to => "pages#archive", :as => :archive
+  delete "delete-photo-cache", :to => "pages#delete_photo_cache", :as => :delete_photo_cache
 
   resources(:news) { post "preview", :on => :collection }
   resource(:sidebar)
