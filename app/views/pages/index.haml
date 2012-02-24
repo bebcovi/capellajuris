@@ -4,8 +4,8 @@
   .inner
     %article.main
       %h1= @intro.title
-      = rework_photo(@intro.photo).html_safe
-      = render_markdown(@intro.text).html_safe
+      = rework_photo(@intro.photo)
+      = render_markdown(@intro.text)
       %p= edit_button "Izmjeni", edit_general_content_path(@intro) if admin_logged_in?
       %p= link_to "Opširnije →", about_us_path
 

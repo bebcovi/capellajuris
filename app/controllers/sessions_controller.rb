@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
-  before_filter :store_referer, :only => [:new]
+  before_filter :store_referer, :only => [:new, :destroy]
 
   def new
   end
@@ -17,16 +17,16 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to :back
+    redirect_to referer
   end
 
 private
 
   def log_in
-    session[:admin_logged_in?] = true
+    session[:admin] = true
   end
 
   def log_out
-    session.delete(:admin_logged_in?)
+    session.delete(:admin)
   end
 end

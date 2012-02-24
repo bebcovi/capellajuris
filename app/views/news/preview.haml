@@ -3,5 +3,5 @@
 %article
   %header
     %h1= @news.title
-  = render_markdown(@news.text).html_safe
-  = rework_photo(@news.photo).html_safe
+  = render_markdown(@news.text)
+  = rework_photo(@news.photo)

@@ -9,5 +9,5 @@
       %ol
         = list_of @members.by_voice(voice) do |member|
           %div= member
-          = delete_button "x", member_path(member)
+          = delete_button "x", member_path(member), :confirm => "Izbrisati člana \"#{member}\"?"
       = add_button "Dodaj člana", new_member_path(:voice => voice[0])

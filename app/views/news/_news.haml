@@ -2,7 +2,7 @@
   %header
     %h1= news.title
     = time_tag news.created_at, croatian_date(news.created_at), :pubdate => true
-  = rework_photo(news.photo).html_safe
-  = render_markdown(news.text).html_safe
+  = rework_photo(news.photo)
+  = render_markdown(news.text)
   = edit_button "Izmjeni", edit_news_path(news) if admin_logged_in?
   = delete_button "Izbriši", news_path(news) if admin_logged_in?

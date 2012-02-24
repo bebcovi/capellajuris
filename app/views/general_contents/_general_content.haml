@@ -1,5 +1,5 @@
 %article{:id => id}
   %h1= general_content.title
-  = rework_photo(general_content.photo).html_safe
-  = render_markdown(general_content.text).html_safe
+  = rework_photo(general_content.photo)
+  = render_markdown(general_content.text)
   = edit_button "Izmjeni", edit_general_content_path(general_content) if admin_logged_in?

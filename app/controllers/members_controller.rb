@@ -14,7 +14,7 @@ class MembersController < ApplicationController
     @member = Member.create(params[:member])
 
     if @member.valid?
-      redirect_to edit_members_path, :notice => "Novi član je uspješno dodan."
+      redirect_to edit_members_path, :notice => "\"#{@member}\" je uspješno dodan."
     else
       render :new
     end
@@ -22,6 +22,6 @@ class MembersController < ApplicationController
 
   def destroy
     member = Member.destroy(params[:id])
-    redirect_to edit_members_path, :notice => "Član \"#{member}\" je izbrisan."
+    redirect_to edit_members_path, :notice => "\"#{member}\" uspješno je izbrisan."
   end
 end

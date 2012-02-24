@@ -37,10 +37,11 @@ module ApplicationHelper
   def rework_photo(photo)
     parsed_photo = Nokogiri::HTML.parse(photo).at(:a)
     unless parsed_photo.nil?
-      parsed_photo.tap do |link|
+      cleaned_photo = parsed_photo.tap do |link|
         link.delete("title") if link["title"] =~ /flickr/i
         link["class"] = "img"
-      end.to_s
+      end
+      cleaned_photo.to_s.html_safe
     else
       photo
     end
@@ -67,7 +68,7 @@ module ApplicationHelper
   end
 
   def render_markdown(text)
-    Redcarpet.new(text).to_html
+    Redcarpet.new(text).to_html.html_safe
   end
 
   def audio_tag(sources, options = {})

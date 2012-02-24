@@ -9,6 +9,8 @@ class Sidebar < ActiveRecord::Base
       self.video = video.gsub(%["], %['])
     elsif video =~ /'/
       self.video = video.gsub(%['], %["])
+    else
+      true
     end
   end
 

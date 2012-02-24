@@ -10,16 +10,14 @@ class VideosController < ApplicationController
     @video = Video.create(params[:video])
 
     if @video.valid?
-      redirect_to videos_path(:page => @video.page), :success => "Video je uspješno dodan."
+      redirect_to videos_path(:page => @video.page), :notice => "Video je uspješno dodan."
     else
       render :new
     end
   end
 
   def destroy
-    video = Video.destroy(params[:id])
-    redirect_to videos_path, :success => "Video je uspješno izbrisan."
+    Video.destroy(params[:id])
+    redirect_to videos_path, :notice => "Video je uspješno izbrisan."
   end
-
-private
 end

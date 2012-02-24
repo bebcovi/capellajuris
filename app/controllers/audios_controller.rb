@@ -16,11 +16,8 @@ class AudiosController < ApplicationController
     end
   end
 
-  def delete
-  end
-
   def destroy
-    @audio = Audio.destroy(params[:id])
-    redirect_to :back, :notice => "Pjesma je uspješno izbrisana."
+    audio = Audio.destroy(params[:id])
+    redirect_to manage_audios_path, :notice => "Pjesma \"#{audio.title}\" je uspješno izbrisana."
   end
 end
