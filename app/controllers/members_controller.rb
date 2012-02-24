@@ -1,6 +1,6 @@
 # encoding: utf-8
 class MembersController < ApplicationController
-  before_filter :handle_unauthorized_request
+  before_filter :authorize
 
   def gui
     @members = Member.order(:last_name)

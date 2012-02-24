@@ -1,6 +1,6 @@
 # encoding: utf-8
 class VideosController < ApplicationController
-  before_filter :handle_unauthorized_request
+  before_filter :authorize
 
   def new
     @video = Video.new

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class AudiosController < ApplicationController
-  before_filter :handle_unauthorized_request
+  before_filter :authorize
 
   def manage
     @audio = Audio.new

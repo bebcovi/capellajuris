@@ -38,9 +38,9 @@ protected
   end
   helper_method :admin_not_logged_in?
 
-  def handle_unauthorized_request
+  def authorize
     if admin_not_logged_in?
-      raise ActionController::RoutingError, "This page is not found, so fuck off!"
+      render "errors/401", :status => :unauthorized
     end
   end
 

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SidebarsController < ApplicationController
-  before_filter :handle_unauthorized_request
+  before_filter :authorize
 
   def edit
     @sidebar = Sidebar.the_only

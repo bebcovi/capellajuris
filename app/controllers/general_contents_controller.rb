@@ -1,6 +1,6 @@
 # encoding: utf-8
 class GeneralContentsController < ApplicationController
-  before_filter :handle_unauthorized_request
+  before_filter :authorize
   before_filter :store_referer, :only => :edit
 
   def preview
