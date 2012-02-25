@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SidebarTest < ActiveSupport::TestCase
-  test "sidebar validations" do
+  test "validations" do
     assert !Sidebar.new(:video => "Video").save, "Saved sidebar with empty video title."
     assert !Sidebar.new(:video_title => "Video title").save, "Saved sidebar with empty video."
   end
