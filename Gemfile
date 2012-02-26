@@ -42,5 +42,5 @@ gem 'nokogiri'
 
 gem 'choices'
 
-gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
+gem 'carrierwave', :git => "git://github.com/jnicklas/carrierwave.git"
 gem 'fog'
