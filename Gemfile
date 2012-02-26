@@ -32,6 +32,10 @@ group :test do
   gem 'ruby-prof'
 end
 
+group :production do
+  gem 'heroku_backup_task'
+end
+
 gem 'redcarpet', '< 2.0.0'
 gem 'faraday-stack', :require => false
 gem 'nokogiri'
