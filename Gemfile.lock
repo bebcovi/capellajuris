@@ -210,6 +210,7 @@ DEPENDENCIES
   faraday-stack
   fog
   haml-rails
+  heroku
   heroku_backup_task
   jquery-rails
   linecache19 (= 0.5.13)

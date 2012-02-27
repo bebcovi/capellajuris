@@ -28,12 +28,7 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'minitest'
-  gem 'aws-s3'
   gem 'ruby-prof'
-end
-
-group :production do
-  gem 'heroku_backup_task'
 end
 
 gem 'redcarpet', '< 2.0.0'
@@ -44,3 +39,7 @@ gem 'choices'
 
 gem 'carrierwave', :git => "git://github.com/jnicklas/carrierwave.git"
 gem 'fog'
+
+gem 'heroku'
+gem 'heroku_backup_task'
+gem 'aws-s3'
