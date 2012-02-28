@@ -3,15 +3,7 @@ class ErrorsController < ApplicationController
     render "404", :status => 404
   end
 
-  def fake_401
-    render "401"
-  end
-
-  def fake_404
-    render "404"
-  end
-
-  def fake_500
-    render "500"
+  def internal_server_error
+    render "500", :status => 500
   end
 end
