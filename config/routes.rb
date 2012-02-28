@@ -20,5 +20,9 @@ CapellaJuris::Application.routes.draw do
   resources(:members) { get "edit", :to => "members#gui", :on => :collection }
   resources(:videos)
 
+  get "errors/401", :to => "errors#fake_401"
+  get "errors/404", :to => "errors#fake_404"
+  get "errors/500", :to => "errors#fake_500"
+
   get "*not_found", :to => "errors#not_found"
 end
