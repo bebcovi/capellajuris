@@ -70,5 +70,6 @@ CapellaJuris::Application.configure do
 
   config.middleware.use ExceptionNotifier,
     :sender_address => ENV['SENDGRID_USERNAME'],
-    :exception_recipients => 'janko.marohnic@gmail.com'
+    :exception_recipients => 'janko.marohnic@gmail.com',
+    :ignore_exceptions => []
 end
