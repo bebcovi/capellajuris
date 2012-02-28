@@ -43,3 +43,5 @@ gem 'fog'
 gem 'heroku'
 gem 'heroku_backup_task'
 gem 'aws-s3'
+
+gem 'exception_notification'
