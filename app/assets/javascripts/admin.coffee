@@ -6,3 +6,6 @@ jQuery ->
   $('article .delete').append($(i).text(' x'))
   $('.uploaded .delete').html($(i).text('X'))
   $('#clanovi .delete').html($(i).text('X'))
+  $('#log a').each ->
+    if $(@).attr('href') == '/logout'
+      $(@).append($(i).text(' o'))
