@@ -10,7 +10,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'compass', '0.12.rc.1'
+  gem 'compass', '0.12.alpha.4'
 end
 
 gem 'jquery-rails'
