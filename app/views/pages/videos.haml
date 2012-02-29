@@ -1,16 +1,15 @@
 - @page_title = "Video"
 
 %div{:"data-pjax-container" => true}
-  = will_paginate(@videos)
-  %ul#video
-    - @videos.each do |video|
-      %li{:id => (video == @videos.last ? "last" : nil)}
-        - if video.title.present?
-          %h1= raw video.title.gsub(" - ", " &ndash; ")
-        = video.link.html_safe
-        %div= delete_button "Izbriši", video_path(video) if admin_logged_in?
-  = will_paginate(@videos)
-
-.center= add_button "Dodaj video", new_video_path if admin_logged_in?
-
-%p#top= link_to "Povratak na vrh ↑", "#"
+  #video
+    = will_paginate(@videos)
+    %ul
+      - @videos.each do |video|
+        %li{:id => (video == @videos.last ? "last" : nil)}
+          - if video.title.present?
+            %h1= raw video.title.gsub(" - ", " &ndash; ")
+          = video.link.html_safe
+          %div= delete_button "Izbriši", video_path(video) if admin_logged_in?
+    = will_paginate(@videos)
+    %p= add_button "Dodaj video", new_video_path if admin_logged_in?
+    %p#top= link_to "Povratak na vrh ↑", "#"

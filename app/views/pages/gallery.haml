@@ -1,10 +1,11 @@
 - @page_title = "Slike"
 
-%ul#slike
-  = list_of(@photos) do |photo|
-    = image_tag photo
+#slike
+  %ul
+    = list_of(@photos) do |photo|
+      = image_tag photo
 
-%p#top= link_to "Povratak na vrh ↑", "#"
+  %p#top= link_to "Povratak na vrh ↑", "#"
 
-- if admin_logged_in?
-  = link_to "Flickr", delete_photo_cache_path, :method => :delete, :class => "reload"
+  - if admin_logged_in?
+    = link_to "Flickr", delete_photo_cache_path, :method => :delete, :class => "reload"
