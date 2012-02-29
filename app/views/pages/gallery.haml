@@ -7,4 +7,4 @@
 %p#top= link_to "Povratak na vrh ↑", "#"
 
 - if admin_logged_in?
-  %p= link_to "Učitaj promjene sa Flickra", delete_photo_cache_path, :method => :delete
+  = link_to "Flickr", delete_photo_cache_path, :method => :delete, :class => "reload"
