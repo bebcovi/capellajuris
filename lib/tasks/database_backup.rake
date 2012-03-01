@@ -1,4 +1,5 @@
 require "heroku_backup_task/tasks"
+require "heroku"
 require "aws/s3"
 require "open-uri"
 
@@ -17,9 +18,12 @@ namespace :backup do
   end
 
   task :monthly => :establish_s3_connection do
-    pgbackups_client = PGBackups::Client.new(ENV["PGBACKUPS_URL"])
-    latest_backup_url = pgbackups_client.get_latest_backup["public_url"]
-    AWS::S3::S3Object.store("capellajuris_monthly_backup.dump", open(latest_backup_url), "database_backups1")
+    backup = AWS::S3::S3Object.find("capellajuris_monthly_backup.dump", "database_backups1")
+    if Time.now.month == backup.last_modified.month + 1
+      pgbackups_client = PGBackups::Client.new(ENV["PGBACKUPS_URL"])
+      latest_backup_url = pgbackups_client.get_latest_backup["public_url"]
+      AWS::S3::S3Object.store("capellajuris_monthly_backup.dump", open(latest_backup_url), "database_backups1")
+    end
   end
 end
 
