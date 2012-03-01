@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  around_filter :catch_exceptions, :if => proc { Rails.env.production? }
+  around_filter :catch_exceptions, :if => proc { Rails.env.production? || Rails.env.staging? }
 
 protected
 
