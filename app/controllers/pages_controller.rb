@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   end
 
   def gallery
-    @photos = Flickr.photos_from_set(admin[:flickr_set]).collect(&:largest)
+    @photos = Flickr.photos_from_set(admin[:flickr_set]).collect(&:medium640_or_less)
   end
 
   def videos

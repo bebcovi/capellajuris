@@ -99,12 +99,13 @@ module Flickr
     end
 
     def largest_size
-      SIZE_NAMES.key(detect_largest_size).capitalize.gsub(/(\d{3})/, ' \1')
+      SIZE_NAMES.key(detect_largest_size)
     end
 
     SIZE_NAMES.each do |name, size|
       define_method(name) do
-        Photo.new(@hash, size)
+        photo = Photo.new(@hash, size)
+        photo.url ? photo : nil
       end
     end
 
@@ -126,6 +127,10 @@ module Flickr
 
     def to_s
       url
+    end
+
+    def medium640_or_less
+      medium640 || medium500 || small || thumbnail || square
     end
 
     private
