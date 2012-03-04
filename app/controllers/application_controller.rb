@@ -1,22 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  around_filter :catch_exceptions, :if => proc { Rails.env.production? || Rails.env.staging? }
-
 protected
-
-  def catch_exceptions
-    yield
-  rescue => exception
-    if exception.is_a?(ActiveRecord::RecordNotFound)
-      status_code = 404
-    else
-      status_code = 500
-    end
-    html = render("errors/#{status_code}").first
-    File.open("public/#{status_code}.html", "w") { |f| f.write(html) }
-    raise exception
-  end
 
   def admin
     CapellaJuris::Application.config.admin
