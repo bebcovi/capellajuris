@@ -7,7 +7,7 @@ BACKUP_DAYS = {
   "monday"    =>  1,
   "wednesday" =>  3,
   "friday"    =>  5,
-  "sunday"    =>  7
+  "sunday"    =>  0
 }
 
 namespace :backup do
