@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  around_filter :catch_flickr_timeouts, :only => :gallery
+
   def index
     @intro, @sidebar = GeneralContent.first, Sidebar.the_only
     @news = News.order("created_at DESC").limit(5)
@@ -25,5 +27,13 @@ class PagesController < ApplicationController
   def delete_photo_cache
     FileUtils.rm_rf File.join(ENV["TMPDIR"], "juris-cache")
     redirect_to gallery_path
+  end
+
+private
+
+  def catch_flickr_timeouts
+    yield
+  rescue Timeout::Error
+    render "errors/flickr", :status => :gateway_timeout
   end
 end
