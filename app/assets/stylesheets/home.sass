@@ -26,7 +26,9 @@
 
 #vijesti, #arhiva
   article
-    border-color: darken(white, 15%)
+    border-bottom: 1px dashed darken(white, 15%)
+    &:last-of-type
+      border-bottom: 0
     header
       +clearfix
     h1
