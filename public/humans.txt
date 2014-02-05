@@ -1,6 +1,6 @@
 /* TEAM */
 Developer: Janko Marohnić
-Twitter: @m_janko
+Twitter: @jankomarohnic
 From: Zagreb, Croatia
 
 Designer: Matija Marohnić
