@@ -1,3 +1,5 @@
+ruby "1.9.3"
+
 source 'http://rubygems.org'
 
 gem 'thin'
@@ -22,7 +24,6 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'minitest'
-  gem 'ruby-prof'
 end
 
 gem 'redcarpet', '< 2.0.0'
