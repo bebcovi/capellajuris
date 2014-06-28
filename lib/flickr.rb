@@ -14,7 +14,7 @@ module Flickr
   def self.client
     @client ||= begin
       client = FaradayStack::build Client,
-        url: 'http://api.flickr.com/services/rest/',
+        url: 'https://api.flickr.com/services/rest/',
         params: {
           format: 'json',
           nojsoncallback: '1',
